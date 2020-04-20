@@ -1,10 +1,6 @@
 {
-<<<<<<< HEAD
-	"process_id" : 29660,
-=======
-	"process_id" : 3616,
->>>>>>> ffb7edcbdf30e0ea96e9a0121b785e3e02b62a13
+	"process_id" : 13682,
 	"version" : "2019.3.10f1",
-	"app_path" : "C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Unity.exe",
-	"app_contents_path" : "C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data"
+	"app_path" : "/home/calin/Unity/Hub/Editor/2019.3.10f1/Editor/Unity",
+	"app_contents_path" : "/home/calin/Unity/Hub/Editor/2019.3.10f1/Editor/Data"
 }
