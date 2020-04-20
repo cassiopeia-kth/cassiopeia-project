@@ -1,2 +1,2 @@
-Base path: '/opt/Unity/Editor/Data', plugins path '/opt/Unity/Editor/Data/PlaybackEngines'
+Base path: '/home/calin/Unity/Hub/Editor/2019.3.10f1/Editor/Data', plugins path '/home/calin/Unity/Hub/Editor/2019.3.10f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
