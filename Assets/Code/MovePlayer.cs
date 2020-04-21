@@ -7,6 +7,7 @@ public class MovePlayer : MonoBehaviour
     float speed = 0.0001f;
     public Rigidbody2D rb;
     public Vector3 posInit;
+    public int i = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -17,33 +18,37 @@ public class MovePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-	if(Input.GetKey(KeyCode.UpArrow)){
-	    Move(0,1);
+	if(Input.GetKey(KeyCode.UpArrow) && i > 10){
+	    rb.MovePosition(rb.position + new Vector2(0,1));
+	    i = 0;
 	}
-	if(Input.GetKey(KeyCode.DownArrow)){
-	    Move(0,-1);
+	if(Input.GetKey(KeyCode.DownArrow) && i > 10){
+	    rb.MovePosition(rb.position - new Vector2(0,1));
+	    i = 0;
 	}
-	if(Input.GetKey(KeyCode.RightArrow)){
-	    Move(1,0);
+	if(Input.GetKey(KeyCode.RightArrow) && i > 10){
+	    rb.MovePosition(rb.position + new Vector2(1,0));
+	    i = 0;
 	}
-	if(Input.GetKey(KeyCode.LeftArrow)){
-	    Move(-1,0);
+	if(Input.GetKey(KeyCode.LeftArrow) && i > 10){
+	    rb.MovePosition(rb.position - new Vector2(1,0));
+	    i = 0;
 	}
-
+	i++;
+	
 	if(Input.GetKeyUp(KeyCode.UpArrow)){
-	    Move(0,0);
+	    i = 10;
 	}
 	if(Input.GetKeyUp(KeyCode.DownArrow)){
-	    Move(0,0);
+	    i = 10;
 	}
 	if(Input.GetKeyUp(KeyCode.RightArrow)){
-	    Move(0,0);
+	    i = 10;
 	}
 	if(Input.GetKeyUp(KeyCode.LeftArrow)){
-	    Move(0,0);
+	    i = 10;
 	}
-	if(Vector3.Distance(posInit, transform.position) > 0.5)
-	    Move(0,0);
+
 	    
     }
 

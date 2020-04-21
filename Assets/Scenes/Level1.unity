@@ -239,6 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1053370858}
+  posInit: {x: 0, y: 0, z: 0}
+  i: 0
 --- !u!212 &1053370857
 SpriteRenderer:
   m_ObjectHideFlags: 0
