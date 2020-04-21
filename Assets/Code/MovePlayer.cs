@@ -8,6 +8,7 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody2D rb;
     public Vector3 posInit;
     public int i = 0;
+    public Collider cd;
     
     // Start is called before the first frame update
     void Start()
@@ -46,9 +47,24 @@ public class MovePlayer : MonoBehaviour
 	}
 	if(Input.GetKeyUp(KeyCode.LeftArrow)){
 	    i = 10;
+	}	    
+    }
+
+    void OnCollisionEnter2D(Collision2D col){	
+	if(col.gameObject.name == "Hole"){
+	    Debug.Log("OnCollisionEnter2D");
+
+	}
+	    
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+	if(other.gameObject.name == "Hole"){
+	    Debug.Log("OnCollisionEnter2D TRIGGER");
+
 	}
 
-	    
     }
 
 }
