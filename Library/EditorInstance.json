@@ -1,5 +1,17 @@
 {
-	"process_id" : 22348,
+<<<<<<< HEAD
+<<<<<<< HEAD
+	"process_id" : 14988,
+=======
+<<<<<<< HEAD
+	"process_id" : 29660,
+=======
+	"process_id" : 3616,
+>>>>>>> ffb7edcbdf30e0ea96e9a0121b785e3e02b62a13
+>>>>>>> develop
+=======
+	"process_id" : 4100,
+>>>>>>> 7a6eea3d7f7b23cefa22ad08a5c4a67c36550c87
 	"version" : "2019.3.10f1",
 	"app_path" : "/home/calin/Unity/Hub/Editor/2019.3.10f1/Editor/Unity",
 	"app_contents_path" : "/home/calin/Unity/Hub/Editor/2019.3.10f1/Editor/Data"
