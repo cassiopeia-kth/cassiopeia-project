@@ -12,7 +12,6 @@ public class MovePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-	posInit = transform.position;
     }
 
     // Update is called once per frame
@@ -52,8 +51,4 @@ public class MovePlayer : MonoBehaviour
 	    
     }
 
-    private void Move(int x, int y){
-	rb.velocity = new Vector2(x,y).normalized * speed;
-	
-    }
 }
