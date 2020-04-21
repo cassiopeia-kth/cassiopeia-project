@@ -44,7 +44,6 @@ public class MovePlayer : MonoBehaviour
     }
 
     private void Move(int x, int y){
-	var lastPost = transform.position;
 	rb.velocity = new Vector2(x,y).normalized * speed;
 	
     }
