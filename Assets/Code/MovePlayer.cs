@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    float speed = 5f;
+    float speed = 0.0001f;
     public Rigidbody2D rb;
+    public Vector3 posInit;
     
     // Start is called before the first frame update
     void Start()
     {
+	posInit = transform.position;
     }
 
     // Update is called once per frame
@@ -40,7 +42,9 @@ public class MovePlayer : MonoBehaviour
 	if(Input.GetKeyUp(KeyCode.LeftArrow)){
 	    Move(0,0);
 	}
-
+	if(Vector3.Distance(posInit, transform.position) > 0.5)
+	    Move(0,0);
+	    
     }
 
     private void Move(int x, int y){
