@@ -100,6 +100,8 @@ LightmapSettings:
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
+<<<<<<<<<< HEAD
+
 NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -139,6 +141,7 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!212 &45991013
+================
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,6 +168,7 @@ SpriteRenderer:
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_ReceiveGI: 1
+  >>>>>>>>>>>> CALIN
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
