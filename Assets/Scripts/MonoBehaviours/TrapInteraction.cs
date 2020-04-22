@@ -42,15 +42,16 @@ public class TrapInteraction : MonoBehaviour
             float x = pos.x;
             float y = pos.y;
             float z = pos.z;
+            Vector3 ninety = new Vector3(90,0,0);
             Vector3 northEast = new Vector3(x + 1, y + 1, z);
             Vector3 northWest = new Vector3(x - 1, y + 1, z);
             Vector3 southEast = new Vector3(x + 1, y - 1, z);
             Vector3 southWest = new Vector3(x - 1, y - 1, z);
-            /*createDiagonal(northEast);
-            createDiagonal(northWest);
-            createDiagonal(southEast);
-            createDiagonal(southWest);*/
-            Debug.Log(northEast);
+            GameObject zeusSouthEast = (GameObject)Resources.Load("Zeus/ZeusSouthEast", typeof(GameObject));
+            GameObject actualSouthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y - 1.5f, z), Quaternion.identity);
+            GameObject actualSouthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y - 1.5f, z), Quaternion.Euler(0,0,0));
+            GameObject actualNorthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y + 0.5f, z), Quaternion.identity);
+            GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.identity);
         }
 
         anim.SetInteger(animationState, 1);
