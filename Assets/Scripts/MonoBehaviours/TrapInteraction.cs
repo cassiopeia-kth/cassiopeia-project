@@ -10,7 +10,7 @@ public class TrapInteraction : MonoBehaviour
         Debug.Log(gameObject.transform.position);
         pos.z = 0;
         gameObject.transform.position = pos;
-        gameObject.animator.controller.speed = 0;
+        //gameObject.animator.controller.speed = 0;
     }
 
 }
