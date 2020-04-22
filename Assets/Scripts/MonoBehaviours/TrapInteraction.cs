@@ -7,18 +7,21 @@ public class TrapInteraction : MonoBehaviour
     private Animator anim;
     private Animation currentAnim;
     string animationState = "AnimationState";
+    private Vector3 pos;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         currentAnim = GetComponent<Animation>();
         anim.SetFloat("animspeed", 0f);
+        pos = gameObject.transform.position;
+        pos.z = -100;
+        gameObject.transform.position = pos;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector3 pos = gameObject.transform.position;
-        Debug.Log(gameObject.transform.position);
+        pos = gameObject.transform.position;
         pos.z = 0;
         gameObject.transform.position = pos;
 

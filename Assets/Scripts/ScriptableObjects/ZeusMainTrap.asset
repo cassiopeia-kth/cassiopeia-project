@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapName: ZeusMainTrap
   sprite: {fileID: 21300000, guid: be8c317dee38d034c88a9e28d1439ab4, type: 3}
-  quantity: 0
+  quantity: 1
   stackable: 0
   trapType: 2

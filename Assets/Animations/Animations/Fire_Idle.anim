@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Zeus_End
+  m_Name: Fire_Idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 00885ad9835cca64092c561747f7e38f, type: 3}
+      value: {fileID: 21300000, guid: 27dd337d186884742b6d121ab947b969, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 703c338a84d102e49b56fea03cf994da, type: 3}
+      value: {fileID: 21300000, guid: a124a20ca54734342a1dc9552dfb4453, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 00885ad9835cca64092c561747f7e38f, type: 3}
-    - {fileID: 21300000, guid: 703c338a84d102e49b56fea03cf994da, type: 3}
+    - {fileID: 21300000, guid: 27dd337d186884742b6d121ab947b969, type: 3}
+    - {fileID: 21300000, guid: a124a20ca54734342a1dc9552dfb4453, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
