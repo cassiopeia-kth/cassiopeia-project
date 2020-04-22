@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class MovePlayer : MonoBehaviour
 {
     float speed = 0.0001f;
@@ -14,8 +13,8 @@ public class MovePlayer : MonoBehaviour
     public Animator ani;
     
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){	
+	FindObjectOfType<GameManager>().Start();
     }
 
     // Update is called once per frame
