@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MovePlayer : MonoBehaviour
     public Vector3 posInit;
     public int i = 0;
     public Collider cd;
+    public Text GameOver;
     
     // Start is called before the first frame update
     void Start()
@@ -20,18 +22,22 @@ public class MovePlayer : MonoBehaviour
     {
 	if(Input.GetKey(KeyCode.UpArrow) && i > 10){
 	    rb.MovePosition(rb.position + new Vector2(0,1));
+//	    	    rb.velocity = new Vector3(0,1,0);
 	    i = 0;
 	}
 	if(Input.GetKey(KeyCode.DownArrow) && i > 10){
 	    rb.MovePosition(rb.position - new Vector2(0,1));
+// 	    	    rb.velocity = new Vector3(0,-1,0);
 	    i = 0;
 	}
 	if(Input.GetKey(KeyCode.RightArrow) && i > 10){
 	    rb.MovePosition(rb.position + new Vector2(1,0));
+//	    rb.velocity = new Vector3(1,0,0);
 	    i = 0;
 	}
 	if(Input.GetKey(KeyCode.LeftArrow) && i > 10){
 	    rb.MovePosition(rb.position - new Vector2(1,0));
+//	    	    rb.velocity = new Vector3(-1,0,0);
 	    i = 0;
 	}
 	i++;
@@ -62,6 +68,7 @@ public class MovePlayer : MonoBehaviour
     {
 	if(other.gameObject.name == "Hole"){
 	    Debug.Log("OnCollisionEnter2D TRIGGER");
+	    FindObjectOfType<GameManager>().EndGame();
 
 	}
 
