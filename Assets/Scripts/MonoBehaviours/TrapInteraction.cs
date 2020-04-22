@@ -37,8 +37,9 @@ public class TrapInteraction : MonoBehaviour
 
         if(trap.trapName == "ZeusMainTrap")
         {
-            SortingLayer slayer = gameObject.GetComponent<SortingLayer>();
+           // SortingLayer slayer = gameObject.GetComponent<SortingLayer>();
             //slayer = "Zeus";
+            gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
         }
 
         anim.SetInteger(animationState, 1);
