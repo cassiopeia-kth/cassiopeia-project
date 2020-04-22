@@ -11,6 +11,7 @@ public class MovePlayer : MonoBehaviour
     public int i = 0;
     public Collider cd;
     public Text GameOver;
+    public Animator ani;
     
     // Start is called before the first frame update
     void Start()
@@ -22,37 +23,45 @@ public class MovePlayer : MonoBehaviour
     {
 	if(Input.GetKey(KeyCode.UpArrow) && i > 10){
 	    rb.MovePosition(rb.position + new Vector2(0,1));
-//	    	    rb.velocity = new Vector3(0,1,0);
+	    ani.SetFloat("up", 1f);
+	    //	    	    rb.velocity = new Vector3(0,1,0);
 	    i = 0;
 	}
 	if(Input.GetKey(KeyCode.DownArrow) && i > 10){
 	    rb.MovePosition(rb.position - new Vector2(0,1));
-// 	    	    rb.velocity = new Vector3(0,-1,0);
+	    // 	    	    rb.velocity = new Vector3(0,-1,0);
 	    i = 0;
+	    ani.SetFloat("down", 1f);
 	}
 	if(Input.GetKey(KeyCode.RightArrow) && i > 10){
 	    rb.MovePosition(rb.position + new Vector2(1,0));
-//	    rb.velocity = new Vector3(1,0,0);
+	    ani.SetFloat("right", 1f);
+	    //	    rb.velocity = new Vector3(1,0,0);
 	    i = 0;
 	}
 	if(Input.GetKey(KeyCode.LeftArrow) && i > 10){
 	    rb.MovePosition(rb.position - new Vector2(1,0));
-//	    	    rb.velocity = new Vector3(-1,0,0);
+	    ani.SetFloat("left", 1f);
+	    //	    	    rb.velocity = new Vector3(-1,0,0);
 	    i = 0;
 	}
 	i++;
 	
 	if(Input.GetKeyUp(KeyCode.UpArrow)){
 	    i = 10;
+	    setAllAnimatorZero();
 	}
-	if(Input.GetKeyUp(KeyCode.DownArrow)){
+	else if(Input.GetKeyUp(KeyCode.DownArrow)){
 	    i = 10;
+	    setAllAnimatorZero();
 	}
-	if(Input.GetKeyUp(KeyCode.RightArrow)){
+	else if(Input.GetKeyUp(KeyCode.RightArrow)){
 	    i = 10;
+	    setAllAnimatorZero();
 	}
-	if(Input.GetKeyUp(KeyCode.LeftArrow)){
+	else if(Input.GetKeyUp(KeyCode.LeftArrow)){
 	    i = 10;
+	    setAllAnimatorZero();
 	}	    
     }
 
@@ -72,6 +81,14 @@ public class MovePlayer : MonoBehaviour
 
 	}
 
+    }
+
+    private void setAllAnimatorZero(){
+	ani.SetFloat("left", 0f);
+	ani.SetFloat("right", 0f);
+	ani.SetFloat("up", 0f);
+	ani.SetFloat("down", 0f);
+	ani.SetFloat("hole", 0f);
     }
 
 }
