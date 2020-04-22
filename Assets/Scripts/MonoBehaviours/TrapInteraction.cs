@@ -5,13 +5,11 @@ public class TrapInteraction : MonoBehaviour
 {
     public Trap trap;
     private Animator anim;
-    private Animation currentAnim;
     string animationState = "AnimationState";
     private Vector3 pos;
 
     void Start()
     {
-        currentAnim = GetComponent<Animation>();
         anim = GetComponent<Animator>();
         anim.SetFloat("animspeed", 0f);
         pos = gameObject.transform.position;

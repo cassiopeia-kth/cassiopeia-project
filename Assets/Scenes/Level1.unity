@@ -1439,17 +1439,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HadesTrap
       objectReference: {fileID: 0}
-    - target: {fileID: 3862097565123042767, guid: defce7f142a50254b8e9390cef362e5a,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 2012328747014868908, guid: 80e6fca860c2b2345a58d86f0f4cf783,
-        type: 3}
-    - target: {fileID: 3862097565123042767, guid: defce7f142a50254b8e9390cef362e5a,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: defce7f142a50254b8e9390cef362e5a, type: 3}
 --- !u!1 &881618404
@@ -4501,11 +4490,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7373041246731399430, guid: 38d0c6f68b35e094899696ffb15eac18,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -495865452663083274, guid: d486d43cf1c8ee84daa2491b9e4f3108,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d0c6f68b35e094899696ffb15eac18, type: 3}

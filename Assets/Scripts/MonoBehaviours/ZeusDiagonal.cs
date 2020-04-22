@@ -5,11 +5,8 @@ using UnityEngine;
 public class ZeusDiagonal : MonoBehaviour
 {
     private Vector3 positon;
+
     
-    void Start()
-    {
-        
-    }
 
     
 }
