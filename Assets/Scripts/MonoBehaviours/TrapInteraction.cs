@@ -11,8 +11,8 @@ public class TrapInteraction : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         currentAnim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
         anim.SetFloat("animspeed", 0f);
         pos = gameObject.transform.position;
         pos.z = -100;
@@ -25,27 +25,36 @@ public class TrapInteraction : MonoBehaviour
         pos.z = 0;
         gameObject.transform.position = pos;
 
-        //anim.SetInteger(animationState, 1);
 
-        StartCoroutine(MyCoroutine());
-
+        StartCoroutine(MyCoroutine(pos));
         anim.SetFloat("animspeed", 1f);
-        Debug.Log(anim.speed);
-
     }
 
-    IEnumerator MyCoroutine()
+    IEnumerator MyCoroutine(Vector3 pos)
     {
         yield return new WaitForSeconds(2f);
 
         if(trap.trapName == "ZeusMainTrap")
         {
-           // SortingLayer slayer = gameObject.GetComponent<SortingLayer>();
-            //slayer = "Zeus";
             gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
+            Debug.Log(pos);
+
+            float x = pos.x;
+            float y = pos.y;
+            float z = pos.z;
+            Vector3 northEast = new Vector3(x + 1, y + 1, z);
+            Vector3 northWest = new Vector3(x - 1, y + 1, z);
+            Vector3 southEast = new Vector3(x + 1, y - 1, z);
+            Vector3 southWest = new Vector3(x - 1, y - 1, z);
+            /*createDiagonal(northEast);
+            createDiagonal(northWest);
+            createDiagonal(southEast);
+            createDiagonal(southWest);*/
+            Debug.Log(northEast);
         }
 
         anim.SetInteger(animationState, 1);
+        Debug.Log(trap.trapName);
 
         yield return new WaitForSeconds(2f);
 
