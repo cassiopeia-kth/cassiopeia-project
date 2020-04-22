@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5925972137361695523}
   - component: {fileID: 5925972137361695522}
-  - component: {fileID: 5925972137361695521}
+  - component: {fileID: 235178128}
   m_Layer: 8
   m_Name: Torch
   m_TagString: Untagged
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5925972137361695520}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.44, y: 1.46, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5925972137361695521
+--- !u!95 &235178128
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 5925972137361695520}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 49abf2fbbbef21849b31860892130ca0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 93b9c5938768cb14ab1a5d052386c4a9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
