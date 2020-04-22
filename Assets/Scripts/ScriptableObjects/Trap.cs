@@ -18,7 +18,8 @@ HADES,
 POSEIDON,
 ZEUS,
 HERMES,
-SPIKE
+SPIKE,
+FIRE
 }
 
 public TrapType trapType;

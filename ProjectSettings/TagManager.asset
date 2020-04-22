@@ -51,3 +51,9 @@ TagManager:
   - name: Objects
     uniqueID: 3871273279
     locked: 0
+  - name: Player
+    uniqueID: 433050519
+    locked: 0
+  - name: Zeus
+    uniqueID: 3142229799
+    locked: 0
