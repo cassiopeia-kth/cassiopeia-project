@@ -11,6 +11,7 @@ public class MovePlayer : MonoBehaviour
     public Collider cd;
     public Text GameOver;
     public Animator ani;
+    public Inventory inventory;
     
     // Start is called before the first frame update
     void Start(){	
@@ -77,10 +78,15 @@ public class MovePlayer : MonoBehaviour
 	if(other.gameObject.name == "Hole"){
 	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    FindObjectOfType<GameManager>().EndGame();
-
 	}
 
+//	Inventory_Item item = other.GetComponent<Inventory_Item>();
+
+	if(item != null){
+	    inventory.AddItem(item);
+	}
     }
+
 
     private void setAllAnimatorZero(){
 	ani.SetFloat("left", 0f);
@@ -89,5 +95,7 @@ public class MovePlayer : MonoBehaviour
 	ani.SetFloat("down", 0f);
 	ani.SetFloat("hole", 0f);
     }
+
+    
 
 }

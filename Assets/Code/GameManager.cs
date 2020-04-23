@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour
     public RectTransform panelGameOver;
     public Text txtGameOver;
     public Canvas gameOverCanvas;
+    public Canvas inventoryCanvas;
     public Button playAgain;
     public Button mainMenu;
     
     
     public void displayGameOverHUD(){
 	gameOverCanvas.enabled = true;
+	inventoryCanvas.enabled = false;
     }
 
     public void displayMainMenu(){
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     }
     public void Start(){
 	gameOverCanvas.enabled = false;
+	inventoryCanvas.enabled = true;
     }
 
     
