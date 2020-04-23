@@ -7,6 +7,8 @@ public class TrapInteraction : MonoBehaviour
     private Animator anim;
     string animationState = "AnimationState";
     private Vector3 pos;
+    bool spent = false;
+    public int poseidonDirection;
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class TrapInteraction : MonoBehaviour
         pos = gameObject.transform.position;
         pos.z = 0;
         gameObject.transform.position = pos;
+        Debug.Log(poseidonDirection);
 
 
         StartCoroutine(MyCoroutine(pos));
@@ -51,11 +54,14 @@ public class TrapInteraction : MonoBehaviour
         Debug.Log(trap.trapName);
         anim.SetInteger(animationState, 1);
 
-        if(name == "PoseidonTrap")
+        if(name == "PoseidonTrap" && spent == false)
         {
+            spent = true;
             yield return new WaitForSeconds(0.1f);
             int num = UnityEngine.Random.Range(0,3);
             gameObject.transform.Rotate(0.0f, 0.0f, num * 90.0f, Space.Self);
+            poseidonDirection = num;
+            Debug.Log(poseidonDirection);
         }
         
 

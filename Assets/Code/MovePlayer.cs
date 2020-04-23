@@ -62,7 +62,7 @@ public class MovePlayer : MonoBehaviour
 	    i = 0;
 	}
 
-	if(Input.GetKey(KeyCode.H)){
+	if(Input.GetKey(KeyCode.H) && i > 10){
 	    int j = 0;
 	    for(j = 0; j < inventory.itemsList.Count; j++){
 		if(inventory.itemsList[j].Selected == true){
@@ -119,6 +119,12 @@ public class MovePlayer : MonoBehaviour
 //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    FindObjectOfType<GameManager>().EndGame();
 	}
+
+	/*if(other.gameObject.name == "PoseidonTrap"){
+		Debug.Log("Go to sea");
+		TrapInteraction PoseidonScript = other.GetComponent<TrapInteraction>();
+		Debug.Log("The direction of Poseidon is: " + PoseidonScript.poseidonDirection);
+	}*/
 
 	
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
