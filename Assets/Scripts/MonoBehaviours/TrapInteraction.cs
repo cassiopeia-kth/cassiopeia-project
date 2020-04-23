@@ -30,7 +30,9 @@ public class TrapInteraction : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        if(trap.trapName == "ZeusMainTrap")
+        string name = trap.trapName;
+
+        if(name == "ZeusMainTrap")
         {
             gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
             Debug.Log(pos);
@@ -44,9 +46,17 @@ public class TrapInteraction : MonoBehaviour
             GameObject actualNorthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,90)));
             GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,180)));
         }
+
         
         Debug.Log(trap.trapName);
         anim.SetInteger(animationState, 1);
+
+        if(name == "PoseidonTrap")
+        {
+            yield return new WaitForSeconds(0.1f);
+            int num = UnityEngine.Random.Range(0,3);
+            gameObject.transform.Rotate(0.0f, 0.0f, num * 90.0f, Space.Self);
+        }
         
 
         yield return new WaitForSeconds(2f);
