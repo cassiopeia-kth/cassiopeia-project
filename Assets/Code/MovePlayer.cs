@@ -1,17 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+<<<<<<< HEAD
 using UnityEngine.UI;
+=======
+
+>>>>>>> 2880080ce02949ee9bb39ddeaef254e0111063b2
 public class MovePlayer : MonoBehaviour
 {
     float speed = 0.0001f;
     public Rigidbody2D rb;
     public Vector3 posInit;
     public int i = 0;
+<<<<<<< HEAD
     public Collider cd;
     public Text GameOver;
     public Animator ani;
     public Inventory inventory;
+=======
+>>>>>>> 2880080ce02949ee9bb39ddeaef254e0111063b2
     
     // Start is called before the first frame update
     void Start(){	
@@ -23,26 +30,18 @@ public class MovePlayer : MonoBehaviour
     {
 	if(Input.GetKey(KeyCode.UpArrow) && i > 10){
 	    rb.MovePosition(rb.position + new Vector2(0,1));
-	    ani.SetFloat("up", 1f);
-	    //	    	    rb.velocity = new Vector3(0,1,0);
 	    i = 0;
 	}
 	if(Input.GetKey(KeyCode.DownArrow) && i > 10){
 	    rb.MovePosition(rb.position - new Vector2(0,1));
-	    // 	    	    rb.velocity = new Vector3(0,-1,0);
 	    i = 0;
-	    ani.SetFloat("down", 1f);
 	}
 	if(Input.GetKey(KeyCode.RightArrow) && i > 10){
 	    rb.MovePosition(rb.position + new Vector2(1,0));
-	    ani.SetFloat("right", 1f);
-	    //	    rb.velocity = new Vector3(1,0,0);
 	    i = 0;
 	}
 	if(Input.GetKey(KeyCode.LeftArrow) && i > 10){
 	    rb.MovePosition(rb.position - new Vector2(1,0));
-	    ani.SetFloat("left", 1f);
-	    //	    	    rb.velocity = new Vector3(-1,0,0);
 	    i = 0;
 	}
 
@@ -92,18 +91,16 @@ public class MovePlayer : MonoBehaviour
 	
 	if(Input.GetKeyUp(KeyCode.UpArrow)){
 	    i = 10;
-	    setAllAnimatorZero();
 	}
-	else if(Input.GetKeyUp(KeyCode.DownArrow)){
+	if(Input.GetKeyUp(KeyCode.DownArrow)){
 	    i = 10;
-	    setAllAnimatorZero();
 	}
-	else if(Input.GetKeyUp(KeyCode.RightArrow)){
+	if(Input.GetKeyUp(KeyCode.RightArrow)){
 	    i = 10;
-	    setAllAnimatorZero();
 	}
-	else if(Input.GetKeyUp(KeyCode.LeftArrow)){
+	if(Input.GetKeyUp(KeyCode.LeftArrow)){
 	    i = 10;
+<<<<<<< HEAD
 	    setAllAnimatorZero();
 	}	    
     }
@@ -141,6 +138,11 @@ public class MovePlayer : MonoBehaviour
 	ani.SetFloat("up", 0f);
 	ani.SetFloat("down", 0f);
 	ani.SetFloat("hole", 0f);
+=======
+	}
+
+	    
+>>>>>>> 2880080ce02949ee9bb39ddeaef254e0111063b2
     }
 
     

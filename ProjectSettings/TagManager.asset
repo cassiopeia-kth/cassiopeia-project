@@ -3,9 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< HEAD
   tags:
   - Trap
   - Enemy
+=======
+  tags: []
+>>>>>>> 2880080ce02949ee9bb39ddeaef254e0111063b2
   layers:
   - Default
   - TransparentFX
@@ -16,9 +20,9 @@ TagManager:
   - 
   - 
   - Objects
-  - Traps
-  - Player
-  - Enemies
+  - 
+  - 
+  - 
   - 
   - 
   - 
