@@ -11,7 +11,6 @@ public class TrapInteraction : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        anim.SetFloat("animspeed", 0f);
         pos = gameObject.transform.position;
         pos.z = -100;
         gameObject.transform.position = pos;
@@ -25,7 +24,6 @@ public class TrapInteraction : MonoBehaviour
 
 
         StartCoroutine(MyCoroutine(pos));
-        anim.SetFloat("animspeed", 1f);
     }
 
     IEnumerator MyCoroutine(Vector3 pos)
