@@ -45,6 +45,49 @@ public class MovePlayer : MonoBehaviour
 	    //	    	    rb.velocity = new Vector3(-1,0,0);
 	    i = 0;
 	}
+
+	if(Input.GetKey(KeyCode.L) && i > 10 ){
+	    int j = 0;
+	    for(j = 0; j < inventory.itemsList.Count; j++){
+		if(inventory.itemsList[j].Selected == true){
+		    inventory.itemsList[j].Selected = false;
+		    break;
+		}
+	    }
+	   
+	    if(j+1 < inventory.itemsList.Count){
+		inventory.SelectItem(inventory.itemsList[j+1], j+1);
+	    }else {
+		inventory.itemsList[j].Selected = true;
+	    }
+	    i = 0;
+	}
+
+	if(Input.GetKey(KeyCode.H)){
+	    int j = 0;
+	    for(j = 0; j < inventory.itemsList.Count; j++){
+		if(inventory.itemsList[j].Selected == true){
+		    inventory.itemsList[j].Selected = false;
+		    break;
+		}
+	    }
+	    Debug.Log(inventory.itemsList.Count);
+	    Debug.Log(inventory.itemsList[0].Name);
+	    Debug.Log(inventory.itemsList[0].Slot);
+	    Debug.Log(inventory.itemsList[0].Selected);
+	    Debug.Log("j = " + j);
+	    if(j-1 >= 0) {
+		Debug.Log("This Happened, Item currently displayed is j: ");
+		Debug.Log(j);  
+
+		inventory.SelectItem(inventory.itemsList[j-1], j-1);
+	    }else {
+		inventory.itemsList[j].Selected = true;
+	    }
+	    i = 0;
+	}
+	
+	
 	i++;
 	
 	if(Input.GetKeyUp(KeyCode.UpArrow)){
@@ -67,7 +110,7 @@ public class MovePlayer : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col){	
 	if(col.gameObject.name == "Hole"){
-	    Debug.Log("OnCollisionEnter2D");
+//	    Debug.Log("OnCollisionEnter2D");
 
 	}
 	    
@@ -76,14 +119,18 @@ public class MovePlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole"){
-	    Debug.Log("OnCollisionEnter2D TRIGGER");
+//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 
-//	Inventory_Item item = other.GetComponent<Inventory_Item>();
+	
+	Inventory_Item item = other.GetComponent<Inventory_Item>();
 
 	if(item != null){
 	    inventory.AddItem(item);
+	    if(inventory.itemsList.Count == 1)
+		inventory.SelectItem(item, 0);
+//	    Debug.Log(item.Selected);
 	}
     }
 

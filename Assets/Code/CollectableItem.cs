@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollectableItem : MonoBehaviour, Inventory_Item
 {
+    public bool selected = false;
 
     public string Name{
 	get{
@@ -11,6 +12,25 @@ public class CollectableItem : MonoBehaviour, Inventory_Item
 	}
     }
 
+    public bool Selected{
+	get{
+	    return selected;
+	}
+	set{
+	    selected = value;
+	}
+    }
+
+    public int slot;
+    public int Slot{
+	get{
+	    return slot;
+	}
+	set{
+	    slot = value;
+	}
+    }
+    
     public Sprite _Image = null;
 
     public Sprite Image{

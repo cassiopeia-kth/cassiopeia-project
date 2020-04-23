@@ -9,6 +9,10 @@ public interface Inventory_Item {
 
     Sprite Image { get; }
 
+    bool Selected { get; set;}
+
+    int Slot { get; set;}
+
     void OnPickup();
 }
 
