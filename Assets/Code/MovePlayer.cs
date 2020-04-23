@@ -123,6 +123,12 @@ public class MovePlayer : MonoBehaviour
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 
+	/*if(other.gameObject.name == "PoseidonTrap"){
+		Debug.Log("Go to sea");
+		TrapInteraction PoseidonScript = other.GetComponent<TrapInteraction>();
+		Debug.Log("The direction of Poseidon is: " + PoseidonScript.poseidonDirection);
+	}*/
+
 	
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
 
