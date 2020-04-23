@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7373041246731399451}
   m_Layer: 8
   m_Name: ZeusmainTrap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -423694017
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3802902807678964246, guid: be8c317dee38d034c88a9e28d1439ab4,
+  m_Sprite: {fileID: -495865452663083274, guid: d486d43cf1c8ee84daa2491b9e4f3108,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
