@@ -63,7 +63,7 @@ public class MovePlayer : MonoBehaviour
 	    i = 0;
 	}
 
-	if(Input.GetKey(KeyCode.H)){
+	if(Input.GetKey(KeyCode.H) && i > 10){
 	    int j = 0;
 	    for(j = 0; j < inventory.itemsList.Count; j++){
 		if(inventory.itemsList[j].Selected == true){
