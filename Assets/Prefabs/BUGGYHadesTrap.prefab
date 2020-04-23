@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2510005037296922747}
   - component: {fileID: 1547788314}
   m_Layer: 9
-  m_Name: HadesTrap
+  m_Name: BUGGYHadesTrap
   m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,10 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -423694017
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2012328747014868908, guid: 80e6fca860c2b2345a58d86f0f4cf783,
-    type: 3}
+  m_Sprite: {fileID: 764528641364348562, guid: fafa0ef59b8232e4b87712d010a1a16b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

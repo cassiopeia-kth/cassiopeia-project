@@ -44,9 +44,10 @@ public class TrapInteraction : MonoBehaviour
             GameObject actualNorthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,90)));
             GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,180)));
         }
-
-        anim.SetInteger(animationState, 1);
+        
         Debug.Log(trap.trapName);
+        anim.SetInteger(animationState, 1);
+        
 
         yield return new WaitForSeconds(2f);
 
