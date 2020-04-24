@@ -24,6 +24,7 @@ public class MovePlayer : MonoBehaviour
     void Update()
     {
 
+	// If the arrows keys are enabled, allow movement
 	if(arrowKeysEnabled == true)
 	{
 		if(Input.GetKey(KeyCode.UpArrow) && i > 10){
@@ -55,16 +56,18 @@ public class MovePlayer : MonoBehaviour
 	if(Input.GetKey(KeyCode.L) && i > 10 ){
 	    int j = 0;
 	    for(j = 0; j < inventory.itemsList.Count; j++){
-		if(inventory.itemsList[j].Selected == true){
-		    inventory.itemsList[j].Selected = false;
-		    break;
-		}
+			if(inventory.itemsList[j].Selected == true){
+		    	inventory.itemsList[j].Selected = false;
+		    	break;
+			}
 	    }
 	   
 	    if(j+1 < inventory.itemsList.Count){
-		inventory.SelectItem(inventory.itemsList[j+1], j+1);
-	    }else {
-		inventory.itemsList[j].Selected = true;
+			inventory.SelectItem(inventory.itemsList[j+1], j+1);
+	    }
+		else 
+		{
+			inventory.itemsList[j].Selected = true;
 	    }
 	    i = 0;
 	}
@@ -72,23 +75,26 @@ public class MovePlayer : MonoBehaviour
 	if(Input.GetKey(KeyCode.H) && i > 10){
 	    int j = 0;
 	    for(j = 0; j < inventory.itemsList.Count; j++){
-		if(inventory.itemsList[j].Selected == true){
-		    inventory.itemsList[j].Selected = false;
-		    break;
-		}
+			if(inventory.itemsList[j].Selected == true){
+		    	inventory.itemsList[j].Selected = false;
+		    	break;
+			}
 	    }
 	    Debug.Log(inventory.itemsList.Count);
 	    Debug.Log(inventory.itemsList[0].Name);
 	    Debug.Log(inventory.itemsList[0].Slot);
 	    Debug.Log(inventory.itemsList[0].Selected);
 	    Debug.Log("j = " + j);
-	    if(j-1 >= 0) {
-		Debug.Log("This Happened, Item currently displayed is j: ");
-		Debug.Log(j);  
+	    if(j-1 >= 0) 
+		{
+			Debug.Log("This Happened, Item currently displayed is j: ");
+			Debug.Log(j);  
 
-		inventory.SelectItem(inventory.itemsList[j-1], j-1);
-	    }else {
-		inventory.itemsList[j].Selected = true;
+			inventory.SelectItem(inventory.itemsList[j-1], j-1);
+	    }
+		else 
+		{
+			inventory.itemsList[j].Selected = true;
 	    }
 	    i = 0;
 	}
@@ -115,11 +121,9 @@ public class MovePlayer : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col){	
-	if(col.gameObject.name == "Hole"){
-//	    Debug.Log("OnCollisionEnter2D");
-
-	}
-	    
+		if(col.gameObject.name == "Hole"){
+		//	    Debug.Log("OnCollisionEnter2D");
+		}
     }
 
 
@@ -127,12 +131,12 @@ public class MovePlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
 	if(other.gameObject.name == "Hole"){
-//	    Debug.Log("OnCollisionEnter2D TRIGGER");
+	//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 
-	// ED ADDING CODE START
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
 	else if (other.GetComponent<TrapInteraction>() != null)
 	{
@@ -176,7 +180,6 @@ public class MovePlayer : MonoBehaviour
 			Debug.Log("Red Bull gives you Wiiings");
 		}
 	}
-	// ED ADDING CODE END
 
 	
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
@@ -198,50 +201,56 @@ public class MovePlayer : MonoBehaviour
 	ani.SetFloat("hole", 0f);
     }
 
-	// ED ADD
+	// Function for moving the player with the Poseidon trap.
+	// For best use, arrowKeysEnabled should be set to false.
+	// Can be cleaned up with a seperate function for each of these movements.
 	IEnumerator findPoseidonDirection(TrapInteraction TrapScript)
 	{
+		// Wait while the poseidon trap is configuring its rotation.
 		while(TrapScript.poseidonDirectionReady == false)
 		{
 			yield return null;
 		}
+
+		// Get the direction 0 to 3, which indicates how many times the
+		// trap has been rotates by 90 degrees.
 		int direction = TrapScript.poseidonDirection;
 		Debug.Log("The direction of Poseidon is: " + direction);
+
+		// If the poseidon direction is up, move the player up.
 		if(direction == 0)
 		{
 			rb.MovePosition(rb.position + new Vector2(0,1));
 	    	ani.SetFloat("up", 1f);
 			yield return new WaitForSeconds(0.1f);
 			ani.SetFloat("up", 0f);
-			// wait then set back to 0f
 		}
+		// If the poseidon direction is right, move the player right.
 		else if(direction == 1)
 		{
 			rb.MovePosition(rb.position + new Vector2(-1,0));
 	    	ani.SetFloat("right", 1f);
 			yield return new WaitForSeconds(0.1f);
 			ani.SetFloat("right", 0f);
-			// wait then set back to 0f
 		}
+		// If the poseidon direction is down, move the player down.
 		else if(direction == 2)
 		{
 			rb.MovePosition(rb.position + new Vector2(0,-1));
 	    	ani.SetFloat("down", 1f);
 			yield return new WaitForSeconds(0.1f);
 			ani.SetFloat("down", 0f);
-			// wait then set back to 0f
 		}
+		// If the poseidon direction is left, move the player left.
 		else
 		{
 			rb.MovePosition(rb.position + new Vector2(1,0));
 	    	ani.SetFloat("left", 1f);
 			yield return new WaitForSeconds(0.1f);
 			ani.SetFloat("left", 0f);
-			// wait then set back to 0f
 		}
 
 		yield return 0;
 	}
-	// ED END ADD
 
 }
