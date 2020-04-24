@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ZeusDiagonal : MonoBehaviour
 {
+    public Trap trap;
     private Animator anim;
     private Vector3 pos;
 

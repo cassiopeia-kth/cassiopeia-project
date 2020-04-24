@@ -128,7 +128,7 @@ public class MovePlayer : MonoBehaviour
 
 	// ED ADDING CODE START
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
-	if (other.GetComponent<TrapInteraction>() != null)
+	else if (other.GetComponent<TrapInteraction>() != null)
 	{
 		TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 		string name = TrapScript.trap.trapName;
@@ -136,26 +136,37 @@ public class MovePlayer : MonoBehaviour
 			StartCoroutine(findPoseidonDirection(TrapScript));
 		}
 		else if(name == "HadesTrap"){
+			Debug.Log("Death by Hades!");
 			FindObjectOfType<GameManager>().EndGame();
 		}
 		else if(name == "FireTrap"){
+			Debug.Log("Death by Fire!");
 			FindObjectOfType<GameManager>().EndGame();
 		}
 		else if(name == "SpikeTrap"){
+			Debug.Log("Death by Spike!");
 			FindObjectOfType<GameManager>().EndGame();
 		}
 		else if(name == "ZeusMainTrap"){
+			Debug.Log("Death by Zeus!");
 			FindObjectOfType<GameManager>().EndGame();
 		}
 	}
 
+	// Deals with Zeus' diagonal bolts of lightning.
+	else if (other.GetComponent<ZeusDiagonal>() != null)
+	{
+		Debug.Log("Death by Zeus Diagonal!");
+		FindObjectOfType<GameManager>().EndGame();
+	}
+
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
-	if (other.GetComponent<Pickup>() != null)
+	else if (other.GetComponent<Pickup>() != null)
 	{
 		Pickup PickupScript = other.GetComponent<Pickup>();
 		string name = PickupScript.trap.trapName;
 		if(name == "HermesPickup"){
-			Debug.Log("Yippee");
+			Debug.Log("Red Bull gives you Wiiings");
 		}
 	}
 	// ED ADDING CODE END
