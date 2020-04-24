@@ -123,11 +123,17 @@ public class MovePlayer : MonoBehaviour
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 
-	/*if(other.gameObject.name == "PoseidonTrap"){
-		Debug.Log("Go to sea");
-		TrapInteraction PoseidonScript = other.GetComponent<TrapInteraction>();
-		Debug.Log("The direction of Poseidon is: " + PoseidonScript.poseidonDirection);
-	}*/
+	// ED ADDING CODE START
+	if (other.GetComponent<TrapInteraction>() != null)
+	{
+		TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
+		string name = TrapScript.trap.trapName;
+		if(name == "PoseidonTrap"){
+			StartCoroutine(findPoseidonDirection(TrapScript));
+		}
+	}
+	
+	// ED ADDING CODE END
 
 	
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
@@ -149,6 +155,50 @@ public class MovePlayer : MonoBehaviour
 	ani.SetFloat("hole", 0f);
     }
 
-    
+	// ED ADD
+	IEnumerator findPoseidonDirection(TrapInteraction TrapScript)
+	{
+		while(TrapScript.poseidonDirectionReady == false)
+		{
+			yield return null;
+		}
+		int direction = TrapScript.poseidonDirection;
+		Debug.Log("The direction of Poseidon is: " + direction);
+		if(direction == 0)
+		{
+			rb.MovePosition(rb.position + new Vector2(0,1));
+	    	ani.SetFloat("up", 1f);
+			yield return new WaitForSeconds(0.1f);
+			ani.SetFloat("up", 0f);
+			// wait then set back to 0f
+		}
+		else if(direction == 1)
+		{
+			rb.MovePosition(rb.position + new Vector2(-1,0));
+	    	ani.SetFloat("right", 1f);
+			yield return new WaitForSeconds(0.1f);
+			ani.SetFloat("right", 0f);
+			// wait then set back to 0f
+		}
+		else if(direction == 2)
+		{
+			rb.MovePosition(rb.position + new Vector2(0,-1));
+	    	ani.SetFloat("down", 1f);
+			yield return new WaitForSeconds(0.1f);
+			ani.SetFloat("down", 0f);
+			// wait then set back to 0f
+		}
+		else
+		{
+			rb.MovePosition(rb.position + new Vector2(1,0));
+	    	ani.SetFloat("left", 1f);
+			yield return new WaitForSeconds(0.1f);
+			ani.SetFloat("left", 0f);
+			// wait then set back to 0f
+		}
+
+		yield return 0;
+	}
+	// ED END ADD
 
 }

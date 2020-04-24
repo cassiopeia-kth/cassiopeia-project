@@ -8,6 +8,7 @@ public class TrapInteraction : MonoBehaviour
     string animationState = "AnimationState";
     private Vector3 pos;
     bool spent = false;
+    public bool poseidonDirectionReady = false;
     public int poseidonDirection;
 
     void Start()
@@ -23,7 +24,7 @@ public class TrapInteraction : MonoBehaviour
         pos = gameObject.transform.position;
         pos.z = 0;
         gameObject.transform.position = pos;
-        Debug.Log(poseidonDirection);
+        //Debug.Log(poseidonDirection);
 
 
         StartCoroutine(MyCoroutine(pos));
@@ -61,7 +62,7 @@ public class TrapInteraction : MonoBehaviour
             int num = UnityEngine.Random.Range(0,3);
             gameObject.transform.Rotate(0.0f, 0.0f, num * 90.0f, Space.Self);
             poseidonDirection = num;
-            Debug.Log(poseidonDirection);
+            poseidonDirectionReady = true;
         }
         
 
