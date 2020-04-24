@@ -5,15 +5,14 @@ public class TrapInteraction : MonoBehaviour
 {
     public Trap trap;
     private Animator anim;
-    private Animation currentAnim;
     string animationState = "AnimationState";
     private Vector3 pos;
+    bool spent = false;
+    public int poseidonDirection;
 
     void Start()
     {
-        currentAnim = GetComponent<Animation>();
         anim = GetComponent<Animator>();
-        anim.SetFloat("animspeed", 0f);
         pos = gameObject.transform.position;
         pos.z = -100;
         gameObject.transform.position = pos;
@@ -24,17 +23,19 @@ public class TrapInteraction : MonoBehaviour
         pos = gameObject.transform.position;
         pos.z = 0;
         gameObject.transform.position = pos;
+        Debug.Log(poseidonDirection);
 
 
         StartCoroutine(MyCoroutine(pos));
-        anim.SetFloat("animspeed", 1f);
     }
 
     IEnumerator MyCoroutine(Vector3 pos)
     {
         yield return new WaitForSeconds(2f);
 
-        if(trap.trapName == "ZeusMainTrap")
+        string name = trap.trapName;
+
+        if(name == "ZeusMainTrap")
         {
             gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
             Debug.Log(pos);
@@ -42,19 +43,27 @@ public class TrapInteraction : MonoBehaviour
             float x = pos.x;
             float y = pos.y;
             float z = pos.z;
-            Vector3 northEast = new Vector3(x + 1, y + 1, z);
-            Vector3 northWest = new Vector3(x - 1, y + 1, z);
-            Vector3 southEast = new Vector3(x + 1, y - 1, z);
-            Vector3 southWest = new Vector3(x - 1, y - 1, z);
-            /*createDiagonal(northEast);
-            createDiagonal(northWest);
-            createDiagonal(southEast);
-            createDiagonal(southWest);*/
-            Debug.Log(northEast);
+            GameObject zeusSouthEast = (GameObject)Resources.Load("Zeus/ZeusSouthEast", typeof(GameObject));
+            GameObject actualSouthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y - 1.5f, z), Quaternion.identity);
+            GameObject actualSouthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y - 1.5f, z), Quaternion.Euler(new Vector3(0,0,-90)));
+            GameObject actualNorthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,90)));
+            GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,180)));
         }
 
-        anim.SetInteger(animationState, 1);
+        
         Debug.Log(trap.trapName);
+        anim.SetInteger(animationState, 1);
+
+        if(name == "PoseidonTrap" && spent == false)
+        {
+            spent = true;
+            yield return new WaitForSeconds(0.1f);
+            int num = UnityEngine.Random.Range(0,3);
+            gameObject.transform.Rotate(0.0f, 0.0f, num * 90.0f, Space.Self);
+            poseidonDirection = num;
+            Debug.Log(poseidonDirection);
+        }
+        
 
         yield return new WaitForSeconds(2f);
 
