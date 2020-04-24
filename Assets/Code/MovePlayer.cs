@@ -116,6 +116,9 @@ public class MovePlayer : MonoBehaviour
 	    
     }
 
+
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole"){
@@ -124,6 +127,7 @@ public class MovePlayer : MonoBehaviour
 	}
 
 	// ED ADDING CODE START
+	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
 	if (other.GetComponent<TrapInteraction>() != null)
 	{
 		TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
@@ -131,8 +135,29 @@ public class MovePlayer : MonoBehaviour
 		if(name == "PoseidonTrap"){
 			StartCoroutine(findPoseidonDirection(TrapScript));
 		}
+		else if(name == "HadesTrap"){
+			FindObjectOfType<GameManager>().EndGame();
+		}
+		else if(name == "FireTrap"){
+			FindObjectOfType<GameManager>().EndGame();
+		}
+		else if(name == "SpikeTrap"){
+			FindObjectOfType<GameManager>().EndGame();
+		}
+		else if(name == "ZeusMainTrap"){
+			FindObjectOfType<GameManager>().EndGame();
+		}
 	}
-	
+
+	// Deals with pickup interaction. (e.g. the Hermes status effect)
+	if (other.GetComponent<Pickup>() != null)
+	{
+		Pickup PickupScript = other.GetComponent<Pickup>();
+		string name = PickupScript.trap.trapName;
+		if(name == "HermesPickup"){
+			Debug.Log("Yippee");
+		}
+	}
 	// ED ADDING CODE END
 
 	
