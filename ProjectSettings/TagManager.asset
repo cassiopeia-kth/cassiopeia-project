@@ -61,3 +61,6 @@ TagManager:
   - name: Zeus
     uniqueID: 3142229799
     locked: 0
+  - name: Player2
+    uniqueID: 2477898341
+    locked: 0
