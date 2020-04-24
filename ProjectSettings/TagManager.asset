@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Trap
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   - name: Floor
     uniqueID: 4294428137
     locked: 0
+  - name: Diagonal
+    uniqueID: 3485827725
+    locked: 0
   - name: Walls
     uniqueID: 1195624033
     locked: 0
@@ -56,4 +60,7 @@ TagManager:
     locked: 0
   - name: Zeus
     uniqueID: 3142229799
+    locked: 0
+  - name: Player2
+    uniqueID: 2477898341
     locked: 0
