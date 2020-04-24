@@ -21,6 +21,7 @@ public class TrapInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
         pos = gameObject.transform.position;
         pos.z = 0;
         gameObject.transform.position = pos;
@@ -52,18 +53,20 @@ public class TrapInteraction : MonoBehaviour
         }
 
         
-        Debug.Log(trap.trapName);
         anim.SetInteger(animationState, 1);
 
         if(name == "PoseidonTrap" && spent == false)
         {
+            pos.z = -100;
             spent = true;
-            yield return new WaitForSeconds(0.1f);
             int num = UnityEngine.Random.Range(0,3);
             gameObject.transform.Rotate(0.0f, 0.0f, num * 90.0f, Space.Self);
             poseidonDirection = num;
             poseidonDirectionReady = true;
+            yield return new WaitForSeconds(0.3f);
         }
+
+        pos.z = 0;
         
 
         yield return new WaitForSeconds(2f);
