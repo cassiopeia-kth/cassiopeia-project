@@ -12,41 +12,59 @@ public class MovePlayer : MonoBehaviour
     public Text GameOver;
     public Animator ani;
     public Inventory inventory;
+    private float timer;
+    private bool activateSleep = false;
     
     // Start is called before the first frame update
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
     }
 
+    void sleep(){}
     // Update is called once per frame
     void Update()
     {
-	if(Input.GetKey(KeyCode.UpArrow) && i > 10){
+	if(activateSleep)
+	{
+	    timer -= Time.deltaTime;
+	    Debug.Log(timer);
+	    if(timer <= 0)
+	    {
+		activateSleep = false;
+		setAllAnimatorZero();
+	    }
+	    else
+	    {
+		// return so the rest of Update is not done
+		return;
+	    }
+	}
+	if(Input.GetKey(KeyCode.UpArrow)){
 	    rb.MovePosition(rb.position + new Vector2(0,1));
 	    ani.SetFloat("up", 1f);
+	    ActivateSleep(0.25f);
 	    //	    	    rb.velocity = new Vector3(0,1,0);
-	    i = 0;
 	}
-	if(Input.GetKey(KeyCode.DownArrow) && i > 10){
+	if(Input.GetKey(KeyCode.DownArrow)){
 	    rb.MovePosition(rb.position - new Vector2(0,1));
 	    // 	    	    rb.velocity = new Vector3(0,-1,0);
-	    i = 0;
 	    ani.SetFloat("down", 1f);
+	    ActivateSleep(0.25f);
 	}
-	if(Input.GetKey(KeyCode.RightArrow) && i > 10){
+	if(Input.GetKey(KeyCode.RightArrow)){
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("right", 1f);
+	    ActivateSleep(0.25f);
 	    //	    rb.velocity = new Vector3(1,0,0);
-	    i = 0;
 	}
-	if(Input.GetKey(KeyCode.LeftArrow) && i > 10){
+	if(Input.GetKey(KeyCode.LeftArrow)){
 	    rb.MovePosition(rb.position - new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
+	    ActivateSleep(0.25f);
 	    //	    	    rb.velocity = new Vector3(-1,0,0);
-	    i = 0;
 	}
 
-	if(Input.GetKey(KeyCode.L) && i > 10 ){
+	if(Input.GetKey(KeyCode.L) ){
 	    int j = 0;
 	    for(j = 0; j < inventory.itemsList.Count; j++){
 		if(inventory.itemsList[j].Selected == true){
@@ -60,10 +78,10 @@ public class MovePlayer : MonoBehaviour
 	    }else {
 		inventory.itemsList[j].Selected = true;
 	    }
-	    i = 0;
+	    ActivateSleep(0.25f);
 	}
 
-	if(Input.GetKey(KeyCode.H) && i > 10){
+	if(Input.GetKey(KeyCode.H)){
 	    int j = 0;
 	    for(j = 0; j < inventory.itemsList.Count; j++){
 		if(inventory.itemsList[j].Selected == true){
@@ -84,50 +102,51 @@ public class MovePlayer : MonoBehaviour
 	    }else {
 		inventory.itemsList[j].Selected = true;
 	    }
-	    i = 0;
+	    ActivateSleep(0.25f);
 	}
 	
 	
-	i++;
 	
 	if(Input.GetKeyUp(KeyCode.UpArrow)){
-	    i = 10;
 	    setAllAnimatorZero();
 	}
 	else if(Input.GetKeyUp(KeyCode.DownArrow)){
-	    i = 10;
 	    setAllAnimatorZero();
 	}
 	else if(Input.GetKeyUp(KeyCode.RightArrow)){
-	    i = 10;
 	    setAllAnimatorZero();
 	}
 	else if(Input.GetKeyUp(KeyCode.LeftArrow)){
-	    i = 10;
 	    setAllAnimatorZero();
 	}	    
     }
 
     void OnCollisionEnter2D(Collision2D col){	
 	if(col.gameObject.name == "Hole"){
-//	    Debug.Log("OnCollisionEnter2D");
+	    //	    Debug.Log("OnCollisionEnter2D");
 
 	}
 	    
     }
 
+    public void ActivateSleep(float forSeconds)
+    {
+	timer = forSeconds;
+	activateSleep = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole"){
-//	    Debug.Log("OnCollisionEnter2D TRIGGER");
+	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 
 	/*if(other.gameObject.name == "PoseidonTrap"){
-		Debug.Log("Go to sea");
-		TrapInteraction PoseidonScript = other.GetComponent<TrapInteraction>();
-		Debug.Log("The direction of Poseidon is: " + PoseidonScript.poseidonDirection);
-	}*/
+	  Debug.Log("Go to sea");
+	  TrapInteraction PoseidonScript = other.GetComponent<TrapInteraction>();
+	  Debug.Log("The direction of Poseidon is: " + PoseidonScript.poseidonDirection);
+	  }*/
 
 	
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
@@ -136,7 +155,7 @@ public class MovePlayer : MonoBehaviour
 	    inventory.AddItem(item);
 	    if(inventory.itemsList.Count == 1)
 		inventory.SelectItem(item, 0);
-//	    Debug.Log(item.Selected);
+	    //	    Debug.Log(item.Selected);
 	}
     }
 

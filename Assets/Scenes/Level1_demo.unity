@@ -1580,6 +1580,16 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1448639039}
+    - target: {fileID: 2116708895987346092, guid: b90fbc491d44cebc097f35bdd8d8e463,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 433050519
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116708895987346092, guid: b90fbc491d44cebc097f35bdd8d8e463,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2116708895987346093, guid: b90fbc491d44cebc097f35bdd8d8e463,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1639,6 +1649,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116708895987346095, guid: b90fbc491d44cebc097f35bdd8d8e463,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b90fbc491d44cebc097f35bdd8d8e463, type: 3}
