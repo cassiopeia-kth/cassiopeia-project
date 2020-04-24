@@ -12,38 +12,44 @@ public class MovePlayer : MonoBehaviour
     public Text GameOver;
     public Animator ani;
     public Inventory inventory;
+	public bool arrowKeysEnabled;
     
     // Start is called before the first frame update
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
+	arrowKeysEnabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-	if(Input.GetKey(KeyCode.UpArrow) && i > 10){
-	    rb.MovePosition(rb.position + new Vector2(0,1));
-	    ani.SetFloat("up", 1f);
-	    //	    	    rb.velocity = new Vector3(0,1,0);
-	    i = 0;
-	}
-	if(Input.GetKey(KeyCode.DownArrow) && i > 10){
-	    rb.MovePosition(rb.position - new Vector2(0,1));
-	    // 	    	    rb.velocity = new Vector3(0,-1,0);
-	    i = 0;
-	    ani.SetFloat("down", 1f);
-	}
-	if(Input.GetKey(KeyCode.RightArrow) && i > 10){
-	    rb.MovePosition(rb.position + new Vector2(1,0));
-	    ani.SetFloat("right", 1f);
-	    //	    rb.velocity = new Vector3(1,0,0);
-	    i = 0;
-	}
-	if(Input.GetKey(KeyCode.LeftArrow) && i > 10){
-	    rb.MovePosition(rb.position - new Vector2(1,0));
-	    ani.SetFloat("left", 1f);
-	    //	    	    rb.velocity = new Vector3(-1,0,0);
-	    i = 0;
+
+	if(arrowKeysEnabled == true)
+	{
+		if(Input.GetKey(KeyCode.UpArrow) && i > 10){
+	    	rb.MovePosition(rb.position + new Vector2(0,1));
+	    	ani.SetFloat("up", 1f);
+	    	//	    	    rb.velocity = new Vector3(0,1,0);
+	    	i = 0;
+		}
+		if(Input.GetKey(KeyCode.DownArrow) && i > 10){
+	    	rb.MovePosition(rb.position - new Vector2(0,1));
+	    	// 	    	    rb.velocity = new Vector3(0,-1,0);
+	    	i = 0;
+	    	ani.SetFloat("down", 1f);
+		}
+		if(Input.GetKey(KeyCode.RightArrow) && i > 10){
+	    	rb.MovePosition(rb.position + new Vector2(1,0));
+	    	ani.SetFloat("right", 1f);
+	    	//	    rb.velocity = new Vector3(1,0,0);
+	    	i = 0;
+		}
+		if(Input.GetKey(KeyCode.LeftArrow) && i > 10){
+	    	rb.MovePosition(rb.position - new Vector2(1,0));
+	    	ani.SetFloat("left", 1f);
+	    	//	    	    rb.velocity = new Vector3(-1,0,0);
+	    	i = 0;
+		}
 	}
 
 	if(Input.GetKey(KeyCode.L) && i > 10 ){
@@ -130,6 +136,7 @@ public class MovePlayer : MonoBehaviour
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
 	else if (other.GetComponent<TrapInteraction>() != null)
 	{
+		//arrowKeysEnabled = false;
 		TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 		string name = TrapScript.trap.trapName;
 		if(name == "PoseidonTrap"){
