@@ -5,10 +5,12 @@ using UnityEngine;
 public class CollectableItem : MonoBehaviour, Inventory_Item
 {
     public bool selected = false;
-
     public string Name{
 	get{
-	    return "SpikeTrap";
+	    return this.name;
+	}
+	set{
+	    Name = value;
 	}
     }
 
