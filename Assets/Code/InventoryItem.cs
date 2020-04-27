@@ -5,7 +5,7 @@ using System;
 
 
 public interface Inventory_Item {
-    string Name { get; }
+    string Name { get; set;}
 
     Sprite Image { get; }
 
