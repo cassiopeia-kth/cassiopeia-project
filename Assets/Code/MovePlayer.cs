@@ -63,48 +63,12 @@ public class MovePlayer : MonoBehaviour
 	}
 
 	if(Input.GetKey(KeyCode.L) ){
-	    int j = 0;
-	    for(j = 0; j < inventory.itemsList.Count; j++){
-		if(inventory.itemsList[j].Selected == true){
-		    inventory.itemsList[j].Selected = false;
-		    break;
-		}
-	    }
-	   
-	    if(j+1 < inventory.itemsList.Count){
-		inventory.SelectItem(inventory.itemsList[j+1], j+1);
-	    }
-	    else 
-	    {
-		inventory.itemsList[j].Selected = true;
-	    }
+	    inventory.hoverRight();
 	    ActivateSleep(0.25f);
 	}
 
 	if(Input.GetKey(KeyCode.H)){
-	    int j = 0;
-	    for(j = 0; j < inventory.itemsList.Count; j++){
-		if(inventory.itemsList[j].Selected == true){
-		    inventory.itemsList[j].Selected = false;
-		    break;
-		}
-	    }
-	    Debug.Log(inventory.itemsList.Count);
-	    Debug.Log(inventory.itemsList[0].Name);
-	    Debug.Log(inventory.itemsList[0].Slot);
-	    Debug.Log(inventory.itemsList[0].Selected);
-	    Debug.Log("j = " + j);
-	    if(j-1 >= 0) 
-	    {
-		Debug.Log("This Happened, Item currently displayed is j: ");
-		Debug.Log(j);  
-
-		inventory.SelectItem(inventory.itemsList[j-1], j-1);
-	    }
-	    else 
-	    {
-		inventory.itemsList[j].Selected = true;
-	    }
+	    inventory.hoverLeft();
 	    ActivateSleep(0.25f);
 	}
 	
@@ -126,7 +90,6 @@ public class MovePlayer : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col){	
 	if(col.gameObject.name == "Hole"){
-	    //Debug.Log("OnCollisionEnter2D");
 	}   
     }
 
@@ -140,7 +103,6 @@ public class MovePlayer : MonoBehaviour
     {
 
 	if(other.gameObject.name == "Hole"){
-	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 
@@ -162,7 +124,6 @@ public class MovePlayer : MonoBehaviour
 		FindObjectOfType<GameManager>().EndGame();
 	    }
 	  //  else if(name == "SpikeTrap"){
-	//	Debug.Log("Death by Spike!");
 	//	FindObjectOfType<GameManager>().EndGame();
 	  //  }
 	    else if(name == "ZeusMainTrap"){
@@ -191,9 +152,6 @@ public class MovePlayer : MonoBehaviour
 
 	if(item != null){
 	    inventory.AddItem(item);
-	    if(inventory.itemsList.Count == 1)
-		inventory.SelectItem(item, 0);
-	    //	    Debug.Log(item.Selected);
 	}
     }
 
