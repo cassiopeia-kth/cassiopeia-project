@@ -8,7 +8,6 @@ public class Inventory : MonoBehaviour
 {
     private const int SLOTS = 7;
 
-    public List<Inventory_Item> itemsList = new List<Inventory_Item>();
     public Inventory_Item[] itemList = new Inventory_Item[7];
 
     public event EventHandler<InventoryEventArgs> ItemAdded;
@@ -75,6 +74,12 @@ public class Inventory : MonoBehaviour
     }
 
     public void hoverRight(){
+	if(isEmpty()){
+	    Image image = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+	    image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
+	    return;
+	}
+	
 	int i;
 	for(i = 0; i < 7; i++){
 	    Image image = transform.GetChild(i).GetChild(0).GetComponent<Image>();
@@ -87,13 +92,26 @@ public class Inventory : MonoBehaviour
 	    if(itemList[j] != null){
 		Image image = transform.GetChild(j).GetChild(0).GetComponent<Image>();
 		image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
-		break;
+		return;
 	    }
-	    
+	}
+	for(int j = 0; j < 7; j++){
+	    if(itemList[j] != null){
+		Image image = transform.GetChild(j).GetChild(0).GetComponent<Image>();
+		image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
+		return;
+	    }
+
 	}
     }
 
     public void hoverLeft(){
+	if(isEmpty()){
+	    Image image = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+	    image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
+	    return;
+	}
+
 	int i;
 	for(i = 6; i >= 0; i--){
 	    Image image = transform.GetChild(i).GetChild(0).GetComponent<Image>();
@@ -106,7 +124,14 @@ public class Inventory : MonoBehaviour
 	    if(itemList[j] != null){
 		Image image = transform.GetChild(j).GetChild(0).GetComponent<Image>();
 		image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
-		break;
+		return;
+	    }   
+	}
+	for(int j = 6; j >= 0; j--){
+	    if(itemList[j] != null){
+		Image image = transform.GetChild(j).GetChild(0).GetComponent<Image>();
+		image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
+		return;
 	    }
 	    
 	}
