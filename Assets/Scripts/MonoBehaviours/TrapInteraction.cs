@@ -8,10 +8,12 @@ public class TrapInteraction : MonoBehaviour
     string animationState = "AnimationState";
     private Vector3 pos;
     bool spent = false;
+    public bool poseidonDirectionReady = false;
     public int poseidonDirection;
 
     void Start()
     {
+        // When a trap is initialised, it is set to z positon -100, so that it is invisible.
         anim = GetComponent<Animator>();
         pos = gameObject.transform.position;
         pos.z = -100;
@@ -20,25 +22,30 @@ public class TrapInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        // A trap can only be interacted with once, so we disable its collider.
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+
+        // Make the trap visible by changin its z value.
         pos = gameObject.transform.position;
         pos.z = 0;
         gameObject.transform.position = pos;
-        Debug.Log(poseidonDirection);
 
-
+        // Start a coroutine which deals with each trap animation.
         StartCoroutine(MyCoroutine(pos));
     }
 
     IEnumerator MyCoroutine(Vector3 pos)
     {
+        // Wait for 2 seconds before changing the animation state.
         yield return new WaitForSeconds(2f);
 
         string name = trap.trapName;
 
+        // If the trap is the zeus trap, then we must initiate four diagonal lightning bolts.
         if(name == "ZeusMainTrap")
         {
+            // We change the sorting layer so that it will render above the player, not below.
             gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
-            Debug.Log(pos);
 
             float x = pos.x;
             float y = pos.y;
@@ -50,21 +57,31 @@ public class TrapInteraction : MonoBehaviour
             GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,180)));
         }
 
-        
-        Debug.Log(trap.trapName);
+        // Change the animation state, so that the trap animation plays.
         anim.SetInteger(animationState, 1);
 
+        // If the trap is the Poseidon trap, and the trap has not been used yet.
         if(name == "PoseidonTrap" && spent == false)
         {
+            // Make the trap invisible, so we can rotate it.
+            pos.z = -100;
+            // Indicate that we have used the trap up, so it cannot be used twice.
             spent = true;
-            yield return new WaitForSeconds(0.1f);
+            // Generate a random number between 0 and 3, for how much we will rotate the trap by.
             int num = UnityEngine.Random.Range(0,3);
             gameObject.transform.Rotate(0.0f, 0.0f, num * 90.0f, Space.Self);
+            // Store this direction as a variable, which can be accessed by the player so they know which way to move.
             poseidonDirection = num;
-            Debug.Log(poseidonDirection);
+            // Indicate that the player is ready to be moved.
+            poseidonDirectionReady = true;
+            // Wait a short amount as a failsafe.
+            yield return new WaitForSeconds(0.3f);
         }
-        
 
+        // Make the trap visible again (this only really relates to the Poseidon trap)
+        pos.z = 0;
+        
+        // Wait two seconds before deactivating the trap.
         yield return new WaitForSeconds(2f);
 
         gameObject.SetActive(false);

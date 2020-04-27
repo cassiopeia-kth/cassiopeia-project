@@ -19,7 +19,8 @@ POSEIDON,
 ZEUS,
 HERMES,
 SPIKE,
-FIRE
+FIRE,
+ZEUS_DIAGONAL
 }
 
 public TrapType trapType;
