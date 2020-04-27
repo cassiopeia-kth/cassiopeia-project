@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Animations/Monster/monster_fire_left.anim.meta
-<<<<<<< HEAD
-guid: c731684d6720faf44b77ce0e6b3b95e1
-=======
-guid: 80a769d2110445d40a7719a681395bea
->>>>>>> develop
-=======
 guid: aecd92c86dea14d3491b3706f0b62ae6
->>>>>>> caee0f461c0146c054987223c7d74833d3a785bf:Assets/Animations/Monster/hades_left.anim.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

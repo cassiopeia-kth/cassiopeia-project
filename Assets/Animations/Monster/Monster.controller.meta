@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Animations/Monster/monster_fire_right.anim.meta
-<<<<<<< HEAD
-guid: b659fcd06481f78409fb401882ee2153
-=======
-guid: c6c360f579c20df458df1665b8c92353
->>>>>>> develop
-=======
 guid: 0a8682484ba1f49a4af728ed2cb63a93
->>>>>>> caee0f461c0146c054987223c7d74833d3a785bf:Assets/Animations/Monster/Monster.controller.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
