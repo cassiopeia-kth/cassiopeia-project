@@ -153,23 +153,24 @@ public class MovePlayer : MonoBehaviour
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
-		StartCoroutine(findPoseidonDirection(TrapScript));
+			StartCoroutine(findPoseidonDirection(TrapScript));
 	    }
 	    else if(name == "HadesTrap"){
-		Debug.Log("Death by Hades!");
-		FindObjectOfType<GameManager>().EndGame();
+			Debug.Log("Death by Hades!");
+			FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
-		Debug.Log("Death by Fire!");
-		FindObjectOfType<GameManager>().EndGame();
+			Debug.Log("Death by Fire!");
+			FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "SpikeTrap"){
-		Debug.Log("Death by Spike!");
-		FindObjectOfType<GameManager>().EndGame();
+			StartCoroutine(spikeTrap());
+			Debug.Log("Death by Spike!");
+			FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "ZeusMainTrap"){
-		Debug.Log("Death by Zeus!");
-		FindObjectOfType<GameManager>().EndGame();
+			Debug.Log("Death by Zeus!");
+			FindObjectOfType<GameManager>().EndGame();
 	    }
 	}
 
@@ -264,6 +265,10 @@ public class MovePlayer : MonoBehaviour
 	return transform.position;
     }
 
-    
+	IEnumerator spikeTrap() {
+		yield return new WaitForSeconds(1f);
+		ani.SetFloat("SpikeTrap", 1f);
+		yield return 0;
+	}
 
 }
