@@ -127,9 +127,7 @@ public class MovePlayer : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col){	
 	if(col.gameObject.name == "Hole"){
 	    //Debug.Log("OnCollisionEnter2D");
-
-	}
-	    
+	}   
     }
 
     public void ActivateSleep(float forSeconds)
@@ -163,10 +161,10 @@ public class MovePlayer : MonoBehaviour
 		Debug.Log("Death by Fire!");
 		FindObjectOfType<GameManager>().EndGame();
 	    }
-	    else if(name == "SpikeTrap"){
-		Debug.Log("Death by Spike!");
-		FindObjectOfType<GameManager>().EndGame();
-	    }
+	  //  else if(name == "SpikeTrap"){
+	//	Debug.Log("Death by Spike!");
+	//	FindObjectOfType<GameManager>().EndGame();
+	  //  }
 	    else if(name == "ZeusMainTrap"){
 		Debug.Log("Death by Zeus!");
 		FindObjectOfType<GameManager>().EndGame();

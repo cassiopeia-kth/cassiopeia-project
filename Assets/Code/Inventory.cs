@@ -49,20 +49,13 @@ public class Inventory : MonoBehaviour
 		Debug.Log(itemsList[i].Name);
 		Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
 		Instantiate(spikeTrap, playerPos , transform.rotation);
-		if(i == itemsList.Count - 1){
-		    itemsList[i-1].Selected = true;
-		    break;
-		}
-		for(; i < itemsList.Count-1; i++){
-		    itemsList[i] = itemsList[i+1];
-		}
+		itemsList[i] = null;
 		renderInventory();
 	    }
 	}
     }
 
     public void renderInventory(){
-	//TODO create a function to refresh the inventory
     }
     
     
