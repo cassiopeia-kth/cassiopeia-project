@@ -19,23 +19,18 @@ public class MovePlayer : MonoBehaviour
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
     }
-
-    void sleep(){}
-    // Update is called once per frame
+    
     void Update()
     {
 	if(activateSleep)
 	{
 	    timer -= Time.deltaTime;
-	    Debug.Log(timer);
-	    if(timer <= 0)
-	    {
+//	    Debug.Log(timer);
+	    if(timer <= 0){
 		activateSleep = false;
 		setAllAnimatorZero();
 	    }
-	    else
-	    {
-		// return so the rest of Update is not done
+	    else{
 		return;
 	    }
 	}
@@ -43,11 +38,9 @@ public class MovePlayer : MonoBehaviour
 	    rb.MovePosition(rb.position + new Vector2(0,1));
 	    ani.SetFloat("up", 1f);
 	    ActivateSleep(0.25f);
-	    //	    	    rb.velocity = new Vector3(0,1,0);
 	}
 	if(Input.GetKey(KeyCode.DownArrow)){
 	    rb.MovePosition(rb.position - new Vector2(0,1));
-	    // 	    	    rb.velocity = new Vector3(0,-1,0);
 	    ani.SetFloat("down", 1f);
 	    ActivateSleep(0.25f);
 	}
@@ -55,13 +48,16 @@ public class MovePlayer : MonoBehaviour
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("right", 1f);
 	    ActivateSleep(0.25f);
-	    //	    rb.velocity = new Vector3(1,0,0);
 	}
 	if(Input.GetKey(KeyCode.LeftArrow)){
 	    rb.MovePosition(rb.position - new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
 	    ActivateSleep(0.25f);
-	    //	    	    rb.velocity = new Vector3(-1,0,0);
+	}
+
+	if(Input.GetKey(KeyCode.Space)){
+	    inventory.PlaceItem();
+	    ActivateSleep(0.25f);
 	}
 
 	if(Input.GetKey(KeyCode.L) ){
@@ -164,8 +160,13 @@ public class MovePlayer : MonoBehaviour
 	ani.SetFloat("left", 0f);
 	ani.SetFloat("right", 0f);
 	ani.SetFloat("up", 0f);
+	//This comment here is for Manu, who asked me to comment my code. There you go buddy! :*
 	ani.SetFloat("down", 0f);
 	ani.SetFloat("hole", 0f);
+    }
+
+    public Vector3 getPlayerPosition(){
+	return transform.position;
     }
 
     

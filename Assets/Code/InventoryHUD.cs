@@ -31,7 +31,6 @@ public class InventoryHUD : MonoBehaviour
 	    if(image.enabled == false){
 		image.enabled = true;
 		image.sprite = e.Item.Image;
-
 		break;
 	    }
 	}
