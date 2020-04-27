@@ -36,28 +36,37 @@ public class MovePlayer : MonoBehaviour
 		return;
 	    }
 	}
-	if(Input.GetKey(KeyCode.UpArrow)){
-	    rb.MovePosition(rb.position + new Vector2(0,1));
-	    ani.SetFloat("up", 1f);
-	    ActivateSleep(0.25f);
-	}
-	if(Input.GetKey(KeyCode.DownArrow)){
-	    rb.MovePosition(rb.position - new Vector2(0,1));
-	    ani.SetFloat("down", 1f);
-	    ActivateSleep(0.25f);
-	}
-	if(Input.GetKey(KeyCode.RightArrow)){
-	    rb.MovePosition(rb.position + new Vector2(1,0));
-	    ani.SetFloat("right", 1f);
-		ani.SetFloat("FacingLeft", 0f);
-	    ActivateSleep(0.25f);
-	}
-	if(Input.GetKey(KeyCode.LeftArrow)){
-	    rb.MovePosition(rb.position - new Vector2(1,0));
-	    ani.SetFloat("left", 1f);
-		ani.SetFloat("FacingLeft", 1f);
-	    ActivateSleep(0.25f);
-	}
+
+		if (arrowKeysEnabled)
+		{
+			if (Input.GetKey(KeyCode.UpArrow))
+			{
+				rb.MovePosition(rb.position + new Vector2(0, 1));
+				ani.SetFloat("up", 1f);
+				ActivateSleep(0.25f);
+			}
+			if (Input.GetKey(KeyCode.DownArrow))
+			{
+				rb.MovePosition(rb.position - new Vector2(0, 1));
+				ani.SetFloat("down", 1f);
+				ActivateSleep(0.25f);
+			}
+			if (Input.GetKey(KeyCode.RightArrow))
+			{
+				rb.MovePosition(rb.position + new Vector2(1, 0));
+				ani.SetFloat("right", 1f);
+				ani.SetFloat("FacingLeft", 0f);
+				ActivateSleep(0.25f);
+			}
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				rb.MovePosition(rb.position - new Vector2(1, 0));
+				ani.SetFloat("left", 1f);
+				ani.SetFloat("FacingLeft", 1f);
+				ActivateSleep(0.25f);
+			}
+
+		}
 
 	if(Input.GetKey(KeyCode.Space)){
 	    inventory.PlaceItem();
@@ -151,7 +160,7 @@ public class MovePlayer : MonoBehaviour
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
 	else if (other.GetComponent<TrapInteraction>() != null)
 	{
-	    //arrowKeysEnabled = false;
+	    arrowKeysEnabled = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
