@@ -49,11 +49,13 @@ public class MovePlayer : MonoBehaviour
 	if(Input.GetKey(KeyCode.RightArrow)){
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("right", 1f);
+		ani.SetFloat("FacingLeft", 0f);
 	    ActivateSleep(0.25f);
 	}
 	if(Input.GetKey(KeyCode.LeftArrow)){
 	    rb.MovePosition(rb.position - new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
+		ani.SetFloat("FacingLeft", 1f);
 	    ActivateSleep(0.25f);
 	}
 
@@ -157,7 +159,8 @@ public class MovePlayer : MonoBehaviour
 	    }
 	    else if(name == "HadesTrap"){
 		Debug.Log("Death by Hades!");
-		FindObjectOfType<GameManager>().EndGame();
+		StartCoroutine(HadesDeath());
+		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
 		Debug.Log("Death by Fire!");
@@ -169,7 +172,8 @@ public class MovePlayer : MonoBehaviour
 	    }
 	    else if(name == "ZeusMainTrap"){
 		Debug.Log("Death by Zeus!");
-		FindObjectOfType<GameManager>().EndGame();
+		StartCoroutine(ZeusDeath());
+		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	}
 
@@ -177,7 +181,8 @@ public class MovePlayer : MonoBehaviour
 	else if (other.GetComponent<ZeusDiagonal>() != null)
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
-	    FindObjectOfType<GameManager>().EndGame();
+		StartCoroutine(ZeusDiagonalDeath());
+		FindObjectOfType<GameManager>().EndGame();
 	}
 
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
@@ -238,7 +243,8 @@ public class MovePlayer : MonoBehaviour
 	{
 	    rb.MovePosition(rb.position + new Vector2(-1,0));
 	    ani.SetFloat("right", 1f);
-	    yield return new WaitForSeconds(0.1f);
+		ani.SetFloat("FacingLeft", 0f);
+		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("right", 0f);
 	}
 	// If the poseidon direction is down, move the player down.
@@ -254,7 +260,8 @@ public class MovePlayer : MonoBehaviour
 	{
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
-	    yield return new WaitForSeconds(0.1f);
+		ani.SetFloat("FacingLeft", 1f);
+		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
 	}
 
@@ -264,6 +271,34 @@ public class MovePlayer : MonoBehaviour
 	return transform.position;
     }
 
-    
+	IEnumerator HadesDeath()
+	{
+		yield return new WaitForSeconds(3f);
+		ani.SetFloat("HadesTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+
+	IEnumerator ZeusDeath()
+	{
+		yield return new WaitForSeconds(3f);
+		ani.SetFloat("ZeusTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+
+	IEnumerator ZeusDiagonalDeath()
+	{
+		yield return new WaitForSeconds(1f);
+		ani.SetFloat("ZeusTrap", 1.5f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+
+
+
 
 }
