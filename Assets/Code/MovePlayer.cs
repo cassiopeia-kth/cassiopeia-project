@@ -8,6 +8,7 @@ public class MovePlayer : MonoBehaviour
     public Animator ani;
     public Inventory inventory;
     public bool arrowKeysEnabled;
+	private bool flying = false;
     private float timer;
     private bool activateSleep = false;
     
@@ -108,14 +109,14 @@ public class MovePlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-	if(other.gameObject.name == "Hole"){
+	if(other.gameObject.name == "Hole" && flying == false){
 			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
 		StartCoroutine(HoleDeath());
 	}
 
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
-	else if (other.GetComponent<TrapInteraction>() != null)
+	else if (other.GetComponent<TrapInteraction>() != null && flying == false)
 	{
 	    arrowKeysEnabled = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
@@ -144,7 +145,7 @@ public class MovePlayer : MonoBehaviour
 	}
 
 	// Deals with Zeus' diagonal bolts of lightning.
-	else if (other.GetComponent<ZeusDiagonal>() != null)
+	else if (other.GetComponent<ZeusDiagonal>() != null && flying == false)
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
 		StartCoroutine(ZeusDiagonalDeath());
@@ -158,6 +159,8 @@ public class MovePlayer : MonoBehaviour
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){
 		Debug.Log("Red Bull gives you Wiiings");
+		ani.SetBool("Flying", true);
+		flying = true;
 	    }
 	}
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
