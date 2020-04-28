@@ -109,7 +109,8 @@ public class MovePlayer : MonoBehaviour
     {
 
 	if(other.gameObject.name == "Hole"){
-		//	    Debug.Log("OnCollisionEnter2D TRIGGER");
+			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
+		arrowKeysEnabled = false;
 		StartCoroutine(HoleDeath());
 	}
 
@@ -128,14 +129,12 @@ public class MovePlayer : MonoBehaviour
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
-				StartCoroutine(FireTrap());
+		StartCoroutine(FireTrap());
 		Debug.Log("Death by Fire!");
-		FindObjectOfType<GameManager>().EndGame();
 	    }
 	     else if(name == "SpikeTrap"){
-			StartCoroutine(spikeTrap());
-			Debug.Log("Death by Spike!");
-			FindObjectOfType<GameManager>().EndGame();
+		StartCoroutine(spikeTrap());
+		Debug.Log("Death by Spike!");
 	    }
 	    else if(name == "ZeusMainTrap"){
 		Debug.Log("Death by Zeus!");
@@ -242,46 +241,76 @@ public class MovePlayer : MonoBehaviour
 		ani.SetFloat("HadesTrap", 1f);
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<GameManager>().EndGame();
+		gameObject.SetActive(false);
 		yield return 0;
 	}
 
 	IEnumerator HadesDeath()
 	{
+		Vector3 pos = gameObject.transform.position;
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("HadesTrap", 1f);
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<GameManager>().EndGame();
+		yield return new WaitForSeconds(2f);
+		gameObject.SetActive(false);
+		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 		yield return 0;
 	}
 
 	IEnumerator ZeusDeath()
 	{
+		Vector3 pos = gameObject.transform.position;
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("ZeusTrap", 1f);
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<GameManager>().EndGame();
+		yield return new WaitForSeconds(2f);
+		gameObject.SetActive(false);
+		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 		yield return 0;
 	}
 
 	IEnumerator ZeusDiagonalDeath()
 	{
+		Vector3 pos = gameObject.transform.position;
 		yield return new WaitForSeconds(1f);
 		ani.SetFloat("ZeusTrap", 1.5f);
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<GameManager>().EndGame();
+		yield return new WaitForSeconds(2f);
+		gameObject.SetActive(false);
+		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 		yield return 0;
 	}
   
   IEnumerator spikeTrap() {
-		yield return new WaitForSeconds(1f);
+		Vector3 pos = gameObject.transform.position;
+		yield return new WaitForSeconds(3f);
 		ani.SetFloat("SpikeTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return new WaitForSeconds(2f);
+		gameObject.SetActive(false);
+		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 		yield return 0;
 	}
 
 IEnumerator FireTrap()
     {
-		yield return new WaitForSeconds(1f);
+		Vector3 pos = gameObject.transform.position;
+		yield return new WaitForSeconds(3f);
 		ani.SetFloat("FireTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return new WaitForSeconds(2f);
+		gameObject.SetActive(false);
+		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 		yield return 0;
 
 	}
