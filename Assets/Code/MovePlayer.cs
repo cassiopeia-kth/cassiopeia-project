@@ -157,6 +157,7 @@ public class MovePlayer : MonoBehaviour
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){
+			ani.SetBool("Flying", true);
 		Debug.Log("Red Bull gives you Wiiings");
 	    }
 	}
