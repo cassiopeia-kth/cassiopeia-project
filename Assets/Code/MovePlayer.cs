@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -175,9 +175,10 @@ public class MovePlayer : MonoBehaviour
 		Debug.Log("Death by Fire!");
 		FindObjectOfType<GameManager>().EndGame();
 	    }
-	    else if(name == "SpikeTrap"){
-		Debug.Log("Death by Spike!");
-		FindObjectOfType<GameManager>().EndGame();
+	     else if(name == "SpikeTrap"){
+			StartCoroutine(spikeTrap());
+			Debug.Log("Death by Spike!");
+			FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "ZeusMainTrap"){
 		Debug.Log("Death by Zeus!");
@@ -313,6 +314,12 @@ public class MovePlayer : MonoBehaviour
 		ani.SetFloat("ZeusTrap", 1.5f);
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+  
+  IEnumerator spikeTrap() {
+		yield return new WaitForSeconds(1f);
+		ani.SetFloat("SpikeTrap", 1f);
 		yield return 0;
 	}
 
