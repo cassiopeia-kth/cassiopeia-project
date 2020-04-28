@@ -172,6 +172,7 @@ public class MovePlayer : MonoBehaviour
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
+				StartCoroutine(FireTrap());
 		Debug.Log("Death by Fire!");
 		FindObjectOfType<GameManager>().EndGame();
 	    }
@@ -279,6 +280,7 @@ public class MovePlayer : MonoBehaviour
     }
     public Vector3 getPlayerPosition(){
 	return transform.position;
+
     }
 
 	IEnumerator HoleDeath()
@@ -323,7 +325,12 @@ public class MovePlayer : MonoBehaviour
 		yield return 0;
 	}
 
+IEnumerator FireTrap()
+    {
+		yield return new WaitForSeconds(1f);
+		ani.SetFloat("FireTrap", 1f);
+		yield return 0;
 
-
+	}
 
 }
