@@ -10,6 +10,8 @@ public class TrapInteraction : MonoBehaviour
     bool spent = false;
     public bool poseidonDirectionReady = false;
     public int poseidonDirection;
+    //audio source
+    public AudioSource trapSound;
 
     void Start()
     {
@@ -59,6 +61,7 @@ public class TrapInteraction : MonoBehaviour
 
         // Change the animation state, so that the trap animation plays.
         anim.SetInteger(animationState, 1);
+        trapSound.Play();
 
         // If the trap is the Poseidon trap, and the trap has not been used yet.
         if(name == "PoseidonTrap" && spent == false)
