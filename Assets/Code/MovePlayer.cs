@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,28 +36,37 @@ public class MovePlayer : MonoBehaviour
 		return;
 	    }
 	}
-	if(Input.GetKey(KeyCode.UpArrow)){
-	    rb.MovePosition(rb.position + new Vector2(0,1));
-	    ani.SetFloat("up", 1f);
-	    ActivateSleep(0.25f);
-	}
-	if(Input.GetKey(KeyCode.DownArrow)){
-	    rb.MovePosition(rb.position - new Vector2(0,1));
-	    ani.SetFloat("down", 1f);
-	    ActivateSleep(0.25f);
-	}
-	if(Input.GetKey(KeyCode.RightArrow)){
-	    rb.MovePosition(rb.position + new Vector2(1,0));
-	    ani.SetFloat("right", 1f);
-		ani.SetFloat("FacingLeft", 0f);
-	    ActivateSleep(0.25f);
-	}
-	if(Input.GetKey(KeyCode.LeftArrow)){
-	    rb.MovePosition(rb.position - new Vector2(1,0));
-	    ani.SetFloat("left", 1f);
-		ani.SetFloat("FacingLeft", 1f);
-	    ActivateSleep(0.25f);
-	}
+
+		if (arrowKeysEnabled)
+		{
+			if (Input.GetKey(KeyCode.UpArrow))
+			{
+				rb.MovePosition(rb.position + new Vector2(0, 1));
+				ani.SetFloat("up", 1f);
+				ActivateSleep(0.25f);
+			}
+			if (Input.GetKey(KeyCode.DownArrow))
+			{
+				rb.MovePosition(rb.position - new Vector2(0, 1));
+				ani.SetFloat("down", 1f);
+				ActivateSleep(0.25f);
+			}
+			if (Input.GetKey(KeyCode.RightArrow))
+			{
+				rb.MovePosition(rb.position + new Vector2(1, 0));
+				ani.SetFloat("right", 1f);
+				ani.SetFloat("FacingLeft", 0f);
+				ActivateSleep(0.25f);
+			}
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				rb.MovePosition(rb.position - new Vector2(1, 0));
+				ani.SetFloat("left", 1f);
+				ani.SetFloat("FacingLeft", 1f);
+				ActivateSleep(0.25f);
+			}
+
+		}
 
 	if(Input.GetKey(KeyCode.Space)){
 	    inventory.PlaceItem();
@@ -144,36 +153,37 @@ public class MovePlayer : MonoBehaviour
     {
 
 	if(other.gameObject.name == "Hole"){
-	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
-	    FindObjectOfType<GameManager>().EndGame();
+		//	    Debug.Log("OnCollisionEnter2D TRIGGER");
+		StartCoroutine(HoleDeath());
 	}
 
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
 	else if (other.GetComponent<TrapInteraction>() != null)
 	{
-	    //arrowKeysEnabled = false;
+	    arrowKeysEnabled = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
-			StartCoroutine(findPoseidonDirection(TrapScript));
+		StartCoroutine(findPoseidonDirection(TrapScript));
 	    }
 	    else if(name == "HadesTrap"){
-			Debug.Log("Death by Hades!");
-			FindObjectOfType<GameManager>().EndGame();
+		Debug.Log("Death by Hades!");
+		StartCoroutine(HadesDeath());
+		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
-			StartCoroutine(fireTrap());
-			Debug.Log("Death by Fire!");
-			FindObjectOfType<GameManager>().EndGame();
+		Debug.Log("Death by Fire!");
+		FindObjectOfType<GameManager>().EndGame();
 	    }
-	    else if(name == "SpikeTrap"){
+	     else if(name == "SpikeTrap"){
 			StartCoroutine(spikeTrap());
 			Debug.Log("Death by Spike!");
 			FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "ZeusMainTrap"){
-			Debug.Log("Death by Zeus!");
-			FindObjectOfType<GameManager>().EndGame();
+		Debug.Log("Death by Zeus!");
+		StartCoroutine(ZeusDeath());
+		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	}
 
@@ -181,7 +191,8 @@ public class MovePlayer : MonoBehaviour
 	else if (other.GetComponent<ZeusDiagonal>() != null)
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
-	    FindObjectOfType<GameManager>().EndGame();
+		StartCoroutine(ZeusDiagonalDeath());
+		FindObjectOfType<GameManager>().EndGame();
 	}
 
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
@@ -210,7 +221,7 @@ public class MovePlayer : MonoBehaviour
 	ani.SetFloat("up", 0f);
 	//This comment here is for Manu, who asked me to comment my code. There you go buddy! :*
 	ani.SetFloat("down", 0f);
-	ani.SetFloat("hole", 0f);
+	//ani.SetFloat("hole", 0f);
     }
 
     // Function for moving the player with the Poseidon trap.
@@ -242,7 +253,8 @@ public class MovePlayer : MonoBehaviour
 	{
 	    rb.MovePosition(rb.position + new Vector2(-1,0));
 	    ani.SetFloat("right", 1f);
-	    yield return new WaitForSeconds(0.1f);
+		ani.SetFloat("FacingLeft", 0f);
+		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("right", 0f);
 	}
 	// If the poseidon direction is down, move the player down.
@@ -258,7 +270,8 @@ public class MovePlayer : MonoBehaviour
 	{
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
-	    yield return new WaitForSeconds(0.1f);
+		ani.SetFloat("FacingLeft", 1f);
+		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
 	}
 
@@ -268,16 +281,49 @@ public class MovePlayer : MonoBehaviour
 	return transform.position;
     }
 
-	IEnumerator spikeTrap() {
+	IEnumerator HoleDeath()
+	{
+		yield return new WaitForSeconds(0.5f);
+		ani.SetFloat("HadesTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+
+	IEnumerator HadesDeath()
+	{
+		yield return new WaitForSeconds(3f);
+		ani.SetFloat("HadesTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+
+	IEnumerator ZeusDeath()
+	{
+		yield return new WaitForSeconds(3f);
+		ani.SetFloat("ZeusTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+
+	IEnumerator ZeusDiagonalDeath()
+	{
+		yield return new WaitForSeconds(1f);
+		ani.SetFloat("ZeusTrap", 1.5f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
+  
+  IEnumerator spikeTrap() {
 		yield return new WaitForSeconds(1f);
 		ani.SetFloat("SpikeTrap", 1f);
 		yield return 0;
 	}
 
-	IEnumerator fireTrap() {
-		yield return new WaitForSeconds(1f);
-		ani.SetFloat("FireTrap", 1f);
-		yield return 0;
-	}
+
+
 
 }
