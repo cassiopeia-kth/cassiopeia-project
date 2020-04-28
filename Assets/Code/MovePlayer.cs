@@ -158,6 +158,7 @@ public class MovePlayer : MonoBehaviour
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){
 		Debug.Log("Red Bull gives you Wiiings");
+		ani.SetBool("Flying", true);
 	    }
 	}
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
@@ -314,5 +315,6 @@ IEnumerator FireTrap()
 		yield return 0;
 
 	}
+
 
 }
