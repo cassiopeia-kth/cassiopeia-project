@@ -49,12 +49,14 @@ public class MovePlayer : MonoBehaviour
 	if(Input.GetKey(KeyCode.RightArrow)){
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("right", 1f);
-	    ActivateSleep(0.25f);
+		ani.SetFloat("FacingLeft", 0f);
+		ActivateSleep(0.25f);
 	}
 	if(Input.GetKey(KeyCode.LeftArrow)){
 	    rb.MovePosition(rb.position - new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
-	    ActivateSleep(0.25f);
+		ani.SetFloat("FacingLeft", 1f);
+		ActivateSleep(0.25f);
 	}
 
 	if(Input.GetKey(KeyCode.Space)){
@@ -160,6 +162,7 @@ public class MovePlayer : MonoBehaviour
 		FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
+				StartCoroutine(FireTrap());
 		Debug.Log("Death by Fire!");
 		FindObjectOfType<GameManager>().EndGame();
 	    }
@@ -264,6 +267,13 @@ public class MovePlayer : MonoBehaviour
 	return transform.position;
     }
 
-    
+	IEnumerator FireTrap()
+    {
+		yield return new WaitForSeconds(1f);
+		ani.SetFloat("FireTrap", 1f);
+		yield return 0;
+
+	}
+
 
 }
