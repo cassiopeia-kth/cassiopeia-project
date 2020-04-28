@@ -43,3 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd81a114e10748aefa93ecfc99345a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restartDelay: 2
+  panelGameOver: {fileID: 0}
+  txtGameOver: {fileID: 0}
+  gameOverCanvas: {fileID: 0}
+  inventoryCanvas: {fileID: 0}
+  playAgain: {fileID: 0}
+  mainMenu: {fileID: 0}
