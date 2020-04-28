@@ -153,8 +153,8 @@ public class MovePlayer : MonoBehaviour
     {
 
 	if(other.gameObject.name == "Hole"){
-	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
-	    FindObjectOfType<GameManager>().EndGame();
+		//	    Debug.Log("OnCollisionEnter2D TRIGGER");
+		StartCoroutine(HoleDeath());
 	}
 
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
@@ -220,7 +220,7 @@ public class MovePlayer : MonoBehaviour
 	ani.SetFloat("up", 0f);
 	//This comment here is for Manu, who asked me to comment my code. There you go buddy! :*
 	ani.SetFloat("down", 0f);
-	ani.SetFloat("hole", 0f);
+	//ani.SetFloat("hole", 0f);
     }
 
     // Function for moving the player with the Poseidon trap.
@@ -279,6 +279,15 @@ public class MovePlayer : MonoBehaviour
     public Vector3 getPlayerPosition(){
 	return transform.position;
     }
+
+	IEnumerator HoleDeath()
+	{
+		yield return new WaitForSeconds(0.5f);
+		ani.SetFloat("HadesTrap", 1f);
+		yield return new WaitForSeconds(1f);
+		FindObjectOfType<GameManager>().EndGame();
+		yield return 0;
+	}
 
 	IEnumerator HadesDeath()
 	{
