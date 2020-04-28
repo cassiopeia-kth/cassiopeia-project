@@ -4,20 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MovePlayer : MonoBehaviour
 {
-    float speed = 0.0001f;
     public Rigidbody2D rb;
-    public Vector3 posInit;
-    public int i = 0;
-    public Collider cd;
-    public Text GameOver;
     public Animator ani;
     public Inventory inventory;
     public bool arrowKeysEnabled;
     private float timer;
     private bool activateSleep = false;
     
-	// Start is called before the first frame update
-	void Start(){	
+    // Start is called before the first frame update
+    void Start(){	
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
     }
@@ -74,48 +69,12 @@ public class MovePlayer : MonoBehaviour
 	}
 
 	if(Input.GetKey(KeyCode.L) ){
-	    int j = 0;
-	    for(j = 0; j < inventory.itemsList.Count; j++){
-		if(inventory.itemsList[j].Selected == true){
-		    inventory.itemsList[j].Selected = false;
-		    break;
-		}
-	    }
-	   
-	    if(j+1 < inventory.itemsList.Count){
-		inventory.SelectItem(inventory.itemsList[j+1], j+1);
-	    }
-	    else 
-	    {
-		inventory.itemsList[j].Selected = true;
-	    }
+	    inventory.hoverRight();
 	    ActivateSleep(0.25f);
 	}
 
 	if(Input.GetKey(KeyCode.H)){
-	    int j = 0;
-	    for(j = 0; j < inventory.itemsList.Count; j++){
-		if(inventory.itemsList[j].Selected == true){
-		    inventory.itemsList[j].Selected = false;
-		    break;
-		}
-	    }
-	    Debug.Log(inventory.itemsList.Count);
-	    Debug.Log(inventory.itemsList[0].Name);
-	    Debug.Log(inventory.itemsList[0].Slot);
-	    Debug.Log(inventory.itemsList[0].Selected);
-	    Debug.Log("j = " + j);
-	    if(j-1 >= 0) 
-	    {
-		Debug.Log("This Happened, Item currently displayed is j: ");
-		Debug.Log(j);  
-
-		inventory.SelectItem(inventory.itemsList[j-1], j-1);
-	    }
-	    else 
-	    {
-		inventory.itemsList[j].Selected = true;
-	    }
+	    inventory.hoverLeft();
 	    ActivateSleep(0.25f);
 	}
 	
@@ -137,10 +96,7 @@ public class MovePlayer : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col){	
 	if(col.gameObject.name == "Hole"){
-	    //Debug.Log("OnCollisionEnter2D");
-
-	}
-	    
+	}   
     }
 
     public void ActivateSleep(float forSeconds)
@@ -209,9 +165,6 @@ public class MovePlayer : MonoBehaviour
 
 	if(item != null){
 	    inventory.AddItem(item);
-	    if(inventory.itemsList.Count == 1)
-		inventory.SelectItem(item, 0);
-	    //	    Debug.Log(item.Selected);
 	}
     }
 
