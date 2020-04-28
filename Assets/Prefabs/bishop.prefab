@@ -104,6 +104,7 @@ MonoBehaviour:
   GameOver: {fileID: 0}
   ani: {fileID: 893019989227312670}
   inventory: {fileID: 0}
+  arrowKeysEnabled: 0
 --- !u!50 &6720982482181154687
 Rigidbody2D:
   serializedVersion: 4
