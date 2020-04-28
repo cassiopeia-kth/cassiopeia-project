@@ -4,20 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MovePlayer : MonoBehaviour
 {
-    float speed = 0.0001f;
     public Rigidbody2D rb;
-    public Vector3 posInit;
-    public int i = 0;
-    public Collider cd;
-    public Text GameOver;
     public Animator ani;
     public Inventory inventory;
     public bool arrowKeysEnabled;
     private float timer;
     private bool activateSleep = false;
     
-	// Start is called before the first frame update
-	void Start(){	
+    // Start is called before the first frame update
+    void Start(){	
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
     }

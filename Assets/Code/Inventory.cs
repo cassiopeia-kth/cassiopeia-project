@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    private const int SLOTS = 7;
 
     public Inventory_Item[] itemList = new Inventory_Item[7];
 
-    public event EventHandler<InventoryEventArgs> ItemAdded;
-    public event EventHandler<InventoryEventArgs> HoverFirst;
-
-
     public GameObject spikeTrap;
+    public GameObject fireTrap;
+    public GameObject zeusmainTrap;
+    public GameObject hadesTrap;
+    public GameObject poseidonTrap;
+    public GameObject hermesTrap;
 
 
 
@@ -63,14 +63,6 @@ public class Inventory : MonoBehaviour
 		image.sprite = item.Image;
 	    }
 	}
-    }
-
-	
-
-
-    public void SelectItem(Inventory_Item item, int i){
-	item.Slot = i;
-	HoverFirst(this, new InventoryEventArgs(item));
     }
 
     public void hoverRight(){
@@ -143,15 +135,35 @@ public class Inventory : MonoBehaviour
 	    Image hover = transform.GetChild(i).GetChild(0).GetComponent<Image>();
 	    if(hover.color.a == 0.7f && itemList[i] != null){
 		Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
-		Instantiate(spikeTrap, playerPos , transform.rotation);
+		Debug.Log(itemList[i].Name);
+		switch(itemList[i].Name){
+		    case "Hades_Collectable":
+			Instantiate(hadesTrap, playerPos , transform.rotation);
+			break;
+		    case "Hermes_Collectable":
+			Instantiate(hermesTrap, playerPos , transform.rotation);
+			break;
+		    case "Spike_Collectable":
+			Instantiate(spikeTrap, playerPos , transform.rotation);
+			break;
+		    case "Poseidon_Collectable":
+			Instantiate(poseidonTrap, playerPos , transform.rotation);
+			break;
+		    case "Zeusmain_Collectable":
+			Instantiate(zeusmainTrap, playerPos , transform.rotation);
+			break;
+		    case "Fire_Collectable":
+			Instantiate(fireTrap, playerPos , transform.rotation);
+			break;		    
+		}
 		removeFromArray(i);
 		sprite.enabled = false;
 		hover.color = new Color(hover.color.r, hover.color.g, hover.color.b, 0.3f);
 		fixHoverToClosest(i);
 		break;
 	    }
+	}
     }
-}
 
     public void fixHoverToClosest(int index){
 	for(int i = index-1; i >= 0; i--){
@@ -175,17 +187,25 @@ public class Inventory : MonoBehaviour
 
     }
     
-void Start(){
-    for(int i = 0; i < 7; i++){
-	itemList[i] = null;
+    void Start(){
+	for(int i = 0; i < 7; i++){
+	    itemList[i] = null;
+	}
+
+	Image image = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+	image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
+
+
+	spikeTrap = (GameObject) Resources.Load("Prefabs/Traps/Spike_Trap");
+	poseidonTrap = (GameObject) Resources.Load("Prefabs/Traps/Poseidon_Trap");
+	hermesTrap = (GameObject) Resources.Load("Prefabs/Traps/Hermes_Trap");
+	hadesTrap = (GameObject) Resources.Load("Prefabs/Traps/Hades_Trap");
+	fireTrap = (GameObject) Resources.Load("Prefabs/Traps/Fire_Trap");
+	zeusmainTrap = (GameObject) Resources.Load("Prefabs/Traps/Zeusmain_Trap");
     }
 
-    Image image = transform.GetChild(0).GetChild(0).GetComponent<Image>();
-    image.color = new Color(image.color.r, image.color.g, image.color.b, 0.7f);
-}
-
-void Update(){
+    void Update(){
 	
-}
+    }
 }
 
