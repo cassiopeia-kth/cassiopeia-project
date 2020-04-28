@@ -57,6 +57,9 @@ public class TrapInteraction : MonoBehaviour
             GameObject actualSouthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y - 1.5f, z), Quaternion.Euler(new Vector3(0,0,-90)));
             GameObject actualNorthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,90)));
             GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,180)));
+
+            //delay for sync sound with thunder
+            yield return new WaitForSeconds(2f);
         }
 
         // Change the animation state, so that the trap animation plays.
@@ -86,7 +89,8 @@ public class TrapInteraction : MonoBehaviour
         
         // Wait two seconds before deactivating the trap.
         yield return new WaitForSeconds(2f);
-
+        pos.z = -100;
+        yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
        
         yield return 0;
