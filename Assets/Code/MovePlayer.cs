@@ -8,14 +8,16 @@ public class MovePlayer : MonoBehaviour
     public Animator ani;
     public Inventory inventory;
     public bool arrowKeysEnabled;
-	private bool flying = false;
+    private bool flying = false;
     private float timer;
     private bool activateSleep = false;
+    public PlayerManager pm;
     
     // Start is called before the first frame update
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
+	pm = FindObjectOfType<PlayerManager>();
     }
     
     void Update()
@@ -37,29 +39,29 @@ public class MovePlayer : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.UpArrow))
 			{
-				rb.MovePosition(rb.position + new Vector2(0, 1));
+//				rb.MovePosition(rb.position + new Vector2(0, 1));
 				ani.SetFloat("up", 1f);
-				ActivateSleep(0.25f);
+//				ActivateSleep(0.25f);
 			}
 			if (Input.GetKey(KeyCode.DownArrow))
 			{
-				rb.MovePosition(rb.position - new Vector2(0, 1));
+//				rb.MovePosition(rb.position - new Vector2(0, 1));
 				ani.SetFloat("down", 1f);
-				ActivateSleep(0.25f);
+//				ActivateSleep(0.25f);
 			}
 			if (Input.GetKey(KeyCode.RightArrow))
 			{
-				rb.MovePosition(rb.position + new Vector2(1, 0));
+//				rb.MovePosition(rb.position + new Vector2(1, 0));
 				ani.SetFloat("right", 1f);
 				ani.SetFloat("FacingLeft", 0f);
-				ActivateSleep(0.25f);
+//				ActivateSleep(0.25f);
 			}
 			if (Input.GetKey(KeyCode.LeftArrow))
 			{
-				rb.MovePosition(rb.position - new Vector2(1, 0));
+//				rb.MovePosition(rb.position - new Vector2(1, 0));
 				ani.SetFloat("left", 1f);
 				ani.SetFloat("FacingLeft", 1f);
-				ActivateSleep(0.25f);
+//				ActivateSleep(0.25f);
 			}
 
 		}
@@ -105,13 +107,13 @@ public class MovePlayer : MonoBehaviour
 	timer = forSeconds;
 	activateSleep = true;
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
 
 	if(other.gameObject.name == "Hole" && flying == false){
 			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
+		pm.isAlive = false;
 		StartCoroutine(HoleDeath());
 	}
 
@@ -119,6 +121,7 @@ public class MovePlayer : MonoBehaviour
 	else if (other.GetComponent<TrapInteraction>() != null && flying == false)
 	{
 	    arrowKeysEnabled = false;
+	    pm.isAlive = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
@@ -148,6 +151,7 @@ public class MovePlayer : MonoBehaviour
 	else if (other.GetComponent<ZeusDiagonal>() != null && flying == false)
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
+	    pm.isAlive = false;
 		StartCoroutine(ZeusDiagonalDeath());
 		FindObjectOfType<GameManager>().EndGame();
 	}
