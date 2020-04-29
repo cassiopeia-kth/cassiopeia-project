@@ -161,6 +161,7 @@ public class MovePlayer : MonoBehaviour
 		Debug.Log("Red Bull gives you Wiiings");
 		ani.SetBool("Flying", true);
 		flying = true;
+
 	    }
 	}
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
@@ -317,5 +318,6 @@ IEnumerator FireTrap()
 		yield return 0;
 
 	}
+
 
 }
