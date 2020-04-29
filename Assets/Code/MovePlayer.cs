@@ -7,48 +7,67 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody2D rb;
     public Animator ani;
     public Inventory inventory;
-    public bool arrowKeysEnabled;
+    private bool arrowKeysEnabled = true;
 	private bool flying = false;
     private float timer;
     private bool activateSleep = false;
+	private bool fixedpos = false;
     
     // Start is called before the first frame update
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
     }
-    
-    void Update()
+
+	
+
+	void FixedUpdate()
     {
-	if(activateSleep)
-	{
-	    timer -= Time.deltaTime;
+		if (!fixedpos)
+		{
+			rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+			rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+			fixedpos = true;
+		}
+
+		rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+		if (activateSleep)
+		{
+			timer -= Time.deltaTime;
 	    //	    Debug.Log(timer);
-	    if(timer <= 0){
-		activateSleep = false;
-		setAllAnimatorZero();
-	    }
-	    else{
-		return;
-	    }
-	}
+			if(timer <= 0){
+				activateSleep = false;
+				setAllAnimatorZero();
+				}
+			else
+			{
+				return;
+			}
+		}
 
 		if (arrowKeysEnabled)
 		{
 			if (Input.GetKey(KeyCode.UpArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 				rb.MovePosition(rb.position + new Vector2(0, 1));
 				ani.SetFloat("up", 1f);
 				ActivateSleep(0.25f);
 			}
 			if (Input.GetKey(KeyCode.DownArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 				rb.MovePosition(rb.position - new Vector2(0, 1));
 				ani.SetFloat("down", 1f);
 				ActivateSleep(0.25f);
 			}
 			if (Input.GetKey(KeyCode.RightArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
 				rb.MovePosition(rb.position + new Vector2(1, 0));
 				ani.SetFloat("right", 1f);
 				ani.SetFloat("FacingLeft", 0f);
@@ -56,6 +75,8 @@ public class MovePlayer : MonoBehaviour
 			}
 			if (Input.GetKey(KeyCode.LeftArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
 				rb.MovePosition(rb.position - new Vector2(1, 0));
 				ani.SetFloat("left", 1f);
 				ani.SetFloat("FacingLeft", 1f);
@@ -64,7 +85,7 @@ public class MovePlayer : MonoBehaviour
 
 		}
 
-	if(Input.GetKey(KeyCode.Space)){
+		if (Input.GetKey(KeyCode.Space)){
 	    inventory.PlaceItem();
 	    ActivateSleep(0.25f);
 	}
@@ -199,7 +220,9 @@ public class MovePlayer : MonoBehaviour
 	// If the poseidon direction is up, move the player up.
 	if(direction == 0)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,1));
+		fixedpos = false;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		rb.MovePosition(rb.position + new Vector2(0,1));
 	    ani.SetFloat("up", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("up", 0f);
@@ -207,7 +230,9 @@ public class MovePlayer : MonoBehaviour
 	// If the poseidon direction is right, move the player right.
 	else if(direction == 1)
 	{
-	    rb.MovePosition(rb.position + new Vector2(-1,0));
+		fixedpos = false;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		rb.MovePosition(rb.position + new Vector2(-1,0));
 	    ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
 		yield return new WaitForSeconds(0.1f);
@@ -216,7 +241,9 @@ public class MovePlayer : MonoBehaviour
 	// If the poseidon direction is down, move the player down.
 	else if(direction == 2)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,-1));
+		fixedpos = false;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		rb.MovePosition(rb.position + new Vector2(0,-1));
 	    ani.SetFloat("down", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("down", 0f);
@@ -224,7 +251,9 @@ public class MovePlayer : MonoBehaviour
 	// If the poseidon direction is left, move the player left.
 	else
 	{
-	    rb.MovePosition(rb.position + new Vector2(1,0));
+		fixedpos = false;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
 		ani.SetFloat("FacingLeft", 1f);
 		yield return new WaitForSeconds(0.1f);

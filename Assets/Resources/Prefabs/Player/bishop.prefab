@@ -98,13 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6720982482181154687}
-  posInit: {x: 0, y: 0, z: 0}
-  i: 0
-  cd: {fileID: 0}
-  GameOver: {fileID: 0}
   ani: {fileID: 893019989227312670}
   inventory: {fileID: 0}
-  arrowKeysEnabled: 0
 --- !u!50 &6720982482181154687
 Rigidbody2D:
   serializedVersion: 4
@@ -121,7 +116,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 974f0181ad9930b459c6d224490e66a1, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
