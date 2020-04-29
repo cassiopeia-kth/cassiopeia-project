@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public Trap trap;
+    public AudioSource pickUpSound;
     private Animator anim;
     string animationState = "AnimationState";
 
@@ -24,6 +25,7 @@ public class Pickup : MonoBehaviour
     IEnumerator MyCoroutine()
     {
         anim.SetInteger(animationState, 1);
+        pickUpSound.Play();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
         yield return 0;
