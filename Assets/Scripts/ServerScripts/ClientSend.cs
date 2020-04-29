@@ -22,16 +22,17 @@ public class ClientSend : MonoBehaviour {
         }
     }
 
-    /*public static void PlayerMovement(bool[] _inputs) {
+    public static void PlayerMovement(bool[] _inputs) {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement)) {
             _packet.Write(_inputs.Length);
             foreach (bool _input in _inputs) {
                 _packet.Write(_input);
+		Debug.Log(_input);
             }
+	    Debug.Log("At least it should run this!");
             _packet.Write(GameManager.players[Client.instance.myId].transform.rotation);
-
             SendUDPData(_packet);
         }
-    }*/
+    }
     #endregion
 }
