@@ -4,6 +4,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class CharacterSelectObject
+{
+  public Sprite splash;
+  public string characterName;
+  public Color characterColor;
+}
+
 public class char_select : MonoBehaviour
 {
   
@@ -11,8 +19,8 @@ public class char_select : MonoBehaviour
   [SerializeField] private List<CharacterSelectObject> characterList = new List<CharacterSelectObject>(); 
 
   [Header ("Sounds")]
-  [SerializeField] private AudioClip cycle;
-  [SerializeField] private AudioClip selected;
+  [SerializeField] private AudioSource cycle;
+  [SerializeField] private AudioSource selected;
 
   [Header ("UI References")]
   [SerializeField] private TextMeshProUGUI middleCharacterName;
@@ -36,15 +44,15 @@ public class char_select : MonoBehaviour
 
   public void LeftArrow()
   {
+    cycle.Play();
     decreaseIndexes();
-    AudioManager.Instance.PlaySFX(cycle);
     UpdateCharacterSelectionUI();
   }
 
   public void RightArrow()
   {
+    cycle.Play();
     increaseIndexes();
-    AudioManager.Instance.PlaySFX(cycle);
     UpdateCharacterSelectionUI();
   } 
 
@@ -73,8 +81,6 @@ public class char_select : MonoBehaviour
     rightCharacterSplash.sprite = characterList[rightIndex].splash;
     rightCharacterName.text = characterList[rightIndex].characterName;
     rightBackgroundColor.color = characterList[rightIndex].characterColor;    
-
-
   }
 
 
@@ -96,15 +102,8 @@ public class char_select : MonoBehaviour
 
   public void select() 
   {
-    
+    selected.Play();
+    Debug.Log("Pressed");
   }
 
-}
-
-[System.Serializable]
-public class CharacterSelectObject
-{
-  public Sprite splash;
-  public string characterName;
-  public Color characterColor;
 }
