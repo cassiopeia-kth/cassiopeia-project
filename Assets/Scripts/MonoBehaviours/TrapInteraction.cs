@@ -57,14 +57,15 @@ public class TrapInteraction : MonoBehaviour
             GameObject actualSouthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y - 1.5f, z), Quaternion.Euler(new Vector3(0,0,-90)));
             GameObject actualNorthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,90)));
             GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,180)));
-
+ 
             //delay for sync sound with thunder
-            yield return new WaitForSeconds(2f);
+            //yield return new WaitForSeconds(2f);
         }
 
         // Change the animation state, so that the trap animation plays.
         anim.SetInteger(animationState, 1);
-        trapSound.Play();
+        StartCoroutine(playSound(name));
+        //trapSound.Play();
 
         // If the trap is the Poseidon trap, and the trap has not been used yet.
         if(name == "PoseidonTrap" && spent == false)
@@ -96,4 +97,12 @@ public class TrapInteraction : MonoBehaviour
         yield return 0;
     }
 
+    IEnumerator playSound(string Name)
+    {
+
+        if (Name == "Zeus") { 
+        yield return new WaitForSeconds(2f);
+    }
+        trapSound.Play();  
+    }
 }
