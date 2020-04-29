@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,7 @@ public class MovePlayer : MonoBehaviour
     public AudioSource inventorySwitchSound;
     public AudioSource fallingHoleSound;
     public AudioSource placeItemSound;
+    public AudioSource itemPickUpSound;
 
     
     // Start is called before the first frame update
@@ -182,6 +183,7 @@ public class MovePlayer : MonoBehaviour
 
 	if(item != null){
 	    inventory.AddItem(item);
+	    itemPickUpSound.Play();
 	}
     }
 
