@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 public class MovePlayer : MonoBehaviour
 {
@@ -17,12 +18,16 @@ public class MovePlayer : MonoBehaviour
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
-		rb.constraints = RigidbodyConstraints2D.FreezePosition;
 	}
 
 	void FixedUpdate()
     {
-		rb.constraints = RigidbodyConstraints2D.FreezePosition;
+		if (!fixedpos)
+		{
+			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			fixedpos = true;
+		}
+		
 
 		if (activateSleep)
 		{
@@ -43,7 +48,7 @@ public class MovePlayer : MonoBehaviour
 			if (Input.GetKey(KeyCode.UpArrow))
 			{
 				fixedpos = false;
-				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position + new Vector2(0, 1));
 				ani.SetFloat("up", 1f);
 				ActivateSleep(0.25f);
@@ -51,7 +56,7 @@ public class MovePlayer : MonoBehaviour
 			if (Input.GetKey(KeyCode.DownArrow))
 			{
 				fixedpos = false;
-				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position - new Vector2(0, 1));
 				ani.SetFloat("down", 1f);
 				ActivateSleep(0.25f);
@@ -59,7 +64,7 @@ public class MovePlayer : MonoBehaviour
 			if (Input.GetKey(KeyCode.RightArrow))
 			{
 				fixedpos = false;
-				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position + new Vector2(1, 0));
 				ani.SetFloat("right", 1f);
 				ani.SetFloat("FacingLeft", 0f);
@@ -68,7 +73,7 @@ public class MovePlayer : MonoBehaviour
 			if (Input.GetKey(KeyCode.LeftArrow))
 			{
 				fixedpos = false;
-				rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position - new Vector2(1, 0));
 				ani.SetFloat("left", 1f);
 				ani.SetFloat("FacingLeft", 1f);
@@ -217,44 +222,44 @@ public class MovePlayer : MonoBehaviour
 	// If the poseidon direction is up, move the player up.
 	if(direction == 0)
 	{
-		fixedpos = false;
-		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 		rb.MovePosition(rb.position + new Vector2(0,1));
 	    ani.SetFloat("up", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("up", 0f);
-	}
+		fixedpos = false;
+		}
 	// If the poseidon direction is right, move the player right.
 	else if(direction == 1)
 	{
-		fixedpos = false;
-		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
 		rb.MovePosition(rb.position + new Vector2(-1,0));
 	    ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
 		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("right", 0f);
+		fixedpos = false;
 	}
 	// If the poseidon direction is down, move the player down.
 	else if(direction == 2)
 	{
-		fixedpos = false;
-		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 		rb.MovePosition(rb.position + new Vector2(0,-1));
 	    ani.SetFloat("down", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("down", 0f);
+		fixedpos = false;
 	}
 	// If the poseidon direction is left, move the player left.
 	else
 	{
-		fixedpos = false;
-		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
 		rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
 		ani.SetFloat("FacingLeft", 1f);
 		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
+		fixedpos = false;
 	}
 
 	yield return 0;
