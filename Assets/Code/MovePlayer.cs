@@ -17,20 +17,12 @@ public class MovePlayer : MonoBehaviour
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
-    }
-
-	
+		rb.constraints = RigidbodyConstraints2D.FreezePosition;
+	}
 
 	void FixedUpdate()
     {
-		if (!fixedpos)
-		{
-			rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-			rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-			fixedpos = true;
-		}
-
-		rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+		rb.constraints = RigidbodyConstraints2D.FreezePosition;
 
 		if (activateSleep)
 		{
@@ -184,11 +176,16 @@ public class MovePlayer : MonoBehaviour
 		flying = true;
 	    }
 	}
-	Inventory_Item item = other.GetComponent<Inventory_Item>();
 
-	if(item != null){
-	    inventory.AddItem(item);
-	}
+	if (other.GetComponent<Inventory_Item>() != null)
+		{
+			Inventory_Item item = other.GetComponent<Inventory_Item>();
+
+			if (item != null)
+			{
+				inventory.AddItem(item);
+			}
+		}
     }
 
 
@@ -221,7 +218,7 @@ public class MovePlayer : MonoBehaviour
 	if(direction == 0)
 	{
 		fixedpos = false;
-		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 		rb.MovePosition(rb.position + new Vector2(0,1));
 	    ani.SetFloat("up", 1f);
 	    yield return new WaitForSeconds(0.1f);
@@ -231,7 +228,7 @@ public class MovePlayer : MonoBehaviour
 	else if(direction == 1)
 	{
 		fixedpos = false;
-		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
 		rb.MovePosition(rb.position + new Vector2(-1,0));
 	    ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
@@ -242,7 +239,7 @@ public class MovePlayer : MonoBehaviour
 	else if(direction == 2)
 	{
 		fixedpos = false;
-		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 		rb.MovePosition(rb.position + new Vector2(0,-1));
 	    ani.SetFloat("down", 1f);
 	    yield return new WaitForSeconds(0.1f);
@@ -252,7 +249,7 @@ public class MovePlayer : MonoBehaviour
 	else
 	{
 		fixedpos = false;
-		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		//rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
 		rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
 		ani.SetFloat("FacingLeft", 1f);
