@@ -10,6 +10,10 @@ public class char_select : MonoBehaviour
   [Header ("List of Characters")]
   [SerializeField] private List<CharacterSelectObject> characterList = new List<CharacterSelectObject>(); 
 
+  [Header ("Sounds")]
+  [SerializeField] private AudioClip cycle;
+  [SerializeField] private AudioClip selected;
+
   [Header ("UI References")]
   [SerializeField] private TextMeshProUGUI middleCharacterName;
   [SerializeField] private Image middleCharacterSplash;
@@ -33,12 +37,14 @@ public class char_select : MonoBehaviour
   public void LeftArrow()
   {
     decreaseIndexes();
+    AudioManager.Instance.PlaySFX(cycle);
     UpdateCharacterSelectionUI();
   }
 
   public void RightArrow()
   {
     increaseIndexes();
+    AudioManager.Instance.PlaySFX(cycle);
     UpdateCharacterSelectionUI();
   } 
 
@@ -73,11 +79,19 @@ public class char_select : MonoBehaviour
 
 
   private void increaseIndexes() {
-    index++;
+    if (index == characterList.Count - 1) {
+      index = 0;
+    } else {
+      index++;
+    }
   }
 
   private void decreaseIndexes() {
-    index--;
+    if (index == 0) {
+      index = characterList.Count - 1;
+    } else {
+      index--;
+    }
   }
 
   public void select() 
