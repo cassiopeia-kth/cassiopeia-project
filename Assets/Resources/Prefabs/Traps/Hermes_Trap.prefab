@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trap: {fileID: 11400000, guid: da9a79b0d543ae45395230d2b9a8a24a, type: 2}
-  pickUpSound: {fileID: 27680918}
+  hermesPickUpSound: {fileID: 27680918}
 --- !u!82 &27680918
 AudioSource:
   m_ObjectHideFlags: 0
