@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,12 @@ public class MovePlayer : MonoBehaviour
 	private bool flying = false;
     private float timer;
     private bool activateSleep = false;
+    public AudioSource movementSound;
+    public AudioSource inventorySwitchSound;
+    public AudioSource fallingHoleSound;
+    public AudioSource placeItemSound;
+    public AudioSource itemPickUpSound;
+
     
     // Start is called before the first frame update
     void Start(){	
@@ -40,12 +46,14 @@ public class MovePlayer : MonoBehaviour
 				rb.MovePosition(rb.position + new Vector2(0, 1));
 				ani.SetFloat("up", 1f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 			if (Input.GetKey(KeyCode.DownArrow))
 			{
 				rb.MovePosition(rb.position - new Vector2(0, 1));
 				ani.SetFloat("down", 1f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 			if (Input.GetKey(KeyCode.RightArrow))
 			{
@@ -53,6 +61,7 @@ public class MovePlayer : MonoBehaviour
 				ani.SetFloat("right", 1f);
 				ani.SetFloat("FacingLeft", 0f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 			if (Input.GetKey(KeyCode.LeftArrow))
 			{
@@ -60,6 +69,7 @@ public class MovePlayer : MonoBehaviour
 				ani.SetFloat("left", 1f);
 				ani.SetFloat("FacingLeft", 1f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 
 		}
@@ -67,16 +77,19 @@ public class MovePlayer : MonoBehaviour
 	if(Input.GetKey(KeyCode.Space)){
 	    inventory.PlaceItem();
 	    ActivateSleep(0.25f);
+	    placeItemSound.Play();
 	}
 
 	if(Input.GetKey(KeyCode.L) ){
 	    inventory.hoverRight();
 	    ActivateSleep(0.25f);
+	    inventorySwitchSound.Play();
 	}
 
 	if(Input.GetKey(KeyCode.H)){
 	    inventory.hoverLeft();
 	    ActivateSleep(0.25f);
+	    inventorySwitchSound.Play();
 	}
 	
 	
@@ -155,6 +168,7 @@ public class MovePlayer : MonoBehaviour
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
 	else if (other.GetComponent<Pickup>() != null)
 	{
+		
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){
@@ -169,6 +183,7 @@ public class MovePlayer : MonoBehaviour
 
 	if(item != null){
 	    inventory.AddItem(item);
+	    itemPickUpSound.Play();
 	}
     }
 
@@ -244,6 +259,7 @@ public class MovePlayer : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.5f);
 		ani.SetFloat("HadesTrap", 1f);
+		fallingHoleSound.Play();
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<GameManager>().EndGame();
 		gameObject.SetActive(false);
