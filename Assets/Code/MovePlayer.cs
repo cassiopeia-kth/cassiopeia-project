@@ -8,7 +8,7 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody2D rb;
     public Animator ani;
     public Inventory inventory;
-    private bool arrowKeysEnabled = true;
+    public static bool arrowKeysEnabled = true;
 	private bool flying = false;
     private float timer;
     private bool activateSleep = false;
