@@ -18,6 +18,7 @@ public class MovePlayer : MonoBehaviour
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
 	pm = FindObjectOfType<PlayerManager>();
+//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
     }
     
     void Update()

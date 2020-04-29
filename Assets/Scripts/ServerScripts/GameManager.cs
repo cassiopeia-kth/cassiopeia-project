@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
 
     public GameObject localPlayerPrefab;
+    public GameObject inventoryPrefab;
     public GameObject playerPrefab;
 
     private void Awake() {
@@ -26,6 +27,9 @@ public class GameManager : MonoBehaviour {
         GameObject _player;
         if (_id == Client.instance.myId) {
             _player = Instantiate(localPlayerPrefab, _position, _rotation);
+	    MovePlayer mp = _player.GetComponent<MovePlayer>();	
+	    Instantiate(inventoryPrefab);
+	    mp.inventory = inventoryPrefab.transform.GetChild(0).GetComponent<Inventory>();
         }
         else {
             _player = Instantiate(playerPrefab, _position, _rotation);
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene("Menu");
     }
     public void Start() {
+	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
         inventoryCanvas.enabled = true;
     }

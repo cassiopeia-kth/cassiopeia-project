@@ -50,7 +50,6 @@ public class Inventory : MonoBehaviour
 		break;
 	    }
 	}
-	//This comment is also for Manu, if you actually do read this, it means that I have a secret copy of the whole project in which I indeed commented everything I did, so either try to break into my system and find it or kindly ask for it. Much luv :*
 	if(!full){
 	    BoxCollider2D collider = (item as MonoBehaviour).GetComponent<BoxCollider2D>();
 	    if(collider.enabled){
