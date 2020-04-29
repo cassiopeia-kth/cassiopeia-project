@@ -128,13 +128,19 @@ public class MovePlayer : MonoBehaviour
     {
 
 	if(other.gameObject.name == "Hole" && flying == false){
-			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
 		StartCoroutine(HoleDeath());
 	}
 
-	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
-	else if (other.GetComponent<TrapInteraction>() != null && flying == false)
+	if (other.gameObject.name == "InnerHole" && flying == false)
+	{
+		arrowKeysEnabled = false;
+		StartCoroutine(HoleDeath());
+
+	}
+
+		// Deals with trap interaction. (e.g. kills character if they stand on a trap)
+		else if (other.GetComponent<TrapInteraction>() != null && flying == false)
 	{
 	    arrowKeysEnabled = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();

@@ -951,12 +951,12 @@ PrefabInstance:
     - target: {fileID: 4210165607614488895, guid: 3b6de69e45c643338b9537c1553599fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.47
+      value: 9.54
       objectReference: {fileID: 0}
     - target: {fileID: 4210165607614488895, guid: 3b6de69e45c643338b9537c1553599fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4
+      value: 1.38
       objectReference: {fileID: 0}
     - target: {fileID: 4210165607614488895, guid: 3b6de69e45c643338b9537c1553599fe,
         type: 3}
@@ -986,7 +986,7 @@ PrefabInstance:
     - target: {fileID: 4210165607614488895, guid: 3b6de69e45c643338b9537c1553599fe,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4210165607614488895, guid: 3b6de69e45c643338b9537c1553599fe,
         type: 3}
@@ -1020,12 +1020,12 @@ PrefabInstance:
     - target: {fileID: 4270669003599042992, guid: 21f6bc9a0b0ae1d44b018b1cf5900c51,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4270669003599042992, guid: 21f6bc9a0b0ae1d44b018b1cf5900c51,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4270669003599042992, guid: 21f6bc9a0b0ae1d44b018b1cf5900c51,
         type: 3}
@@ -1127,7 +1127,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.702099
+  orthographic size: 8.583678
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1598,6 +1598,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1093402469, guid: 8520e5eaa29c05e4395979f41f57153c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4301806180939376512, guid: 8520e5eaa29c05e4395979f41f57153c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1636,7 +1640,7 @@ PrefabInstance:
     - target: {fileID: 4301806180939376512, guid: 8520e5eaa29c05e4395979f41f57153c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4301806180939376512, guid: 8520e5eaa29c05e4395979f41f57153c,
         type: 3}
