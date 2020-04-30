@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
 
     public Inventory_Item[] itemList = new Inventory_Item[7];
-
+//    public Inventory_Item[] itemList;
     public GameObject spikeTrap;
     public GameObject fireTrap;
     public GameObject zeusmainTrap;
@@ -58,8 +58,10 @@ public class Inventory : MonoBehaviour
 		item.OnPickup();
 		itemList[i] = item;
 		Image image = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>();
+		Debug.Log(image.enabled);
 		image.enabled = true;
 		image.sprite = item.Image;
+		Debug.Log("got here but the image is not displayed.");
 	    }
 	}
 	for(i = 0; i < 7; i++){
@@ -131,20 +133,14 @@ public class Inventory : MonoBehaviour
 	}
     }
 
-    public void PlaceItem(){
-//	Invoke("PlaceItemWait", 1f);
-	Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
-	StartCoroutine(PlaceItemWait(playerPos, 1f));
-    }
     
-    IEnumerator PlaceItemWait(Vector3 playerPos, float delayTime){
-	yield return new WaitForSeconds(delayTime);
+    public void PlaceItem(){
 	for(int i = 0; i < 7; i++){
 	    Image sprite = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>();
 	    Image hover = transform.GetChild(i).GetChild(0).GetComponent<Image>();
 	    if(hover.color.a == 0.7f && itemList[i] != null){
-		//Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
-		Debug.Log(itemList[i].Name);
+		Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
+		//Debug.Log(itemList[i].Name);
 		switch(itemList[i].Name){
 		    case "Hades_Collectable":
 			Instantiate(hadesTrap, playerPos , transform.rotation);
@@ -199,6 +195,11 @@ public class Inventory : MonoBehaviour
     void Start(){
 	for(int i = 0; i < 7; i++){
 	    itemList[i] = null;
+	    Image sprite = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>();
+	     sprite.enabled = false;
+	     sprite.sprite = null;
+	     Image frame = transform.GetChild(i).GetChild(0).GetComponent<Image>();
+	     frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
 	}
 
 	Image image = transform.GetChild(0).GetChild(0).GetComponent<Image>();

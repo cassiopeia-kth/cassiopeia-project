@@ -68,6 +68,10 @@ public class MovePlayer : MonoBehaviour
 		}
 
 	if(Input.GetKey(KeyCode.Space)){
+	    for(int i = 0 ; i < 7; i++){
+		Debug.Log(inventory.itemList[i]);
+	    }
+	    GameManager gm = FindObjectOfType<GameManager>();
 	    inventory.PlaceItem();
 	    ActivateSleep(0.25f);
 	}
@@ -95,9 +99,6 @@ public class MovePlayer : MonoBehaviour
 	}
 	else if(Input.GetKeyUp(KeyCode.LeftArrow)){
 	    setAllAnimatorZero();
-	}
-	for(int j = 0; j < 7; j++){
-	    Debug.Log(inventory.itemList[j]);
 	}
     }
 
@@ -174,7 +175,7 @@ public class MovePlayer : MonoBehaviour
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
 
 	if(item != null){
-	    inventory.AddItem(item);
+	    FindObjectOfType<GameManager>().AddItemToInventory(item);
 	}
     }
 

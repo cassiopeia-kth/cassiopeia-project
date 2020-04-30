@@ -30,7 +30,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 5910657247397863244}
+  - {fileID: 3268271205415247518}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -106,11 +106,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9198241731349215464}
     m_Modifications:
+    - target: {fileID: 1846071598561114520, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846071598561114520, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7080252653612657973, guid: d83fab36538efe1438a3eeab463cec1c,
+        type: 3}
     - target: {fileID: 8807318156224124794, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9177742489021401629, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177742489021401629, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7080252653612657973, guid: d83fab36538efe1438a3eeab463cec1c,
+        type: 3}
     - target: {fileID: 9177742489035304810, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
         type: 3}
       propertyPath: m_Enabled
@@ -125,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 9177742489174843698, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.7
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9177742489796543161, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
         type: 3}
@@ -268,14 +290,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9175444512576196960, guid: 6f789ed2ae9723e94866449c8ebadd61,
         type: 3}
+    - target: {fileID: 9177742489796543162, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9177742489796543166, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
         type: 3}
       propertyPath: m_Name
       value: InventoryPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 9177742490346209444, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584b9a9b0e1c909f8bc953034c8c3e5f, type: 3}
---- !u!224 &5910657247397863244 stripped
+--- !u!224 &3268271205415247518 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9177742489796543161, guid: 584b9a9b0e1c909f8bc953034c8c3e5f,
     type: 3}

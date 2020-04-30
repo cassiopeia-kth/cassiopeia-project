@@ -9,7 +9,6 @@ public enum ServerPackets {
     welcome = 1,
     spawnPlayer,
     playerPosition,
-    playerRotation,
     playerDisconnected
 }
 
@@ -148,12 +147,6 @@ public class Packet : IDisposable {
     }
     /// <summary>Adds a Quaternion to the packet.</summary>
     /// <param name="_value">The Quaternion to add.</param>
-    public void Write(Quaternion _value) {
-        Write(_value.x);
-        Write(_value.y);
-        Write(_value.z);
-        Write(_value.w);
-    }
     #endregion
 
     #region Read Data

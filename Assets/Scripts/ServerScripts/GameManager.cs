@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     public GameObject inventoryPrefab;
     public GameObject playerPrefab;
     public MovePlayer mp;
+    public Canvas inventoryCanvas;
+    
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -23,16 +25,30 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void SpawnPlayer(int _id, string _username, Vector3 _position, Quaternion _rotation) {
+    public void SpawnPlayer(int _id, string _username, Vector3 _position) {
         GameObject _player;
         if (_id == Client.instance.myId) {
-            _player = Instantiate(localPlayerPrefab, _position, _rotation);
-	    mp = _player.GetComponent<MovePlayer>();	
-	    Instantiate(inventoryPrefab);
-	    mp.inventory = inventoryPrefab.transform.GetChild(0).GetComponent<Inventory>();
+            _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
+	    mp = _player.AddComponent<MovePlayer>();
+	    mp.rb = FindObjectOfType<Rigidbody2D>();
+	    mp.ani = FindObjectOfType<Animator>();	    
+	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
+
+
+	    //TOTO: Fix inventory for each player
+	    //PROBLEM: need to instantiate new inventory, but for some reason, it shares the same inventory object, not moveplayer object.
+
+
+
+	    
+	    
+//	    mp.inventory = inventoryHUD.transform.GetChild(0).GetComponent<Inventory>();
+	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    
         }
         else {
-            _player = Instantiate(playerPrefab, _position, _rotation);
+            _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
         }
 
         _player.GetComponent<PlayerManager>().id = _id;
@@ -44,7 +60,6 @@ public class GameManager : MonoBehaviour {
     public RectTransform panelGameOver;
     public Text txtGameOver;
     public Canvas gameOverCanvas;
-    public Canvas inventoryCanvas;
     public Button playAgain;
     public Button mainMenu;
 
@@ -58,7 +73,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene("Menu");
     }
     public void Start() {
-	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
+//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
         inventoryCanvas.enabled = true;
     }
@@ -70,6 +85,10 @@ public class GameManager : MonoBehaviour {
         Invoke("displayGameOverHUD", restartDelay);
         playAgain.onClick.AddListener(Restart);
         mainMenu.onClick.AddListener(displayMainMenu);
+    }
+
+    public void AddItemToInventory(Inventory_Item item){
+	mp.inventory.AddItem(item);
     }
 
 

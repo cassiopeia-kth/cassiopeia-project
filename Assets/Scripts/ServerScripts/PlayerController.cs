@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private float timer;
     private bool activateSleep = false;
-
+    private int i = 0;
     private void FixedUpdate(){
 	if(activateSleep)
 	{
@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
 		return;
 	    }
 	}
-
 	SendInputToServer();
 //	ActivateSleep(0.25f);
+
     }
     
     public void ActivateSleep(float forSeconds)
@@ -29,7 +29,13 @@ public class PlayerController : MonoBehaviour
 	activateSleep = true;
     }
     
+    private void SendEmpty(){
+	bool[] _inputs = new bool[]{
+	    false,false,false,false
+	};
+	ClientSend.PlayerMovement(_inputs);
 
+    }
     private void SendInputToServer(){
 	bool[] _inputs = new bool[]{
 	    Input.GetKey(KeyCode.W),
@@ -38,5 +44,6 @@ public class PlayerController : MonoBehaviour
 	    Input.GetKey(KeyCode.D),
 	};
 	ClientSend.PlayerMovement(_inputs);
+
     }
 }

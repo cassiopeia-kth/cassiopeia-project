@@ -10,7 +10,7 @@ public class Client : MonoBehaviour {
     public static Client instance;
     public static int dataBufferSize = 4096;
 
-    public string ip = "127.0.0.1";
+    public string ip = "83.227.73.57";
     public int port = 25850;
     public int myId = 0;
     public TCP tcp;
@@ -232,7 +232,6 @@ public class Client : MonoBehaviour {
             { (int)ServerPackets.welcome, ClientHandle.Welcome },
             { (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
-            { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected }
         };
         Debug.Log("Initialized packets.");
