@@ -14,6 +14,8 @@ public class CharacterSelectObject
 
 public class char_select : MonoBehaviour
 {
+  [Header ("Animator")]
+  [SerializeField] private Animator ani;
   
   [Header ("List of Characters")]
   [SerializeField] private List<CharacterSelectObject> characterList = new List<CharacterSelectObject>(); 
@@ -24,8 +26,6 @@ public class char_select : MonoBehaviour
 
   [Header ("UI References")]
   [SerializeField] private TextMeshProUGUI middleCharacterName;
-  [SerializeField] private Image middleCharacterSplash;
-  [SerializeField] private Image middleBackgroundColor;
   [SerializeField] private TextMeshProUGUI leftCharacterName;
   [SerializeField] private Image leftCharacterSplash;
   [SerializeField] private Image leftBackgroundColor;
@@ -47,6 +47,7 @@ public class char_select : MonoBehaviour
     cycle.Play();
     decreaseIndexes();
     UpdateCharacterSelectionUI();
+    
   }
 
   public void RightArrow()
@@ -69,11 +70,10 @@ public class char_select : MonoBehaviour
       leftIndex = index - 1;
       rightIndex = index + 1;
     }
-
-    middleCharacterSplash.sprite = characterList[index].splash;
-    middleCharacterName.text = characterList[index].characterName;
-    middleBackgroundColor.color = characterList[index].characterColor;
+    ani.SetInteger("index",index);
     
+    middleCharacterName.text = characterList[index].characterName;
+
     leftCharacterSplash.sprite = characterList[leftIndex].splash;
     leftCharacterName.text = characterList[leftIndex].characterName;
     leftBackgroundColor.color = characterList[leftIndex].characterColor;
