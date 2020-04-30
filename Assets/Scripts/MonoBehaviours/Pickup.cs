@@ -7,6 +7,8 @@ public class Pickup : MonoBehaviour
     public Trap trap;
     private Animator anim;
     string animationState = "AnimationState";
+    public AudioSource hermesPickUpSound;
+
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class Pickup : MonoBehaviour
     IEnumerator MyCoroutine()
     {
         anim.SetInteger(animationState, 1);
+        hermesPickUpSound.Play();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
         yield return 0;
