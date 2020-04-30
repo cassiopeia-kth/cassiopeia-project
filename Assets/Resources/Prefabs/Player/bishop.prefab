@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4270669003599042992}
   - component: {fileID: 6528040347826575928}
-  - component: {fileID: 7202629411031856094}
   - component: {fileID: 6720982482181154687}
   - component: {fileID: 1458527050638696581}
   - component: {fileID: 893019989227312670}
+  - component: {fileID: 246545222}
   m_Layer: 0
   m_Name: bishop
   m_TagString: Untagged
@@ -85,26 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7202629411031856094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933739478917387332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df6bd4ac8c1348b388fd7206f050cb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6720982482181154687}
-  posInit: {x: 0, y: 0, z: 0}
-  i: 0
-  cd: {fileID: 0}
-  GameOver: {fileID: 0}
-  ani: {fileID: 893019989227312670}
-  inventory: {fileID: 0}
-  arrowKeysEnabled: 0
 --- !u!50 &6720982482181154687
 Rigidbody2D:
   serializedVersion: 4
@@ -121,11 +101,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 974f0181ad9930b459c6d224490e66a1, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &1458527050638696581
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -171,3 +151,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &246545222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933739478917387332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df6bd4ac8c1348b388fd7206f050cb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 6720982482181154687}
+  ani: {fileID: 893019989227312670}
+  inventory: {fileID: 0}
