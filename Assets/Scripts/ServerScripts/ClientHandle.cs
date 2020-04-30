@@ -37,6 +37,7 @@ public class ClientHandle : MonoBehaviour {
         //GameManager.players[_id].transform.position = _position;
 	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
 	Vector3 actual_position = GameManager.players[_id].transform.position;
+	
     }
 
     public static void PlayerRotation(Packet _packet) {
