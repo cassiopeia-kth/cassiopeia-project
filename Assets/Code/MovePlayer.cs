@@ -95,7 +95,10 @@ public class MovePlayer : MonoBehaviour
 	}
 	else if(Input.GetKeyUp(KeyCode.LeftArrow)){
 	    setAllAnimatorZero();
-	}	    
+	}
+	for(int j = 0; j < 7; j++){
+	    Debug.Log(inventory.itemList[j]);
+	}
     }
 
     void OnCollisionEnter2D(Collision2D col){	

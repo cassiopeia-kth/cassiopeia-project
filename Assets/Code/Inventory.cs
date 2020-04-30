@@ -62,6 +62,9 @@ public class Inventory : MonoBehaviour
 		image.sprite = item.Image;
 	    }
 	}
+	for(i = 0; i < 7; i++){
+	    Debug.Log(itemList[i]);
+	}
     }
 
     public void hoverRight(){
@@ -129,11 +132,18 @@ public class Inventory : MonoBehaviour
     }
 
     public void PlaceItem(){
+//	Invoke("PlaceItemWait", 1f);
+	Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
+	StartCoroutine(PlaceItemWait(playerPos, 1f));
+    }
+    
+    IEnumerator PlaceItemWait(Vector3 playerPos, float delayTime){
+	yield return new WaitForSeconds(delayTime);
 	for(int i = 0; i < 7; i++){
 	    Image sprite = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>();
 	    Image hover = transform.GetChild(i).GetChild(0).GetComponent<Image>();
 	    if(hover.color.a == 0.7f && itemList[i] != null){
-		Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
+		//Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
 		Debug.Log(itemList[i].Name);
 		switch(itemList[i].Name){
 		    case "Hades_Collectable":

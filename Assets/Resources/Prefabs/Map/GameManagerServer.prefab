@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localPlayerPrefab: {fileID: 1933739478917387332, guid: 21f6bc9a0b0ae1d44b018b1cf5900c51,
     type: 3}
+  inventoryPrefab: {fileID: 7507916959248793141, guid: 859fa3ddc5de8608a9b0114b6326c4c0,
+    type: 3}
   playerPrefab: {fileID: 5035207236821859426, guid: 09cad8dc04b195c3490459f09c682b7f,
     type: 3}
   restartDelay: 2

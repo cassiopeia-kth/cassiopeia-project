@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     public GameObject localPlayerPrefab;
     public GameObject inventoryPrefab;
     public GameObject playerPrefab;
-
+    public MovePlayer mp;
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         GameObject _player;
         if (_id == Client.instance.myId) {
             _player = Instantiate(localPlayerPrefab, _position, _rotation);
-	    MovePlayer mp = _player.GetComponent<MovePlayer>();	
+	    mp = _player.GetComponent<MovePlayer>();	
 	    Instantiate(inventoryPrefab);
 	    mp.inventory = inventoryPrefab.transform.GetChild(0).GetComponent<Inventory>();
         }
