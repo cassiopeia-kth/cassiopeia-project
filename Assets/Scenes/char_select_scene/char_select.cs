@@ -23,8 +23,9 @@ public class char_select : MonoBehaviour
   [Header ("Sounds")]
   [SerializeField] private AudioSource cycle;
   [SerializeField] private AudioSource selected;
+  [SerializeField] private AudioSource music;
 
-  [Header ("UI References")]
+    [Header ("UI References")]
   [SerializeField] private TextMeshProUGUI middleCharacterName;
   [SerializeField] private TextMeshProUGUI leftCharacterName;
   [SerializeField] private Image leftCharacterSplash;
@@ -39,6 +40,7 @@ public class char_select : MonoBehaviour
 
   private void Start() 
   {
+        music.Play();
     UpdateCharacterSelectionUI();
   }
 
