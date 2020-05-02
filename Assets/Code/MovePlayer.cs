@@ -1,82 +1,114 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 public class MovePlayer : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Animator ani;
     public Inventory inventory;
-    public bool arrowKeysEnabled;
+    public static bool arrowKeysEnabled = true;
 	private bool flying = false;
     private float timer;
     private bool activateSleep = false;
+
+	private bool fixedpos = false;
+    public AudioSource movementSound;
+    public AudioSource inventorySwitchSound;
+    public AudioSource fallingHoleSound;
+    public AudioSource placeItemSound;
+    public AudioSource itemPickUpSound;
+
     
     // Start is called before the first frame update
     void Start(){	
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
-    }
-    
-    void Update()
-    {
-	if(activateSleep)
-	{
-	    timer -= Time.deltaTime;
-	    //	    Debug.Log(timer);
-	    if(timer <= 0){
-		activateSleep = false;
-		setAllAnimatorZero();
-	    }
-	    else{
-		return;
-	    }
 	}
+
+	void FixedUpdate()
+    {
+		if (!fixedpos)
+		{
+			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			fixedpos = true;
+		}
+		
+
+		if (activateSleep)
+		{
+			timer -= Time.deltaTime;
+	    //	    Debug.Log(timer);
+			if(timer <= 0){
+				activateSleep = false;
+				setAllAnimatorZero();
+				}
+			else
+			{
+				return;
+			}
+		}
 
 		if (arrowKeysEnabled)
 		{
 			if (Input.GetKey(KeyCode.UpArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position + new Vector2(0, 1));
 				ani.SetFloat("up", 1f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 			if (Input.GetKey(KeyCode.DownArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position - new Vector2(0, 1));
 				ani.SetFloat("down", 1f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 			if (Input.GetKey(KeyCode.RightArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position + new Vector2(1, 0));
 				ani.SetFloat("right", 1f);
 				ani.SetFloat("FacingLeft", 0f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 			if (Input.GetKey(KeyCode.LeftArrow))
 			{
+				fixedpos = false;
+				rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
 				rb.MovePosition(rb.position - new Vector2(1, 0));
 				ani.SetFloat("left", 1f);
 				ani.SetFloat("FacingLeft", 1f);
 				ActivateSleep(0.25f);
+				movementSound.Play();
 			}
 
 		}
 
-	if(Input.GetKey(KeyCode.Space)){
+		if (Input.GetKey(KeyCode.Space)){
 	    inventory.PlaceItem();
 	    ActivateSleep(0.25f);
+	    placeItemSound.Play();
 	}
 
 	if(Input.GetKey(KeyCode.L) ){
 	    inventory.hoverRight();
 	    ActivateSleep(0.25f);
+	    inventorySwitchSound.Play();
 	}
 
 	if(Input.GetKey(KeyCode.H)){
 	    inventory.hoverLeft();
 	    ActivateSleep(0.25f);
+	    inventorySwitchSound.Play();
 	}
 	
 	
@@ -110,13 +142,19 @@ public class MovePlayer : MonoBehaviour
     {
 
 	if(other.gameObject.name == "Hole" && flying == false){
-			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
 		StartCoroutine(HoleDeath());
 	}
 
-	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
-	else if (other.GetComponent<TrapInteraction>() != null && flying == false)
+	if (other.gameObject.name == "InnerHole" && flying == false)
+	{
+		arrowKeysEnabled = false;
+		StartCoroutine(HoleDeath());
+
+	}
+
+		// Deals with trap interaction. (e.g. kills character if they stand on a trap)
+		else if (other.GetComponent<TrapInteraction>() != null && flying == false)
 	{
 	    arrowKeysEnabled = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
@@ -155,6 +193,7 @@ public class MovePlayer : MonoBehaviour
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
 	else if (other.GetComponent<Pickup>() != null)
 	{
+		
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){
@@ -165,11 +204,17 @@ public class MovePlayer : MonoBehaviour
 
 	    }
 	}
-	Inventory_Item item = other.GetComponent<Inventory_Item>();
 
-	if(item != null){
-	    inventory.AddItem(item);
-	}
+
+	if (other.GetComponent<Inventory_Item>() != null)
+		{
+			Inventory_Item item = other.GetComponent<Inventory_Item>();
+
+			if (item != null)
+			{
+				inventory.AddItem(item);
+			}
+		}
     }
 
 
@@ -201,36 +246,44 @@ public class MovePlayer : MonoBehaviour
 	// If the poseidon direction is up, move the player up.
 	if(direction == 0)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,1));
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		rb.MovePosition(rb.position + new Vector2(0,1));
 	    ani.SetFloat("up", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("up", 0f);
-	}
+		fixedpos = false;
+		}
 	// If the poseidon direction is right, move the player right.
 	else if(direction == 1)
 	{
-	    rb.MovePosition(rb.position + new Vector2(-1,0));
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		rb.MovePosition(rb.position + new Vector2(-1,0));
 	    ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
 		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("right", 0f);
+		fixedpos = false;
 	}
 	// If the poseidon direction is down, move the player down.
 	else if(direction == 2)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,-1));
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+		rb.MovePosition(rb.position + new Vector2(0,-1));
 	    ani.SetFloat("down", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("down", 0f);
+		fixedpos = false;
 	}
 	// If the poseidon direction is left, move the player left.
 	else
 	{
-	    rb.MovePosition(rb.position + new Vector2(1,0));
+		rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+		rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
 		ani.SetFloat("FacingLeft", 1f);
 		yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
+		fixedpos = false;
 	}
 
 	yield return 0;
@@ -244,6 +297,7 @@ public class MovePlayer : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.5f);
 		ani.SetFloat("HadesTrap", 1f);
+		fallingHoleSound.Play();
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<GameManager>().EndGame();
 		gameObject.SetActive(false);
