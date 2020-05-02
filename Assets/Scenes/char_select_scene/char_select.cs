@@ -23,8 +23,9 @@ public class char_select : MonoBehaviour
   [Header ("Sounds")]
   [SerializeField] private AudioSource cycle;
   [SerializeField] private AudioSource selected;
+  [SerializeField] private AudioSource music;
 
-  [Header ("UI References")]
+    [Header ("UI References")]
   [SerializeField] private TextMeshProUGUI middleCharacterName;
   [SerializeField] private TextMeshProUGUI leftCharacterName;
   [SerializeField] private Image leftCharacterSplash;
@@ -39,6 +40,7 @@ public class char_select : MonoBehaviour
 
   private void Start() 
   {
+        music.Play();
     UpdateCharacterSelectionUI();
   }
 
@@ -73,8 +75,14 @@ public class char_select : MonoBehaviour
     ani.SetInteger("index",index);
     
     middleCharacterName.text = characterList[index].characterName;
+    if(characterList[index].characterName =="Elite Knight")
+        {
 
-    leftCharacterSplash.sprite = characterList[leftIndex].splash;
+            ani.SetBool("isKnight", true);
+            StartCoroutine(knight());
+        }
+
+        leftCharacterSplash.sprite = characterList[leftIndex].splash;
     leftCharacterName.text = characterList[leftIndex].characterName;
     leftBackgroundColor.color = characterList[leftIndex].characterColor;
 
@@ -105,5 +113,11 @@ public class char_select : MonoBehaviour
     selected.Play();
     Debug.Log("Pressed");
   }
+    IEnumerator knight() { 
+        
+        yield return new WaitForSeconds(3f);
+        ani.SetBool("isKnight",false);
+        yield return 0;
 
+    }
 }
