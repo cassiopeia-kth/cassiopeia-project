@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private float timer;
     private bool activateSleep = false;
-    private int i = 0;
     private void FixedUpdate(){
 	if(activateSleep)
 	{

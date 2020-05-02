@@ -191,7 +191,7 @@ public class MovePlayer : MonoBehaviour
 	Inventory_Item item = other.GetComponent<Inventory_Item>();
 
 	if(item != null){
-	    FindObjectOfType<GameManager>().AddItemToInventory(item);
+	    inventory.AddItem(item);
 	}
     }
 

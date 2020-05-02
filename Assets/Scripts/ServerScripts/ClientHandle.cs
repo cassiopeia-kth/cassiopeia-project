@@ -18,7 +18,7 @@ public class ClientHandle : MonoBehaviour {
     public static void SpawnPlayer(Packet _packet) {
         int _id = _packet.ReadInt();
         string _username = _packet.ReadString();
-        Vector3 _position = _packet.ReadVector3();	
+        Vector3 _position = _packet.ReadVector3();
         GameManager.instance.SpawnPlayer(_id, _username, _position);
     }
     

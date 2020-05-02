@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour {
     public GameObject localPlayerPrefab;
     public GameObject inventoryPrefab;
     public GameObject playerPrefab;
-    public MovePlayer mp;
     public Canvas inventoryCanvas;
+    public MovePlayer mp;
+    
     
     private void Awake() {
         if (instance == null) {
@@ -28,26 +29,25 @@ public class GameManager : MonoBehaviour {
     public void SpawnPlayer(int _id, string _username, Vector3 _position) {
         GameObject _player;
         if (_id == Client.instance.myId) {
-            _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
+	    _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
 	    mp = _player.AddComponent<MovePlayer>();
 	    mp.rb = FindObjectOfType<Rigidbody2D>();
 	    mp.ani = FindObjectOfType<Animator>();	    
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
-	    
-        }
-        else {
-            _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
-	    mp = _player.AddComponent<MovePlayer>();
-	    mp.rb = FindObjectOfType<Rigidbody2D>();
-	    mp.ani = FindObjectOfType<Animator>();	    
-	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
-	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
-	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
-	    
 
         }
+        else {
+	    Debug.Log(_position);
+	    _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
+	    mp = _player.AddComponent<MovePlayer>();
+	    mp.rb = FindObjectOfType<Rigidbody2D>();
+	    mp.ani = FindObjectOfType<Animator>();	    
+	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
+	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	}
 
         _player.GetComponent<PlayerManager>().id = _id;
         _player.GetComponent<PlayerManager>().username = _username;
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void AddItemToInventory(Inventory_Item item){
-	mp.inventory.AddItem(item);
+//	mp.inventory.AddItem(item);
     }
 
 
