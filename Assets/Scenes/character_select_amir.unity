@@ -2384,7 +2384,7 @@ MonoBehaviour:
   - splash: {fileID: 21300000, guid: ab5abb314006a5a4caacc4e64caf3862, type: 3}
     characterName: Monster
     characterColor: {r: 1, g: 1, b: 1, a: 0}
-  - splash: {fileID: 21300000, guid: 8707d55ee9cec8182ab36e562ccf0530, type: 3}
+  - splash: {fileID: 21300000, guid: d2d43a5880d31c1408a9e8fff6e3d3bc, type: 3}
     characterName: Executioner
     characterColor: {r: 0, g: 0, b: 0, a: 0}
   - splash: {fileID: 21300000, guid: 5d2275cab91b1c9499c18a7c23c6d13b, type: 3}
