@@ -33,22 +33,20 @@ public class GameManager : MonoBehaviour {
 	    mp.rb = FindObjectOfType<Rigidbody2D>();
 	    mp.ani = FindObjectOfType<Animator>();	    
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
-
-
-	    //TOTO: Fix inventory for each player
-	    //PROBLEM: need to instantiate new inventory, but for some reason, it shares the same inventory object, not moveplayer object.
-
-
-
-	    
-	    
-//	    mp.inventory = inventoryHUD.transform.GetChild(0).GetComponent<Inventory>();
 	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
 	    
         }
         else {
             _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
+	    mp = _player.AddComponent<MovePlayer>();
+	    mp.rb = FindObjectOfType<Rigidbody2D>();
+	    mp.ani = FindObjectOfType<Animator>();	    
+	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
+	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    
+
         }
 
         _player.GetComponent<PlayerManager>().id = _id;

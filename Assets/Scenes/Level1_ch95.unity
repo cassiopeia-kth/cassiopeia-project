@@ -1451,7 +1451,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4078701623704441147, guid: add4e116849a09c2daf85a356cba02df,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4078701623704441140, guid: add4e116849a09c2daf85a356cba02df, type: 3}
+    - {fileID: 4078701623704441141, guid: add4e116849a09c2daf85a356cba02df, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: add4e116849a09c2daf85a356cba02df, type: 3}
 --- !u!1 &1797530845
 GameObject:
@@ -1661,7 +1668,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 3256100946209752983, guid: 09cad8dc04b195c3490459f09c682b7f,
+      objectReference: {fileID: 5035207236821859428, guid: 09cad8dc04b195c3490459f09c682b7f,
         type: 3}
     - target: {fileID: 7182162724525179828, guid: 8cba29becdf97453885b6a249cfbff2b,
         type: 3}

@@ -12,6 +12,9 @@ public class MovePlayer : MonoBehaviour
     private float timer;
     private bool activateSleep = false;
     public PlayerManager pm;
+    public float moveSpeed = 10f;
+    public Transform movePoint;
+    public LayerMask whatStopsMovement;
     
     // Start is called before the first frame update
     void Start(){	
@@ -19,6 +22,19 @@ public class MovePlayer : MonoBehaviour
 	arrowKeysEnabled = true;
 	pm = FindObjectOfType<PlayerManager>();
 //	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
+	movePoint = transform.GetChild(0);
+	movePoint.parent = null;
+	whatStopsMovement = LayerMask.GetMask("StopMovement");
+
+    }
+
+    public void movePlayer(Vector3 position){
+	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
+	
+		if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
+		    movePoint.position += position;
+	}
     }
     
     void Update()
