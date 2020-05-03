@@ -43,7 +43,7 @@ public class ClientSend : MonoBehaviour {
             }
 	    _packet.Write(GameManager.players[Client.instance.myId].isAlive);
 	    _packet.Write(GameManager.players[Client.instance.myId].transform.position);
-            SendUDPData(_packet);
+            SendTCPData(_packet);
 	    //ActivateSleep(2.5f);
         }
     }
