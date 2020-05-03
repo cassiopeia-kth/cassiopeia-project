@@ -10,8 +10,6 @@ namespace GameServer {
         public string username;
 
         public Vector3 position;
-        public Quaternion rotation;
-
         private float moveSpeed = 1f / Constants.TICKS_PER_SEC;
 	private bool[] inputs;
 
@@ -21,15 +19,12 @@ namespace GameServer {
             id = _id;
             username = _username;
             position = _spawnPosition;
-            rotation = Quaternion.Identity;
-
 	    inputs = new bool[4];
         }
 
 
-	public void SetInput(bool[] _inputs, Quaternion _rotation, Vector3 _position, bool _isAlive){
+	public void SetInput(bool[] _inputs, Vector3 _position, bool _isAlive){
 	    inputs= _inputs;
-	    rotation= _rotation;
 	    position = _position;
 	    isAlive = _isAlive;
 	}
@@ -48,22 +43,17 @@ namespace GameServer {
 
 	     }
 
-//	     Console.Write(_inputDirection);
 	     Move(_inputDirection);
-	     Thread.Sleep(150);
+//	     Thread.Sleep(150);
 	     return;
         }
 
 
 	private void Move(Vector2 _inputDirection){
-	    //Vector3 _forward = Vector3.Transform(new Vector3(0,0,0), rotation);
-	    //Vector3 _right = Vector3.Normalize(Vector3.Cross(_forward, new Vector3(0,1,0)));
-
-	    //Vector3 _moveDirection = _right * _inputDirection.X + _forward * _inputDirection.Y;
-	    position = new Vector3(position.X + _inputDirection.X, position.Y + _inputDirection.Y, 0);
-
+	 //   position = new Vector3(position.X + _inputDirection.X, position.Y + _inputDirection.Y, 0);
+	    position = new Vector3(_inputDirection.X,_inputDirection.Y, 0);
+	    //Console.Write(position);
 	    ServerSend.PlayerPosition(this);
-	    ServerSend.PlayerRotation(this);
 	}
 
 

@@ -9,7 +9,6 @@ namespace GameServer {
         welcome = 1,
         spawnPlayer,
         playerPosition,
-        playerRotation,
         playerDisconnected
     }
 
@@ -302,9 +301,6 @@ namespace GameServer {
 
         /// <summary>Reads a Quaternion from the packet.</summary>
         /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-        public Quaternion ReadQuaternion(bool _moveReadPos = true) {
-            return new Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
-        }
         #endregion
 
         private bool disposed = false;

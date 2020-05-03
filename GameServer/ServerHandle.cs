@@ -23,11 +23,9 @@ namespace GameServer {
 		_inputs[i] = _packet.ReadBool();
 	    }
 	    bool isAlive = _packet.ReadBool();
-	    //Console.WriteLine(isAlive);
 	    Vector3 _position = _packet.ReadVector3();
-	    Quaternion _rotation = _packet.ReadQuaternion();
 	    try{
-	    Server.clients[_fromClient].player.SetInput(_inputs, _rotation, _position, isAlive);
+		Server.clients[_fromClient].player.SetInput(_inputs, _position, isAlive);
 	    }
 	    catch(Exception e){
 		Console.Write(e);

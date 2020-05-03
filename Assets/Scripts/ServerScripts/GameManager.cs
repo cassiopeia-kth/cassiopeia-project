@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    inventoryCanvas.enabled = true;
 
         }
         else {
@@ -46,7 +47,8 @@ public class GameManager : MonoBehaviour {
 	    mp.ani = FindObjectOfType<Animator>();	    
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
-	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+//	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    inventoryHUD.SetActive(false);
 	}
 
         _player.GetComponent<PlayerManager>().id = _id;
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour {
     public void Start() {
 //	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
-        inventoryCanvas.enabled = true;
+//        inventoryCanvas.enabled = true;
     }
 
 

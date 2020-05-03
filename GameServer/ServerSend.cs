@@ -58,7 +58,6 @@ namespace GameServer {
                 _packet.Write(_player.id);
                 _packet.Write(_player.username);
                 _packet.Write(_player.position);
-                _packet.Write(_player.rotation);
                 SendTCPData(_toClient, _packet);
             }
         }
@@ -71,16 +70,6 @@ namespace GameServer {
 //		Console.Write(_player.position);
 		if(_player.isAlive)
 		    SendUDPDataToAll(_packet);
-	    }
-	}
-
-	
-	public static void PlayerRotation(Player _player){
-	    using (Packet _packet = new Packet((int)ServerPackets.playerRotation)){
-		_packet.Write(_player.id);
-		_packet.Write(_player.rotation);
-
-		SendUDPDataToAll(_player.id, _packet);
 	    }
 	}
 
