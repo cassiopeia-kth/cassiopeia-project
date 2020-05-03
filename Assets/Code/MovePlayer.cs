@@ -87,7 +87,6 @@ public class MovePlayer : MonoBehaviour
 	    for(int i = 0 ; i < 7; i++){
 		Debug.Log(inventory.itemList[i]);
 	    }
-	    GameManager gm = FindObjectOfType<GameManager>();
 	    inventory.PlaceItem();
 	    ActivateSleep(0.25f);
 	}
@@ -260,7 +259,6 @@ public class MovePlayer : MonoBehaviour
     }
     public Vector3 getPlayerPosition(){
 	return transform.position;
-
     }
 
 	IEnumerator HoleDeath()

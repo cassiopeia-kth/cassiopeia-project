@@ -34,8 +34,10 @@ public class ClientHandle : MonoBehaviour {
         Vector3 _position = _packet.ReadVector3();
 //	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
 
-	GameManager.players[_id].GetComponent<MovePlayer>().movePlayer(_position);
-
+	if(GameManager.players[_id].GetComponent<MovePlayer>() != null)
+	    GameManager.players[_id].GetComponent<MovePlayer>().movePlayer(_position);
+	else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
+	    GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
 	
 	Vector3 actual_position = GameManager.players[_id].transform.position;
 //	GameManager.players[_id].transform.position = _position;

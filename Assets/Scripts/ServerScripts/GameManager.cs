@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     public GameObject playerPrefab;
     public Canvas inventoryCanvas;
     public MovePlayer mp;
-    
+    public MovePlayerOnline mpo;
     
     private void Awake() {
         if (instance == null) {
@@ -40,14 +40,15 @@ public class GameManager : MonoBehaviour {
 
         }
         else {
+	    
 	    Debug.Log(_position);
 	    _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
-	    mp = _player.AddComponent<MovePlayer>();
-	    mp.rb = FindObjectOfType<Rigidbody2D>();
-	    mp.ani = FindObjectOfType<Animator>();	    
+	    mpo = _player.AddComponent<MovePlayerOnline>();
+	    mpo.rb = FindObjectOfType<Rigidbody2D>();
+	    mpo.ani = FindObjectOfType<Animator>();	    
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
-	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
-//	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
 	    inventoryHUD.SetActive(false);
 	}
 
