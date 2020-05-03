@@ -21,7 +21,7 @@ public class MovePlayer : MonoBehaviour
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
 	pm = FindObjectOfType<PlayerManager>();
-//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
+	//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
 	movePoint = transform.GetChild(0);
 	movePoint.parent = null;
 	whatStopsMovement = LayerMask.GetMask("StopMovement");
@@ -32,8 +32,8 @@ public class MovePlayer : MonoBehaviour
 	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	
-		if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
-		    movePoint.position += position;
+	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
+		movePoint.position += position;
 	}
     }
     
@@ -52,36 +52,36 @@ public class MovePlayer : MonoBehaviour
 	    }
 	}
 
-		if (arrowKeysEnabled)
-		{
-			if (Input.GetKey(KeyCode.UpArrow))
-			{
-//				rb.MovePosition(rb.position + new Vector2(0, 1));
-				ani.SetFloat("up", 1f);
-//				ActivateSleep(0.25f);
-			}
-			if (Input.GetKey(KeyCode.DownArrow))
-			{
-//				rb.MovePosition(rb.position - new Vector2(0, 1));
-				ani.SetFloat("down", 1f);
-//				ActivateSleep(0.25f);
-			}
-			if (Input.GetKey(KeyCode.RightArrow))
-			{
-//				rb.MovePosition(rb.position + new Vector2(1, 0));
-				ani.SetFloat("right", 1f);
-				ani.SetFloat("FacingLeft", 0f);
-//				ActivateSleep(0.25f);
-			}
-			if (Input.GetKey(KeyCode.LeftArrow))
-			{
-//				rb.MovePosition(rb.position - new Vector2(1, 0));
-				ani.SetFloat("left", 1f);
-				ani.SetFloat("FacingLeft", 1f);
-//				ActivateSleep(0.25f);
-			}
+	if (arrowKeysEnabled)
+	{
+	    if (Input.GetKey(KeyCode.UpArrow))
+	    {
+		//				rb.MovePosition(rb.position + new Vector2(0, 1));
+		ani.SetFloat("up", 1f);
+		//				ActivateSleep(0.25f);
+	    }
+	    if (Input.GetKey(KeyCode.DownArrow))
+	    {
+		//				rb.MovePosition(rb.position - new Vector2(0, 1));
+		ani.SetFloat("down", 1f);
+		//				ActivateSleep(0.25f);
+	    }
+	    if (Input.GetKey(KeyCode.RightArrow))
+	    {
+		//				rb.MovePosition(rb.position + new Vector2(1, 0));
+		ani.SetFloat("right", 1f);
+		ani.SetFloat("FacingLeft", 0f);
+		//				ActivateSleep(0.25f);
+	    }
+	    if (Input.GetKey(KeyCode.LeftArrow))
+	    {
+		//				rb.MovePosition(rb.position - new Vector2(1, 0));
+		ani.SetFloat("left", 1f);
+		ani.SetFloat("FacingLeft", 1f);
+		//				ActivateSleep(0.25f);
+	    }
 
-		}
+	}
 
 	if(Input.GetKey(KeyCode.Space)){
 	    for(int i = 0 ; i < 7; i++){
@@ -131,10 +131,10 @@ public class MovePlayer : MonoBehaviour
     {
 
 	if(other.gameObject.name == "Hole" && flying == false){
-			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
-		arrowKeysEnabled = false;
-		pm.isAlive = false;
-		StartCoroutine(HoleDeath());
+	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
+	    arrowKeysEnabled = false;
+	    pm.isAlive = false;
+	    StartCoroutine(HoleDeath());
 	}
 
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
@@ -156,7 +156,7 @@ public class MovePlayer : MonoBehaviour
 		StartCoroutine(FireTrap());
 		Debug.Log("Death by Fire!");
 	    }
-	     else if(name == "SpikeTrap"){
+	    else if(name == "SpikeTrap"){
 		StartCoroutine(spikeTrap());
 		Debug.Log("Death by Spike!");
 	    }
@@ -172,8 +172,8 @@ public class MovePlayer : MonoBehaviour
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
 	    pm.isAlive = false;
-		StartCoroutine(ZeusDiagonalDeath());
-		FindObjectOfType<GameManager>().EndGame();
+	    StartCoroutine(ZeusDiagonalDeath());
+	    FindObjectOfType<GameManager>().EndGame();
 	}
 
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
@@ -223,35 +223,43 @@ public class MovePlayer : MonoBehaviour
 	// If the poseidon direction is up, move the player up.
 	if(direction == 0)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,1));
+	    //	    rb.MovePosition(rb.position + new Vector2(0,1));
+	    this.movePlayer(new Vector3(0,1,0));
+	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
 	    ani.SetFloat("up", 1f);
-	    yield return new WaitForSeconds(0.1f);
+	    //yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("up", 0f);
 	}
 	// If the poseidon direction is right, move the player right.
 	else if(direction == 1)
 	{
-	    rb.MovePosition(rb.position + new Vector2(-1,0));
+	    //	    rb.MovePosition(rb.position + new Vector2(-1,0));
+	    this.movePlayer(new Vector3(-1,0,0));
+	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
 	    ani.SetFloat("right", 1f);
-		ani.SetFloat("FacingLeft", 0f);
-		yield return new WaitForSeconds(0.1f);
+	    ani.SetFloat("FacingLeft", 0f);
+	    //yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("right", 0f);
 	}
 	// If the poseidon direction is down, move the player down.
 	else if(direction == 2)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,-1));
+	    //	    rb.MovePosition(rb.position + new Vector2(0,-1));
+	    this.movePlayer(new Vector3(0,-1,0));
+	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
 	    ani.SetFloat("down", 1f);
-	    yield return new WaitForSeconds(0.1f);
+	    //yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("down", 0f);
 	}
 	// If the poseidon direction is left, move the player left.
 	else
 	{
-	    rb.MovePosition(rb.position + new Vector2(1,0));
+	    //	    rb.MovePosition(rb.position + new Vector2(1,0));
+	    this.movePlayer(new Vector3(1,0,0));
+	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
 	    ani.SetFloat("left", 1f);
-		ani.SetFloat("FacingLeft", 1f);
-		yield return new WaitForSeconds(0.1f);
+	    ani.SetFloat("FacingLeft", 1f);
+	    //yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
 	}
 
@@ -261,84 +269,84 @@ public class MovePlayer : MonoBehaviour
 	return transform.position;
     }
 
-	IEnumerator HoleDeath()
-	{
-		yield return new WaitForSeconds(0.5f);
-		ani.SetFloat("HadesTrap", 1f);
-		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
-		gameObject.SetActive(false);
-		yield return 0;
-	}
-
-	IEnumerator HadesDeath()
-	{
-		Vector3 pos = gameObject.transform.position;
-		yield return new WaitForSeconds(3f);
-		ani.SetFloat("HadesTrap", 1f);
-		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
-		yield return new WaitForSeconds(2f);
-		gameObject.SetActive(false);
-		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
-		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
-		yield return 0;
-	}
-
-	IEnumerator ZeusDeath()
-	{
-		Vector3 pos = gameObject.transform.position;
-		yield return new WaitForSeconds(3f);
-		ani.SetFloat("ZeusTrap", 1f);
-		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
-		yield return new WaitForSeconds(2f);
-		gameObject.SetActive(false);
-		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
-		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
-		yield return 0;
-	}
-
-	IEnumerator ZeusDiagonalDeath()
-	{
-		Vector3 pos = gameObject.transform.position;
-		yield return new WaitForSeconds(1f);
-		ani.SetFloat("ZeusTrap", 1.5f);
-		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
-		yield return new WaitForSeconds(2f);
-		gameObject.SetActive(false);
-		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
-		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
-		yield return 0;
-	}
-  
-  IEnumerator spikeTrap() {
-		Vector3 pos = gameObject.transform.position;
-		yield return new WaitForSeconds(3f);
-		ani.SetFloat("SpikeTrap", 1f);
-		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
-		yield return new WaitForSeconds(2f);
-		gameObject.SetActive(false);
-		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
-		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
-		yield return 0;
-	}
-
-IEnumerator FireTrap()
+    IEnumerator HoleDeath()
     {
-		Vector3 pos = gameObject.transform.position;
-		yield return new WaitForSeconds(3f);
-		ani.SetFloat("FireTrap", 1f);
-		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
-		yield return new WaitForSeconds(2f);
-		gameObject.SetActive(false);
-		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
-		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
-		yield return 0;
+	yield return new WaitForSeconds(0.5f);
+	ani.SetFloat("HadesTrap", 1f);
+	yield return new WaitForSeconds(1f);
+	FindObjectOfType<GameManager>().EndGame();
+	gameObject.SetActive(false);
+	yield return 0;
+    }
 
-	}
+    IEnumerator HadesDeath()
+    {
+	Vector3 pos = gameObject.transform.position;
+	yield return new WaitForSeconds(3f);
+	ani.SetFloat("HadesTrap", 1f);
+	yield return new WaitForSeconds(1f);
+	FindObjectOfType<GameManager>().EndGame();
+	yield return new WaitForSeconds(2f);
+	gameObject.SetActive(false);
+	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
+	yield return 0;
+    }
+
+    IEnumerator ZeusDeath()
+    {
+	Vector3 pos = gameObject.transform.position;
+	yield return new WaitForSeconds(3f);
+	ani.SetFloat("ZeusTrap", 1f);
+	yield return new WaitForSeconds(1f);
+	FindObjectOfType<GameManager>().EndGame();
+	yield return new WaitForSeconds(2f);
+	gameObject.SetActive(false);
+	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
+	yield return 0;
+    }
+
+    IEnumerator ZeusDiagonalDeath()
+    {
+	Vector3 pos = gameObject.transform.position;
+	yield return new WaitForSeconds(1f);
+	ani.SetFloat("ZeusTrap", 1.5f);
+	yield return new WaitForSeconds(1f);
+	FindObjectOfType<GameManager>().EndGame();
+	yield return new WaitForSeconds(2f);
+	gameObject.SetActive(false);
+	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
+	yield return 0;
+    }
+  
+    IEnumerator spikeTrap() {
+	Vector3 pos = gameObject.transform.position;
+	yield return new WaitForSeconds(3f);
+	ani.SetFloat("SpikeTrap", 1f);
+	yield return new WaitForSeconds(1f);
+	FindObjectOfType<GameManager>().EndGame();
+	yield return new WaitForSeconds(2f);
+	gameObject.SetActive(false);
+	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
+	yield return 0;
+    }
+
+    IEnumerator FireTrap()
+    {
+	Vector3 pos = gameObject.transform.position;
+	yield return new WaitForSeconds(3f);
+	ani.SetFloat("FireTrap", 1f);
+	yield return new WaitForSeconds(1f);
+	FindObjectOfType<GameManager>().EndGame();
+	yield return new WaitForSeconds(2f);
+	gameObject.SetActive(false);
+	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
+	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
+	yield return 0;
+
+    }
 
 }

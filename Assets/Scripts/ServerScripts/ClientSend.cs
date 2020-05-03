@@ -25,26 +25,16 @@ public class ClientSend : MonoBehaviour {
     }
 
     public static void PlayerMovement(bool[] _inputs) {
-	if(activateSleep){
-	    timer -= Time.deltaTime;
-	    if(timer <= 0){
-		activateSleep = false;
-	    }
-	    else{
-		return;
-	    }
-	}
 
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement)) {
             _packet.Write(_inputs.Length);
             foreach (bool _input in _inputs) {
                 _packet.Write(_input);
-		//Debug.Log(_input);
+		Debug.Log(_input);
             }
 	    _packet.Write(GameManager.players[Client.instance.myId].isAlive);
 	    _packet.Write(GameManager.players[Client.instance.myId].transform.position);
             SendTCPData(_packet);
-	    //ActivateSleep(2.5f);
         }
     }
     #endregion
