@@ -64,7 +64,8 @@ public class TrapInteraction : MonoBehaviour
 
         // Change the animation state, so that the trap animation plays.
         anim.SetInteger(animationState, 1);
-        trapSound.Play();
+        StartCoroutine(playSound(name));
+        //trapSound.Play();
 
         // If the trap is the Poseidon trap, and the trap has not been used yet.
         if(name == "PoseidonTrap" && spent == false)
@@ -96,4 +97,12 @@ public class TrapInteraction : MonoBehaviour
         yield return 0;
     }
 
+    IEnumerator playSound(string Name)
+    {
+
+        if (Name == "Zeus") { 
+        yield return new WaitForSeconds(2f);
+    }
+        trapSound.Play();  
+    }
 }
