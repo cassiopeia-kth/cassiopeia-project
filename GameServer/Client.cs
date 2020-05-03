@@ -165,7 +165,7 @@ namespace GameServer {
                 if (_client.player != null) {
                     if (_client.id != id) {
                         ServerSend.SpawnPlayer(id, _client.player);
-			Console.Write(_client.player.position + "\n");
+//			Console.Write(_client.player.position + "\n");
                     }
                 }
             }
@@ -173,11 +173,10 @@ namespace GameServer {
             foreach (Client _client in Server.clients.Values) {
                 if (_client.player != null) {
                     ServerSend.SpawnPlayer(_client.id, player);
-		    Console.Write("Current player:");
-		    Console.Write(player.position);
+//		    Console.Write("Current player:");
+//		    Console.Write(player.position);
                 }
             }
-	    Console.Write("Done with first player");
         }
 
         private void Disconnect() {

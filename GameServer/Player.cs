@@ -10,6 +10,7 @@ namespace GameServer {
         public string username;
 
         public Vector3 position;
+	public Vector3 movePosition;
         private float moveSpeed = 1f / Constants.TICKS_PER_SEC;
 	private bool[] inputs;
 
@@ -50,8 +51,9 @@ namespace GameServer {
 
 
 	private void Move(Vector2 _inputDirection){
-	 //   position = new Vector3(position.X + _inputDirection.X, position.Y + _inputDirection.Y, 0);
-	    position = new Vector3(_inputDirection.X,_inputDirection.Y, 0);
+	    //position = new Vector3(position.X + _inputDirection.X, position.Y + _inputDirection.Y, 0);
+	    this.movePosition = new Vector3(_inputDirection.X,_inputDirection.Y, 0);
+	    this.position = new Vector3(_inputDirection.X + position.X, _inputDirection.Y + position.Y, 0);
 	    //Console.Write(position);
 	    ServerSend.PlayerPosition(this);
 	}
@@ -59,3 +61,4 @@ namespace GameServer {
 
     }
 }
+

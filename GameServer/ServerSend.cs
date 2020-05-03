@@ -58,6 +58,7 @@ namespace GameServer {
                 _packet.Write(_player.id);
                 _packet.Write(_player.username);
                 _packet.Write(_player.position);
+		Console.Write(_player.position);
                 SendTCPData(_toClient, _packet);
             }
         }
@@ -66,8 +67,7 @@ namespace GameServer {
 	public static void PlayerPosition(Player _player){
 	    using (Packet _packet = new Packet((int)ServerPackets.playerPosition)){
 		_packet.Write(_player.id);
-		_packet.Write(_player.position);
-//		Console.Write(_player.position);
+		_packet.Write(_player.movePosition);
 		if(_player.isAlive)
 		    SendUDPDataToAll(_packet);
 	    }
