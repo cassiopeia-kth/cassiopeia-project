@@ -141,7 +141,6 @@ public class MovePlayer : MonoBehaviour
 	else if (other.GetComponent<TrapInteraction>() != null && flying == false)
 	{
 	    arrowKeysEnabled = false;
-	    pm.isAlive = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
@@ -150,18 +149,22 @@ public class MovePlayer : MonoBehaviour
 	    else if(name == "HadesTrap"){
 		Debug.Log("Death by Hades!");
 		StartCoroutine(HadesDeath());
+		pm.isAlive = false;	    
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
 		StartCoroutine(FireTrap());
+		pm.isAlive = false;
 		Debug.Log("Death by Fire!");
 	    }
 	    else if(name == "SpikeTrap"){
+		pm.isAlive = false;
 		StartCoroutine(spikeTrap());
 		Debug.Log("Death by Spike!");
 	    }
 	    else if(name == "ZeusMainTrap"){
 		Debug.Log("Death by Zeus!");
+		pm.isAlive = false;
 		StartCoroutine(ZeusDeath());
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
@@ -219,23 +222,22 @@ public class MovePlayer : MonoBehaviour
 	// trap has been rotates by 90 degrees.
 	int direction = TrapScript.poseidonDirection;
 	Debug.Log("The direction of Poseidon is: " + direction);
-
 	// If the poseidon direction is up, move the player up.
 	if(direction == 0)
 	{
 	    //	    rb.MovePosition(rb.position + new Vector2(0,1));
-	    this.movePlayer(new Vector3(0,1,0));
-	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
+	    //	    this.movePlayer(new Vector3(0,1,0));
+	    ClientSend.PlayerMovement(new bool[]{true,false,false,false});
 	    ani.SetFloat("up", 1f);
-	    //yield return new WaitForSeconds(0.1f);
+	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("up", 0f);
 	}
 	// If the poseidon direction is right, move the player right.
 	else if(direction == 1)
 	{
 	    //	    rb.MovePosition(rb.position + new Vector2(-1,0));
-	    this.movePlayer(new Vector3(-1,0,0));
-	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
+	    //this.movePlayer(new Vector3(-1,0,0));
+	    ClientSend.PlayerMovement(new bool[]{false,false,true,false});
 	    ani.SetFloat("right", 1f);
 	    ani.SetFloat("FacingLeft", 0f);
 	    //yield return new WaitForSeconds(0.1f);
@@ -245,8 +247,8 @@ public class MovePlayer : MonoBehaviour
 	else if(direction == 2)
 	{
 	    //	    rb.MovePosition(rb.position + new Vector2(0,-1));
-	    this.movePlayer(new Vector3(0,-1,0));
-	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
+	    //this.movePlayer(new Vector3(0,-1,0));
+	    ClientSend.PlayerMovement(new bool[]{false,true,false,false});
 	    ani.SetFloat("down", 1f);
 	    //yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("down", 0f);
@@ -255,15 +257,15 @@ public class MovePlayer : MonoBehaviour
 	else
 	{
 	    //	    rb.MovePosition(rb.position + new Vector2(1,0));
-	    this.movePlayer(new Vector3(1,0,0));
-	    //ClientSend.PlayerMovement(new bool[]{true,false,false,false});
+	    //this.movePlayer(new Vector3(1,0,0));
+	    ClientSend.PlayerMovement(new bool[]{false,false,false,true});
 	    ani.SetFloat("left", 1f);
 	    ani.SetFloat("FacingLeft", 1f);
 	    //yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
 	}
 
-	yield return 0;
+	//yield return 0;
     }
     public Vector3 getPlayerPosition(){
 	return transform.position;
