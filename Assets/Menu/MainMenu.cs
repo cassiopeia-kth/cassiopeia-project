@@ -11,8 +11,11 @@ public class MainMenu : MonoBehaviour {
     
     public void PlayGame () 
     {
-	name = GameObject.Find("UsernameInput").GetComponent<TextMeshProUGUI>().text;
 	SceneManager.LoadScene("Level1_ch95");
+    }
+
+    public void setUsername(){
+	name = GameObject.Find("UsernameInput").GetComponent<TextMeshProUGUI>().text;
     }
    
 	public void QuitGame ()
