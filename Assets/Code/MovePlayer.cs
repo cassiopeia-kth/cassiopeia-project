@@ -318,7 +318,7 @@ public class MovePlayer : MonoBehaviour
 	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 	yield return 0;
     }
-
+}
     /*
 ﻿using System.Collections;
 using System.Collections.Generic;
