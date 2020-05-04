@@ -1,5 +1,62 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2395475868549796229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5035207236821859428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74886840aae04dc45820572f8d1cdeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  username: 
+  isAlive: 1
+--- !u!114 &4011820006571390364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5035207236821859428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75c133becea1f74783133dd18abd490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6917513419883633345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7145085483936530616}
+  m_Layer: 10
+  m_Name: Player Move Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7145085483936530616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917513419883633345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5035207236821859501}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5035207236821859861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,17 +122,60 @@ PrefabInstance:
     - target: {fileID: 7552352694575004034, guid: f53446ee2d27f5d3bb6390893b4d9374,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Vampire
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552352694575004037, guid: f53446ee2d27f5d3bb6390893b4d9374,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552352694575004037, guid: f53446ee2d27f5d3bb6390893b4d9374,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7552352694575004038, guid: f53446ee2d27f5d3bb6390893b4d9374,
         type: 3}
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7552352694575004038, guid: f53446ee2d27f5d3bb6390893b4d9374,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552352694575004038, guid: f53446ee2d27f5d3bb6390893b4d9374,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7552352694575004039, guid: f53446ee2d27f5d3bb6390893b4d9374,
         type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7552352694575004039, guid: f53446ee2d27f5d3bb6390893b4d9374,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552352694575004039, guid: f53446ee2d27f5d3bb6390893b4d9374,
+        type: 3}
+      propertyPath: whatStopsMovement.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7552352694575004039, guid: f53446ee2d27f5d3bb6390893b4d9374, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f53446ee2d27f5d3bb6390893b4d9374, type: 3}
+--- !u!1 &5035207236821859428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7552352694575004034, guid: f53446ee2d27f5d3bb6390893b4d9374,
+    type: 3}
+  m_PrefabInstance: {fileID: 5035207236821859861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5035207236821859501 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7552352694575004032, guid: f53446ee2d27f5d3bb6390893b4d9374,
+    type: 3}
+  m_PrefabInstance: {fileID: 5035207236821859861}
+  m_PrefabAsset: {fileID: 0}
