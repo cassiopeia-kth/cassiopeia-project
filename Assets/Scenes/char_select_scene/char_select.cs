@@ -42,6 +42,7 @@ public class char_select : MonoBehaviour
   {
         music.Play();
     UpdateCharacterSelectionUI();
+        
   }
 
   public void LeftArrow()
@@ -88,8 +89,24 @@ public class char_select : MonoBehaviour
 
     rightCharacterSplash.sprite = characterList[rightIndex].splash;
     rightCharacterName.text = characterList[rightIndex].characterName;
-    rightBackgroundColor.color = characterList[rightIndex].characterColor;    
-  }
+    rightBackgroundColor.color = characterList[rightIndex].characterColor;
+
+       
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            LeftArrow();
+
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            RightArrow();
+        }
+    }
+
 
 
   private void increaseIndexes() {
