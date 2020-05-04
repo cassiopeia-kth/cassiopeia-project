@@ -166,8 +166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536342107360672086}
-  - component: {fileID: 536342107360672087}
-  - component: {fileID: 5494571419773178487}
   m_Layer: 0
   m_Name: NetworkRoomPlayer
   m_TagString: Untagged
@@ -190,49 +188,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &536342107360672087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536342107360672105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
---- !u!114 &5494571419773178487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536342107360672105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60148dbc11bf244e9d6be718531e963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  lobbyUI: {fileID: 4840224169300833984}
-  playerNameTexts:
-  - {fileID: 4814736893418701514}
-  - {fileID: 319159887003629745}
-  - {fileID: 173429052063146268}
-  - {fileID: 6184847387731441580}
-  playerReadyTexts:
-  - {fileID: 5269654496915668819}
-  - {fileID: 2667470065098628649}
-  - {fileID: 1109206796896019275}
-  - {fileID: 2680868567209399530}
-  startGameButton: {fileID: 540273961728269921}
-  DisplayName: Loading...
-  IsReady: 0
 --- !u!1 &750114169346772136
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,7 +777,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494571419773178487}
+      - m_Target: {fileID: 0}
         m_MethodName: CmdReadyUp
         m_Mode: 1
         m_Arguments:
@@ -1414,7 +1369,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494571419773178487}
+      - m_Target: {fileID: 0}
         m_MethodName: CmdStartGame
         m_Mode: 1
         m_Arguments:
