@@ -110,9 +110,8 @@ public class GameManager : MonoBehaviour {
         }
         
         GameObject laid_trap = Instantiate(trap, pos, rot);
-        laid_trap.GetComponent<TrapInteraction>().killer = id;
-        string un = players[laid_trap.GetComponent<TrapInteraction>().killer].username;
-        Debug.Log("Trap laid by player: " + un);
+        laid_trap.GetComponent<TrapInteraction>().killer = players[id].username;
+        Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
     }
 
 

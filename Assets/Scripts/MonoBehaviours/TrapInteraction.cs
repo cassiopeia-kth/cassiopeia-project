@@ -15,7 +15,7 @@ public class TrapInteraction : MonoBehaviour
     public AudioSource trapSound;
     public CircleCollider2D trapCollider;
     private SpriteRenderer sr;
-    public int killer;
+    public string killer;
 
     // Bool for the timer elapsed until we implement a global message
     bool timerElapsed = false;
@@ -48,7 +48,7 @@ public class TrapInteraction : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
+    {  
         // A trap can only be interacted with once, so we disable its collider.
         trapCollider.enabled = false;
 
