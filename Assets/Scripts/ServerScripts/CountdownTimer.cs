@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CountdownTimer : MonoBehaviour{
+public class CountdownTimer : MonoBehaviour {
 
 
     public float currentTime = 0f;
     public float startTime = 10f;
-    public [SerializeField] TextMeshProUGUI countdownText;
     // Start is called before the first frame update
     public void StartTimer()
     {
+	
         currentTime = startTime;
     }
 
@@ -20,12 +20,13 @@ public class CountdownTimer : MonoBehaviour{
     public void UpdateTimer()
     {
         currentTime -= 1 * Time.deltaTime;
-        countdownText.text = currentTime.ToString("0");
+	GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
+        //countdownText.text = currentTime.ToString("0");
 
         if (currentTime <= 0)
         {
             currentTime = 0;
-            countdownText.text = "Time Up!";
+	    GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = "Time's up!";
         }
     }
 
