@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CountdownTimer : MonoBehaviour
-{
+public class CountdownTimer : MonoBehaviour{
 
 
     public float currentTime = 0f;
     public float startTime = 10f;
-
-    [SerializeField] TextMeshProUGUI countdownText;
+    public [SerializeField] TextMeshProUGUI countdownText;
     // Start is called before the first frame update
     public void StartTimer()
     {
@@ -22,7 +20,7 @@ public class CountdownTimer : MonoBehaviour
     public void UpdateTimer()
     {
         currentTime -= 1 * Time.deltaTime;
-        //countdownText.text = currentTime.ToString("0");
+        countdownText.text = currentTime.ToString("0");
 
         if (currentTime <= 0)
         {
