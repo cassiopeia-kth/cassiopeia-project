@@ -7,7 +7,7 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour {
 
-    public string name;
+    public static string name;
     
     public void PlayGame () 
     {
@@ -16,6 +16,9 @@ public class MainMenu : MonoBehaviour {
 
     public void setUsername(){
 	name = GameObject.Find("UsernameInput").GetComponent<TextMeshProUGUI>().text;
+	Debug.Log(name);
+	//GameObject test = GameObject.Find("UsernameInput");
+	//Debug.Log(test);
     }
    
 	public void QuitGame ()

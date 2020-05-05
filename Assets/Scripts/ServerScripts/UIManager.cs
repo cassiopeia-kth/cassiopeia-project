@@ -18,11 +18,22 @@ public class UIManager : MonoBehaviour {
             Debug.Log("Instance already exists, detroying object");
             Destroy(this);
         }
+	Debug.Log(MainMenu.name);
+	startMenu.SetActive(false);
+	usernameField.interactable = false;
+	usernameField.text = MainMenu.name;
+	StartCoroutine("connectToServer");
     }
 
     public void ConnectToServer(){
-        startMenu.SetActive(false);
-        usernameField.interactable = false;
-        Client.instance.ConnectToServer();
+
+	
+    }
+
+    IEnumerator connectToServer(){
+	while(Client.instance == null){
+	    yield return null;
+	}
+	Client.instance.ConnectToServer();
     }
 }
