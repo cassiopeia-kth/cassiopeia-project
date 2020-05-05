@@ -14,6 +14,7 @@ public class CharacterSelectObject
 
 public class char_select : MonoBehaviour
 {
+
   [Header ("Animator")]
   [SerializeField] private Animator ani;
   
@@ -25,7 +26,7 @@ public class char_select : MonoBehaviour
   [SerializeField] private AudioSource selected;
   [SerializeField] private AudioSource music;
 
-    [Header ("UI References")]
+  [Header ("UI References")]
   [SerializeField] private TextMeshProUGUI middleCharacterName;
   [SerializeField] private TextMeshProUGUI leftCharacterName;
   [SerializeField] private Image leftCharacterSplash;
@@ -33,10 +34,15 @@ public class char_select : MonoBehaviour
   [SerializeField] private TextMeshProUGUI rightCharacterName;
   [SerializeField] private Image rightCharacterSplash;
   [SerializeField] private Image rightBackgroundColor;
+
+  [Header ("Self canvas")]
+  [SerializeField] private GameObject charSelectCanvas;
   
   private int index;
   private int leftIndex;
   private int rightIndex;
+
+  private GameManager gm;
 
   private void Start() 
   {
@@ -129,6 +135,25 @@ public class char_select : MonoBehaviour
   {
     selected.Play();
     Debug.Log("Pressed");
+    gm = FindObjectOfType<GameManager>();
+    
+    switch (index)
+    { case 0:
+        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Monster/monster", typeof(GameObject));
+        break;
+      case 1:
+        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Executioner/executioner", typeof(GameObject));
+        break;
+      case 2:
+        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/knight", typeof(GameObject));
+        break;
+      case 3:
+        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/bishop", typeof(GameObject));
+        break;
+      default:
+        break;
+    }
+    charSelectCanvas.SetActive(false);
   }
     IEnumerator knight() { 
         
