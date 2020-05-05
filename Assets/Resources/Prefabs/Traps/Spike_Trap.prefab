@@ -137,6 +137,7 @@ MonoBehaviour:
   poseidonDirectionReady: 0
   poseidonDirection: 0
   trapSound: {fileID: 441054961}
+  trapCollider: {fileID: 1272495066106214280}
 --- !u!82 &441054961
 AudioSource:
   m_ObjectHideFlags: 0

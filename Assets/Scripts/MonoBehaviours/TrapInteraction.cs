@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 public class TrapInteraction : MonoBehaviour 
 {
@@ -12,25 +13,50 @@ public class TrapInteraction : MonoBehaviour
     public int poseidonDirection;
     //audio source
     public AudioSource trapSound;
+    public CircleCollider2D trapCollider;
+    private SpriteRenderer sr;
+    public int killer;
+
+    // Bool for the timer elapsed until we implement a global message
+    bool timerElapsed = false;
+    bool roundRestart = false;
 
     void Start()
     {
         // When a trap is initialised, it is set to z positon -100, so that it is invisible.
         anim = GetComponent<Animator>();
-        pos = gameObject.transform.position;
-        pos.z = -100;
-        gameObject.transform.position = pos;
+        //pos = gameObject.transform.position;
+        //pos.z = -100;
+        //gameObject.transform.position = pos;
+        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr.enabled = false;
+        trapCollider.enabled = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if(timerElapsed)
+        {
+            timerElapsed = false;
+            trapCollider.enabled = true;
+        }
+        if(roundRestart)
+        {
+            roundRestart = false;
+            trapCollider.enabled = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         // A trap can only be interacted with once, so we disable its collider.
-        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        trapCollider.enabled = false;
 
         // Make the trap visible by changin its z value.
         pos = gameObject.transform.position;
-        pos.z = 0;
-        gameObject.transform.position = pos;
+        //pos.z = 0;
+        //gameObject.transform.position = pos;
+        sr.enabled = true;
 
         // Start a coroutine which deals with each trap animation.
         StartCoroutine(MyCoroutine(pos));
@@ -71,7 +97,8 @@ public class TrapInteraction : MonoBehaviour
         if(name == "PoseidonTrap" && spent == false)
         {
             // Make the trap invisible, so we can rotate it.
-            pos.z = -100;
+            //pos.z = -100;
+            sr.enabled = false;
             // Indicate that we have used the trap up, so it cannot be used twice.
             spent = true;
             // Generate a random number between 0 and 3, for how much we will rotate the trap by.
@@ -86,11 +113,13 @@ public class TrapInteraction : MonoBehaviour
         }
 
         // Make the trap visible again (this only really relates to the Poseidon trap)
-        pos.z = 0;
-        
+        //pos.z = 0;
+        sr.enabled = true;
+
         // Wait two seconds before deactivating the trap.
         yield return new WaitForSeconds(2f);
-        pos.z = -100;
+        //pos.z = -100;
+        sr.enabled = false;
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
        
