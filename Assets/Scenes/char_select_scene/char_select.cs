@@ -83,7 +83,7 @@ public class char_select : MonoBehaviour
             StartCoroutine(knight());
         }
 
-        leftCharacterSplash.sprite = characterList[leftIndex].splash;
+    leftCharacterSplash.sprite = characterList[leftIndex].splash;
     leftCharacterName.text = characterList[leftIndex].characterName;
     leftBackgroundColor.color = characterList[leftIndex].characterColor;
 
