@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public Canvas inventoryCanvas;
     public MovePlayer mp;
     public MovePlayerOnline mpo;
+    public CountdownTimer countdownTimer;
     
     private void Awake() {
         if (instance == null) {
@@ -77,6 +78,8 @@ public class GameManager : MonoBehaviour {
 //	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
 //        inventoryCanvas.enabled = true;
+        countdownTimer = GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>();
+        countdownTimer.StartTimer();
     }
 
 
