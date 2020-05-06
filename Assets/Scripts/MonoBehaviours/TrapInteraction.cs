@@ -18,7 +18,7 @@ public class TrapInteraction : MonoBehaviour
     public string killer;
 
     // Bool for the timer elapsed until we implement a global message
-    bool timerElapsed = false;
+    bool timerElapsed = true;
     bool roundRestart = false;
 
     void Start()
@@ -49,17 +49,20 @@ public class TrapInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {  
-        // A trap can only be interacted with once, so we disable its collider.
-        trapCollider.enabled = false;
+        if(collision.gameObject.tag == "Player")
+        {
+            // A trap can only be interacted with once, so we disable its collider.
+            trapCollider.enabled = false;
 
-        // Make the trap visible by changin its z value.
-        pos = gameObject.transform.position;
-        //pos.z = 0;
-        //gameObject.transform.position = pos;
-        sr.enabled = true;
+            // Make the trap visible by changin its z value.
+            pos = gameObject.transform.position;
+            //pos.z = 0;
+            //gameObject.transform.position = pos;
+            sr.enabled = true;
 
-        // Start a coroutine which deals with each trap animation.
-        StartCoroutine(MyCoroutine(pos));
+            // Start a coroutine which deals with each trap animation.
+            StartCoroutine(MyCoroutine(pos));
+        }
     }
 
     IEnumerator MyCoroutine(Vector3 pos)
@@ -87,6 +90,55 @@ public class TrapInteraction : MonoBehaviour
             //delay for sync sound with thunder
             //yield return new WaitForSeconds(2f);
         }
+
+        if (name == "FireTrap" && spent == false)
+        {
+            spent = true;
+            float x = pos.x;
+            float y = pos.y;
+            float z = pos.z;
+
+            int num = UnityEngine.Random.Range(0, 3);
+            int num2 = UnityEngine.Random.Range(4, 7);
+
+            GameObject wildFire = (GameObject)Resources.Load("Fire/WildFire", typeof(GameObject));
+
+            if (num == 0)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x - 1, y + 1, z), Quaternion.identity);
+            }
+            else if (num == 1)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x, y + 1, z), Quaternion.identity);
+            }
+            else if (num == 2)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x + 1, y + 1, z), Quaternion.identity);
+            }
+            else if (num == 3)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x - 1, y, z), Quaternion.identity);
+            }
+
+            if (num2 == 4)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x + 1, y, z), Quaternion.identity);
+            }
+            else if (num2 == 5)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x - 1, y - 1, z), Quaternion.identity);
+            }
+            else if (num2 == 6)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x, y - 1, z), Quaternion.identity);
+            }
+            else if (num2 == 7)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x + 1, y - 1, z), Quaternion.identity);
+            }
+
+        }
+
 
         // Change the animation state, so that the trap animation plays.
         anim.SetInteger(animationState, 1);

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trap
   - Enemy
+  - TrapCollision
   layers:
   - Default
   - TransparentFX

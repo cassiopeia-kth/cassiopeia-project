@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 668454901}
   m_Layer: 0
   m_Name: DetectOtherTraps
-  m_TagString: Trap
+  m_TagString: TrapCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
