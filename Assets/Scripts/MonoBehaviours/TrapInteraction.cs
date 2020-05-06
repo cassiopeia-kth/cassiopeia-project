@@ -106,35 +106,43 @@ public class TrapInteraction : MonoBehaviour
             if (num == 0)
             {
                 GameObject actualFire = Instantiate(wildFire, new Vector3(x - 1, y + 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x - 2, y + 1, z), Quaternion.identity);
             }
             else if (num == 1)
             {
                 GameObject actualFire = Instantiate(wildFire, new Vector3(x, y + 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x, y + 2, z), Quaternion.identity);
             }
             else if (num == 2)
             {
                 GameObject actualFire = Instantiate(wildFire, new Vector3(x + 1, y + 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x + 1, y + 2, z), Quaternion.identity);
             }
             else if (num == 3)
             {
                 GameObject actualFire = Instantiate(wildFire, new Vector3(x - 1, y, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x - 2, y, z), Quaternion.identity);
             }
 
             if (num2 == 4)
             {
                 GameObject actualFire2 = Instantiate(wildFire, new Vector3(x + 1, y, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x + 2, y, z), Quaternion.identity);
             }
             else if (num2 == 5)
             {
                 GameObject actualFire2 = Instantiate(wildFire, new Vector3(x - 1, y - 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x - 1, y -2, z), Quaternion.identity);
             }
             else if (num2 == 6)
             {
                 GameObject actualFire2 = Instantiate(wildFire, new Vector3(x, y - 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x, y -2, z), Quaternion.identity);
             }
             else if (num2 == 7)
             {
                 GameObject actualFire2 = Instantiate(wildFire, new Vector3(x + 1, y - 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x + 2, y - 1, z), Quaternion.identity);
             }
 
         }
