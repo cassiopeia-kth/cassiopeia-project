@@ -9,7 +9,8 @@ namespace GameServer {
         welcome = 1,
         spawnPlayer,
         playerPosition,
-        playerDisconnected
+        playerDisconnected,
+        time
     }
 
     /// <summary>Sent from client to server.</summary>

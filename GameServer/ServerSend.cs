@@ -80,6 +80,13 @@ namespace GameServer {
                 SendTCPDataToAll(_packet);
             }
         }
+
+        public static void TimerInfo(CountdownTimer _currentTime){
+            using (Packet _packet = new Packet((int)ClientPackets.timer)) {
+                _packet.Write(_currentTime.currentTime);
+                SendUDPDataToAll(_packet);
+            }
+        }
         #endregion
     }
 }

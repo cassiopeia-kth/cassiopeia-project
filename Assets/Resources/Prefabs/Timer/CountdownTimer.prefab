@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3543262319641551012}
   - component: {fileID: 3543262319641551015}
   - component: {fileID: 3543262319641551014}
-  - component: {fileID: 3543262319641551009}
+  - component: {fileID: 8726632991633682134}
   m_Layer: 5
   m_Name: CountdownTimer
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3543262319641551009
+--- !u!114 &8726632991633682134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,12 +109,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3543262319641551011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd4f9e09effbadb4a909d6ad30d80cc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2aec866a344881f468a2f4e47db8ff35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentTime: 0
   startTime: 10
-  countdownText: {fileID: 3543262321475451001}
+  isZero: 0
 --- !u!1 &3543262321475451003
 GameObject:
   m_ObjectHideFlags: 0

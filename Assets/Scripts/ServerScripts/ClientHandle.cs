@@ -44,5 +44,11 @@ public class ClientHandle : MonoBehaviour {
 	
 	
     }
+
+    public static void ClientTimer(Packet _packet){
+        int currentTime = _packet.ReadInt();
+        CountdownTimer.instance.currentTime = currentTime;
+        CountdownTimer.instance.UpdateTimer();
+    }
     
 }
