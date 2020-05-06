@@ -40,9 +40,25 @@ public class ClientHandle : MonoBehaviour {
 	    GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
 	
 	Vector3 actual_position = GameManager.players[_id].transform.position;
-//	GameManager.players[_id].transform.position = _position;
+//	GameManager.players[_id].transform.position = _position;	
+    }
+
+    public static void readyFlag(Packet _packet){
+	//TODO make start button active
+	int _id = _packet.ReadInt();
+	bool isReady = _packet.ReadBool();
+	bool everyoneReady = _packet.ReadBool();
+	bool startPressed = _packet.ReadBool();
+	GameManager.players[_id].isReady = isReady;
+	Debug.Log(isReady);
+	if(everyoneReady == true){
+	    Lobby.instance.displayStartButton();
+	}
+	if(startPressed == true){
+	    Lobby.instance.startGame();
+	}
 	
-	
+	Lobby.instance.displayReadyorNot(_id);
     }
     
 }

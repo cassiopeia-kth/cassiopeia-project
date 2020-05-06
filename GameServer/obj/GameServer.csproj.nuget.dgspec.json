@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/GameServer.csproj": {}
+    "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj": {}
   },
   "projects": {
-    "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/GameServer.csproj": {
+    "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/GameServer.csproj",
+        "projectUniqueName": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj",
         "projectName": "GameServer",
-        "projectPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/GameServer.csproj",
+        "projectPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj",
         "packagesPath": "/home/calin/.nuget/packages/",
-        "outputPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/",
+        "outputPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/calin/.nuget/NuGet/NuGet.Config"

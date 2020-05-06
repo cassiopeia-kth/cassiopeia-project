@@ -147,6 +147,8 @@ MonoBehaviour:
   id: 0
   username: 
   isAlive: 1
+  isReady: 0
+  checkChange: 0
 --- !u!114 &7608610829187407449
 MonoBehaviour:
   m_ObjectHideFlags: 0
