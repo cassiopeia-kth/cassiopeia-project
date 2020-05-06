@@ -72,6 +72,7 @@
     <Compile Include="Assets\Code\NewMovementTest.cs" />
     <Compile Include="Assets\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scenes\char_select_scene\char_select.cs" />
+    <Compile Include="Assets\Scripts\MonoBehaviours\DetectOtherTraps.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviours\Pickup.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviours\TrapInteraction.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviours\ZeusDiagonal.cs" />
