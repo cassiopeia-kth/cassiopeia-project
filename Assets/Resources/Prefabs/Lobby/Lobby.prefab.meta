@@ -1,6 +1,16 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/Resources/Prefabs/Lobby/Lobby.prefab.meta
 guid: 7bb74e7f414f2c7d4baccf395411bbaf
 PrefabImporter:
+=======
+guid: 5b3a0242a3db556f6873f48513584f1b
+DefaultImporter:
+>>>>>>> origin/CC-game-flow:Assets/Scenes/Level1_calin.unity.meta
+=======
+guid: 7bb74e7f414f2c7d4baccf395411bbaf
+PrefabImporter:
+>>>>>>> origin/CC-game-flow
   externalObjects: {}
   userData: 
   assetBundleName: 
