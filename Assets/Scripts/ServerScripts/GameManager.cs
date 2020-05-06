@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject localPlayerPrefab;
     public GameObject inventoryPrefab;
-    public GameObject playerPrefab;
+     public GameObject playerPrefab;
     public Canvas inventoryCanvas;
     public MovePlayer mp;
     public MovePlayerOnline mpo;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void SpawnPlayer(int _id, string _username, Vector3 _position) {
+    public void SpawnPlayer(int _id, string _username, Vector3 _position, string _charType) {
         GameObject _player;
         if (_id == Client.instance.myId) {
 	    _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
@@ -42,7 +42,10 @@ public class GameManager : MonoBehaviour {
         else {
 	    
 	    Debug.Log(_position);
-	    _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
+        //here call the prefab with name
+        
+
+	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mpo = _player.AddComponent<MovePlayerOnline>();
 	    mpo.rb = FindObjectOfType<Rigidbody2D>();
 	    mpo.ani = FindObjectOfType<Animator>();	    

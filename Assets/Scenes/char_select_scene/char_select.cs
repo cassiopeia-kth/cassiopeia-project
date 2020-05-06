@@ -43,7 +43,7 @@ public class char_select : MonoBehaviour
   private int rightIndex;
 
   private GameManager gm;
-
+ 
   private void Start() 
   {
         music.Play();
@@ -136,20 +136,31 @@ public class char_select : MonoBehaviour
     selected.Play();
     Debug.Log("Pressed");
     gm = FindObjectOfType<GameManager>();
-    
+
     switch (index)
     { case 0:
-        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Monster/monster", typeof(GameObject));
+        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/monster", typeof(GameObject));
+        Client.instance.charType = gm.localPlayerPrefab.name;
+        Client.instance.myId = Random.Range(1,10000);
         break;
+
       case 1:
-        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Executioner/executioner", typeof(GameObject));
+        gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/executioner", typeof(GameObject));
+        Client.instance.charType = gm.localPlayerPrefab.name;
+        Client.instance.myId = Random.Range(1,10000);
         break;
       case 2:
         gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/knight", typeof(GameObject));
+        Client.instance.charType = gm.localPlayerPrefab.name;
+        Client.instance.myId = Random.Range(1,10000);
+
         break;
       case 3:
         gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/bishop", typeof(GameObject));
+        Client.instance.charType = gm.localPlayerPrefab.name;
+        Client.instance.myId = Random.Range(1,10000);
         break;
+
       default:
         break;
     }

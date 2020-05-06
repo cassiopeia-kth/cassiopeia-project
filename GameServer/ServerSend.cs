@@ -53,9 +53,10 @@ namespace GameServer {
             }
         }
 
-        public static void SpawnPlayer(int _toClient, Player _player) {
+        public static void SpawnPlayer(int _toClient, Player _player, string _charType) {
             using (Packet _packet = new Packet((int)ServerPackets.spawnPlayer)) {
                 _packet.Write(_player.id);
+                _packet.Write(_charType);
                 _packet.Write(_player.username);
                 _packet.Write(_player.position);
 		Console.Write(_player.position);

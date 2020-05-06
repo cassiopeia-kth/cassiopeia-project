@@ -19,6 +19,7 @@ public class ClientSend : MonoBehaviour {
     public static void WelcomeReceived() {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived)) {
             _packet.Write(Client.instance.myId);
+            _packet.Write(Client.instance.charType);
             _packet.Write(UIManager.instance.usernameField.text);
             SendTCPData(_packet);
         }
