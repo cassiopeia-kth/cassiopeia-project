@@ -8,6 +8,7 @@ namespace GameServer {
     class Player {
         public int id;
         public string username;
+        public string charType;
 
         public Vector3 position;
 	public Vector3 movePosition;
@@ -16,9 +17,10 @@ namespace GameServer {
 
 	public bool isAlive;
 
-        public Player(int _id, string _username, Vector3 _spawnPosition) {
+        public Player(int _id, string _username, string _charType, Vector3 _spawnPosition) {
             id = _id;
             username = _username;
+            charType = _charType;
             position = _spawnPosition;
 	    inputs = new bool[4];
         }

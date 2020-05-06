@@ -20,8 +20,8 @@ public class ClientHandle : MonoBehaviour {
         string _charType = _packet.ReadString();
         string _username = _packet.ReadString();
         Vector3 _position = _packet.ReadVector3();
-        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType);
-	Debug.Log("did try to spawn the player");
+        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType); //Spawn the player locally in game manager instance
+	    Debug.Log("did try to spawn the player");
     }
     
     public static void PlayerDisconnected(Packet _packet) {

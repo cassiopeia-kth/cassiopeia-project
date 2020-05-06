@@ -12,7 +12,7 @@ public class Client : MonoBehaviour {
 
     public string ip = "83.227.73.57";
     public int port = 25850;  
-    public string charType = "";  
+    public string charType = "";  // For sending chartype information
     public int myId = 0;
     public TCP tcp;
     public UDP udp;

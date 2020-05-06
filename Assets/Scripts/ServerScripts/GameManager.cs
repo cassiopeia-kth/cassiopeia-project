@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject localPlayerPrefab;
     public GameObject inventoryPrefab;
-     public GameObject playerPrefab;
+    public GameObject playerPrefab;
     public Canvas inventoryCanvas;
     public MovePlayer mp;
     public MovePlayerOnline mpo;
@@ -29,30 +29,27 @@ public class GameManager : MonoBehaviour {
     public void SpawnPlayer(int _id, string _username, Vector3 _position, string _charType) {
         GameObject _player;
         if (_id == Client.instance.myId) {
-	    _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
-	    mp = _player.AddComponent<MovePlayer>();
-	    mp.rb = FindObjectOfType<Rigidbody2D>();
-	    mp.ani = FindObjectOfType<Animator>();	    
-	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
-	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
-	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
-	    inventoryCanvas.enabled = true;
-
+            _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
+            mp = _player.AddComponent<MovePlayer>();
+            mp.rb = FindObjectOfType<Rigidbody2D>();
+            mp.ani = FindObjectOfType<Animator>();	    
+            GameObject inventoryHUD = Instantiate(inventoryPrefab);
+            mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+            inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+            inventoryCanvas.enabled = true;
         }
         else {
-	    
-	    Debug.Log(_position);
-        //here call the prefab with name
-        
-
-	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
-	    mpo = _player.AddComponent<MovePlayerOnline>();
-	    mpo.rb = FindObjectOfType<Rigidbody2D>();
-	    mpo.ani = FindObjectOfType<Animator>();	    
-	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
-	    mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
-	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
-	    inventoryHUD.SetActive(false);
+            Debug.Log(_position);
+            //here call the prefab with name
+            playerPrefab = (GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject));
+            _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
+            mpo = _player.AddComponent<MovePlayerOnline>();
+            mpo.rb = FindObjectOfType<Rigidbody2D>();
+            mpo.ani = FindObjectOfType<Animator>();	    
+            GameObject inventoryHUD = Instantiate(inventoryPrefab);
+            mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+            inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+            inventoryHUD.SetActive(false);
 	}
 
         _player.GetComponent<PlayerManager>().id = _id;

@@ -137,6 +137,7 @@ public class char_select : MonoBehaviour
     Debug.Log("Pressed");
     gm = FindObjectOfType<GameManager>();
 
+    // set the client with charType and a random ID
     switch (index)
     { case 0:
         gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/monster", typeof(GameObject));
