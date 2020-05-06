@@ -33,9 +33,10 @@ public class CountdownTimer : MonoBehaviour {
     // Update is called once per frame
     public void UpdateTimer()
     {
-        //currentTime -= 1 * Time.deltaTime;
-	GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
-        //countdownText.text = currentTime.ToString("0");
+
+     //currentTime -= 1 * Time.deltaTime;
+	 GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
+     //countdownText.text = currentTime.ToString("0");
 
         if (currentTime <= 0)
         {

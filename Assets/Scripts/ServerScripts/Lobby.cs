@@ -18,8 +18,8 @@ public class Lobby : MonoBehaviour {
         }
 	
 	Debug.Log(MainMenu.name);
-	username = MainMenu.name;
-//	username = "test";
+	//username = MainMenu.name;
+	username = "test";
 	StartCoroutine("connectToServer");
     }
 
@@ -28,6 +28,13 @@ public class Lobby : MonoBehaviour {
     public void startGame(){
 	GameManager.instance.inventoryCanvas.enabled = true;
 	GameObject.Find("Lobby").SetActive(false);
+        //CountdownTimer.instance.StartTimer();
+    }
+
+    public void startGameTimer()
+    {
+        GameObject.Find("Lobby").SetActive(false);
+        CountdownTimer.instance.StartTimer();
     }
 
     IEnumerator connectToServer(){

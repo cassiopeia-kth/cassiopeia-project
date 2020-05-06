@@ -1,8 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class ServerCountdownTimer
 {
@@ -12,7 +9,7 @@ public class ServerCountdownTimer
     public float startTime = 10f;
     public bool isZero = false;
 
-    private void Awake()
+    /*private void Awake()
     {
         if (instance == null)
         {
@@ -22,7 +19,7 @@ public class ServerCountdownTimer
         {
             Destroy(this);
         }
-    }
+    }*/
     // Start is called before the first frame update
     public void StartTimer()
     {
@@ -34,7 +31,7 @@ public class ServerCountdownTimer
     // Update is called once per frame
     public void UpdateTimer()
     {
-        currentTime -= 1 * Time.deltaTime;
+        currentTime -= 1; //* Time.deltaTime;
         //GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
         //countdownText.text = currentTime.ToString("0");
 
