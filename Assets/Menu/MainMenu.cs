@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour {
     
     public void PlayGame () 
     {
-	SceneManager.LoadScene("Level1_ch95");
+	SceneManager.LoadScene("Level1_calin");
     }
 
     public void setUsername(){
