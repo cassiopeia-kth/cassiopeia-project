@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour {
     public Canvas inventoryCanvas;
     public MovePlayer mp;
     public MovePlayerOnline mpo;
+    public Canvas inventoryCanvasOnline;
+    public string[] nameList;
     
     private void Awake() {
         if (instance == null) {
@@ -24,6 +27,35 @@ public class GameManager : MonoBehaviour {
             Debug.Log("Instance already exists, destroying object!");
             Destroy(this);
         }
+	nameList = new string[4];
+    }
+
+    public void fillUsername(){
+	if(nameList[0] != null){
+	    GameObject.Find("Username_Player_1").GetComponent<TextMeshProUGUI>().text = nameList[0];
+	    GameObject.Find("Text_Ready_Player_1").GetComponent<TextMeshProUGUI>().text = "Not Ready";
+	    GameObject.Find("Text_Ready_Player_1").GetComponent<TextMeshProUGUI>().color = new Color32(255,0,0,255);
+	    GameObject.Find("Text_Name_Player_1").GetComponent<TextMeshProUGUI>().text = "Connected";
+	}
+	if(nameList[1] != null){
+	    GameObject.Find("Username_Player_2").GetComponent<TextMeshProUGUI>().text = nameList[1];
+	    GameObject.Find("Text_Ready_Player_2").GetComponent<TextMeshProUGUI>().text = "Not Ready";
+	    GameObject.Find("Text_Ready_Player_2").GetComponent<TextMeshProUGUI>().color = new Color32(255,0,0,255);
+	    GameObject.Find("Text_Name_Player_2").GetComponent<TextMeshProUGUI>().text = "Connected";
+	}
+	if(nameList[2] != null){
+	    GameObject.Find("Username_Player_3").GetComponent<TextMeshProUGUI>().text = nameList[2];
+	    GameObject.Find("Text_Ready_Player_3").GetComponent<TextMeshProUGUI>().text = "Not Ready";
+	    GameObject.Find("Text_Ready_Player_3").GetComponent<TextMeshProUGUI>().color = new Color32(255,0,0,255);
+	    GameObject.Find("Text_Name_Player_3").GetComponent<TextMeshProUGUI>().text = "Connected";
+	}
+	if(nameList[3] != null){
+	    GameObject.Find("Username_Player_4").GetComponent<TextMeshProUGUI>().text = nameList[3];
+	    GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().text = "Not Ready";
+	    GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().color = new Color32(255,0,0,255);
+	    GameObject.Find("Text_Name_Player_4").GetComponent<TextMeshProUGUI>().text = "Connected";
+	}
+	
     }
 
     public void SpawnPlayer(int _id, string _username, Vector3 _position) {
@@ -36,8 +68,8 @@ public class GameManager : MonoBehaviour {
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
-	    inventoryCanvas.enabled = true;
-
+	    inventoryCanvas.enabled = false;
+	    
         }
         else {
 	    
@@ -48,13 +80,20 @@ public class GameManager : MonoBehaviour {
 	    mpo.ani = FindObjectOfType<Animator>();	    
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
-	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    inventoryCanvasOnline = inventoryHUD.transform.GetComponent<Canvas>();
 	    inventoryHUD.SetActive(false);
 	}
 
+	for(int i = 0; i < 4; i++){
+	    if(nameList[i] == null){
+		nameList[i] = _username;
+		break;
+	    }
+	}
         _player.GetComponent<PlayerManager>().id = _id;
         _player.GetComponent<PlayerManager>().username = _username;
         players.Add(_id, _player.GetComponent<PlayerManager>());
+	fillUsername();
     }
 
     public float restartDelay = 2f;

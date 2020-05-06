@@ -1,14 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
+public class Lobby : MonoBehaviour {
 
-    public static UIManager instance;
-
-    public GameObject startMenu;
-    public InputField usernameField;
+    public static Lobby instance;
+    public string username;
 
     private void Awake(){
         if (instance == null){
@@ -18,16 +16,18 @@ public class UIManager : MonoBehaviour {
             Debug.Log("Instance already exists, detroying object");
             Destroy(this);
         }
+	
 	Debug.Log(MainMenu.name);
-	startMenu.SetActive(false);
-	usernameField.interactable = false;
-	usernameField.text = MainMenu.name;
+	username = MainMenu.name;
+//	username = "test";
 	StartCoroutine("connectToServer");
     }
 
-    public void ConnectToServer(){
+    
 
-	
+    public void startGame(){
+	GameManager.instance.inventoryCanvas.enabled = true;
+	GameObject.Find("Lobby").SetActive(false);
     }
 
     IEnumerator connectToServer(){
