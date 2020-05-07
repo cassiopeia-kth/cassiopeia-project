@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Philipe Granhall\\Documents\\Programming\\II1305\\cassiopeia-project\\GameServer\\GameServer.csproj": {}
+    "/mnt/c/Users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/GameServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Philipe Granhall\\Documents\\Programming\\II1305\\cassiopeia-project\\GameServer\\GameServer.csproj": {
+    "/mnt/c/Users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/GameServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Philipe Granhall\\Documents\\Programming\\II1305\\cassiopeia-project\\GameServer\\GameServer.csproj",
+        "projectUniqueName": "/mnt/c/Users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/GameServer.csproj",
         "projectName": "GameServer",
-        "projectPath": "C:\\Users\\Philipe Granhall\\Documents\\Programming\\II1305\\cassiopeia-project\\GameServer\\GameServer.csproj",
-        "packagesPath": "C:\\Users\\Philipe Granhall\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Philipe Granhall\\Documents\\Programming\\II1305\\cassiopeia-project\\GameServer\\obj\\",
+        "projectPath": "/mnt/c/Users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/GameServer.csproj",
+        "packagesPath": "/home/minn/.nuget/packages/",
+        "outputPath": "/mnt/c/Users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Philipe Granhall\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/minn/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -62,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
         }
       }
     }
