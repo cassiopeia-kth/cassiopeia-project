@@ -86,8 +86,8 @@ namespace GameServer {
             using (Packet _packet = new Packet((int)ServerPackets.timer)) {
                 _packet.Write(_currentTime.currentTime);
                 _packet.Write(_currentTime.isZero);
-                SendUDPDataToAll(_packet);
-                Console.Write("sent timer packet");
+                SendTCPDataToAll(_packet);
+                Console.WriteLine("sent timer packet");
             }
         }
         
@@ -97,6 +97,7 @@ namespace GameServer {
 		_packet.Write(_player.ready);
 		_packet.Write(_player.everyoneReady);
 		_packet.Write(_player.startPressed);
+//		Console.Write("ready flag sent");
 		SendTCPDataToAll(_packet);
 	    }
 	}

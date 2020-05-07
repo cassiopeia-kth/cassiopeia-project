@@ -19,6 +19,8 @@ public enum ServerPackets {
 public enum ClientPackets {
     welcomeReceived = 1,
     playerMovement,
+    timer,
+    isZero,
     readyFlag
 }
 

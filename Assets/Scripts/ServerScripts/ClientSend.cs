@@ -49,6 +49,13 @@ public class ClientSend : MonoBehaviour {
 	}
 	
     }
+
+    public static void sendStartTimer(){
+	using (Packet _packet = new Packet((int)ClientPackets.timer)) {
+	    _packet.Write(GameManager.players[Client.instance.myId].startPressed);
+	SendTCPData(_packet);
+	}
+    }
     
     #endregion
     

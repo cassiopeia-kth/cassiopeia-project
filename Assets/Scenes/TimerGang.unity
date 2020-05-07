@@ -929,6 +929,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   username: 
+  notReadyButton: {fileID: 0}
+  readyButton: {fileID: 0}
+  startButton: {fileID: 0}
 --- !u!223 &925589227 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 5697414869214795211, guid: 56489c99f54f5fecfa95b9414bb787f8,
@@ -1747,7 +1750,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTime: 0
   startTime: 10
-  isZero: 0
 --- !u!1001 &1476940957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2369,7 +2371,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 720162820}
-        m_MethodName: activateInventoryCanvas
+        m_MethodName: startGameTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

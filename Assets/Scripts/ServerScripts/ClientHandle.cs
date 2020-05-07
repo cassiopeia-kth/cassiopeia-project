@@ -69,6 +69,7 @@ public class ClientHandle : MonoBehaviour {
     public static void ClientTimer(Packet _packet){
         float currentTime = _packet.ReadFloat();
         bool isZero = _packet.ReadBool();
+	//Debug.Log("got here server timer");
         Debug.Log($"{currentTime} is the current time");
         if (isZero)
         {

@@ -12,13 +12,15 @@ namespace GameServer {
         playerDisconnected,
         timer,
         isZero,
-        readyFlag
+        readyFlag,
     }
 
     /// <summary>Sent from client to server.</summary>
     public enum ClientPackets {
         welcomeReceived = 1,
         playerMovement,
+	timer,
+        isZero,
 	readyFlag
     }
 

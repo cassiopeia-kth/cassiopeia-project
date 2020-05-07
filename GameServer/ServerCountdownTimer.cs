@@ -13,17 +13,13 @@ namespace GameServer
         public float startTime = 10f;
         public bool isZero = false;
 
-        /*private void Awake()
+        public void Awake()
         {
             if (instance == null)
             {
                 instance = this;
             }
-            else if (instance != this)
-            {
-                Destroy(this);
-            }
-        }*/
+        }
         // Start is called before the first frame update
         public void StartTimer()
         {
@@ -47,7 +43,7 @@ namespace GameServer
             }
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
             UpdateTimer();
             ServerSend.TimerInfo(instance);

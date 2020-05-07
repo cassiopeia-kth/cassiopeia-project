@@ -24,7 +24,6 @@ public class CountdownTimer : MonoBehaviour {
     // Start is called before the first frame update
     public void StartTimer()
     {
-
         currentTime = startTime;
     }
 

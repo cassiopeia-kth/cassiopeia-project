@@ -46,6 +46,10 @@ namespace GameServer {
 		Console.Write(e);
 	    }
 	}
+
+	public static void ReceiveStartTimer(int _fromClient, Packet _packet){
+	    bool startPressed = _packet.ReadBool();
+	}
 	
     }
 

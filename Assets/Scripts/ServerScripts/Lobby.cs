@@ -23,10 +23,10 @@ public class Lobby : MonoBehaviour {
 	Debug.Log(MainMenu.name);
 	//username = MainMenu.name;
 	username = "test";
-	notReadyButton = GameObject.Find("NotReadyButton");
+//	notReadyButton = GameObject.Find("NotReadyButton");
 	readyButton = GameObject.Find("ReadyButton");
 	startButton = GameObject.Find("StartGameButton");
-	GameObject.Find("NotReadyButton").SetActive(false);
+//	GameObject.Find("NotReadyButton").SetActive(false);
 	startButton.SetActive(false);
 	StartCoroutine("connectToServer");
     }
