@@ -9,6 +9,7 @@ namespace GameServer {
     class Player{
         public int id;
         public string username;
+		public string charType;
 
         public Vector3 position;
 	public Vector3 movePosition;
@@ -20,9 +21,10 @@ namespace GameServer {
 	public bool isAlive;
 	public bool startPressed = false;
 
-        public Player(int _id, string _username) {
+        public Player(int _id, string _username, string _charType) {
             id = _id;
             username = _username;
+			charType = _charType;
 	    Console.Write(username);
 	    inputs = new bool[4];
 	    choosePosition();
