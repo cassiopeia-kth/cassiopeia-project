@@ -9,15 +9,13 @@ namespace GameServer {
         welcome = 1,
         spawnPlayer,
         playerPosition,
-        playerDisconnected,
-	readyFlag
+        playerDisconnected
     }
 
     /// <summary>Sent from client to server.</summary>
     public enum ClientPackets {
         welcomeReceived = 1,
-        playerMovement,
-	readyFlag
+        playerMovement
     }
 
     public class Packet : IDisposable {

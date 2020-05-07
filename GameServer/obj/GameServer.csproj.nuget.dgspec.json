@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj": {}
+    "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/GameServer.csproj": {}
   },
   "projects": {
-    "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj": {
+    "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/GameServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj",
+        "projectUniqueName": "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/GameServer.csproj",
         "projectName": "GameServer",
-        "projectPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj",
-        "packagesPath": "/home/calin/.nuget/packages/",
-        "outputPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/obj/",
+        "projectPath": "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/GameServer.csproj",
+        "packagesPath": "/home/edward/.nuget/packages/",
+        "outputPath": "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/calin/.nuget/NuGet/NuGet.Config"
+          "/home/edward/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.103/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
         }
       }
     }
