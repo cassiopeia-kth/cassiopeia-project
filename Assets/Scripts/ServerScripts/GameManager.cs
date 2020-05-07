@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
         else {
 	    
 	    Debug.Log(_position);
-	    playerPrefab = (GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject));
+	    //playerPrefab = (GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject));
 	    _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
 	    mpo = _player.AddComponent<MovePlayerOnline>();
 	    mpo.rb = FindObjectOfType<Rigidbody2D>();
