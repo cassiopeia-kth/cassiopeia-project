@@ -161,12 +161,29 @@ public class GameManager : MonoBehaviour {
     }
 
     public void spawnCollectibleTrap(Vector2[] positions){
-        var rand = new System.Random();
-        int randomIndex = rand.Next(positions.Length);
+        var rand1 = new System.Random();
+        int randomIndex1 = rand1.Next(positions.Length);
+        int randomIndex11 = rand1.Next(positions.Length);
 
-        GameObject a =(GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable");
-        Instantiate(a, positions[randomIndex], Quaternion.identity);
-        Debug.Log("collectible trap spawned");
+
+        GameObject[] traps = {  (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Fire_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hermes_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Poseidon_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Spike_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Zeusmain_Collectable")
+        };
+
+        var rand2 = new System.Random();
+        int randomIndex2 = rand2.Next(traps.Length);
+        int randomIndex22 = rand2.Next(traps.Length);
+
+        GameObject a = traps[randomIndex2];
+        GameObject b = traps[randomIndex22];
+        Instantiate(a, positions[randomIndex1], Quaternion.identity);
+        Instantiate(b, positions[randomIndex11], Quaternion.identity);
+        Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
+        Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
     }
 
     void Restart() {
@@ -177,7 +194,6 @@ public class GameManager : MonoBehaviour {
         if(startOfRound == true){
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false; 
-            Debug.Log("called twice?");
         }
     }
 }
