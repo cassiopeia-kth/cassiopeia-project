@@ -87,7 +87,8 @@ namespace GameServer {
                 _packet.Write(_currentTime.currentTime);
                 _packet.Write(_currentTime.isZero);
                 SendTCPDataToAll(_packet);
-                Console.WriteLine("sent timer packet");
+                Console.WriteLine($"{_currentTime.currentTime} sent timer packet");
+                Console.WriteLine($"{_currentTime.isZero} is the isZero status");
             }
         }
         
