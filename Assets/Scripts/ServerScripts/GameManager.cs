@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour {
     }
 
 
+
     public void EndGame() {
         Debug.Log("Game Over!");
         FindObjectOfType<MovePlayer>().enabled = false;
