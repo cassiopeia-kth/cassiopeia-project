@@ -1,10 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Scenes/Level1_calin.unity.meta
 guid: 5b3a0242a3db556f6873f48513584f1b
-=======
-guid: 96baf2769418713d0ba05367e7b7ed4c
-folderAsset: yes
->>>>>>> char-select-server-integration:Assets/Resources/Prefabs/CharSelectMenu.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

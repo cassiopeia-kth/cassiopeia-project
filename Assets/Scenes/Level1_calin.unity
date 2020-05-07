@@ -1687,7 +1687,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ip: 83.227.73.57
   port: 25850
-  charType: 
   myId: 0
 --- !u!4 &1617048333
 Transform:
@@ -2653,7 +2652,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 3256100946209752983, guid: 09cad8dc04b195c3490459f09c682b7f,
+      objectReference: {fileID: 5035207236821859428, guid: 09cad8dc04b195c3490459f09c682b7f,
         type: 3}
     - target: {fileID: 7182162724525179828, guid: 8cba29becdf97453885b6a249cfbff2b,
         type: 3}

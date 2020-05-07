@@ -17,12 +17,10 @@ public class ClientHandle : MonoBehaviour {
 
     public static void SpawnPlayer(Packet _packet) {
         int _id = _packet.ReadInt();
-        string _charType = _packet.ReadString();
         string _username = _packet.ReadString();
         Vector3 _position = _packet.ReadVector3();
-	//string _charType = "test";
-        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType); //Spawn the player locally in game manager instance
-	    Debug.Log("did try to spawn the player");
+        GameManager.instance.SpawnPlayer(_id, _username, _position);
+	Debug.Log("did try to spawn the player");
     }
     
     public static void PlayerDisconnected(Packet _packet) {
@@ -34,16 +32,21 @@ public class ClientHandle : MonoBehaviour {
     public static void PlayerPosition(Packet _packet) {
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-//	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
+	//	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
 
-	if(GameManager.players[_id].GetComponent<MovePlayer>() != null)
-	    GameManager.players[_id].GetComponent<MovePlayer>().movePlayer(_position);
-	else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
-	    GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
-	
-	Vector3 actual_position = GameManager.players[_id].transform.position;
-//	GameManager.players[_id].transform.position = _position;	
+	/*	if(GameManager.players.ContainsKey(_id)){
+		if(GameManager.players[_id].GetComponent<MovePlayer>() != null)
+		GameManager.players[_id].GetComponent<MovePlayer>().movePlayer(_position);
+		else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
+		GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
+	*/
+	GameManager.instance.waitForInit(_id, _position);
     }
+
+	
+	
+    //	Vector3 actual_position = GameManager.players[_id].transform.position;
+    //	GameManager.players[_id].transform.position = _position;
 
     public static void readyFlag(Packet _packet){
 	//TODO make start button active
@@ -53,17 +56,22 @@ public class ClientHandle : MonoBehaviour {
 	bool startPressed = _packet.ReadBool();
 	GameManager.players[_id].isReady = isReady;
 	Debug.Log(isReady);
-	if(everyoneReady == true){
-	    Lobby.instance.displayStartButton();
-	}
-	if(everyoneReady == false){
-	    Lobby.instance.hideStartButton();
-	}
-	if(startPressed == true){
-	    Lobby.instance.startGame();
+	if(Lobby.instance.gameStarted == false){
+	    if(everyoneReady == true){
+		Lobby.instance.displayStartButton();
+	    }
+	    if(everyoneReady == false){
+		Lobby.instance.hideStartButton();
+	    }
+	    if(startPressed == true){
+		Lobby.instance.startGame();
+	    }
+	    Lobby.instance.displayReadyorNot(_id);
+
 	}
 	
-	Lobby.instance.displayReadyorNot(_id);
     }
+
+
     
 }

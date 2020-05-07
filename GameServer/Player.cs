@@ -19,15 +19,13 @@ namespace GameServer {
 	public bool everyoneReady = false;
 	public bool isAlive;
 	public bool startPressed = false;
-	public string charType;
 
-        public Player(int _id, string _username, string _charType) {
+        public Player(int _id, string _username) {
             id = _id;
             username = _username;
 	    Console.Write(username);
 	    inputs = new bool[4];
 	    choosePosition();
-	    charType = _charType;
         }
 
 	public void choosePosition(){

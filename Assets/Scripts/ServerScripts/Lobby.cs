@@ -11,6 +11,7 @@ public class Lobby : MonoBehaviour {
     public GameObject notReadyButton;
     public GameObject readyButton;
     public GameObject startButton;
+    public bool gameStarted = false;
     private void Awake(){
         if (instance == null){
             instance = this;
@@ -22,8 +23,7 @@ public class Lobby : MonoBehaviour {
 	
 	Debug.Log(MainMenu.name);
 	username = MainMenu.name;
-	username = username.Remove(username.Length - 1);
-//	username = "test";
+	//username = "test";
 	notReadyButton = GameObject.Find("NotReadyButton");
 	readyButton = GameObject.Find("ReadyButton");
 	startButton = GameObject.Find("StartGameButton");
@@ -66,6 +66,7 @@ public class Lobby : MonoBehaviour {
 	ClientSend.ReadyFlag();
 	GameManager.instance.inventoryCanvas.enabled = true;
 	GameObject.Find("Lobby").SetActive(false);
+	this.gameStarted = true;
     }
 
     IEnumerator connectToServer(){

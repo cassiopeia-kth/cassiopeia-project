@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &739756589610123309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 820895883855058826}
-  m_Layer: 0
-  m_Name: Player Move Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &820895883855058826
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739756589610123309}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6767334856503373012}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6767334856503373017
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,8 +13,7 @@ GameObject:
   - component: {fileID: 6767334856503373018}
   - component: {fileID: 6610216468623208504}
   - component: {fileID: 7370576631817917259}
-  - component: {fileID: 5800917982934673810}
-  - component: {fileID: -3682202366583557902}
+  - component: {fileID: 8353522365686643424}
   m_Layer: 0
   m_Name: Executioner
   m_TagString: Untagged
@@ -62,8 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.60650605, y: -1.2285748, z: -0.8702942}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 820895883855058826}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -183,7 +151,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5800917982934673810
+--- !u!114 &8353522365686643424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,21 +160,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6767334856503373017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b75c133becea1f74783133dd18abd490, type: 3}
+  m_Script: {fileID: 11500000, guid: df6bd4ac8c1348b388fd7206f050cb5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3682202366583557902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6767334856503373017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74886840aae04dc45820572f8d1cdeea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  username: 
-  isAlive: 1
+  rb: {fileID: 6610216468623208504}
+  ani: {fileID: 6767334856503373018}
+  inventory: {fileID: 0}
+  arrowKeysEnabled: 0

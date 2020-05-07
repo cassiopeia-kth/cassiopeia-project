@@ -21,7 +21,6 @@ public class ClientSend : MonoBehaviour {
             _packet.Write(Client.instance.myId);
             _packet.Write(Lobby.instance.username);
 	    Debug.Log(Lobby.instance.username);
-            _packet.Write(Client.instance.charType); //write chartype as well
             SendTCPData(_packet);
         }
     }
