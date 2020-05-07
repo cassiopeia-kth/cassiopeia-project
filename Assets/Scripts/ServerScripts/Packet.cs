@@ -11,6 +11,7 @@ public enum ServerPackets {
     playerPosition,
     playerDisconnected,
     timer,
+    isZero,
     readyFlag,
 }
 

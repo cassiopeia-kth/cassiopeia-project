@@ -35,7 +35,7 @@ namespace GameServer
         // Update is called once per frame
         public void UpdateTimer()
         {
-            currentTime -= 1; //* Time.deltaTime;
+            currentTime -= 1 * Constants.MS_PER_TICK; //* Time.deltaTime;
                               //GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
                               //countdownText.text = currentTime.ToString("0");
 
@@ -47,7 +47,7 @@ namespace GameServer
             }
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             UpdateTimer();
             ServerSend.TimerInfo(instance);

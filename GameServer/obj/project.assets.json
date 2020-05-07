@@ -951,11 +951,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj",
+      "projectUniqueName": "/mnt/c/users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/GameServer.csproj",
       "projectName": "GameServer",
-      "projectPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/GameServer.csproj",
-      "packagesPath": "/home/calin/.nuget/packages/",
-      "outputPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/obj/",
+      "projectPath": "/mnt/c/users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/GameServer.csproj",
+      "packagesPath": "/home/minn/.nuget/packages/",
+      "outputPath": "/mnt/c/users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/minn/.nuget/NuGet/NuGet.Config"

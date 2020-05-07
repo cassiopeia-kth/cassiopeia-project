@@ -44,12 +44,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         bool[] _inputs = new bool[4];
-        if (CountdownTimer.instance.isZero)
-        {
-            ClientSend.PlayerMovement(_inputs);
-        }
-        else
-        {
             _inputs = new bool[]{
                 Input.GetKey(KeyCode.W),
                 Input.GetKey(KeyCode.S),
@@ -58,6 +52,6 @@ public class PlayerController : MonoBehaviour
             };
 
             ClientSend.PlayerMovement(_inputs);
-        }
+        
     } 
 }

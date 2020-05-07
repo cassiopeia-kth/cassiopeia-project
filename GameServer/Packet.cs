@@ -11,6 +11,7 @@ namespace GameServer {
         playerPosition,
         playerDisconnected,
         timer,
+        isZero,
         readyFlag
     }
 

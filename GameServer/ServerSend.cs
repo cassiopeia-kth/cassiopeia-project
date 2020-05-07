@@ -85,6 +85,7 @@ namespace GameServer {
         public static void TimerInfo(ServerCountdownTimer _currentTime){
             using (Packet _packet = new Packet((int)ServerPackets.timer)) {
                 _packet.Write(_currentTime.currentTime);
+                _packet.Write(_currentTime.isZero);
                 SendUDPDataToAll(_packet);
                 Console.Write("sent timer packet");
             }

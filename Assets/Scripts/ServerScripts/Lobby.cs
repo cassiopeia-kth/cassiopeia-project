@@ -21,8 +21,8 @@ public class Lobby : MonoBehaviour {
         }
 	
 	Debug.Log(MainMenu.name);
-	username = MainMenu.name;
-	//username = "test";
+	//username = MainMenu.name;
+	username = "test";
 	notReadyButton = GameObject.Find("NotReadyButton");
 	readyButton = GameObject.Find("ReadyButton");
 	startButton = GameObject.Find("StartGameButton");

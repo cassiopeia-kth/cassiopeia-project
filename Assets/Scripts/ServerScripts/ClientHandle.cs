@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 //using System.Diagnostics;
 using System.Net;
@@ -66,10 +67,18 @@ public class ClientHandle : MonoBehaviour {
     }
 
     public static void ClientTimer(Packet _packet){
-        int currentTime = _packet.ReadInt();
+        float currentTime = _packet.ReadFloat();
+        bool isZero = _packet.ReadBool();
         Debug.Log($"{currentTime} is the current time");
-        CountdownTimer.instance.currentTime = currentTime;
-        CountdownTimer.instance.UpdateTimer();
+        if (isZero)
+        {
+            //CountdownTimer.instance.
+        }
+        else {
+            Debug.Log(currentTime);
+            CountdownTimer.instance.currentTime = currentTime;
+            CountdownTimer.instance.UpdateTimer();
+        }
     }
     
 }

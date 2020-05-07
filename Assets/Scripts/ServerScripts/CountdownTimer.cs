@@ -10,7 +10,6 @@ public class CountdownTimer : MonoBehaviour {
 
     public float currentTime = 0f;
     public float startTime = 10f;
-    public bool isZero = false;
 
     private void Awake()
     {
@@ -27,7 +26,6 @@ public class CountdownTimer : MonoBehaviour {
     {
 
         currentTime = startTime;
-        isZero = false;
     }
 
     // Update is called once per frame
@@ -42,7 +40,6 @@ public class CountdownTimer : MonoBehaviour {
         {
             currentTime = 0;
 	        GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = "Time's up!";
-            isZero = true;
         }
     }
 
