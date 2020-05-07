@@ -1,22 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "SuUNMG2X2Sy07iyElwROxl2nd+DRYlnRyIKwtRDa9vd/ZZHlG6AJOFi2Lcu7Tll3KeA49ZpGim+fArUrBQLqpw==",
+  "dgSpecHash": "yGRz91WKc3v6SAd/TdO0gsPEoCTrrS0rImzLgOnLP16wZwwE3KkDunJvbbANkaFPuvN9IikFBAqw4pyEpppQzA==",
   "success": true,
-  "projectFilePath": "/mnt/c/users/dlwls/desktop/sprint2/cassiopeia-project/GameServer/GameServer.csproj",
+  "projectFilePath": "C:\\Users\\Philipe Granhall\\Documents\\Programming\\II1305\\cassiopeia-project\\GameServer\\GameServer.csproj",
   "expectedPackageFiles": [
-    "/home/minn/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.io/4.3.0/system.io.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.reflection/4.3.0/system.reflection.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.reflection.primitives/4.3.0/system.reflection.primitives.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.resources.resourcemanager/4.3.0/system.resources.resourcemanager.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.runtime.extensions/4.3.0/system.runtime.extensions.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.runtime.numerics/4.3.0/system.runtime.numerics.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
-    "/home/minn/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512"
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.runtime.numerics\\4.3.0\\system.runtime.numerics.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\Philipe Granhall\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }
