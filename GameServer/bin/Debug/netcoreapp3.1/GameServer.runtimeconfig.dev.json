@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/home/calin/.dotnet/store/|arch|/|tfm|",
-      "/home/calin/.nuget/packages"
+      "/home/minn/.dotnet/store/|arch|/|tfm|",
+      "/home/minn/.nuget/packages"
     ]
   }
 }

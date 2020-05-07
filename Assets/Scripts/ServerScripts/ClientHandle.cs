@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using System.Net;
 using UnityEngine;
 
@@ -62,6 +63,13 @@ public class ClientHandle : MonoBehaviour {
 	}
 	
 	Lobby.instance.displayReadyorNot(_id);
+    }
+
+    public static void ClientTimer(Packet _packet){
+        int currentTime = _packet.ReadInt();
+        Debug.Log($"{currentTime} is the current time");
+        CountdownTimer.instance.currentTime = currentTime;
+        CountdownTimer.instance.UpdateTimer();
     }
     
 }

@@ -14,7 +14,7 @@
         "outputPath": "/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/calin/.nuget/NuGet/NuGet.Config"
+          "/home/minn/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.103/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace GameServer {
@@ -81,6 +82,14 @@ namespace GameServer {
             }
         }
 
+        public static void TimerInfo(ServerCountdownTimer _currentTime){
+            using (Packet _packet = new Packet((int)ServerPackets.timer)) {
+                _packet.Write(_currentTime.currentTime);
+                SendUDPDataToAll(_packet);
+                Console.Write("sent timer packet");
+            }
+        }
+        
 	public static void ReadyFlag(Player _player){
 	    using (Packet _packet = new Packet((int)ServerPackets.readyFlag)){
 		_packet.Write(_player.id);

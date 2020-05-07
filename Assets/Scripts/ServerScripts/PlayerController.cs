@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private float timer;
     private bool activateSleep = false;
+
     private void FixedUpdate(){
 	SendInputToServer();
 	//TODO stop calling this once in game (might add up)
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     }
     
     private void SendInputToServer(){
+        StartCoroutine("timerFix");
 	bool[] _inputs = new bool[]{
 	    Input.GetKey(KeyCode.W),
 	    Input.GetKey(KeyCode.S),
@@ -36,4 +38,26 @@ public class PlayerController : MonoBehaviour
     private void SendReadyFlag(){
 	ClientSend.ReadyFlag();
     }
+
+    IEnumerator timerFix(){
+        while(CountdownTimer.instance == null){
+            yield return null;
+        }
+        bool[] _inputs = new bool[4];
+        if (CountdownTimer.instance.isZero)
+        {
+            ClientSend.PlayerMovement(_inputs);
+        }
+        else
+        {
+            _inputs = new bool[]{
+                Input.GetKey(KeyCode.W),
+                Input.GetKey(KeyCode.S),
+                Input.GetKey(KeyCode.A),
+                Input.GetKey(KeyCode.D),
+            };
+
+            ClientSend.PlayerMovement(_inputs);
+        }
+    } 
 }

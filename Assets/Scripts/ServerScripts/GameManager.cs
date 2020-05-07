@@ -116,7 +116,10 @@ public class GameManager : MonoBehaviour {
     public void Start() {
 	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
-	//        inventoryCanvas.enabled = true;
+        //        inventoryCanvas.enabled = true;
+        //CountdownTimer.instance.StartTimer();
+	GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>().StartTimer();
+
     }
 
 

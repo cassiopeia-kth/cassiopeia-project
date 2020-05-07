@@ -12,7 +12,7 @@ public class MovePlayer : MonoBehaviour
     private float timer;
     private bool activateSleep = false;
     public PlayerManager pm;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 200f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     // Start is called before the first frame update

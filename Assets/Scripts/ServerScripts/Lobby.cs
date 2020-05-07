@@ -65,6 +65,13 @@ public class Lobby : MonoBehaviour {
 	ClientSend.ReadyFlag();
 	GameManager.instance.inventoryCanvas.enabled = true;
 	GameObject.Find("Lobby").SetActive(false);
+        //CountdownTimer.instance.StartTimer();
+    }
+
+    public void startGameTimer()
+    {
+        GameObject.Find("Lobby").SetActive(false);
+        CountdownTimer.instance.StartTimer();
     }
 
     IEnumerator connectToServer(){

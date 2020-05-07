@@ -44,7 +44,7 @@ public class Client : MonoBehaviour {
     public void ConnectToServer() {
         InitializeClientData();
         isConnected = true;
-	tcp.Connect();
+	    tcp.Connect();
     }
 
     public class TCP {
@@ -233,8 +233,9 @@ public class Client : MonoBehaviour {
             { (int)ServerPackets.welcome, ClientHandle.Welcome },
             { (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
-	    { (int)ServerPackets.readyFlag, ClientHandle.readyFlag },
-            { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected }
+            { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
+            { (int)ServerPackets.timer, ClientHandle.ClientTimer }
+    	    { (int)ServerPackets.readyFlag, ClientHandle.readyFlag },   
         };
         Debug.Log("Initialized packets.");
     }
