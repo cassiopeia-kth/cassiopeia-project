@@ -20,15 +20,38 @@ namespace GameServer {
 	public bool isAlive;
 	public bool startPressed = false;
 
-        public Player(int _id, string _username, Vector3 _spawnPosition) {
+        public Player(int _id, string _username) {
             id = _id;
             username = _username;
 	    Console.Write(username);
-            position = _spawnPosition;
 	    inputs = new bool[4];
+	    choosePosition();
         }
 
-
+	public void choosePosition(){
+	    position = new Vector3(-5.5f, 1.5f, 0);
+	    foreach(Client item in Server.clients.Values){
+		if(item.player != null && item.player != this){
+		    if(this.position == item.player.position){
+			position = new Vector3(-5.5f,-1.5f, 0);
+			foreach(Client item1 in Server.clients.Values){
+			    if(item1.player != null && item1.player != this){
+				if(this.position == item1.player.position){
+				    position = new Vector3(5.5f,-1.5f, 0);
+				    foreach(Client item2 in Server.clients.Values){
+					if(item2.player != null && item2.player != this){
+					    if(this.position == item2.player.position){
+						position = new Vector3(5.5f,1.5f, 0);
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
 	public void SetInput(bool[] _inputs, Vector3 _position, bool _isAlive){
 	    inputs= _inputs;
 	    position = _position;
