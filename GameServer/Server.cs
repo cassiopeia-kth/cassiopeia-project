@@ -99,6 +99,7 @@ namespace GameServer {
             {
                 { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
 		{ (int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
+		{ (int)ClientPackets.readyFlag, ServerHandle.PlayerReady}
             };
             Console.WriteLine("Initialized packets.");
         }

@@ -81,6 +81,15 @@ namespace GameServer {
                 SendTCPDataToAll(_packet);
             }
         }
+	public static void ReadyFlag(Player _player){
+	    using (Packet _packet = new Packet((int)ServerPackets.readyFlag)){
+		_packet.Write(_player.id);
+		_packet.Write(_player.ready);
+		_packet.Write(_player.everyoneReady);
+		_packet.Write(_player.startPressed);
+		SendTCPDataToAll(_packet);
+	    }
+	}
         #endregion
     }
 }

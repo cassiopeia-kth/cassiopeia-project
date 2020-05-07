@@ -32,6 +32,18 @@ namespace GameServer {
 		Console.Write(e);
 	    }
 	}
+	public static void PlayerReady(int _fromClient, Packet _packet){
+	    bool isReady = _packet.ReadBool();
+	    bool startPressed = _packet.ReadBool();
+	    Console.Write(isReady);
+	    try{
+		Server.clients[_fromClient].player.ready = isReady;
+		Server.clients[_fromClient].player.startPressed = startPressed;
+	    }
+	    catch(Exception e){
+		Console.Write(e);
+	    }
+	}
     }
 
     

@@ -22,3 +22,14 @@ C:/Users/Philipe Granhall/source/repos/GameServer/GameServer/obj/Debug/netcoreap
 /home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfo.cs
 /home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/obj/Debug/netcoreapp3.1/GameServer.dll
 /home/calin/KTH/TCOMK2/II1305_Project_TCOMK/GameServer/obj/Debug/netcoreapp3.1/GameServer.pdb
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.deps.json
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.runtimeconfig.json
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.runtimeconfig.dev.json
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.dll
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.pdb
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.csprojAssemblyReference.cache
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfoInputs.cache
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfo.cs
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.dll
+/home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.pdb
