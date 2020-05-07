@@ -55,6 +55,9 @@ public class ClientHandle : MonoBehaviour {
 	if(everyoneReady == true){
 	    Lobby.instance.displayStartButton();
 	}
+	if(everyoneReady == false){
+	    Lobby.instance.hideStartButton();
+	}
 	if(startPressed == true){
 	    Lobby.instance.startGame();
 	}

@@ -114,11 +114,12 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene("Menu");
     }
     public void Start() {
-//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
+	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
         //        inventoryCanvas.enabled = true;
         //CountdownTimer.instance.StartTimer();
 	GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>().StartTimer();
+
     }
 
 
@@ -131,7 +132,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void AddItemToInventory(Inventory_Item item){
-//	mp.inventory.AddItem(item);
+	//	mp.inventory.AddItem(item);
     }
 
 

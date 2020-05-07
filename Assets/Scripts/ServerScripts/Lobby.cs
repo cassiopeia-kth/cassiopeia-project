@@ -41,6 +41,11 @@ public class Lobby : MonoBehaviour {
     public void displayStartButton(){
 	startButton.SetActive(true);
     }
+
+    public void hideStartButton(){
+	startButton.SetActive(false);
+    }
+    
     public void setReady(){
 	GameManager.players[Client.instance.myId].isReady = true;
 	GameObject.Find("ReadyButton").SetActive(false);
