@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
     private bool activateSleep = false;
     private void FixedUpdate(){
 	SendInputToServer();
+	//TODO stop calling this once in game (might add up)
+	if(GameManager.players[Client.instance.myId].checkChange != GameManager.players[Client.instance.myId].isReady){
+	    SendReadyFlag();
+	    GameManager.players[Client.instance.myId].checkChange = GameManager.players[Client.instance.myId].isReady;
+	}
     }
     
     private void SendEmpty(){
@@ -15,7 +20,7 @@ public class PlayerController : MonoBehaviour
 	    false,false,false,false
 	};
 	ClientSend.PlayerMovement(_inputs);
-
+	
     }
     
     private void SendInputToServer(){
@@ -26,6 +31,9 @@ public class PlayerController : MonoBehaviour
 	    Input.GetKey(KeyCode.D),
 	};
 	ClientSend.PlayerMovement(_inputs);
+    }
 
+    private void SendReadyFlag(){
+	ClientSend.ReadyFlag();
     }
 }

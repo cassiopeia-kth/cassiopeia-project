@@ -19,7 +19,8 @@ public class ClientSend : MonoBehaviour {
     public static void WelcomeReceived() {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived)) {
             _packet.Write(Client.instance.myId);
-            _packet.Write(UIManager.instance.usernameField.text);
+            _packet.Write(Lobby.instance.username);
+	    Debug.Log(Lobby.instance.username);
             SendTCPData(_packet);
         }
     }
@@ -37,11 +38,24 @@ public class ClientSend : MonoBehaviour {
             SendTCPData(_packet);
         }
     }
+
+
+    public static void ReadyFlag(){
+	using (Packet _packet = new Packet((int)ClientPackets.readyFlag)) {
+	    _packet.Write(GameManager.players[Client.instance.myId].isReady);
+	    _packet.Write(GameManager.players[Client.instance.myId].startPressed);
+	    Debug.Log(GameManager.players[Client.instance.myId].startPressed);
+	    SendTCPData(_packet);
+	}
+	
+    }
+    
     #endregion
     
     public static void ActivateSleep(float forSeconds){
 	timer = forSeconds;
 	activateSleep = true;
     }
+    
 
 }
