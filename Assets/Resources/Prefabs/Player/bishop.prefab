@@ -147,6 +147,20 @@ MonoBehaviour:
   id: 0
   username: 
   isAlive: 1
+  isReady: 0
+  checkChange: 0
+--- !u!114 &7608610829187407449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933739478917387332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75c133becea1f74783133dd18abd490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &-6137262292955251344
 Rigidbody2D:
   serializedVersion: 4

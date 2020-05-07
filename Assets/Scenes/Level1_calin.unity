@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireTrap
       objectReference: {fileID: 0}
+    - target: {fileID: 2356990309618509437, guid: 3b9e3154a30beef489767b4cb1dcde97,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b9e3154a30beef489767b4cb1dcde97, type: 3}
 --- !u!1 &45991012
@@ -1064,6 +1069,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6930e6ea9a76c04fa8e4c4490a38890, type: 3}
+  notReadyButton: {fileID: 0}
+  readyButton: {fileID: 0}
+  startButton: {fileID: 0}
 --- !u!223 &925589227 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 5697414869214795211, guid: 56489c99f54f5fecfa95b9414bb787f8,
@@ -1227,7 +1235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1204382622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2265,7 +2273,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 720162820}
-        m_MethodName: activateInventoryCanvas
+        m_MethodName: setReady
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2500,7 +2508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1902044895
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2593,7 +2601,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 720162820}
-        m_MethodName: activateInventoryCanvas
+        m_MethodName: setNotReady
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4785,7 +4793,7 @@ MonoBehaviour:
   m_fontSizeMin: 1
   m_fontSizeMax: 40
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -5029,7 +5037,7 @@ MonoBehaviour:
   m_fontSizeMin: 1
   m_fontSizeMax: 40
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -5807,7 +5815,7 @@ MonoBehaviour:
   m_fontSizeMin: 1
   m_fontSizeMax: 40
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0

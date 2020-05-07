@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
@@ -234,6 +235,7 @@ public class Client : MonoBehaviour {
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             { (int)ServerPackets.timer, ClientHandle.ClientTimer }
+    	    { (int)ServerPackets.readyFlag, ClientHandle.readyFlag },   
         };
         Debug.Log("Initialized packets.");
     }
