@@ -46,3 +46,14 @@ C:/Users/Philipe Granhall/source/repos/GameServer/GameServer/obj/Debug/netcoreap
 /mnt/c/users/Edwar/desktop/Server/Server/GameServer/obj/Debug/netcoreapp3.1/GameServer.dll
 /mnt/c/users/Edwar/desktop/Server/Server/GameServer/obj/Debug/netcoreapp3.1/GameServer.pdb
 /mnt/c/users/Edwar/desktop/Server/Server/GameServer/obj/Debug/netcoreapp3.1/GameServer.genruntimeconfig.cache
+/home/ak/Desktop/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer
+/home/ak/Desktop/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.deps.json
+/home/ak/Desktop/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.runtimeconfig.json
+/home/ak/Desktop/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.runtimeconfig.dev.json
+/home/ak/Desktop/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.dll
+/home/ak/Desktop/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.pdb
+/home/ak/Desktop/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.csprojAssemblyReference.cache
+/home/ak/Desktop/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfoInputs.cache
+/home/ak/Desktop/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfo.cs
+/home/ak/Desktop/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.dll
+/home/ak/Desktop/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.pdb

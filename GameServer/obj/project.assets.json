@@ -946,19 +946,19 @@
     ]
   },
   "packageFolders": {
-    "/home/edward/.nuget/packages/": {}
+    "/home/ak/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/GameServer.csproj",
+      "projectUniqueName": "/home/ak/Desktop/cassiopeia-project/GameServer/GameServer.csproj",
       "projectName": "GameServer",
-      "projectPath": "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/GameServer.csproj",
-      "packagesPath": "/home/edward/.nuget/packages/",
-      "outputPath": "/mnt/c/users/Edwar/desktop/Server/Server/GameServer/obj/",
+      "projectPath": "/home/ak/Desktop/cassiopeia-project/GameServer/GameServer.csproj",
+      "packagesPath": "/home/ak/.nuget/packages/",
+      "outputPath": "/home/ak/Desktop/cassiopeia-project/GameServer/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/edward/.nuget/NuGet/NuGet.Config"
+        "/home/ak/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -1004,7 +1004,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.103/RuntimeIdentifierGraph.json"
       }
     }
   }
