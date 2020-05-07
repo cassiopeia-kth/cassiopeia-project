@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Code\CollectableItem.cs" />
     <Compile Include="Assets\Code\Inventory.cs" />
     <Compile Include="Assets\Code\InventoryItem.cs" />
     <Compile Include="Assets\Code\MovePlayer.cs" />
@@ -79,7 +78,10 @@
     <Compile Include="Assets\Scripts\ServerScripts\Client.cs" />
     <Compile Include="Assets\Scripts\ServerScripts\ClientHandle.cs" />
     <Compile Include="Assets\Scripts\ServerScripts\ClientSend.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\CollectableItem.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\CountdownTimer.cs" />
     <Compile Include="Assets\Scripts\ServerScripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\Lobby.cs" />
     <Compile Include="Assets\Scripts\ServerScripts\Packet.cs" />
     <Compile Include="Assets\Scripts\ServerScripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ServerScripts\PlayerManager.cs" />
