@@ -29,7 +29,8 @@ public class MovePlayerOnline : MonoBehaviour
     }
 
     public void movePlayer(Vector3 position){
-	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+//	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	
 		if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
