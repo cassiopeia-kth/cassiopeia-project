@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public MovePlayerOnline mpo;
     public Canvas inventoryCanvasOnline;
     public string[] nameList;
+    public bool startOfRound;
     
     private void Awake() {
         if (instance == null) {
@@ -120,8 +121,7 @@ public class GameManager : MonoBehaviour {
 	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
 	//        inventoryCanvas.enabled = true;
-
-         spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
+        startOfRound = true; 
     }
 
 
@@ -171,6 +171,14 @@ public class GameManager : MonoBehaviour {
 
     void Restart() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void FixedUpdate(){
+        if(startOfRound == true){
+            spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
+            startOfRound = false; 
+            Debug.Log("called twice?");
+        }
     }
 }
     /*
