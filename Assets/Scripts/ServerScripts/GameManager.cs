@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
     }
     
 
-    public void SpawnPlayer(int _id, string _username, Vector3 _position) {
+    public void SpawnPlayer(int _id, string _username, Vector3 _position, string _charType) {
         GameObject _player;
         if (_id == Client.instance.myId) {
 	    _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour {
         else {
 	    
 	    Debug.Log(_position);
+	    playerPrefab = (GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject));
 	    _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
 	    mpo = _player.AddComponent<MovePlayerOnline>();
 	    mpo.rb = FindObjectOfType<Rigidbody2D>();
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour {
 	    mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvasOnline = inventoryHUD.transform.GetComponent<Canvas>();
 	    inventoryHUD.SetActive(false);
+
 	}
 
 	for(int i = 0; i < 4; i++){

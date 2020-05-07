@@ -18,13 +18,13 @@ public class MovePlayer : MonoBehaviour
     public LayerMask whatStopsMovement;
     // Start is called before the first frame update
     void Start(){
-	FindObjectOfType<GameManager>().Start();
-	arrowKeysEnabled = true;
-	pm = FindObjectOfType<PlayerManager>();
-	//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
-	movePoint = transform.GetChild(0);
-	movePoint.parent = null;
-	whatStopsMovement = LayerMask.GetMask("StopMovement");
+		FindObjectOfType<GameManager>().Start();
+		arrowKeysEnabled = true;
+		pm = FindObjectOfType<PlayerManager>();
+		//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
+		movePoint = this.gameObject.transform.GetChild(0);
+		movePoint.parent = null;
+		whatStopsMovement = LayerMask.GetMask("StopMovement");
     }
     public void movePlayer(Vector3 position){
 //	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
@@ -32,6 +32,7 @@ public class MovePlayer : MonoBehaviour
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		movePoint.position += position;
+
 	}
     }
     void Update()
@@ -484,7 +485,6 @@ public class MovePlayer : MonoBehaviour
 	    StartCoroutine(ZeusDiagonalDeath());
 	    //FindObjectOfType<GameManager>().EndGame();
 	}
-
 		else if (other.GetComponent<WildFire>() != null && flying == false)
 		{
 			Debug.Log("Death by WildFire!");
@@ -650,7 +650,4 @@ public class MovePlayer : MonoBehaviour
 	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 	yield return 0;
     }
-}
-
-
 */

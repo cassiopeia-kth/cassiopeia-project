@@ -158,8 +158,8 @@ namespace GameServer {
             }
         }
 
-        public void SendIntoGame(string _playerName) {
-            player = new Player(id, _playerName, new Vector3(-5.5f, 1.5f, 0));
+        public void SendIntoGame(string _playerName, string _charType) {
+            player = new Player(id, _playerName, _charType, new Vector3(-5.5f, 1.5f, 0));
 
             foreach (Client _client in Server.clients.Values) {
                 if (_client.player != null) {
