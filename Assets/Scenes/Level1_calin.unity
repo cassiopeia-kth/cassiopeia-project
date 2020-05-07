@@ -1685,9 +1685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241bc57de56f45248818d29d11a09a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 158.174.118.126
+  ip: 127.0.0.1
   port: 25850
-  charType: 
   myId: 0
 --- !u!4 &1617048333
 Transform:
@@ -2674,24 +2673,6 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cba29becdf97453885b6a249cfbff2b, type: 3}
---- !u!1 &148531780100051667 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 752567360997333317, guid: 8cba29becdf97453885b6a249cfbff2b,
-    type: 3}
-  m_PrefabInstance: {fileID: 148531780100051666}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &148531780100051668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148531780100051667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9fe4ffafb1260ef8e1fe8264f41340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &509179093404846677
 RectTransform:
   m_ObjectHideFlags: 0
