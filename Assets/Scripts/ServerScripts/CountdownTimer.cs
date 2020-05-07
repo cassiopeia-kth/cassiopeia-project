@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading;
 
 public class CountdownTimer : MonoBehaviour {
 
@@ -35,8 +36,7 @@ public class CountdownTimer : MonoBehaviour {
 	 GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
      //countdownText.text = currentTime.ToString("0");
 
-        if (currentTime <= 0)
-        {
+        if (currentTime <= 0){
             currentTime = 0;
 	        GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = "Time's up!";
         }

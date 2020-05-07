@@ -14,7 +14,7 @@ namespace GameServer {
 	public Vector3 movePosition;
 	public bool ready = false;
 	public bool checkChange = false;
-        private float moveSpeed = 1f / Constants.TICKS_PER_SEC;
+    private float moveSpeed = 1f / Constants.TICKS_PER_SEC;
 	private bool[] inputs;
 	public bool everyoneReady = false;
 	public bool isAlive;
@@ -27,7 +27,6 @@ namespace GameServer {
             position = _spawnPosition;
 	    inputs = new bool[4];
         }
-
 
 	public void SetInput(bool[] _inputs, Vector3 _position, bool _isAlive){
 	    inputs= _inputs;
