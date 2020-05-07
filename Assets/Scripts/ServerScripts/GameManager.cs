@@ -120,6 +120,8 @@ public class GameManager : MonoBehaviour {
 	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
 	//        inventoryCanvas.enabled = true;
+
+         spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
     }
 
 
@@ -156,6 +158,15 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
         actualCross.GetComponent<SpriteRenderer>().enabled = false;
         actualCross.SetActive(false);
+    }
+
+    public void spawnCollectibleTrap(Vector2[] positions){
+        var rand = new System.Random();
+        int randomIndex = rand.Next(positions.Length);
+
+        GameObject a =(GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable");
+        Instantiate(a, positions[randomIndex], Quaternion.identity);
+        Debug.Log("collectible trap spawned");
     }
 
     void Restart() {
