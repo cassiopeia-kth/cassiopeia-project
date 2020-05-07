@@ -34,7 +34,7 @@ public class MovePlayer : MonoBehaviour
     }
     void Update()
     {
-	if(activateSleep)
+		if(activateSleep)
 	{
 	    timer -= Time.deltaTime;
 	    //	    Debug.Log(timer);
@@ -158,10 +158,18 @@ public class MovePlayer : MonoBehaviour
 	    Debug.Log("Death by Zeus Diagonal!");
 	    pm.isAlive = false;
 	    StartCoroutine(ZeusDiagonalDeath());
-	    FindObjectOfType<GameManager>().EndGame();
+	    //FindObjectOfType<GameManager>().EndGame();
 	}
-	// Deals with pickup interaction. (e.g. the Hermes status effect)
-	else if (other.GetComponent<Pickup>() != null)
+
+		else if (other.GetComponent<WildFire>() != null && flying == false)
+		{
+			Debug.Log("Death by WildFire!");
+			pm.isAlive = false;
+			StartCoroutine(FireTrap());
+			//FindObjectOfType<GameManager>().EndGame();
+		}
+		// Deals with pickup interaction. (e.g. the Hermes status effect)
+		else if (other.GetComponent<Pickup>() != null)
 	{
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
@@ -319,6 +327,10 @@ public class MovePlayer : MonoBehaviour
 	yield return 0;
     }
 }
+
+
+
+
     /*
 ﻿using System.Collections;
 using System.Collections.Generic;

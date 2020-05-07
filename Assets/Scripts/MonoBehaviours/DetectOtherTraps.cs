@@ -15,7 +15,7 @@ public class DetectOtherTraps : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         // If a trap collides with another trap, they must overlap. Delete the older one.
-        if (collision.gameObject.tag == "Trap")
+        if (collision.gameObject.tag == "TrapCollision")
         {
             if (initialisationTime - collision.gameObject.GetComponent<DetectOtherTraps>().initialisationTime < 0)
             {
