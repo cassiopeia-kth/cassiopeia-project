@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
+//using System.Diagnostics;
 using System.Net;
 using System;
 using UnityEngine;
@@ -92,6 +95,27 @@ public class ClientHandle : MonoBehaviour {
 	
     }
 
-
+    public static void ClientTimer(Packet _packet){
+        float currentTime = _packet.ReadFloat();
+        bool isZero = _packet.ReadBool();
+	//Debug.Log("got here server timer");
+        //Debug.Log($"{currentTime} is the current time");
+        if (isZero)
+        {
+            foreach (PlayerManager pman in GameManager.players.Values)
+            {
+                pman.isAlive = false;
+            }
+        }
+        else {
+            //Debug.Log(currentTime);
+            foreach (PlayerManager pman in GameManager.players.Values)
+            {
+                pman.isAlive = true;
+            }
+            CountdownTimer.instance.currentTime = currentTime;
+            CountdownTimer.instance.UpdateTimer();
+        }
+    }
     
 }

@@ -1,6 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 3873ee3d8a0bb8615a6cd210e2b675ae
 PrefabImporter:
+=======
+<<<<<<< HEAD:Assets/Resources/Prefabs/Timer.meta
+guid: 520fdfef35702a74690a317f00c54874
+folderAsset: yes
+DefaultImporter:
+=======
+guid: 3873ee3d8a0bb8615a6cd210e2b675ae
+PrefabImporter:
+>>>>>>> origin/CC-game-flow:Assets/Resources/Prefabs/Lobby/NetworkRoomPlayer 1.prefab.meta
+>>>>>>> origin/CC-game-flow
   externalObjects: {}
   userData: 
   assetBundleName: 

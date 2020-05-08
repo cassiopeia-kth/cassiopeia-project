@@ -7,12 +7,12 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody2D rb;
     public Animator ani;
     public Inventory inventory;
-    public bool arrowKeysEnabled;
+    public static bool arrowKeysEnabled;
     private bool flying = false;
     private float timer;
     private bool activateSleep = false;
     public PlayerManager pm;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 50f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     // Start is called before the first frame update
@@ -165,6 +165,14 @@ public class MovePlayer : MonoBehaviour
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
+	else if (other.GetComponent<WildFire>() != null && flying == false)
+		{
+			Debug.Log("Death by WildFire!");
+			pm.isAlive = false;
+			StartCoroutine(FireTrap());
+			//FindObjectOfType<GameManager>().EndGame();
+		}
+	
 	else if (other.GetComponent<Pickup>() != null)
 	{
 	    Pickup PickupScript = other.GetComponent<Pickup>();

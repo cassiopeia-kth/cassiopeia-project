@@ -24,11 +24,12 @@ public class Lobby : MonoBehaviour {
 	
 	//Debug.Log(MainMenu.name);
 	username = MainMenu.name;
+	username = username.Remove(username.Length - 1);
 	//username = "test";
 	notReadyButton = GameObject.Find("NotReadyButton");
 	readyButton = GameObject.Find("ReadyButton");
 	startButton = GameObject.Find("StartGameButton");
-	GameObject.Find("NotReadyButton").SetActive(false);
+//	GameObject.Find("NotReadyButton").SetActive(false);
 	startButton.SetActive(false);
 	StartCoroutine("connectToServer");
     }
@@ -85,11 +86,21 @@ public class Lobby : MonoBehaviour {
 	GameManager.players[Client.instance.myId].startPressed = true;
 	ClientSend.ReadyFlag();
 	GameManager.instance.inventoryCanvas.enabled = true;
-	GameObject.Find("Lobby").SetActive(false);
 	this.gameStarted = true;
 	foreach(PlayerManager pman in GameManager.players.Values){
 	    pman.isAlive = true;
 	}
+	//GameObject.Find("Lobby").SetActive(false);
+	Canvas a = gameObject.GetComponent<Canvas>();
+	a.enabled = false;
+	//GameObject.Find("Lobby").SetActive(false);
+        //CountdownTimer.instance.StartTimer();
+    }
+
+    public void startGameTimer()
+    {
+        GameObject.Find("Lobby").SetActive(false);
+        CountdownTimer.instance.StartTimer();
     }
 
     IEnumerator connectToServer(){
