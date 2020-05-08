@@ -31,6 +31,7 @@ public class MovePlayer : MonoBehaviour
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		movePoint.position += position;
+		//movePoint.position = Vector3.MoveTowards(movePoint.position, movePoint.position + position, moveSpeed*Time.deltaTime);
 	}
     }
     void Update()

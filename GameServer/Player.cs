@@ -20,6 +20,7 @@ namespace GameServer {
 	public bool everyoneReady = false;
 	public bool isAlive;
 	public bool startPressed = false;
+	public int moveSlower = 0;
 
         public Player(int _id, string _username, string _charType) {
             id = _id;
@@ -58,6 +59,7 @@ namespace GameServer {
 	    inputs= _inputs;
 	    position = _position;
 	    isAlive = _isAlive;
+	    Move(Vector2.Zero);
 	}
 	
 
@@ -95,7 +97,19 @@ namespace GameServer {
 		 this.checkChange = ready;
 	     }
 	     //Console.WriteLine(isAlive);
-	     Move(_inputDirection);
+
+	     
+
+	     if(_inputDirection != Vector2.Zero){
+		 if(moveSlower >= 5){
+		     //&& _inputDirection != Vector2.Zero){
+		     Move(_inputDirection);
+		     moveSlower = 0;
+		 }}
+	     else moveSlower = 5;
+	     moveSlower++;
+
+	     
 //	     Thread.Sleep(150);
 	     return;
         }
