@@ -27,7 +27,7 @@ public class Lobby : MonoBehaviour {
 	notReadyButton = GameObject.Find("NotReadyButton");
 	readyButton = GameObject.Find("ReadyButton");
 	startButton = GameObject.Find("StartGameButton");
-	GameObject.Find("NotReadyButton").SetActive(false);
+//	GameObject.Find("NotReadyButton").SetActive(false);
 	startButton.SetActive(false);
 	StartCoroutine("connectToServer");
     }
@@ -68,6 +68,14 @@ public class Lobby : MonoBehaviour {
 	//GameObject.Find("Lobby").SetActive(false);
 	Canvas a = gameObject.GetComponent<Canvas>();
 	a.enabled = false;
+	//GameObject.Find("Lobby").SetActive(false);
+        //CountdownTimer.instance.StartTimer();
+    }
+
+    public void startGameTimer()
+    {
+        GameObject.Find("Lobby").SetActive(false);
+        CountdownTimer.instance.StartTimer();
     }
 
     IEnumerator connectToServer(){

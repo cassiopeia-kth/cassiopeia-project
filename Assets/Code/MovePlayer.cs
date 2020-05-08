@@ -8,12 +8,12 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody2D rb;
     public Animator ani;
     public Inventory inventory;
-    public bool arrowKeysEnabled;
+    public static bool arrowKeysEnabled;
     private bool flying = false;
     private float timer;
     private bool activateSleep = false;
     public PlayerManager pm;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 50f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     // Start is called before the first frame update

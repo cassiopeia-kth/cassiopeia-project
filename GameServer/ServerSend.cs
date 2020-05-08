@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace GameServer {
@@ -66,12 +67,17 @@ namespace GameServer {
 
 
 	public static void PlayerPosition(Player _player){
-	    using (Packet _packet = new Packet((int)ServerPackets.playerPosition)){
-		_packet.Write(_player.id);
-		_packet.Write(_player.movePosition);
-		if(_player.isAlive)
-		    SendUDPDataToAll(_packet);
-	    }
+            using (Packet _packet = new Packet((int)ServerPackets.playerPosition))
+            {
+                _packet.Write(_player.id);
+                _packet.Write(_player.movePosition);
+                if (_player.isAlive)
+                    SendUDPDataToAll(_packet);
+                else
+                {
+                    //Console.Write("froennnn");
+                }
+            }
 	}
 
         public static void PlayerDisconnected(int _playerId) {
@@ -81,12 +87,24 @@ namespace GameServer {
                 SendTCPDataToAll(_packet);
             }
         }
+
+        public static void TimerInfo(ServerCountdownTimer _currentTime){
+            using (Packet _packet = new Packet((int)ServerPackets.timer)) {
+                _packet.Write(_currentTime.currentTime);
+                _packet.Write(_currentTime.isZero);
+                SendTCPDataToAll(_packet);
+                //Console.WriteLine($"{_currentTime.currentTime} sent timer packet");
+                //Console.WriteLine($"{_currentTime.isZero} is the isZero status");
+            }
+        }
+        
 	public static void ReadyFlag(Player _player){
 	    using (Packet _packet = new Packet((int)ServerPackets.readyFlag)){
 		_packet.Write(_player.id);
 		_packet.Write(_player.ready);
 		_packet.Write(_player.everyoneReady);
 		_packet.Write(_player.startPressed);
+//		Console.Write("ready flag sent");
 		SendTCPDataToAll(_packet);
 	    }
 	}

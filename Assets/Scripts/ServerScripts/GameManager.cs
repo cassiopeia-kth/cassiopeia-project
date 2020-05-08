@@ -122,6 +122,10 @@ public class GameManager : MonoBehaviour {
         gameOverCanvas.enabled = false;
 	//        inventoryCanvas.enabled = true;
         startOfRound = true; 
+        //        inventoryCanvas.enabled = true;
+        //CountdownTimer.instance.StartTimer();
+	GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>().StartTimer();
+
     }
 
 
