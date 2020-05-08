@@ -162,6 +162,14 @@ public class MovePlayer : MonoBehaviour
 	    FindObjectOfType<GameManager>().EndGame();
 	}
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
+	else if (other.GetComponent<WildFire>() != null && flying == false)
+		{
+			Debug.Log("Death by WildFire!");
+			pm.isAlive = false;
+			StartCoroutine(FireTrap());
+			//FindObjectOfType<GameManager>().EndGame();
+		}
+	
 	else if (other.GetComponent<Pickup>() != null)
 	{
 	    Pickup PickupScript = other.GetComponent<Pickup>();
