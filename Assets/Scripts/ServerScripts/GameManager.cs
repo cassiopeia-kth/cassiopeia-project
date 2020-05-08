@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     public MovePlayerOnline mpo;
     public Canvas inventoryCanvasOnline;
     public string[] nameList;
+    public bool startOfRound;
     
     private void Awake() {
         if (instance == null) {
@@ -127,6 +128,11 @@ public class GameManager : MonoBehaviour {
 	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
 	//        inventoryCanvas.enabled = true;
+        startOfRound = true; 
+        //        inventoryCanvas.enabled = true;
+        //CountdownTimer.instance.StartTimer();
+	GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>().StartTimer();
+
     }
 
 
@@ -143,6 +149,32 @@ public class GameManager : MonoBehaviour {
     }
 
 
+    public void spawnCollectibleTrap(Vector2[] positions){
+        var rand1 = new System.Random();
+        int randomIndex1 = rand1.Next(positions.Length);
+        int randomIndex11 = rand1.Next(positions.Length);
+
+
+        GameObject[] traps = {  (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Fire_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hermes_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Poseidon_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Spike_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Zeusmain_Collectable")
+        };
+
+        var rand2 = new System.Random();
+        int randomIndex2 = rand2.Next(traps.Length);
+        int randomIndex22 = rand2.Next(traps.Length);
+
+        GameObject a = traps[randomIndex2];
+        GameObject b = traps[randomIndex22];
+        Instantiate(a, positions[randomIndex1], Quaternion.identity);
+        Instantiate(b, positions[randomIndex11], Quaternion.identity);
+        Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
+        Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
+    }
+
     void Restart() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -151,6 +183,59 @@ public class GameManager : MonoBehaviour {
     public static IEnumerator waitForGM(int id, Vector3 position){
 	while(GameManager.players.ContainsKey(id) == false){
 	    yield return null;
+    public void FixedUpdate(){
+        if(startOfRound == true){
+            spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
+            startOfRound = false; 
+        }
+    }
+}
+    /*
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+public class GameManager : MonoBehaviour {
+    public static GameManager instance;
+    public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
+    public GameObject localPlayerPrefab;
+    public GameObject inventoryPrefab;
+    public GameObject playerPrefab;
+    public Canvas inventoryCanvas;
+    public MovePlayer mp;
+    public MovePlayerOnline mpo;
+    private void Awake() {
+        if (instance == null) {
+            instance = this;
+        }
+        else if (instance != this) {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
+    public void SpawnPlayer(int _id, string _username, Vector3 _position) {
+        GameObject _player;
+        if (_id == Client.instance.myId) {
+	    _player = Instantiate(localPlayerPrefab, _position, new Quaternion(0,0,0,0));
+	    mp = _player.AddComponent<MovePlayer>();
+	    mp.rb = FindObjectOfType<Rigidbody2D>();
+	    mp.ani = FindObjectOfType<Animator>();
+	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
+	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    inventoryCanvas.enabled = true;
+        }
+        else {
+	    Debug.Log(_position);
+	    _player = Instantiate(playerPrefab, _position, new Quaternion(0,0,0,0));
+	    mpo = _player.AddComponent<MovePlayerOnline>();
+	    mpo.rb = FindObjectOfType<Rigidbody2D>();
+	    mpo.ani = FindObjectOfType<Animator>();
+	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
+	    mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
+	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
+	    inventoryHUD.SetActive(false);
 	}
 	 if(GameManager.players[id].GetComponent<MovePlayer>() != null)
 		GameManager.players[id].GetComponent<MovePlayer>().movePlayer(position);

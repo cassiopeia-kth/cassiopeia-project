@@ -10,6 +10,8 @@ public enum ServerPackets {
     spawnPlayer,
     playerPosition,
     playerDisconnected,
+    timer,
+    isZero,
     readyFlag,
 }
 
@@ -17,6 +19,8 @@ public enum ServerPackets {
 public enum ClientPackets {
     welcomeReceived = 1,
     playerMovement,
+    timer,
+    isZero,
     readyFlag
 }
 
