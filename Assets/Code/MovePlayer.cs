@@ -7,12 +7,12 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody2D rb;
     public Animator ani;
     public Inventory inventory;
-    public bool arrowKeysEnabled;
+    public static bool arrowKeysEnabled;
     private bool flying = false;
     private float timer;
     private bool activateSleep = false;
     public PlayerManager pm;
-    public float moveSpeed = 10f;
+    public float moveSpeed = 50f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     // Start is called before the first frame update
@@ -26,7 +26,8 @@ public class MovePlayer : MonoBehaviour
 	whatStopsMovement = LayerMask.GetMask("StopMovement");
     }
     public void movePlayer(Vector3 position){
-	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+//	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		movePoint.position += position;
@@ -34,7 +35,7 @@ public class MovePlayer : MonoBehaviour
     }
     void Update()
     {
-		if(activateSleep)
+	if(activateSleep)
 	{
 	    timer -= Time.deltaTime;
 	    //	    Debug.Log(timer);
@@ -158,18 +159,10 @@ public class MovePlayer : MonoBehaviour
 	    Debug.Log("Death by Zeus Diagonal!");
 	    pm.isAlive = false;
 	    StartCoroutine(ZeusDiagonalDeath());
-	    //FindObjectOfType<GameManager>().EndGame();
+	    FindObjectOfType<GameManager>().EndGame();
 	}
-
-		else if (other.GetComponent<WildFire>() != null && flying == false)
-		{
-			Debug.Log("Death by WildFire!");
-			pm.isAlive = false;
-			StartCoroutine(FireTrap());
-			//FindObjectOfType<GameManager>().EndGame();
-		}
-		// Deals with pickup interaction. (e.g. the Hermes status effect)
-		else if (other.GetComponent<Pickup>() != null)
+	// Deals with pickup interaction. (e.g. the Hermes status effect)
+	else if (other.GetComponent<Pickup>() != null)
 	{
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
@@ -327,10 +320,6 @@ public class MovePlayer : MonoBehaviour
 	yield return 0;
     }
 }
-
-
-
-
     /*
 ﻿using System.Collections;
 using System.Collections.Generic;

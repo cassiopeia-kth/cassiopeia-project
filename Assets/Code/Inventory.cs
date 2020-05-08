@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour
     public GameObject hermesTrap;
 
 
+
     public void addToArray(Inventory_Item item){
 	for(int i = 0; i < 7; i++){
 	    if(itemList[i] == null){
@@ -142,27 +143,22 @@ public class Inventory : MonoBehaviour
 		//Debug.Log(itemList[i].Name);
 		switch(itemList[i].Name){
 		    case "Hades_Collectable":
-			//Instantiate(hadesTrap, playerPos , transform.rotation);
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation);
+			Instantiate(hadesTrap, playerPos , transform.rotation);
 			break;
 		    case "Hermes_Collectable":
 			Instantiate(hermesTrap, playerPos , transform.rotation);
 			break;
 		    case "Spike_Collectable":
-			//Instantiate(spikeTrap, playerPos , transform.rotation);
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation);
+			Instantiate(spikeTrap, playerPos , transform.rotation);
 			break;
 		    case "Poseidon_Collectable":
-			//Instantiate(poseidonTrap, playerPos , transform.rotation);
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation);
+			Instantiate(poseidonTrap, playerPos , transform.rotation);
 			break;
 		    case "Zeusmain_Collectable":
-			//Instantiate(zeusmainTrap, playerPos , transform.rotation); // Change this because the trap is 1 x 2 in size
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation);
+			Instantiate(zeusmainTrap, playerPos , transform.rotation);
 			break;
 		    case "Fire_Collectable":
-			//Instantiate(fireTrap, playerPos , transform.rotation);
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation);
+			Instantiate(fireTrap, playerPos , transform.rotation);
 			break;		    
 		}
 		removeFromArray(i);

@@ -8,10 +8,11 @@ using TMPro;
 public class MainMenu : MonoBehaviour {
 
     public static string name;
+    public static string charType;
     
     public void PlayGame () 
     {
-	SceneManager.LoadScene("Level1_ch95");
+	SceneManager.LoadScene("TimerGang");
     }
 
     public void setUsername(){
@@ -20,6 +21,11 @@ public class MainMenu : MonoBehaviour {
 	//GameObject test = GameObject.Find("UsernameInput");
 	//Debug.Log(test);
     }
+
+    public void setCharType(string _charType){
+        charType = _charType;
+    }
+
    
 	public void QuitGame ()
     {

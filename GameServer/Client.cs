@@ -158,13 +158,16 @@ namespace GameServer {
             }
         }
 
-        public void SendIntoGame(string _playerName) {
-            player = new Player(id, _playerName, new Vector3(-5.5f, 1.5f, 0));
+        public void SendIntoGame(string _playerName, string _charType) {
+            //ADD char type to constructor
+            player = new Player(id, _playerName, _charType);
+	    //, new Vector3(-5.5f, -0.5f, 0));
 
             foreach (Client _client in Server.clients.Values) {
                 if (_client.player != null) {
                     if (_client.id != id) {
                         ServerSend.SpawnPlayer(id, _client.player);
+                        //ServerSend.TimerInfo(ServerCountdownTimer.instance);
 //			Console.Write(_client.player.position + "\n");
                     }
                 }
@@ -173,8 +176,10 @@ namespace GameServer {
             foreach (Client _client in Server.clients.Values) {
                 if (_client.player != null) {
                     ServerSend.SpawnPlayer(_client.id, player);
-//		    Console.Write("Current player:");
-//		    Console.Write(player.position);
+                    //ServerSend.TimerInfo(ServerCountdownTimer.instance);
+
+                    //		    Console.Write("Current player:");
+                    //		    Console.Write(player.position);
                 }
             }
         }
