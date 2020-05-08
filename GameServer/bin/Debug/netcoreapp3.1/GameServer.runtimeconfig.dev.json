@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/home/bugra/.dotnet/store/|arch|/|tfm|",
-      "/home/bugra/.nuget/packages"
+      "/home/calin/.dotnet/store/|arch|/|tfm|",
+      "/home/calin/.nuget/packages"
     ]
   }
 }
