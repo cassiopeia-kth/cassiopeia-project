@@ -11,7 +11,7 @@ namespace GameServer
     {
         public static ServerCountdownTimer instance;
 
-        public float currentTime = 0f;
+        public float currentTime = 15f;
         public float startTime = 15f;
         public bool isZero = false;
 
@@ -29,20 +29,20 @@ namespace GameServer
 
         // Update is called once per frame
         public void UpdateTimer(){
-
-            if (currentTime <= 0) {
-                //Thread.Sleep(5000);
-                FreezeGame();
-                //currentTime = 15f;
+            if (currentTime <= 0)
+            {
                 isZero = true;
+                if(currentTime <= -5)
+                {
+                    currentTime = 15f;
+                    isZero = false;
+                }
             }
 
-            currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
-            isZero = false;
 
+                currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
+                
 
-               
-            
         }
 
         public void FreezeGame() {
@@ -50,8 +50,7 @@ namespace GameServer
             foreach (Client item in Server.clients.Values) {
                 if (item.player != null) {
                     item.player.isAlive = false;
-                    Console.WriteLine("Froze a boi");
-
+                    //Console.WriteLine($"{item.player.isAlive} is the isAlive status");
                 }
             }
 
@@ -68,13 +67,11 @@ namespace GameServer
         }
         
         public void Update(){
-            /*if (currentTime <= 0) {
-                FreezeGame(5000);
-                currentTime = 15f;        
-            }*/
-        UpdateTimer();
-        ServerSend.TimerInfo(instance);
-        Console.WriteLine("sent currentTime");
+            
+                UpdateTimer();
+                ServerSend.TimerInfo(instance);
+                //Console.WriteLine("sent currentTime");
+            
         }
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6254391766835420401}
   - component: {fileID: -6137262292955251344}
   - component: {fileID: 9222342038124327308}
+  - component: {fileID: 7608610829187407449}
   m_Layer: 0
   m_Name: bishop
   m_TagString: Untagged
@@ -149,18 +150,8 @@ MonoBehaviour:
   isAlive: 1
   isReady: 0
   checkChange: 0
---- !u!114 &7608610829187407449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933739478917387332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b75c133becea1f74783133dd18abd490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  everyoneReady: 0
+  startPressed: 0
 --- !u!50 &-6137262292955251344
 Rigidbody2D:
   serializedVersion: 4
@@ -194,7 +185,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c133becea1f74783133dd18abd490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownTimer: {fileID: 0}
+--- !u!114 &7608610829187407449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933739478917387332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75c133becea1f74783133dd18abd490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5325360580667886098
 GameObject:
   m_ObjectHideFlags: 0

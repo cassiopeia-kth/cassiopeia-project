@@ -33,9 +33,11 @@ namespace GameServer {
 	    position = _position;
 	    isAlive = _isAlive;
 	}
-	
 
-        public void Update() {
+
+
+
+		public void Update() {
              Vector2 _inputDirection = Vector2.Zero;
              if (inputs[0]) {
                  _inputDirection.Y = 1;
@@ -68,8 +70,10 @@ namespace GameServer {
 		 ServerSend.ReadyFlag(this);
 		 this.checkChange = ready;
 	     }
-	     //Console.WriteLine(isAlive);
-	     Move(_inputDirection);
+			//Console.WriteLine(isAlive);
+				Move(_inputDirection);
+			
+		
 //	     Thread.Sleep(150);
 	     return;
         }
