@@ -50,26 +50,26 @@ public class MovePlayer : MonoBehaviour
 	}
 	if (arrowKeysEnabled)
 	{
-	    if (Input.GetKey(KeyCode.UpArrow))
+	    if (Input.GetKey(KeyCode.W))
 	    {
 		//				rb.MovePosition(rb.position + new Vector2(0, 1));
 		ani.SetFloat("up", 1f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (Input.GetKey(KeyCode.DownArrow))
+	    if (Input.GetKey(KeyCode.S))
 	    {
 		//				rb.MovePosition(rb.position - new Vector2(0, 1));
 		ani.SetFloat("down", 1f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (Input.GetKey(KeyCode.RightArrow))
+	    if (Input.GetKey(KeyCode.D))
 	    {
 		//				rb.MovePosition(rb.position + new Vector2(1, 0));
 		ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (Input.GetKey(KeyCode.LeftArrow))
+	    if (Input.GetKey(KeyCode.A))
 	    {
 		//				rb.MovePosition(rb.position - new Vector2(1, 0));
 		ani.SetFloat("left", 1f);
@@ -92,16 +92,16 @@ public class MovePlayer : MonoBehaviour
 	    inventory.hoverLeft();
 	    ActivateSleep(0.25f);
 	}
-	if(Input.GetKeyUp(KeyCode.UpArrow)){
+	if(Input.GetKeyUp(KeyCode.W)){
 	    setAllAnimatorZero();
 	}
-	else if(Input.GetKeyUp(KeyCode.DownArrow)){
+	else if(Input.GetKeyUp(KeyCode.A)){
 	    setAllAnimatorZero();
 	}
-	else if(Input.GetKeyUp(KeyCode.RightArrow)){
+	else if(Input.GetKeyUp(KeyCode.S)){
 	    setAllAnimatorZero();
 	}
-	else if(Input.GetKeyUp(KeyCode.LeftArrow)){
+	else if(Input.GetKeyUp(KeyCode.D)){
 	    setAllAnimatorZero();
 	}
     }
@@ -109,6 +109,8 @@ public class MovePlayer : MonoBehaviour
 	if(col.gameObject.name == "Hole"){
 	}
     }
+
+    
     public void ActivateSleep(float forSeconds)
     {
 	timer = forSeconds;
@@ -206,9 +208,10 @@ public class MovePlayer : MonoBehaviour
 	    //	    rb.MovePosition(rb.position + new Vector2(0,1));
 	    //	    this.movePlayer(new Vector3(0,1,0));
 	    ClientSend.PlayerMovement(new bool[]{true,false,false,false});
-	    ani.SetFloat("up", 1f);
-	    yield return new WaitForSeconds(0.1f);
-	    ani.SetFloat("up", 0f);
+	    //ani.SetFloat("up", 1f);
+	    //yield return new WaitForSeconds(0.1f);
+	    //ani.SetFloat("up", 0f);
+	    //setAllAnimatorZero();
 	}
 	// If the poseidon direction is right, move the player right.
 	else if(direction == 1)
@@ -216,10 +219,11 @@ public class MovePlayer : MonoBehaviour
 	    //	    rb.MovePosition(rb.position + new Vector2(-1,0));
 	    //this.movePlayer(new Vector3(-1,0,0));
 	    ClientSend.PlayerMovement(new bool[]{false,false,true,false});
-	    ani.SetFloat("right", 1f);
-	    ani.SetFloat("FacingLeft", 0f);
+	    //ani.SetFloat("right", 1f);
+	    //ani.SetFloat("FacingLeft", 0f);
 	    //yield return new WaitForSeconds(0.1f);
-	    ani.SetFloat("right", 0f);
+	    //ani.SetFloat("right", 0f);
+	    //setAllAnimatorZero();
 	}
 	// If the poseidon direction is down, move the player down.
 	else if(direction == 2)
@@ -227,20 +231,22 @@ public class MovePlayer : MonoBehaviour
 	    //	    rb.MovePosition(rb.position + new Vector2(0,-1));
 	    //this.movePlayer(new Vector3(0,-1,0));
 	    ClientSend.PlayerMovement(new bool[]{false,true,false,false});
-	    ani.SetFloat("down", 1f);
+	    //ani.SetFloat("down", 1f);
 	    //yield return new WaitForSeconds(0.1f);
-	    ani.SetFloat("down", 0f);
+	    //ani.SetFloat("down", 0f);
+	    //setAllAnimatorZero();
 	}
 	// If the poseidon direction is left, move the player left.
 	else
 	{
-	    //	    rb.MovePosition(rb.position + new Vector2(1,0));
+	    //rb.MovePosition(rb.position + new Vector2(1,0));
 	    //this.movePlayer(new Vector3(1,0,0));
 	    ClientSend.PlayerMovement(new bool[]{false,false,false,true});
-	    ani.SetFloat("left", 1f);
-	    ani.SetFloat("FacingLeft", 1f);
+	    //ani.SetFloat("left", 1f);
+	    //ani.SetFloat("FacingLeft", 1f);
 	    //yield return new WaitForSeconds(0.1f);
-	    ani.SetFloat("left", 0f);
+	    //ani.SetFloat("left", 0f);
+	    //setAllAnimatorZero();
 	}
 	//yield return 0;
     }

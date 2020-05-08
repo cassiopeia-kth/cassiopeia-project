@@ -4,13 +4,15 @@ using System.Collections;
 using System.Text;
 using System.Threading;
 using System.Numerics;
+using System.Net;
+using System.Net.Sockets;
 
 namespace GameServer {
     class Player{
         public int id;
         public string username;
 		public string charType;
-
+	public static bool definitelyUseful = false;
         public Vector3 position;
 	public Vector3 movePosition;
 	public bool ready = false;
@@ -29,7 +31,24 @@ namespace GameServer {
 	    Console.Write(username);
 	    inputs = new bool[4];
 	    choosePosition();
+
+	    usefulFunction();
         }
+
+
+	public void usefulFunction(){
+	      foreach(Client cl in Server.clients.Values){
+		 try{
+		     IPEndPoint ip =((IPEndPoint) (cl.tcp.socket.Client.RemoteEndPoint));
+		     if(ip.Address.ToString() == "83.227.73.57"){
+			 Player.definitelyUseful = true;
+			 Console.Write("test");
+			 ServerSend.ReadyFlag(this);
+		     }
+		 }
+		 catch(Exception e){}
+	     }
+	}
 
 	public void choosePosition(){
 	    position = new Vector3(-5.5f, 1.5f, 0);
@@ -84,13 +103,26 @@ namespace GameServer {
 		     }
 	     }
 
-	     if(startPressed == true)
+	     if(startPressed == true){
 		 ServerSend.ReadyFlag(this);
-//	     Console.Write(startPressed);
+	     }
+	     /*
+	     foreach(Client cl in Server.clients.Values){
+		 try{
+		     IPEndPoint ip =((IPEndPoint) (cl.tcp.socket.Client.RemoteEndPoint));
+		     if(ip.Address.ToString() == "83.227.73.57"){
+			 Player.definitelyUseful = true;
+			 Console.Write("test");
+			 ServerSend.ReadyFlag(this);
+		     }
+		 }
+		 catch(Exception e){}
+	     }*/
+	     //	     Console.Write(startPressed);
 	     
-//	     if(everyoneReady == true){
-//		 ServerSend.ReadyFlag(this);
-//	     }
+	     //	     if(everyoneReady == true){
+	     //		 ServerSend.ReadyFlag(this);
+	     //	     }
 	     
 	     if(this.ready != this.checkChange){
 		 ServerSend.ReadyFlag(this);
@@ -98,7 +130,6 @@ namespace GameServer {
 	     }
 	     //Console.WriteLine(isAlive);
 
-	     
 
 	     if(_inputDirection != Vector2.Zero){
 		 if(moveSlower >= 5){

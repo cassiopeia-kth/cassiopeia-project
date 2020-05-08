@@ -65,11 +65,10 @@ public class GameManager : MonoBehaviour {
     }
     
 
-    public void SpawnPlayer(int _id, string _username, Vector3 _position, string _charType) {
+    public void SpawnPlayer(int _id, string _username, Vector3 _position, string _charType, bool isReady) {
         
         
-        Debug.Log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
-        Debug.Log(_charType);
+        //Debug.Log(_charType);
         GameObject _player;
         if (_id == Client.instance.myId) {
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
@@ -84,7 +83,7 @@ public class GameManager : MonoBehaviour {
         }
         else {
 	    
-	    Debug.Log(_position);
+	    //Debug.Log(_position);
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mpo = _player.AddComponent<MovePlayerOnline>();
 	    mpo.rb = FindObjectOfType<Rigidbody2D>();
@@ -103,8 +102,12 @@ public class GameManager : MonoBehaviour {
 	}
         _player.GetComponent<PlayerManager>().id = _id;
         _player.GetComponent<PlayerManager>().username = _username;
+	_player.GetComponent<PlayerManager>().isReady = isReady;
         players.Add(_id, _player.GetComponent<PlayerManager>());
 	fillUsername();
+	Lobby.instance.displayReadyorNot(_id);
+	//Debug.Log(players[Client.instance.myId].isReady + "this is after spawingng a new playeralsknnaks"); //UP UNTIL HERE IT IS FINE
+
     }
 
     public float restartDelay = 2f;

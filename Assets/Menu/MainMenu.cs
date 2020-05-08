@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour {
 
     public void setUsername(){
 	name = GameObject.Find("UsernameInput").GetComponent<TextMeshProUGUI>().text;
-	Debug.Log(name);
+//	Debug.Log(name);
 	if(charType == null)
 	    charType = "bishop";
 	//GameObject test = GameObject.Find("UsernameInput");

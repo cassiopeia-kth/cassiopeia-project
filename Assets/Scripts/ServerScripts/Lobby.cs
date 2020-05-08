@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Lobby : MonoBehaviour {
 
@@ -21,7 +22,7 @@ public class Lobby : MonoBehaviour {
             Destroy(this);
         }
 	
-	Debug.Log(MainMenu.name);
+	//Debug.Log(MainMenu.name);
 	username = MainMenu.name;
 	//username = "test";
 	notReadyButton = GameObject.Find("NotReadyButton");
@@ -37,12 +38,31 @@ public class Lobby : MonoBehaviour {
 	    if(GameManager.players[Client.instance.myId].everyoneReady == true){
 		Debug.Log("Everyone ready");
 	    }
+	foreach(PlayerManager pman in GameManager.players.Values){
+	    if(pman.isAlive == true){
+		pman.isAlive = false;
+	    }
+	}
+	foreach(PlayerManager id in GameManager.players.Values){
+	    Lobby.instance.displayReadyorNot(id.id);
+	}
+	try{
+	Lobby.instance.displayReadyorNot(GameManager.players[Client.instance.myId].id);
+	}
+	catch(Exception e ){}
+	//Debug.Log(GameManager.players[Client.instance.myId].id);
+	//Debug.Log(GameManager.players[Client.instance.myId].isReady);
+	
     }
 
     public void displayStartButton(){
 	startButton.SetActive(true);
     }
 
+    public void theMostUsefulFunction(){
+	Debug.Log("GOD JOINED");
+    }
+    
     public void hideStartButton(){
 	startButton.SetActive(false);
     }
@@ -67,6 +87,9 @@ public class Lobby : MonoBehaviour {
 	GameManager.instance.inventoryCanvas.enabled = true;
 	GameObject.Find("Lobby").SetActive(false);
 	this.gameStarted = true;
+	foreach(PlayerManager pman in GameManager.players.Values){
+	    pman.isAlive = true;
+	}
     }
 
     IEnumerator connectToServer(){

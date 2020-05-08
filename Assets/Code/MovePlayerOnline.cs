@@ -115,7 +115,7 @@ public class MovePlayerOnline : MonoBehaviour
 	if(other.gameObject.name == "Hole" && flying == false){
 			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
-		pm.isAlive = false;
+		//pm.isAlive = false;
 		StartCoroutine(HoleDeath());
 	}
 
@@ -123,7 +123,7 @@ public class MovePlayerOnline : MonoBehaviour
 	else if (other.GetComponent<TrapInteraction>() != null && flying == false)
 	{
 	    arrowKeysEnabled = false;
-	    pm.isAlive = false;
+//	    pm.isAlive = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
@@ -153,7 +153,7 @@ public class MovePlayerOnline : MonoBehaviour
 	else if (other.GetComponent<ZeusDiagonal>() != null && flying == false)
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
-	    pm.isAlive = false;
+//	    pm.isAlive = false;
 		StartCoroutine(ZeusDiagonalDeath());
 		//FindObjectOfType<GameManager>().EndGame();
 	}
@@ -232,8 +232,8 @@ public class MovePlayerOnline : MonoBehaviour
 	{
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
-		ani.SetFloat("FacingLeft", 1f);
-		yield return new WaitForSeconds(0.1f);
+	    ani.SetFloat("FacingLeft", 1f);
+	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
 	}
 
