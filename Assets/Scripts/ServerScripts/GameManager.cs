@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -188,6 +188,34 @@ public class GameManager : MonoBehaviour {
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false; 
         }
+    }
+    
+    
+    public void spawnTrap(int id, GameObject trap, Vector3 pos, Quaternion rot)
+    {
+        if (id == Client.instance.myId)
+        {
+            StartCoroutine(markTrap(pos, rot));
+        }
+       
+        if(trap.name == "Zeusmain_Trap")
+        {
+            pos.y = pos.y + 0.5f;
+        }
+        
+        GameObject laid_trap = Instantiate(trap, pos, rot);
+        laid_trap.GetComponent<TrapInteraction>().killer = players[id].username;
+        Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
+    }
+
+
+    IEnumerator markTrap (Vector3 pos, Quaternion rot)
+    {
+        GameObject cross = (GameObject)Resources.Load("Prefabs/Traps/Cross", typeof(GameObject));
+        GameObject actualCross = Instantiate(cross, pos, rot);
+        yield return new WaitForSeconds(1.5f);
+        actualCross.GetComponent<SpriteRenderer>().enabled = false;
+        actualCross.SetActive(false);
     }
 }
     /*
