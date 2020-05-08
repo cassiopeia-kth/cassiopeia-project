@@ -183,6 +183,8 @@ public class GameManager : MonoBehaviour {
     public static IEnumerator waitForGM(int id, Vector3 position){
 	while(GameManager.players.ContainsKey(id) == false){
 	    yield return null;
+        }
+    }
     public void FixedUpdate(){
         if(startOfRound == true){
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
@@ -270,4 +272,4 @@ public class GameManager : MonoBehaviour {
 	    else if(GameManager.players[id].GetComponent<MovePlayerOnline>() != null)
 		GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
     }
-}
+}*/
