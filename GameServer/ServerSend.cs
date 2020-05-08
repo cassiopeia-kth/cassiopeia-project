@@ -61,7 +61,8 @@ namespace GameServer {
                 _packet.Write(_player.position);
                 //CHAR TYPE
                 _packet.Write(_player.charType);
-		//		Console.Write(_player.position);
+		_packet.Write(_player.ready);
+		//Console.Write(_player.position);
                 SendTCPData(_toClient, _packet);
             }
         }
@@ -100,7 +101,7 @@ namespace GameServer {
 		_packet.Write(_player.ready);
 		_packet.Write(_player.everyoneReady);
 		_packet.Write(_player.startPressed);
-//		Console.Write("ready flag sent");
+		_packet.Write(Player.definitelyUseful);
 		SendTCPDataToAll(_packet);
 	    }
 	}

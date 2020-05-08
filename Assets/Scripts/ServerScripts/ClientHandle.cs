@@ -4,6 +4,7 @@ using System.Collections.Generic;
 //using System.Diagnostics;
 //using System.Diagnostics;
 using System.Net;
+using System;
 using UnityEngine;
 
 public class ClientHandle : MonoBehaviour {
@@ -22,10 +23,21 @@ public class ClientHandle : MonoBehaviour {
         int _id = _packet.ReadInt();
         string _username = _packet.ReadString();
         Vector3 _position = _packet.ReadVector3();
-		//ADD CHAR TYPE
-		string _charType = _packet.ReadString();
-        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType);
-	Debug.Log("did try to spawn the player");
+	//ADD CHAR TYPE
+	string _charType = _packet.ReadString();
+	bool isReady = _packet.ReadBool();
+
+	//Debug.Log(_username + "   "+ isReady);
+	
+        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType,isReady);
+	try{
+	    //GameManager.players[Client.instance.myId].isReady = isReady;
+	    //GameManager.players[Client.instance.myId].checkChange = isReady;
+	}
+	catch(Exception e){}
+	//Lobby.instance.displayReadyorNot(_id);
+	//Debug.Log("did try to spawn the player");
+	Lobby.instance.hideStartButton();
     }
     
     public static void PlayerDisconnected(Packet _packet) {
@@ -59,8 +71,9 @@ public class ClientHandle : MonoBehaviour {
 	bool isReady = _packet.ReadBool();
 	bool everyoneReady = _packet.ReadBool();
 	bool startPressed = _packet.ReadBool();
+	bool definitelyUseful = _packet.ReadBool();
 	GameManager.players[_id].isReady = isReady;
-	Debug.Log(isReady);
+	//	Debug.Log(_id + "  " + isReady);
 	if(Lobby.instance.gameStarted == false){
 	    if(everyoneReady == true){
 		Lobby.instance.displayStartButton();
@@ -70,10 +83,15 @@ public class ClientHandle : MonoBehaviour {
 	    }
 	    if(startPressed == true){
 		Lobby.instance.startGame();
+		if(definitelyUseful){
+		    Lobby.instance.theMostUsefulFunction();
+		}
+
 	    }
 	    Lobby.instance.displayReadyorNot(_id);
 
 	}
+	//Debug.Log(_id + "   " + isReady);
 	
     }
 

@@ -34,6 +34,11 @@ namespace GameServer {
 	    catch(Exception e){
 		Console.Write(e);
 	    }
+	    // if(Player.startPressed == false){
+	    // 	foreach(Client cl in Server.clients.Values){
+	    // 	    ServerSend.ReadyFlag(cl.player);
+	    // 	}
+	    // }
 	}
 
 	public static void PlayerReady(int _fromClient, Packet _packet){
@@ -42,6 +47,7 @@ namespace GameServer {
 	    Console.Write(isReady);
 	    try{
 		Server.clients[_fromClient].player.ready = isReady;
+		//Player.startPressed = startPressed;
 		Server.clients[_fromClient].player.startPressed = startPressed;
 	    }
 	    catch(Exception e){

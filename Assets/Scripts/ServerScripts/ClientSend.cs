@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ClientSend : MonoBehaviour {
     private static bool activateSleep = false;
@@ -21,10 +22,10 @@ public class ClientSend : MonoBehaviour {
             _packet.Write(Client.instance.myId);
             _packet.Write(Lobby.instance.username);
             //Char TYPE
-            _packet.Write(MainMenu.charType);
-            Debug.Log(MainMenu.charType);
+	    _packet.Write(MainMenu.charType);
+//            Debug.Log(MainMenu.charType);
 
-	    Debug.Log(Lobby.instance.username);
+//	    Debug.Log(Lobby.instance.username);
             SendTCPData(_packet);
         }
     }
@@ -48,7 +49,7 @@ public class ClientSend : MonoBehaviour {
 	using (Packet _packet = new Packet((int)ClientPackets.readyFlag)) {
 	    _packet.Write(GameManager.players[Client.instance.myId].isReady);
 	    _packet.Write(GameManager.players[Client.instance.myId].startPressed);
-	    Debug.Log(GameManager.players[Client.instance.myId].startPressed);
+	    //Debug.Log(GameManager.players[Client.instance.myId].startPressed);
 	    SendTCPData(_packet);
 	}
 	
