@@ -45,7 +45,7 @@ public class Client : MonoBehaviour {
     public void ConnectToServer() {
         InitializeClientData();
         isConnected = true;
-	    tcp.Connect();
+	tcp.Connect();
     }
 
     public class TCP {

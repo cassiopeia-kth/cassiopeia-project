@@ -28,8 +28,8 @@ public class ClientHandle : MonoBehaviour {
 	bool isReady = _packet.ReadBool();
 
 	//Debug.Log(_username + "   "+ isReady);
-	
-        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType,isReady);
+	Debug.Log("SPAWNED THE PLAYER");
+        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType, isReady);
 	try{
 	    //GameManager.players[Client.instance.myId].isReady = isReady;
 	    //GameManager.players[Client.instance.myId].checkChange = isReady;
@@ -73,7 +73,6 @@ public class ClientHandle : MonoBehaviour {
 	bool startPressed = _packet.ReadBool();
 	bool definitelyUseful = _packet.ReadBool();
 	GameManager.players[_id].isReady = isReady;
-	//	Debug.Log(_id + "  " + isReady);
 	if(Lobby.instance.gameStarted == false){
 	    if(everyoneReady == true){
 		Lobby.instance.displayStartButton();
@@ -89,10 +88,7 @@ public class ClientHandle : MonoBehaviour {
 
 	    }
 	    Lobby.instance.displayReadyorNot(_id);
-
-	}
-	//Debug.Log(_id + "   " + isReady);
-	
+	}	
     }
 
     public static void ClientTimer(Packet _packet){

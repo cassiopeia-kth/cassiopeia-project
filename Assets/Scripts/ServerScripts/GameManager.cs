@@ -174,8 +174,8 @@ public class GameManager : MonoBehaviour {
         GameObject b = traps[randomIndex22];
         Instantiate(a, positions[randomIndex1], Quaternion.identity);
         Instantiate(b, positions[randomIndex11], Quaternion.identity);
-        Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
-        Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
+        //Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
+        //Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
     }
 
     void Restart() {
@@ -186,7 +186,11 @@ public class GameManager : MonoBehaviour {
     public static IEnumerator waitForGM(int id, Vector3 position){
 	while(GameManager.players.ContainsKey(id) == false){
 	    yield return null;
-        }
+	}
+	if(GameManager.players[id].GetComponent<MovePlayer>() != null)
+	    GameManager.players[id].GetComponent<MovePlayer>().movePlayer(position);
+	else if(GameManager.players[id].GetComponent<MovePlayerOnline>() != null)
+	    GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
     }
     public void FixedUpdate(){
         if(startOfRound == true){

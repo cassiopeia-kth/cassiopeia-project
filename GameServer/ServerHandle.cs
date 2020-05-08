@@ -9,8 +9,8 @@ namespace GameServer {
             int _clientIdCheck = _packet.ReadInt();
             string _username = _packet.ReadString();
 			//Char TYPE
-			string _charType = _packet.ReadString();
-	    _username = _username.Remove(_username.Length - 1);
+	    string _charType = _packet.ReadString();
+	    //_username = _username.Remove(_username.Length - 1);
 	    Console.WriteLine(_username);
             Console.WriteLine($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}.");
             if (_fromClient != _clientIdCheck) {
@@ -46,6 +46,7 @@ namespace GameServer {
 	    bool startPressed = _packet.ReadBool();
 	    Console.Write(isReady);
 	    try{
+		Console.Write("wrote the is ready");
 		Server.clients[_fromClient].player.ready = isReady;
 		//Player.startPressed = startPressed;
 		Server.clients[_fromClient].player.startPressed = startPressed;

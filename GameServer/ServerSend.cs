@@ -59,10 +59,9 @@ namespace GameServer {
                 _packet.Write(_player.id);
                 _packet.Write(_player.username);
                 _packet.Write(_player.position);
-                //CHAR TYPE
                 _packet.Write(_player.charType);
 		_packet.Write(_player.ready);
-		//Console.Write(_player.position);
+		//Console.Write("Player spawned");
                 SendTCPData(_toClient, _packet);
             }
         }
