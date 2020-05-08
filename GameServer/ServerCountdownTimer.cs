@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Threading;
 
@@ -28,27 +29,31 @@ namespace GameServer
 
         // Update is called once per frame
         public void UpdateTimer(){
-            
 
-            currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
-            isZero = false;
-            
-            if (currentTime <= 0){
+            if (currentTime <= 0) {
+                //Thread.Sleep(5000);
                 FreezeGame();
                 //currentTime = 15f;
                 isZero = true;
-
             }
+
+            currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
+            isZero = false;
+
+
+               
             
         }
 
         public void FreezeGame() {
+            //Console.WriteLine("Freeze Boi, ice cold");
             foreach (Client item in Server.clients.Values) {
                 if (item.player != null) {
                     item.player.isAlive = false;
+                    Console.WriteLine("Froze a boi");
+
                 }
             }
-            //Thread.Sleep(_duration);
 
             currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
             if (currentTime <= -5) {
