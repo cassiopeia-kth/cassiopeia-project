@@ -33,3 +33,16 @@ C:/Users/Philipe Granhall/source/repos/GameServer/GameServer/obj/Debug/netcoreap
 /home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfo.cs
 /home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.dll
 /home/calin/KTH/TCOMK2/II1305_Project_TCOMK/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.pdb
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.csprojAssemblyReference.cache
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.csproj.CoreCompileInputs.cache
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfoInputs.cache
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.AssemblyInfo.cs
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.dll
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.deps.json
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.runtimeconfig.json
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.runtimeconfig.dev.json
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.dll
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/bin/Debug/netcoreapp3.1/GameServer.pdb
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.pdb
+/home/bugra/Desktop/projectFresh/cassiopeia-project/GameServer/obj/Debug/netcoreapp3.1/GameServer.genruntimeconfig.cache

@@ -20,6 +20,10 @@ public class ClientSend : MonoBehaviour {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived)) {
             _packet.Write(Client.instance.myId);
             _packet.Write(Lobby.instance.username);
+            //Char TYPE
+            _packet.Write(MainMenu.charType);
+            Debug.Log(MainMenu.charType);
+
 	    Debug.Log(Lobby.instance.username);
             SendTCPData(_packet);
         }

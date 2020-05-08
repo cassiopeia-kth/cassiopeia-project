@@ -38,6 +38,8 @@ public class char_select : MonoBehaviour
   private int leftIndex;
   private int rightIndex;
 
+  private MainMenu mainMenu;
+
   private void Start() 
   {
         music.Play();
@@ -128,7 +130,41 @@ public class char_select : MonoBehaviour
   public void select() 
   {
     selected.Play();
-    Debug.Log("Pressed");
+    mainMenu = FindObjectOfType<MainMenu>();
+    // set the client with charType and a random ID
+    switch (index)
+    { case 0:
+        mainMenu.setCharType("monster");
+        // gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/monster", typeof(GameObject));
+        // Client.instance.charType = gm.localPlayerPrefab.name;
+        // Client.instance.myId = Random.Range(1,10000);
+        break;
+
+      case 1:
+      mainMenu.setCharType("executioner");
+        // gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/executioner", typeof(GameObject));
+        // Client.instance.charType = gm.localPlayerPrefab.name;
+        // Client.instance.myId = Random.Range(1,10000);
+        break;
+      case 2:
+      mainMenu.setCharType("knight");
+        // gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/knight", typeof(GameObject));
+        // Client.instance.charType = gm.localPlayerPrefab.name;
+        // Client.instance.myId = Random.Range(1,10000);
+
+        break;
+      case 3:
+      mainMenu.setCharType("bishop");
+        // gm.localPlayerPrefab = (GameObject)Resources.Load("Prefabs/Player/bishop", typeof(GameObject));
+        // Client.instance.charType = gm.localPlayerPrefab.name;
+        // Client.instance.myId = Random.Range(1,10000);
+        break;
+
+      default:
+        break;
+    }
+
+
   }
     IEnumerator knight() { 
         
