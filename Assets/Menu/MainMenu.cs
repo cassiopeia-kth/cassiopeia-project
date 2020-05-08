@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour {
     
     public void PlayGame () 
     {
-	SceneManager.LoadScene("TimerGang");
+	SceneManager.LoadScene("Level1_calin");
     }
 
     public void setUsername(){

@@ -179,17 +179,25 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    
-    public static IEnumerator waitForGM(int id, Vector3 position){
-	while(GameManager.players.ContainsKey(id) == false){
-	    yield return null;
-    public void FixedUpdate(){
-        if(startOfRound == true){
-            spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
-            startOfRound = false; 
+
+    public static IEnumerator waitForGM(int id, Vector3 position)
+    {
+        while (GameManager.players.ContainsKey(id) == false)
+        {
+            yield return null;
         }
     }
+
+
+        public void FixedUpdate() {
+            if (startOfRound == true) {
+                spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
+                startOfRound = false;
+            }
+        }
+    
 }
+
     /*
 ﻿using System.Collections;
 using System.Collections.Generic;
@@ -242,4 +250,4 @@ public class GameManager : MonoBehaviour {
 	    else if(GameManager.players[id].GetComponent<MovePlayerOnline>() != null)
 		GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
     }
-}
+}*/

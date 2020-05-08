@@ -111,6 +111,7 @@ namespace GameServer {
 	    this.position = new Vector3(_inputDirection.X + position.X, _inputDirection.Y + position.Y, 0);
 	    //Console.WriteLine("This is being sent: " + position);
 	    ServerSend.PlayerPosition(this);
+			Console.WriteLine("Sent move instructions");
 	}
 
 

@@ -114,7 +114,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTime: 0
   startTime: 10
-  isZero: 0
 --- !u!1 &3543262321475451003
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +126,7 @@ GameObject:
   - component: {fileID: 3543262321475451006}
   - component: {fileID: 3543262321475451001}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
