@@ -30,11 +30,14 @@ public class Client : MonoBehaviour {
             Debug.Log("Instance already exists, destroying object!");
             Destroy(this);
         }
+	tcp = new TCP();
+        udp = new UDP();
+
     }
 
     private void Start() {
-        tcp = new TCP();
-        udp = new UDP();
+        //tcp = new TCP();
+//        udp = new UDP();
     }
 
     private void OnApplicationQuit() {
@@ -47,6 +50,8 @@ public class Client : MonoBehaviour {
         isConnected = true;
 	tcp.Connect();
     }
+
+
 
     public class TCP {
         public TcpClient socket;
