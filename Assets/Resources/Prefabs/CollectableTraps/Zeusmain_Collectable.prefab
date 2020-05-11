@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3346704524523387734}
   - component: {fileID: 3346704524523387737}
   m_Layer: 0
-  m_Name: Zeus_Collectable
+  m_Name: Zeusmain_Collectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3346704524523387736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec57a117c08717438e319d0d6483f5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 78543f8498599d74b97ff52aac3b4b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0

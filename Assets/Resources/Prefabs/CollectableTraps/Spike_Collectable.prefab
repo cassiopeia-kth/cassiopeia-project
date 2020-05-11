@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5300973143849857497}
   - component: {fileID: 5300973143849857496}
   m_Layer: 0
-  m_Name: CollectableTrap
+  m_Name: Spike_Collectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,12 +93,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5300973143849857501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec57a117c08717438e319d0d6483f5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 78543f8498599d74b97ff52aac3b4b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
   slot: 0
-  _Image: {fileID: -7080252653612657973, guid: d83fab36538efe1438a3eeab463cec1c, type: 3}
+  _Image: {fileID: -8287650901645349780, guid: a8cc11d4d37456f4dba2771e56089b83, type: 3}
 --- !u!61 &5300973143849857496
 BoxCollider2D:
   m_ObjectHideFlags: 0

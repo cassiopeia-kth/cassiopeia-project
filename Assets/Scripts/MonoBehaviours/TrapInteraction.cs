@@ -17,7 +17,7 @@ public class TrapInteraction : MonoBehaviour
     private SpriteRenderer sr;
     public string killer;
 
-    bool timerElapsed = true;
+    bool timerElapsed = false;
     bool roundRestart = false;
 
     void Start()
