@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour {
     
     public void spawnTrap(int id, GameObject trap, Vector3 pos, Quaternion rot)
     {
+        Debug.Log("Am I here");
         if (id == Client.instance.myId)
         {
             StartCoroutine(markTrap(pos, rot));
