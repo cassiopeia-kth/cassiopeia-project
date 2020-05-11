@@ -72,3 +72,4 @@ crashlytics-build.properties
 
 /GameServer/bin/*
 /GameServer/obj/*
+Assembly-CSharp.csproj
