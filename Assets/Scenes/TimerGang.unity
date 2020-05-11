@@ -1687,8 +1687,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1617048333}
-  - component: {fileID: 1617048332}
   - component: {fileID: 1617048334}
+  - component: {fileID: 1617048332}
   m_Layer: 0
   m_Name: ClientManager
   m_TagString: Untagged
@@ -1708,7 +1708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241bc57de56f45248818d29d11a09a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charType: 
+  charType: bishop
   ip: 127.0.0.1
   port: 25850
   myId: 0
