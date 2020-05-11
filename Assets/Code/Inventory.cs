@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
 
     public Inventory_Item[] itemList = new Inventory_Item[7];
-//    public Inventory_Item[] itemList;
+    //    public Inventory_Item[] itemList;
     public GameObject spikeTrap;
     public GameObject fireTrap;
     public GameObject zeusmainTrap;
@@ -64,9 +64,9 @@ public class Inventory : MonoBehaviour
 		Debug.Log("got here but the image is not displayed.");
 	    }
 	}
-	for(i = 0; i < 7; i++){
-	    Debug.Log(itemList[i]);
-	}
+	//for(i = 0; i < 7; i++){
+	//Debug.Log(itemList[i]);
+	//}
     }
 
     public void hoverRight(){
@@ -142,30 +142,38 @@ public class Inventory : MonoBehaviour
 		Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
 		//Debug.Log(itemList[i].Name);
 		switch(itemList[i].Name){
-					case "Hades_Collectable":
-						//Instantiate(hadesTrap, playerPos , transform.rotation);
-						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation);
-						break;
-					case "Hermes_Collectable":
-						Instantiate(hermesTrap, playerPos, transform.rotation);
-						break;
-					case "Spike_Collectable":
-						//Instantiate(spikeTrap, playerPos , transform.rotation);
-						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation);
-						break;
-					case "Poseidon_Collectable":
-						//Instantiate(poseidonTrap, playerPos , transform.rotation);
-						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation);
-						break;
-					case "Zeusmain_Collectable":
-						//Instantiate(zeusmainTrap, playerPos , transform.rotation); // Change this because the trap is 1 x 2 in size
-						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation);
-						break;
-					case "Fire_Collectable":
-						//Instantiate(fireTrap, playerPos , transform.rotation);
-						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation);
-						break;
-				}
+		    case "Hades_Collectable":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation);
+			break;
+		    case "Hades_Collectable(Clone)":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation);
+			break;
+		    case "Spike_Collectable":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation);
+			break;
+		    case "Spike_Collectable(Clone)":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation);
+			break;
+		    case "Poseidon_Collectable":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation);
+			break;
+		    case "Poseidon_Collectable(Clone)":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation);
+			break;
+		    case "Zeusmain_Collectable":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation);
+			break;
+		    case "Zeusmain_Collectable(Clone)":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation);
+			break;
+		    case "Fire_Collectable":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation);
+			break;
+		    case "Fire_Collectable(Clone)":
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation);
+			break;
+
+		}
 		removeFromArray(i);
 		sprite.enabled = false;
 		hover.color = new Color(hover.color.r, hover.color.g, hover.color.b, 0.3f);
@@ -201,10 +209,10 @@ public class Inventory : MonoBehaviour
 	for(int i = 0; i < 7; i++){
 	    itemList[i] = null;
 	    Image sprite = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>();
-	     sprite.enabled = false;
-	     sprite.sprite = null;
-	     Image frame = transform.GetChild(i).GetChild(0).GetComponent<Image>();
-	     frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
+	    sprite.enabled = false;
+	    sprite.sprite = null;
+	    Image frame = transform.GetChild(i).GetChild(0).GetComponent<Image>();
+	    frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
 	}
 
 	Image image = transform.GetChild(0).GetChild(0).GetComponent<Image>();
