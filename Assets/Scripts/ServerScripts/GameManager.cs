@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour {
 
         GameObject[] traps = {  (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Fire_Collectable"),
-                                (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hermes_Collectable"),
+                                (GameObject)  Resources.Load("Prefabs/Traps/Hermes_Trap"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Poseidon_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Spike_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Zeusmain_Collectable")
@@ -202,6 +202,8 @@ public class GameManager : MonoBehaviour {
     
     public void spawnTrap(int id, GameObject trap, Vector3 pos, Quaternion rot)
     {
+        Debug.Log("Trapdrop Id: " + id);
+        Debug.Log("My Id: " + Client.instance.myId);
         if (id == Client.instance.myId)
         {
             StartCoroutine(markTrap(pos, rot));
@@ -220,6 +222,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator markTrap (Vector3 pos, Quaternion rot)
     {
+        Debug.Log("Play cross animation");
         GameObject cross = (GameObject)Resources.Load("Prefabs/Traps/Cross", typeof(GameObject));
         GameObject actualCross = Instantiate(cross, pos, rot);
         yield return new WaitForSeconds(1.5f);

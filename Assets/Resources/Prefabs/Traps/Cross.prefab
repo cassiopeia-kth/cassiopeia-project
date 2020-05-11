@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5617652001033707842}
   - component: {fileID: 5617652001033707869}
-  - component: {fileID: 5617652001033707868}
+  - component: {fileID: 4646865739389247641}
   m_Layer: 0
   m_Name: Cross
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5617652001033707868
+--- !u!95 &4646865739389247641
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

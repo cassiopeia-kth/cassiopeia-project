@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: 0
   slot: 0
-  _Image: {fileID: -8797026739151283192, guid: e84aa220cfcb5f2429f6ac91d1ef8d0f, type: 3}
+  _Image: {fileID: 4033355307889638888, guid: 895434788db63d948b59c2bc9e2ed24e, type: 3}
 --- !u!61 &3759243082074340136
 BoxCollider2D:
   m_ObjectHideFlags: 0

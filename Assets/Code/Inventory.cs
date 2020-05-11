@@ -142,25 +142,30 @@ public class Inventory : MonoBehaviour
 		Vector3 playerPos = FindObjectOfType<MovePlayer>().getPlayerPosition();
 		//Debug.Log(itemList[i].Name);
 		switch(itemList[i].Name){
-		    case "Hades_Collectable":
-			Instantiate(hadesTrap, playerPos , transform.rotation);
-			break;
-		    case "Hermes_Collectable":
-			Instantiate(hermesTrap, playerPos , transform.rotation);
-			break;
-		    case "Spike_Collectable":
-			Instantiate(spikeTrap, playerPos , transform.rotation);
-			break;
-		    case "Poseidon_Collectable":
-			Instantiate(poseidonTrap, playerPos , transform.rotation);
-			break;
-		    case "Zeusmain_Collectable":
-			Instantiate(zeusmainTrap, playerPos , transform.rotation);
-			break;
-		    case "Fire_Collectable":
-			Instantiate(fireTrap, playerPos , transform.rotation);
-			break;		    
-		}
+					case "Hades_Collectable":
+						//Instantiate(hadesTrap, playerPos , transform.rotation);
+						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation);
+						break;
+					case "Hermes_Collectable":
+						Instantiate(hermesTrap, playerPos, transform.rotation);
+						break;
+					case "Spike_Collectable":
+						//Instantiate(spikeTrap, playerPos , transform.rotation);
+						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation);
+						break;
+					case "Poseidon_Collectable":
+						//Instantiate(poseidonTrap, playerPos , transform.rotation);
+						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation);
+						break;
+					case "Zeusmain_Collectable":
+						//Instantiate(zeusmainTrap, playerPos , transform.rotation); // Change this because the trap is 1 x 2 in size
+						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation);
+						break;
+					case "Fire_Collectable":
+						//Instantiate(fireTrap, playerPos , transform.rotation);
+						FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation);
+						break;
+				}
 		removeFromArray(i);
 		sprite.enabled = false;
 		hover.color = new Color(hover.color.r, hover.color.g, hover.color.b, 0.3f);

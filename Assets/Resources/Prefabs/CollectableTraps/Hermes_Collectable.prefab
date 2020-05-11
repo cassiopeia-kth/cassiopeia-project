@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 803518840240423918}
   - component: {fileID: 803518840240423917}
-  - component: {fileID: 803518840240423916}
   - component: {fileID: 803518840240423907}
   m_Layer: 0
   m_Name: Hermes_Collectable
