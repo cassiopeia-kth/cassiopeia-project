@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+//using System.Diagnostics;
 
 public class WallpaperManager : MonoBehaviour
 {
@@ -17,8 +18,13 @@ public class WallpaperManager : MonoBehaviour
     [SerializeField] private bool changeColor = false;
     [SerializeField] private bool goBack = false;
 
-    private float currentTimeStep;
+    [SerializeField] private TextMeshProUGUI pressKey;
+    [SerializeField] private GameObject toDisable;
 
+    private float timer;
+    private float currentTimeStep;
+    
+    
     private void Start()
     {
        // if (useThisText)
@@ -30,6 +36,30 @@ public class WallpaperManager : MonoBehaviour
        // {
             StartChangingColor(dokano, colorOverTime, timeMultiplier);
       //  }
+    }
+
+    private void Update()
+    {
+       
+        timer += Time.deltaTime;
+        if(timer >= 0.5)
+        {
+            pressKey.enabled = true; 
+        }
+
+        if(timer >= 1)
+        {
+            pressKey.enabled = false;
+            timer = 0;
+        }
+
+        if (Input.anyKeyDown)
+        {
+           // toDisable.SetActive(false);
+           //Send to next scene using SceneManager should be added her 
+            Debug.Log("mouse or a key pressed");
+        }
+
     }
 
     private IEnumerator ChangeTextColor(TextMeshProUGUI newText, Gradient newGradient, float timeSpeed)
