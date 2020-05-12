@@ -8,6 +8,7 @@ public class SoundFX : MonoBehaviour
     public AudioSource Bupp;
     public AudioSource MenuOver;
     public AudioSource ChestOpening;
+    public AudioSource CharSelectSound; //put it here as it didnt work in the char_select script (pehaps because it goes out of the thing?)
 
     public void PlayBlip() {
 
@@ -27,6 +28,10 @@ public class SoundFX : MonoBehaviour
 	public void PlayChestOpening() {
 
     	ChestOpening.Play();
+    }
+
+    public void PlayCharSelectSound() {
+    	CharSelectSound.Play();
     }
 
 }
