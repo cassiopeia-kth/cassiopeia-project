@@ -12,4 +12,8 @@ public class Music : MonoBehaviour
     	MenuMusic1.Play();
     }
 
+    public void StopMenuMusic1() {
+    	MenuMusic1.Stop();
+    }
+
 }
