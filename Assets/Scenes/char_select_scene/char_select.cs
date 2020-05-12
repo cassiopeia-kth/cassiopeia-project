@@ -129,7 +129,7 @@ public class char_select : MonoBehaviour
 
   public void select() 
   {
-    selected.Play();
+    //selected.Play();
     mainMenu = FindObjectOfType<MainMenu>();
     // set the client with charType and a random ID
     switch (index)
