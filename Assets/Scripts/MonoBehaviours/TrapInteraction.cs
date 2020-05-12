@@ -16,9 +16,9 @@ public class TrapInteraction : MonoBehaviour
     public CircleCollider2D trapCollider;
     private SpriteRenderer sr;
     public string killer;
+    private bool onlyOnce;
 
     bool timerElapsed = false;
-    bool roundRestart = false;
 
     void Start()
     {
@@ -30,26 +30,27 @@ public class TrapInteraction : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.enabled = false;
         trapCollider.enabled = false;
+        onlyOnce = true;
     }
 
     private void FixedUpdate()
     {
-        if(timerElapsed)
+        timerElapsed = FindObjectOfType<GameManager>().timerZero;
+        if (timerElapsed)
         {
-            timerElapsed = false;
             trapCollider.enabled = true;
         }
-        if(roundRestart)
+        else
         {
-            roundRestart = false;
             trapCollider.enabled = false;
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && onlyOnce)
         {
+            onlyOnce = false;
             // A trap can only be interacted with once, so we disable its collider.
             trapCollider.enabled = false;
 
@@ -75,7 +76,7 @@ public class TrapInteraction : MonoBehaviour
         if(name == "ZeusMainTrap")
         {
             // We change the sorting layer so that it will render above the player, not below.
-            gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
+            //gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
 
             float x = pos.x;
             float y = pos.y;
@@ -85,6 +86,7 @@ public class TrapInteraction : MonoBehaviour
             GameObject actualSouthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y - 1.5f, z), Quaternion.Euler(new Vector3(0,0,-90)));
             GameObject actualNorthEast = Instantiate(zeusSouthEast, new Vector3(x + 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,90)));
             GameObject actualNorthWest = Instantiate(zeusSouthEast, new Vector3(x - 1, y + 0.5f, z), Quaternion.Euler(new Vector3(0,0,180)));
+            
 
             //delay for sync sound with thunder
             //yield return new WaitForSeconds(2f);
@@ -148,7 +150,12 @@ public class TrapInteraction : MonoBehaviour
 
         // Change the animation state, so that the trap animation plays.
         anim.SetInteger(animationState, 1);
-        StartCoroutine(playSound(name));
+        if (name == "ZeusMainTrap")
+        {
+            yield return new WaitForSeconds(0.5f);
+            gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
+        }
+            StartCoroutine(playSound(name));
         //trapSound.Play();
 
         // If the trap is the Poseidon trap, and the trap has not been used yet.

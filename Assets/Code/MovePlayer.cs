@@ -15,6 +15,8 @@ public class MovePlayer : MonoBehaviour
     public float moveSpeed = 50f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
+	private bool flyingAllowed = true;
+
     // Start is called before the first frame update
     void Start(){
 	FindObjectOfType<GameManager>().Start();
@@ -36,6 +38,24 @@ public class MovePlayer : MonoBehaviour
     }
     void Update()
     {
+		
+		// For enabling and disabling Hermes animation each round.
+		bool timerElapsed = FindObjectOfType<GameManager>().timerZero;
+
+		if (timerElapsed && flying)
+		{
+			flyingAllowed = false;
+		}
+
+		if (!timerElapsed && !flyingAllowed)
+		{
+			ani.SetBool("Flying", false);
+			flying = false; // change animation
+			flyingAllowed = true;
+		}
+
+
+
 	if(activateSleep)
 	{
 	    timer -= Time.deltaTime;
@@ -116,7 +136,21 @@ public class MovePlayer : MonoBehaviour
 	timer = forSeconds;
 	activateSleep = true;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		Debug.Log("Hejejejej");
+		if (collision.gameObject.name == "Hole" && flying == false)
+		{
+			arrowKeysEnabled = false;
+			pm.isAlive = false;
+			StartCoroutine(HoleDeath());
+		}
+	}
+
+
+
+	private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole" && flying == false){
 	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
