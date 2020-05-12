@@ -16,9 +16,9 @@ public class TrapInteraction : MonoBehaviour
     public CircleCollider2D trapCollider;
     private SpriteRenderer sr;
     public string killer;
+    private bool onlyOnce;
 
     bool timerElapsed = false;
-    bool roundRestart = false;
 
     void Start()
     {
@@ -30,26 +30,27 @@ public class TrapInteraction : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.enabled = false;
         trapCollider.enabled = false;
+        onlyOnce = true;
     }
 
     private void FixedUpdate()
     {
-        if(timerElapsed)
+        timerElapsed = FindObjectOfType<GameManager>().trapsActive;
+        if (timerElapsed)
         {
-            timerElapsed = false;
             trapCollider.enabled = true;
         }
-        if(roundRestart)
+        else
         {
-            roundRestart = false;
             trapCollider.enabled = false;
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && onlyOnce)
         {
+            onlyOnce = false;
             // A trap can only be interacted with once, so we disable its collider.
             trapCollider.enabled = false;
 

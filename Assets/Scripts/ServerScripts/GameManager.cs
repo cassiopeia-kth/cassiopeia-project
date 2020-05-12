@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public Canvas inventoryCanvasOnline;
     public string[] nameList;
     public bool startOfRound;
+    public bool trapsActive;
     
     private void Awake() {
         if (instance == null) {

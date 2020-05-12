@@ -102,6 +102,7 @@ public class ClientHandle : MonoBehaviour {
             {
                 pman.isAlive = false;
             }
+            FindObjectOfType<GameManager>().trapsActive = true;
         }
         else {
             //Debug.Log(currentTime);
@@ -111,6 +112,7 @@ public class ClientHandle : MonoBehaviour {
             }
             CountdownTimer.instance.currentTime = currentTime;
             CountdownTimer.instance.UpdateTimer();
+            FindObjectOfType<GameManager>().trapsActive = false;
         }
     }
     
