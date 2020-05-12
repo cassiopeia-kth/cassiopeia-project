@@ -15,6 +15,29 @@ public class MainMenu : MonoBehaviour {
 	SceneManager.LoadScene("TimerGang");
     }
 
+    public void playLobby1(){
+	Client.port = 25850;
+	SceneManager.LoadScene("TimerGang");
+    }
+
+    
+    public void playLobby2(){
+	Client.port = 25851;
+	SceneManager.LoadScene("TimerGang");
+    }
+
+    
+    public void playLobby3(){
+	Client.port = 25852;
+	SceneManager.LoadScene("TimerGang");
+    }
+
+    
+    public void playLobby4(){
+	Client.port = 25853;
+	SceneManager.LoadScene("TimerGang");
+    }
+
     public void setUsername(){
 	name = GameObject.Find("UsernameInput").GetComponent<TextMeshProUGUI>().text;
 //	Debug.Log(name);
