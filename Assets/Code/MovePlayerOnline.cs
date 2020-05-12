@@ -15,6 +15,8 @@ public class MovePlayerOnline : MonoBehaviour
     public float moveSpeed = 10f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
+    private bool flyingAllowed = true;
+    
     
     // Start is called before the first frame update
     void Start(){	
@@ -40,6 +42,23 @@ public class MovePlayerOnline : MonoBehaviour
     
     void Update()
     {
+
+	bool timerElapsed = FindObjectOfType<GameManager>().timerZero;
+
+	if (timerElapsed && flying)
+	{
+	    flyingAllowed = false;
+		}
+	
+	if (!timerElapsed && !flyingAllowed)
+	{
+	    ani.SetBool("Flying", false);
+	    flying = false; // change animation
+	    flyingAllowed = true;
+	}
+	
+
+	
 	if(activateSleep)
 	{
 	    timer -= Time.deltaTime;
@@ -161,6 +180,7 @@ public class MovePlayerOnline : MonoBehaviour
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
 	else if (other.GetComponent<Pickup>() != null)
 	{
+	    other.enabled = false;
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Tilemaps;
+using System;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour {
     public string[] nameList;
     public bool startOfRound;
     public bool timerZero;
+    public int HermesBuffer = 0;
+    private int HermesSpawn = 0;
     
     private void Awake() {
         if (instance == null) {
@@ -99,6 +103,7 @@ public class GameManager : MonoBehaviour {
 	for(int i = 0; i < 4; i++){
 	    if(nameList[i] == null){
 		nameList[i] = _username;
+		HermesSpawn = HermesSpawn + Math.Abs(_username.GetHashCode());
 		break;
 	    }
 	}
@@ -154,14 +159,36 @@ public class GameManager : MonoBehaviour {
 
 
     public void spawnCollectibleTrap(Vector2[] positions){
+
+        int index = Math.Abs(HermesSpawn % positions.Length);
         var rand1 = new System.Random();
         int randomIndex1 = rand1.Next(positions.Length);
         int randomIndex11 = rand1.Next(positions.Length);
 
+        if (HermesBuffer > 2)
+        {
+            Debug.Log(index);
+            GameObject c = (GameObject)Resources.Load("Prefabs/Traps/Hermes_Trap");
+            Instantiate(c, positions[index], Quaternion.identity);
+            HermesBuffer = 0;
+            HermesSpawn = (HermesSpawn + index) * 2;
+
+            if (randomIndex1 == index)
+            {
+                randomIndex1 = rand1.Next(positions.Length);
+            }
+
+            if (randomIndex11 == index)
+            {
+                randomIndex11 = rand1.Next(positions.Length);
+            }
+        }
+        //HermesBuffer++;
+
 
         GameObject[] traps = {  (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Fire_Collectable"),
-                                (GameObject)  Resources.Load("Prefabs/Traps/Hermes_Trap"),
+                                //(GameObject)  Resources.Load("Prefabs/Traps/Hermes_Trap"), TOO OP
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Poseidon_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Spike_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Zeusmain_Collectable")

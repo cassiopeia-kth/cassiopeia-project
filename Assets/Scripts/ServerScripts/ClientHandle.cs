@@ -64,13 +64,13 @@ public class ClientHandle : MonoBehaviour {
 	
     //	Vector3 actual_position = GameManager.players[_id].transform.position;
     //	GameManager.players[_id].transform.position = _position;
-
+    private static bool startPressed = false;
     public static void readyFlag(Packet _packet){
 	//TODO make start button active
 	int _id = _packet.ReadInt();
 	bool isReady = _packet.ReadBool();
 	bool everyoneReady = _packet.ReadBool();
-	bool startPressed = _packet.ReadBool();
+	startPressed = _packet.ReadBool();
 	bool definitelyUseful = _packet.ReadBool();
 	GameManager.players[_id].isReady = isReady;
 	if(Lobby.instance.gameStarted == false){
@@ -98,6 +98,7 @@ public class ClientHandle : MonoBehaviour {
         bool isZero = _packet.ReadBool();
 	//Debug.Log("got here server timer");
         //Debug.Log($"{currentTime} is the current time");
+	if(startPressed)
         if (isZero)
         {
 	    flagSetAlive = true;
@@ -108,6 +109,7 @@ public class ClientHandle : MonoBehaviour {
 		flagSetDead = false;
 	    }
 	    FindObjectOfType<GameManager>().timerZero = true;
+	    GameManager.instance.HermesBuffer++;
         }
         else {
 	    flagSetDead = true;
