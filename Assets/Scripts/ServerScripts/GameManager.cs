@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
     public bool startOfRound;
     public bool timerZero;
     private int HermesBuffer = 0;
+    private int HermesSpawn = 0;
     
     private void Awake() {
         if (instance == null) {
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour {
 	for(int i = 0; i < 4; i++){
 	    if(nameList[i] == null){
 		nameList[i] = _username;
+        HermesSpawn = HermesSpawn + _username.GetHashCode();
 		break;
 	    }
 	}
@@ -180,17 +182,14 @@ public class GameManager : MonoBehaviour {
         //Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
         //Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
 
-        if (HermesBuffer > 4)
+        if (HermesBuffer > 1)
         {
-            int HermesCheck = rand2.Next(0);
-            Debug.Log("HermesCheck was: " + HermesCheck);
-            if (HermesCheck == 0)
-            {
-                int randomIndex3 = rand1.Next(positions.Length);
+                int index = HermesSpawn % positions.Length;
+                Debug.Log(index);
                 GameObject c = (GameObject)Resources.Load("Prefabs/Traps/Hermes_Trap");
-                Instantiate(c, positions[randomIndex3], Quaternion.identity);
-            }
-            HermesBuffer = 0;
+                Instantiate(c, positions[index], Quaternion.identity);
+                HermesBuffer = 0;
+                HermesSpawn = (HermesSpawn + index) * 2;
         }
         HermesBuffer++;
     }
