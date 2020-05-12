@@ -180,6 +180,7 @@ public class MovePlayerOnline : MonoBehaviour
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
 	else if (other.GetComponent<Pickup>() != null)
 	{
+	    other.enabled = false;
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){

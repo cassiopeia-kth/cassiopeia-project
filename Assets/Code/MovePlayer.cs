@@ -209,6 +209,7 @@ public class MovePlayer : MonoBehaviour
 	
 	else if (other.GetComponent<Pickup>() != null)
 	{
+	    other.enabled = false;
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){
