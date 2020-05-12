@@ -10,7 +10,7 @@ public class CountdownTimer : MonoBehaviour {
     public static CountdownTimer instance;
 
     public float currentTime = 0f;
-    public float startTime = 10f;
+    public float startTime = 19f;
 
     private void Awake()
     {
@@ -32,8 +32,25 @@ public class CountdownTimer : MonoBehaviour {
     public void UpdateTimer()
     {
 
-     //currentTime -= 1 * Time.deltaTime;
-	 GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
+        if (currentTime <= 19 && currentTime < 18)
+        {
+            GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = "3";
+        }
+        else if (currentTime <= 18 && currentTime < 17)
+        {
+            GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = "2";
+        }
+        else if (currentTime <= 17 && currentTime < 16)
+        {
+            GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = "1";
+        }
+        else if (currentTime <= 16 && currentTime < 15)
+        {
+            GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = "Round Start!";
+        }
+
+        //currentTime -= 1 * Time.deltaTime;
+        GameObject.Find("Timer").GetComponent<TextMeshProUGUI>().text = currentTime.ToString("0");
      //countdownText.text = currentTime.ToString("0");
 
         if (currentTime <= 0){
