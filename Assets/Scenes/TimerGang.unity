@@ -1709,8 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charType: bishop
-  ip: 127.0.0.1
-  port: 25850
+  ip: 83.227.73.57
   myId: 0
 --- !u!4 &1617048333
 Transform:
@@ -2499,6 +2498,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5697414869704194462, guid: 56489c99f54f5fecfa95b9414bb787f8,
+        type: 3}
+      propertyPath: m_Text
+      value: Spectate
+      objectReference: {fileID: 0}
     - target: {fileID: 5697414870033855720, guid: 56489c99f54f5fecfa95b9414bb787f8,
         type: 3}
       propertyPath: m_Name
