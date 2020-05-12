@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
     public string[] nameList;
     public bool startOfRound;
     public bool timerZero;
+    private int HermesBuffer = 0;
     
     private void Awake() {
         if (instance == null) {
@@ -161,7 +163,7 @@ public class GameManager : MonoBehaviour {
 
         GameObject[] traps = {  (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Fire_Collectable"),
-                                (GameObject)  Resources.Load("Prefabs/Traps/Hermes_Trap"),
+                                //(GameObject)  Resources.Load("Prefabs/Traps/Hermes_Trap"), TOO OP
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Poseidon_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Spike_Collectable"),
                                 (GameObject)  Resources.Load("Prefabs/CollectableTraps/Zeusmain_Collectable")
@@ -177,6 +179,20 @@ public class GameManager : MonoBehaviour {
         Instantiate(b, positions[randomIndex11], Quaternion.identity);
         //Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
         //Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
+
+        if (HermesBuffer > 4)
+        {
+            int HermesCheck = rand2.Next(0);
+            Debug.Log("HermesCheck was: " + HermesCheck);
+            if (HermesCheck == 0)
+            {
+                int randomIndex3 = rand1.Next(positions.Length);
+                GameObject c = (GameObject)Resources.Load("Prefabs/Traps/Hermes_Trap");
+                Instantiate(c, positions[randomIndex3], Quaternion.identity);
+            }
+            HermesBuffer = 0;
+        }
+        HermesBuffer++;
     }
 
     void Restart() {
