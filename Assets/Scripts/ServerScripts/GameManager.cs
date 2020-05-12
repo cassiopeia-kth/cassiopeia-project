@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Tilemaps;
+using System;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
     public string[] nameList;
     public bool startOfRound;
     public bool timerZero;
-    private int HermesBuffer = 0;
+    public int HermesBuffer = 0;
     private int HermesSpawn = 0;
     
     private void Awake() {
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour {
 	for(int i = 0; i < 4; i++){
 	    if(nameList[i] == null){
 		nameList[i] = _username;
-        HermesSpawn = HermesSpawn + _username.GetHashCode();
+		HermesSpawn = HermesSpawn + Math.Abs(_username.GetHashCode());
 		break;
 	    }
 	}
@@ -159,7 +160,7 @@ public class GameManager : MonoBehaviour {
 
     public void spawnCollectibleTrap(Vector2[] positions){
 
-        int index = HermesSpawn % positions.Length;
+        int index = Math.Abs(HermesSpawn % positions.Length);
         var rand1 = new System.Random();
         int randomIndex1 = rand1.Next(positions.Length);
         int randomIndex11 = rand1.Next(positions.Length);
@@ -182,7 +183,7 @@ public class GameManager : MonoBehaviour {
                 randomIndex11 = rand1.Next(positions.Length);
             }
         }
-        HermesBuffer++;
+        //HermesBuffer++;
 
 
         GameObject[] traps = {  (GameObject)  Resources.Load("Prefabs/CollectableTraps/Hades_Collectable"),

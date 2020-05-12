@@ -15,7 +15,7 @@ public class MovePlayer : MonoBehaviour
     public float moveSpeed = 50f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
-	private bool flyingAllowed = true;
+    private bool flyingAllowed = true;
 
     // Start is called before the first frame update
     void Start(){
