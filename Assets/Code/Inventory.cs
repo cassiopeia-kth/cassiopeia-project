@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
 
+    public static Inventory instance;
     public Inventory_Item[] itemList = new Inventory_Item[7];
     //    public Inventory_Item[] itemList;
     public GameObject spikeTrap;
@@ -143,34 +144,34 @@ public class Inventory : MonoBehaviour
 		//Debug.Log(itemList[i].Name);
 		switch(itemList[i].Name){
 		    case "Hades_Collectable":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation, 1);
 			break;
 		    case "Hades_Collectable(Clone)":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, hadesTrap, playerPos, transform.rotation, 1);
 			break;
 		    case "Spike_Collectable":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation, 2);
 			break;
 		    case "Spike_Collectable(Clone)":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, spikeTrap, playerPos, transform.rotation, 2);
 			break;
 		    case "Poseidon_Collectable":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation, 3);
 			break;
 		    case "Poseidon_Collectable(Clone)":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, poseidonTrap, playerPos, transform.rotation, 3);
 			break;
 		    case "Zeusmain_Collectable":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation, 4);
 			break;
 		    case "Zeusmain_Collectable(Clone)":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, zeusmainTrap, playerPos, transform.rotation, 4);
 			break;
 		    case "Fire_Collectable":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation, 5);
 			break;
 		    case "Fire_Collectable(Clone)":
-			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation);
+			FindObjectOfType<GameManager>().spawnTrap(Client.instance.myId, fireTrap, playerPos, transform.rotation, 5);
 			break;
 
 		}
@@ -206,6 +207,7 @@ public class Inventory : MonoBehaviour
     }
     
     void Start(){
+	instance = this;
 	for(int i = 0; i < 7; i++){
 	    itemList[i] = null;
 	    Image sprite = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>();

@@ -13,6 +13,7 @@ public enum ServerPackets {
     timer,
     isZero,
     readyFlag,
+    trap
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -21,7 +22,8 @@ public enum ClientPackets {
     playerMovement,
     timer,
     isZero,
-    readyFlag
+    readyFlag,
+    trap
 }
 
 public class Packet : IDisposable {

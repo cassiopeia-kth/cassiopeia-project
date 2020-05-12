@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Numerics;
 
 namespace GameServer {
     class ServerSend {
@@ -104,6 +105,16 @@ namespace GameServer {
 		SendTCPDataToAll(_packet);
 	    }
 	}
+
+	public static void sendTrap(int playerId, Vector3 pos, int trapId){
+	    using (Packet _packet = new Packet((int)ServerPackets.trap)){
+		_packet.Write(playerId);
+		_packet.Write(pos);
+		_packet.Write(trapId);
+		SendTCPDataToAll(_packet);
+	    }
+	}
+	
 #endregion
     }
 }

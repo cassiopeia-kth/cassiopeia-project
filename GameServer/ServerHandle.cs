@@ -60,6 +60,12 @@ namespace GameServer {
 	    bool startPressed = _packet.ReadBool();
 	}
 	
+	public static void spawnTrap(int _fromClient, Packet _packet){
+	    int id = _packet.ReadInt();
+	    Vector3 pos = _packet.ReadVector3();
+	    int trapId = _packet.ReadInt();
+	    ServerSend.sendTrap(id,pos,trapId);
+	}
     }
 
     
