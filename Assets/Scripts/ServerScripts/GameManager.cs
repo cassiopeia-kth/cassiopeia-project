@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Game Over!");
         FindObjectOfType<MovePlayer>().enabled = false;
         Invoke("displayGameOverHUD", restartDelay);
-        playAgain.onClick.AddListener(Restart);
+        playAgain.onClick.AddListener(spectate);
         mainMenu.onClick.AddListener(displayMainMenu);
     }
 
@@ -178,8 +178,9 @@ public class GameManager : MonoBehaviour {
         //Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
     }
 
-    void Restart() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    void spectate() {
+	gameOverCanvas.enabled = false;
+	FindObjectOfType<MovePlayer>().enabled = false;
     }
 
     

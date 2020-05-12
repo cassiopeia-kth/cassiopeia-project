@@ -91,6 +91,8 @@ public class ClientHandle : MonoBehaviour {
 	}	
     }
 
+    public static bool flagSetAlive = true;
+    public static bool flagSetDead = true;
     public static void ClientTimer(Packet _packet){
         float currentTime = _packet.ReadFloat();
         bool isZero = _packet.ReadBool();
@@ -98,19 +100,26 @@ public class ClientHandle : MonoBehaviour {
         //Debug.Log($"{currentTime} is the current time");
         if (isZero)
         {
-            foreach (PlayerManager pman in GameManager.players.Values)
-            {
-                pman.isAlive = false;
-            }
+	    flagSetAlive = true;
+	    if(flagSetDead){
+		foreach (PlayerManager pman in GameManager.players.Values){
+		    pman.isAlive = false;
+		}
+		flagSetDead = false;
+	    }
         }
         else {
-            //Debug.Log(currentTime);
-            foreach (PlayerManager pman in GameManager.players.Values)
-            {
+	    flagSetDead = true;
+	    if(flagSetAlive){
+            foreach (PlayerManager pman in GameManager.players.Values){
+		Debug.Log("THIS SHOULD HAPPEN ONLY ONCE");
                 pman.isAlive = true;
             }
+	    flagSetAlive = false;
+	    }
             CountdownTimer.instance.currentTime = currentTime;
             CountdownTimer.instance.UpdateTimer();
+	    
         }
     }
     
