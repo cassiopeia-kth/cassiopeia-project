@@ -241,7 +241,8 @@ public class Client : MonoBehaviour {
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             { (int)ServerPackets.timer, ClientHandle.ClientTimer },
-    	    { (int)ServerPackets.readyFlag, ClientHandle.readyFlag },   
+    	    { (int)ServerPackets.readyFlag, ClientHandle.readyFlag },
+	    { (int)ServerPackets.trap, ClientHandle.receiveTrap },
         };
         Debug.Log("Initialized packets.");
     }

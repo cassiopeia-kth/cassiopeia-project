@@ -107,6 +107,7 @@ public class ClientHandle : MonoBehaviour {
 		}
 		flagSetDead = false;
 	    }
+	    FindObjectOfType<GameManager>().timerZero = true;
         }
         else {
 	    flagSetDead = true;
@@ -121,6 +122,15 @@ public class ClientHandle : MonoBehaviour {
             CountdownTimer.instance.UpdateTimer();
             FindObjectOfType<GameManager>().timerZero = false;
         }
+    }
+
+    public static void receiveTrap(Packet _packet){
+	int playerId = _packet.ReadInt();
+	Vector3 pos = _packet.ReadVector3();
+	int trapId = _packet.ReadInt();
+	if(playerId != Client.instance.myId){
+	    GameManager.instance.spawnTrapInvisible(pos, trapId);
+	}
     }
     
 }

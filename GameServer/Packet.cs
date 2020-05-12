@@ -13,15 +13,17 @@ namespace GameServer {
         timer,
         isZero,
         readyFlag,
+	trap
     }
 
     /// <summary>Sent from client to server.</summary>
     public enum ClientPackets {
         welcomeReceived = 1,
         playerMovement,
-	    timer,
+	timer,
         isZero,
-	    readyFlag,
+	readyFlag,
+	trap
     }
 
     public class Packet : IDisposable {

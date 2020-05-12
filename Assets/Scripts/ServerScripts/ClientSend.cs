@@ -63,7 +63,16 @@ public class ClientSend : MonoBehaviour {
     }
     
     #endregion
-    
+    public static void sendTrap(int id, Vector3 pos, int trapId){
+	using (Packet _packet = new Packet((int)ClientPackets.trap)) {
+	    _packet.Write(id);
+	    _packet.Write(pos);
+	    _packet.Write(trapId);
+	    SendTCPData(_packet);
+	}
+    }
+
+	
     public static void ActivateSleep(float forSeconds){
 	timer = forSeconds;
 	activateSleep = true;

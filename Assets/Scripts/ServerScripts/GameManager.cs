@@ -204,9 +204,29 @@ public class GameManager : MonoBehaviour {
             startOfRound = true;
         }
     }
+    public void spawnTrapInvisible(Vector3 pos, int trapId){
+	switch(trapId){
+	    case 1:
+		Instantiate(Inventory.instance.hadesTrap, pos, new Quaternion(0,0,0,0));
+		break;
+	    case 2:
+		Instantiate(Inventory.instance.spikeTrap, pos, new Quaternion(0,0,0,0));
+		break;
+	    case 3:
+		Instantiate(Inventory.instance.poseidonTrap, pos, new Quaternion(0,0,0,0));
+		break;
+	    case 4:
+		Instantiate(Inventory.instance.zeusmainTrap, pos, new Quaternion(0,0,0,0));
+		break;
+	    case 5:
+		Instantiate(Inventory.instance.fireTrap, pos, new Quaternion(0,0,0,0));
+		break;
+
+		
+	}
+    }
     
-    
-    public void spawnTrap(int id, GameObject trap, Vector3 pos, Quaternion rot)
+    public void spawnTrap(int id, GameObject trap, Vector3 pos, Quaternion rot, int trapId)
     {
         Debug.Log("Trapdrop Id: " + id);
         Debug.Log("My Id: " + Client.instance.myId);
@@ -219,7 +239,7 @@ public class GameManager : MonoBehaviour {
         {
             pos.y = pos.y + 0.5f;
         }
-        
+	ClientSend.sendTrap(Client.instance.myId, pos, trapId);
         GameObject laid_trap = Instantiate(trap, pos, rot);
         laid_trap.GetComponent<TrapInteraction>().killer = players[id].username;
         Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
