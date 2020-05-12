@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
+//using System.Diagnostics;
 using System.Net;
+using System;
 using UnityEngine;
 
 public class ClientHandle : MonoBehaviour {
@@ -19,8 +23,21 @@ public class ClientHandle : MonoBehaviour {
         int _id = _packet.ReadInt();
         string _username = _packet.ReadString();
         Vector3 _position = _packet.ReadVector3();
-        GameManager.instance.SpawnPlayer(_id, _username, _position);
-	Debug.Log("did try to spawn the player");
+	//ADD CHAR TYPE
+	string _charType = _packet.ReadString();
+	bool isReady = _packet.ReadBool();
+
+	//Debug.Log(_username + "   "+ isReady);
+	Debug.Log("SPAWNED THE PLAYER");
+        GameManager.instance.SpawnPlayer(_id, _username, _position, _charType, isReady);
+	try{
+	    //GameManager.players[Client.instance.myId].isReady = isReady;
+	    //GameManager.players[Client.instance.myId].checkChange = isReady;
+	}
+	catch(Exception e){}
+	//Lobby.instance.displayReadyorNot(_id);
+	//Debug.Log("did try to spawn the player");
+	Lobby.instance.hideStartButton();
     }
     
     public static void PlayerDisconnected(Packet _packet) {
@@ -32,17 +49,69 @@ public class ClientHandle : MonoBehaviour {
     public static void PlayerPosition(Packet _packet) {
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-//	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
+	//	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
 
-	if(GameManager.players[_id].GetComponent<MovePlayer>() != null)
-	    GameManager.players[_id].GetComponent<MovePlayer>().movePlayer(_position);
-	else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
-	    GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
+	/*	if(GameManager.players.ContainsKey(_id)){
+		if(GameManager.players[_id].GetComponent<MovePlayer>() != null)
+		GameManager.players[_id].GetComponent<MovePlayer>().movePlayer(_position);
+		else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
+		GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
+	*/
+	GameManager.instance.waitForInit(_id, _position);
+    }
+
 	
-	Vector3 actual_position = GameManager.players[_id].transform.position;
-//	GameManager.players[_id].transform.position = _position;
 	
-	
+    //	Vector3 actual_position = GameManager.players[_id].transform.position;
+    //	GameManager.players[_id].transform.position = _position;
+
+    public static void readyFlag(Packet _packet){
+	//TODO make start button active
+	int _id = _packet.ReadInt();
+	bool isReady = _packet.ReadBool();
+	bool everyoneReady = _packet.ReadBool();
+	bool startPressed = _packet.ReadBool();
+	bool definitelyUseful = _packet.ReadBool();
+	GameManager.players[_id].isReady = isReady;
+	if(Lobby.instance.gameStarted == false){
+	    if(everyoneReady == true){
+		Lobby.instance.displayStartButton();
+	    }
+	    if(everyoneReady == false){
+		Lobby.instance.hideStartButton();
+	    }
+	    if(startPressed == true){
+		Lobby.instance.startGame();
+		if(definitelyUseful){
+		    Lobby.instance.theMostUsefulFunction();
+		}
+
+	    }
+	    Lobby.instance.displayReadyorNot(_id);
+	}	
+    }
+
+    public static void ClientTimer(Packet _packet){
+        float currentTime = _packet.ReadFloat();
+        bool isZero = _packet.ReadBool();
+	//Debug.Log("got here server timer");
+        //Debug.Log($"{currentTime} is the current time");
+        if (isZero)
+        {
+            foreach (PlayerManager pman in GameManager.players.Values)
+            {
+                pman.isAlive = false;
+            }
+        }
+        else {
+            //Debug.Log(currentTime);
+            foreach (PlayerManager pman in GameManager.players.Values)
+            {
+                pman.isAlive = true;
+            }
+            CountdownTimer.instance.currentTime = currentTime;
+            CountdownTimer.instance.UpdateTimer();
+        }
     }
     
 }

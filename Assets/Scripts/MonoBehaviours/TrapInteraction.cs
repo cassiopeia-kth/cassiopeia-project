@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 public class TrapInteraction : MonoBehaviour 
 {
@@ -12,28 +13,55 @@ public class TrapInteraction : MonoBehaviour
     public int poseidonDirection;
     //audio source
     public AudioSource trapSound;
+    public CircleCollider2D trapCollider;
+    private SpriteRenderer sr;
+    public string killer;
+
+    bool timerElapsed = false;
+    bool roundRestart = false;
 
     void Start()
     {
         // When a trap is initialised, it is set to z positon -100, so that it is invisible.
         anim = GetComponent<Animator>();
-        pos = gameObject.transform.position;
-        pos.z = -100;
-        gameObject.transform.position = pos;
+        //pos = gameObject.transform.position;
+        //pos.z = -100;
+        //gameObject.transform.position = pos;
+        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr.enabled = false;
+        trapCollider.enabled = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if(timerElapsed)
+        {
+            timerElapsed = false;
+            trapCollider.enabled = true;
+        }
+        if(roundRestart)
+        {
+            roundRestart = false;
+            trapCollider.enabled = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // A trap can only be interacted with once, so we disable its collider.
-        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        if(collision.gameObject.tag == "Player")
+        {
+            // A trap can only be interacted with once, so we disable its collider.
+            trapCollider.enabled = false;
 
-        // Make the trap visible by changin its z value.
-        pos = gameObject.transform.position;
-        pos.z = 0;
-        gameObject.transform.position = pos;
+            // Make the trap visible by changin its z value.
+            pos = gameObject.transform.position;
+            //pos.z = 0;
+            //gameObject.transform.position = pos;
+            sr.enabled = true;
 
-        // Start a coroutine which deals with each trap animation.
-        StartCoroutine(MyCoroutine(pos));
+            // Start a coroutine which deals with each trap animation.
+            StartCoroutine(MyCoroutine(pos));
+        }
     }
 
     IEnumerator MyCoroutine(Vector3 pos)
@@ -62,6 +90,62 @@ public class TrapInteraction : MonoBehaviour
             //yield return new WaitForSeconds(2f);
         }
 
+        if (name == "FireTrap" && spent == false)
+        {
+            spent = true;
+            float x = pos.x;
+            float y = pos.y;
+            float z = pos.z;
+
+            int num = UnityEngine.Random.Range(0, 3);
+            int num2 = UnityEngine.Random.Range(4, 7);
+
+            GameObject wildFire = (GameObject)Resources.Load("Fire/WildFire", typeof(GameObject));
+
+            if (num == 0)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x - 1, y + 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x - 2, y + 1, z), Quaternion.identity);
+            }
+            else if (num == 1)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x, y + 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x, y + 2, z), Quaternion.identity);
+            }
+            else if (num == 2)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x + 1, y + 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x + 1, y + 2, z), Quaternion.identity);
+            }
+            else if (num == 3)
+            {
+                GameObject actualFire = Instantiate(wildFire, new Vector3(x - 1, y, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x - 2, y, z), Quaternion.identity);
+            }
+
+            if (num2 == 4)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x + 1, y, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x + 2, y, z), Quaternion.identity);
+            }
+            else if (num2 == 5)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x - 1, y - 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x - 1, y -2, z), Quaternion.identity);
+            }
+            else if (num2 == 6)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x, y - 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x, y -2, z), Quaternion.identity);
+            }
+            else if (num2 == 7)
+            {
+                GameObject actualFire2 = Instantiate(wildFire, new Vector3(x + 1, y - 1, z), Quaternion.identity);
+                GameObject _actualFire = Instantiate(wildFire, new Vector3(x + 2, y - 1, z), Quaternion.identity);
+            }
+
+        }
+
         // Change the animation state, so that the trap animation plays.
         anim.SetInteger(animationState, 1);
         StartCoroutine(playSound(name));
@@ -71,7 +155,8 @@ public class TrapInteraction : MonoBehaviour
         if(name == "PoseidonTrap" && spent == false)
         {
             // Make the trap invisible, so we can rotate it.
-            pos.z = -100;
+            //pos.z = -100;
+            sr.enabled = false;
             // Indicate that we have used the trap up, so it cannot be used twice.
             spent = true;
             // Generate a random number between 0 and 3, for how much we will rotate the trap by.
@@ -86,11 +171,14 @@ public class TrapInteraction : MonoBehaviour
         }
 
         // Make the trap visible again (this only really relates to the Poseidon trap)
-        pos.z = 0;
+        //pos.z = 0;
+        sr.enabled = true;
+
         
         // Wait two seconds before deactivating the trap.
         yield return new WaitForSeconds(2f);
-        pos.z = -100;
+        //pos.z = -100;
+        sr.enabled = false;
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
        

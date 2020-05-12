@@ -10,7 +10,7 @@ namespace GameServer {
                     _client.player.Update();
                 }
             }
-
+	    ServerCountdownTimer.instance.Update();
             ThreadManager.UpdateMain();
         }
     }

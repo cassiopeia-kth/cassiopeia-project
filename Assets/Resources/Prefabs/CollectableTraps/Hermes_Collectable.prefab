@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 803518840240423918}
   - component: {fileID: 803518840240423917}
-  - component: {fileID: 803518840240423916}
   - component: {fileID: 803518840240423907}
   m_Layer: 0
   m_Name: Hermes_Collectable
@@ -91,14 +90,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803518840240423906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec57a117c08717438e319d0d6483f5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 78543f8498599d74b97ff52aac3b4b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
   slot: 0
-  _Image: {fileID: -3337038689812066966, guid: 977dd02b9290b2c478526bce5a5f2779, type: 3}
+  _Image: {fileID: 0}
 --- !u!61 &803518840240423907
 BoxCollider2D:
   m_ObjectHideFlags: 0

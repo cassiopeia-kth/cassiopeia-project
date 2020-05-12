@@ -29,7 +29,8 @@ public class MovePlayerOnline : MonoBehaviour
     }
 
     public void movePlayer(Vector3 position){
-	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+//	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	
 		if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
@@ -114,7 +115,7 @@ public class MovePlayerOnline : MonoBehaviour
 	if(other.gameObject.name == "Hole" && flying == false){
 			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
-		pm.isAlive = false;
+		//pm.isAlive = false;
 		StartCoroutine(HoleDeath());
 	}
 
@@ -122,7 +123,7 @@ public class MovePlayerOnline : MonoBehaviour
 	else if (other.GetComponent<TrapInteraction>() != null && flying == false)
 	{
 	    arrowKeysEnabled = false;
-	    pm.isAlive = false;
+//	    pm.isAlive = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
@@ -152,9 +153,9 @@ public class MovePlayerOnline : MonoBehaviour
 	else if (other.GetComponent<ZeusDiagonal>() != null && flying == false)
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
-	    pm.isAlive = false;
+//	    pm.isAlive = false;
 		StartCoroutine(ZeusDiagonalDeath());
-		FindObjectOfType<GameManager>().EndGame();
+		//FindObjectOfType<GameManager>().EndGame();
 	}
 
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
@@ -231,8 +232,8 @@ public class MovePlayerOnline : MonoBehaviour
 	{
 	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
-		ani.SetFloat("FacingLeft", 1f);
-		yield return new WaitForSeconds(0.1f);
+	    ani.SetFloat("FacingLeft", 1f);
+	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("left", 0f);
 	}
 
@@ -247,7 +248,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(0.5f);
 		ani.SetFloat("HadesTrap", 1f);
 		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
+		//FindObjectOfType<GameManager>().EndGame();
 		gameObject.SetActive(false);
 		yield return 0;
 	}
@@ -258,7 +259,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("HadesTrap", 1f);
 		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
+		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
 		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
@@ -272,7 +273,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("ZeusTrap", 1f);
 		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
+		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
 		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
@@ -286,7 +287,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 		ani.SetFloat("ZeusTrap", 1.5f);
 		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
+		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
 		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
@@ -299,7 +300,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("SpikeTrap", 1f);
 		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
+		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
 		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
@@ -313,7 +314,7 @@ IEnumerator FireTrap()
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("FireTrap", 1f);
 		yield return new WaitForSeconds(1f);
-		FindObjectOfType<GameManager>().EndGame();
+	//	FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
 		GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));

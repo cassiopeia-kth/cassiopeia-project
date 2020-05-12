@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace GameServer {
@@ -44,7 +45,7 @@ namespace GameServer {
             }
         }
 
-        #region Packets
+#region Packets
         public static void Welcome(int _toClient, string _msg) {
             using (Packet _packet = new Packet((int)ServerPackets.welcome)) {
                 _packet.Write(_msg);
@@ -58,7 +59,9 @@ namespace GameServer {
                 _packet.Write(_player.id);
                 _packet.Write(_player.username);
                 _packet.Write(_player.position);
-		Console.Write(_player.position);
+                _packet.Write(_player.charType);
+		_packet.Write(_player.ready);
+		//Console.Write("Player spawned");
                 SendTCPData(_toClient, _packet);
             }
         }
@@ -69,7 +72,7 @@ namespace GameServer {
 		_packet.Write(_player.id);
 		_packet.Write(_player.movePosition);
 		if(_player.isAlive)
-		    SendUDPDataToAll(_packet);
+		    SendTCPDataToAll(_packet);
 	    }
 	}
 
@@ -80,6 +83,27 @@ namespace GameServer {
                 SendTCPDataToAll(_packet);
             }
         }
-        #endregion
+
+        public static void TimerInfo(ServerCountdownTimer _currentTime){
+            using (Packet _packet = new Packet((int)ServerPackets.timer)) {
+                _packet.Write(_currentTime.currentTime);
+                _packet.Write(_currentTime.isZero);
+                SendTCPDataToAll(_packet);
+                //Console.WriteLine($"{_currentTime.currentTime} sent timer packet");
+                //Console.WriteLine($"{_currentTime.isZero} is the isZero status");
+            }
+        }
+        
+	public static void ReadyFlag(Player _player){
+	    using (Packet _packet = new Packet((int)ServerPackets.readyFlag)){
+		_packet.Write(_player.id);
+		_packet.Write(_player.ready);
+		_packet.Write(_player.everyoneReady);
+		_packet.Write(_player.startPressed);
+		_packet.Write(Player.definitelyUseful);
+		SendTCPDataToAll(_packet);
+	    }
+	}
+#endregion
     }
 }
