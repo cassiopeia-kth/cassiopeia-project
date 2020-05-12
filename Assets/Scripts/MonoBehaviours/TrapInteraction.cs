@@ -35,7 +35,7 @@ public class TrapInteraction : MonoBehaviour
 
     private void FixedUpdate()
     {
-        timerElapsed = FindObjectOfType<GameManager>().trapsActive;
+        timerElapsed = FindObjectOfType<GameManager>().timerZero;
         if (timerElapsed)
         {
             trapCollider.enabled = true;

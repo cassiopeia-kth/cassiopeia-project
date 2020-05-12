@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     public Canvas inventoryCanvasOnline;
     public string[] nameList;
     public bool startOfRound;
-    public bool trapsActive;
+    public bool timerZero;
     
     private void Awake() {
         if (instance == null) {
@@ -194,9 +194,13 @@ public class GameManager : MonoBehaviour {
 	    GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
     }
     public void FixedUpdate(){
-        if(startOfRound == true){
+        if(startOfRound == true && !timerZero){
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false; 
+        }
+        else if (timerZero)
+        {
+            startOfRound = true;
         }
     }
     
