@@ -161,7 +161,6 @@ public class MovePlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole"){
-	    WAVE = true;
 	    isOverAHole = true;
 	    Debug.Log("shortest debug ever");
 	}
@@ -169,6 +168,7 @@ public class MovePlayer : MonoBehaviour
 	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    arrowKeysEnabled = false;
 	    pm.isAlive = false;
+	    WAVE = true;
 	    StartCoroutine(HoleDeath());
 	}
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
