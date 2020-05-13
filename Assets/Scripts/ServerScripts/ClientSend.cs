@@ -39,6 +39,7 @@ public class ClientSend : MonoBehaviour {
             }
 	    _packet.Write(GameManager.players[Client.instance.myId].isAlive);
 	    _packet.Write(GameManager.players[Client.instance.myId].transform.position);
+	    _packet.Write(GameManager.players[Client.instance.myId].poseidonMove);
             SendTCPData(_packet);
         }
     }

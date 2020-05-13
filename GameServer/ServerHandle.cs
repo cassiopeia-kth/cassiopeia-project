@@ -27,9 +27,10 @@ namespace GameServer {
 	    }
 	    bool isAlive = _packet.ReadBool();
 	    Vector3 _position = _packet.ReadVector3();
+	    bool poseidonMove = _packet.ReadBool();
 //	    Console.WriteLine(_position);
 	    try{
-		Server.clients[_fromClient].player.SetInput(_inputs, _position, isAlive);
+		Server.clients[_fromClient].player.SetInput(_inputs, _position, isAlive, poseidonMove);
 	    }
 	    catch(Exception e){
 		Console.Write(e);

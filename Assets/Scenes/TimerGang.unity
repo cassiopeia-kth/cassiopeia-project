@@ -393,6 +393,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 75638677387855966, guid: c81acbc8b25e8af21a19a3a6b203af7a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 75638677549702508, guid: c81acbc8b25e8af21a19a3a6b203af7a,
         type: 3}
       propertyPath: m_textInfo.characterCount
