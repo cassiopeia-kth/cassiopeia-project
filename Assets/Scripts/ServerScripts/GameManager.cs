@@ -251,9 +251,13 @@ public class GameManager : MonoBehaviour {
         else if (timerZero)
         {
             startOfRound = true;
-            if (!movedThisRound)
+            if (!movedThisRound && players[Client.instance.myId].startPressed == true)
             {
                 Debug.Log("I did not move! Kill me");
+                ClientSend.sendTrap(Client.instance.myId, _player.transform.position, 1);
+                GameObject laid_trap = Instantiate(Inventory.instance.hadesTrap, _player.transform.position, Quaternion.identity);
+                laid_trap.GetComponent<TrapInteraction>().killer = "God";
+                Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
                 movedThisRound = true;
             }
         }
