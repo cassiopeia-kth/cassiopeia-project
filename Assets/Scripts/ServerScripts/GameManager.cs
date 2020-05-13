@@ -155,32 +155,36 @@ public class GameManager : MonoBehaviour {
       /*
       this block of code is added for win-menu
       */
-      int countOfDead = 0;
-      if(players.Count > 1) {
-        foreach (PlayerManager player in players.Values) {
-          if(player.isDead) {
-            countOfDead++;
-          }
-        }
-        if(countOfDead == players.Count - 1) {
-          string name = "";
-
-          foreach (PlayerManager playerInner in players.Values) {
-              if(!playerInner.isDead) {
-                name = playerInner.username;
-              }
+      if(!isThereAWinner) {
+        int countOfDead = 0;
+        if(players.Count > 1) {
+          foreach (PlayerManager player in players.Values) {
+            if(player.isDead) {
+              countOfDead++;
             }
-            txtGameOver.text = $"{name} wins";
-            EndGame();
-            isThereAWinner = true;
-            return true;
+          }
+          if(countOfDead == players.Count - 1) {
+            string name = "";
+
+            foreach (PlayerManager playerInner in players.Values) {
+                if(!playerInner.isDead) {
+                  name = playerInner.username;
+                }
+              }
+              txtGameOver.text = $"{name} wins";
+              playAgain.gameObject.SetActive(false);
+              EndGame();
+              isThereAWinner = true;
+              return true;
+          }
+          return false;
         }
         return false;
+        /*
+        this block of code is added for win-menu
+        */
       }
       return false;
-      /*
-      this block of code is added for win-menu
-      */
     }
 
     public void EndGame() {
