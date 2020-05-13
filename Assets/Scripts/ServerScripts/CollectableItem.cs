@@ -59,4 +59,13 @@ public class CollectableItem : MonoBehaviour, Inventory_Item
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Collectable")
+        {
+            Debug.Log("Two collectables on same spot. Kill them both!");
+            gameObject.SetActive(false);
+        }
+    }
 }
