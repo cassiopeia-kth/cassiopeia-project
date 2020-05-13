@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour {
     private int HermesSpawn = 0;
     public GameObject _player;
     public static Dictionary<int, GameObject> playersNotManager = new Dictionary<int, GameObject>();
+
+    public bool movedThisRound = false;
+    private bool firstRound = true;
     
     private void Awake() {
         if (instance == null) {
@@ -165,11 +168,11 @@ public class GameManager : MonoBehaviour {
         int index = Math.Abs(HermesSpawn % positions.Length);
         var rand1 = new System.Random();
         int randomIndex1 = rand1.Next(positions.Length);
-        int randomIndex11 = rand1.Next(positions.Length);
+        //int randomIndex11 = rand1.Next(positions.Length);
 
-        if (HermesBuffer > 2)
+        if (HermesBuffer > 600)
         {
-            Debug.Log(index);
+            Debug.Log(HermesBuffer);
             GameObject c = (GameObject)Resources.Load("Prefabs/Traps/Hermes_Trap");
             Instantiate(c, positions[index], Quaternion.identity);
             HermesBuffer = 0;
@@ -180,10 +183,10 @@ public class GameManager : MonoBehaviour {
                 randomIndex1 = rand1.Next(positions.Length);
             }
 
-            if (randomIndex11 == index)
+            /*if (randomIndex11 == index)
             {
                 randomIndex11 = rand1.Next(positions.Length);
-            }
+            }*/
         }
         //HermesBuffer++;
 
@@ -198,12 +201,12 @@ public class GameManager : MonoBehaviour {
 
         var rand2 = new System.Random();
         int randomIndex2 = rand2.Next(traps.Length);
-        int randomIndex22 = rand2.Next(traps.Length);
+       // int randomIndex22 = rand2.Next(traps.Length);
 
         GameObject a = traps[randomIndex2];
-        GameObject b = traps[randomIndex22];
+       // GameObject b = traps[randomIndex22];
         Instantiate(a, positions[randomIndex1], Quaternion.identity);
-        Instantiate(b, positions[randomIndex11], Quaternion.identity);
+        //Instantiate(b, positions[randomIndex11], Quaternion.identity);
         //Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
         //Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
     }
@@ -227,7 +230,15 @@ public class GameManager : MonoBehaviour {
 
     
     public void FixedUpdate(){
+        Debug.Log("Have I moved is " + movedThisRound + ", the round is " + firstRound + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true));
+        
         if(startOfRound == true && !timerZero){
+            
+            if (movedThisRound)
+            {
+                movedThisRound = false;
+            }
+            
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false;
 	    MovePlayer.arrowKeysEnabled = true;
@@ -235,7 +246,7 @@ public class GameManager : MonoBehaviour {
 		if(go.GetComponent<MovePlayer>() != null)
 		    if(go.GetComponent<MovePlayer>().isOverAHole)
 			go.GetComponent<MovePlayer>().holeDeathStartRound();
-		if(go.GetComponent<MovePlayerOnline>() != null)
+		    if(go.GetComponent<MovePlayerOnline>() != null)
 		    if(go.GetComponent<MovePlayerOnline>().isOverAHole)
 			go.GetComponent<MovePlayerOnline>().holeDeathStartRound();
 	    }
@@ -244,8 +255,24 @@ public class GameManager : MonoBehaviour {
         else if (timerZero)
         {
             startOfRound = true;
+
+            if (!movedThisRound && !firstRound && GameManager.players[Client.instance.myId].startPressed == true)
+            {
+                Debug.Log("I did not move! Kill me");
+                ClientSend.sendTrap(Client.instance.myId, _player.transform.position, 1);
+                GameObject laid_trap = Instantiate(Inventory.instance.hadesTrap, _player.transform.position, Quaternion.identity);
+                laid_trap.GetComponent<TrapInteraction>().killer = "Not Moving";
+                Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
+                movedThisRound = true;
+            }
 	    MovePlayer.arrowKeysEnabled = false;
         }
+
+        if (firstRound && GameManager.players[Client.instance.myId].startPressed == true)
+        {
+            firstRound = false;
+        }
+
     }
     public void spawnTrapInvisible(Vector3 pos, int trapId){
 	switch(trapId){

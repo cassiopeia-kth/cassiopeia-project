@@ -60,11 +60,11 @@ public class ClientHandle : MonoBehaviour {
 		else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
 		GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
 	*/
-	/*if(movedPoseidon){
-	    GameManager.players[Client.instance.myId].GetComponent<MovePlayer>().movePlayer(_position, movedPoseidon);
+	if (_position != new Vector3(0,0,0))
+	{
+	    FindObjectOfType<GameManager>().movedThisRound = true;
 	}
-	else*/
-	    GameManager.instance.waitForInit(_id, _position, movedPoseidon);
+	GameManager.instance.waitForInit(_id, _position, movedPoseidon);
     }
 
 	
