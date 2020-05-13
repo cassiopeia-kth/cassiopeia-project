@@ -16,6 +16,7 @@ public class MovePlayerOnline : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     private bool flyingAllowed = true;
+    public bool WAVE = false;
     
     
     // Start is called before the first frame update
@@ -32,11 +33,13 @@ public class MovePlayerOnline : MonoBehaviour
 
     public void movePlayer(Vector3 position){
 //	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+	if(!WAVE){
 	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	
 		if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		    movePoint.position += position;
+	}
 	}
     }
     
@@ -162,6 +165,7 @@ public class MovePlayerOnline : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole"){
+	    WAVE = true;
 	    isOverAHole = true;
 	    Debug.Log("shortest debug ever");
 	}
@@ -185,18 +189,22 @@ public class MovePlayerOnline : MonoBehaviour
 	    }
 	    else if(name == "HadesTrap"){
 		Debug.Log("Death by Hades!");
+		WAVE = true;
 		StartCoroutine(HadesDeath());
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
+		WAVE = true;
 		StartCoroutine(FireTrap());
 		Debug.Log("Death by Fire!");
 	    }
 	     else if(name == "SpikeTrap"){
-		StartCoroutine(spikeTrap());
-		Debug.Log("Death by Spike!");
+		 WAVE = true;
+		 StartCoroutine(spikeTrap());
+		 Debug.Log("Death by Spike!");
 	    }
 	    else if(name == "ZeusMainTrap"){
+		WAVE = true;
 		Debug.Log("Death by Zeus!");
 		StartCoroutine(ZeusDeath());
 		//FindObjectOfType<GameManager>().EndGame();
