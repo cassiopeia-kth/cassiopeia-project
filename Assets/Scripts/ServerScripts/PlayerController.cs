@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     private bool activateSleep = false;
 
     private void FixedUpdate(){
-	SendInputToServer();
+	if(MovePlayer.arrowKeysEnabled)
+	    SendInputToServer();
 	//TODO stop calling this once in game (might add up)
 	if(GameManager.players[Client.instance.myId].checkChange != GameManager.players[Client.instance.myId].isReady){
 	    SendReadyFlag();

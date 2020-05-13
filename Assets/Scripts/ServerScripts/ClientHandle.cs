@@ -43,12 +43,15 @@ public class ClientHandle : MonoBehaviour {
     public static void PlayerDisconnected(Packet _packet) {
         int _id = _packet.ReadInt();
         Destroy(GameManager.players[_id].gameObject);
+	Lobby.instance.removeFromList(_id);
         GameManager.players.Remove(_id);
     }
 
     public static void PlayerPosition(Packet _packet) {
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
+	bool movedPoseidon = _packet.ReadBool();
+	Debug.Log("Moved Poseidon result: " + movedPoseidon);
 	//	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
 
 	/*	if(GameManager.players.ContainsKey(_id)){
@@ -57,7 +60,11 @@ public class ClientHandle : MonoBehaviour {
 		else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
 		GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
 	*/
-	GameManager.instance.waitForInit(_id, _position);
+	/*if(movedPoseidon){
+	    GameManager.players[Client.instance.myId].GetComponent<MovePlayer>().movePlayer(_position, movedPoseidon);
+	}
+	else*/
+	    GameManager.instance.waitForInit(_id, _position, movedPoseidon);
     }
 
 	

@@ -23,6 +23,7 @@ namespace GameServer {
 	public bool isAlive;
 	public bool startPressed = false;
 	public int moveSlower = 0;
+	public bool poseidonMove;
 
         public Player(int _id, string _username, string _charType) {
             id = _id;
@@ -74,10 +75,11 @@ namespace GameServer {
 		}
 	    }
 	}
-	public void SetInput(bool[] _inputs, Vector3 _position, bool _isAlive){
+	public void SetInput(bool[] _inputs, Vector3 _position, bool _isAlive, bool _poseidonMove){
 	    inputs= _inputs;
 	    position = _position;
 	    isAlive = _isAlive;
+	    poseidonMove = _poseidonMove;
 	    Move(Vector2.Zero);
 	}
 
