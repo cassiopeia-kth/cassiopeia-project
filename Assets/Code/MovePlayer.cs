@@ -260,7 +260,7 @@ public class MovePlayer : MonoBehaviour
 	{
 	    //	    rb.MovePosition(rb.position + new Vector2(0,1));
 	    //	    this.movePlayer(new Vector3(0,1,0));
-	    ClientSend.PlayerMovement(new bool[]{true,false,false,false});
+	    ClientSend.PoseidonMovement(new bool[]{true,false,false,false});
 	    //ani.SetFloat("up", 1f);
 	    //yield return new WaitForSeconds(0.1f);
 	    //ani.SetFloat("up", 0f);
@@ -271,7 +271,7 @@ public class MovePlayer : MonoBehaviour
 	{
 	    //	    rb.MovePosition(rb.position + new Vector2(-1,0));
 	    //this.movePlayer(new Vector3(-1,0,0));
-	    ClientSend.PlayerMovement(new bool[]{false,false,true,false});
+	    ClientSend.PoseidonMovement(new bool[]{false,false,true,false});
 	    //ani.SetFloat("right", 1f);
 	    //ani.SetFloat("FacingLeft", 0f);
 	    //yield return new WaitForSeconds(0.1f);
@@ -283,7 +283,7 @@ public class MovePlayer : MonoBehaviour
 	{
 	    //	    rb.MovePosition(rb.position + new Vector2(0,-1));
 	    //this.movePlayer(new Vector3(0,-1,0));
-	    ClientSend.PlayerMovement(new bool[]{false,true,false,false});
+	    ClientSend.PoseidonMovement(new bool[]{false,true,false,false});
 	    //ani.SetFloat("down", 1f);
 	    //yield return new WaitForSeconds(0.1f);
 	    //ani.SetFloat("down", 0f);
@@ -294,7 +294,7 @@ public class MovePlayer : MonoBehaviour
 	{
 	    //rb.MovePosition(rb.position + new Vector2(1,0));
 	    //this.movePlayer(new Vector3(1,0,0));
-	    ClientSend.PlayerMovement(new bool[]{false,false,false,true});
+	    ClientSend.PoseidonMovement(new bool[]{false,false,false,true});
 	    //ani.SetFloat("left", 1f);
 	    //ani.SetFloat("FacingLeft", 1f);
 	    //yield return new WaitForSeconds(0.1f);

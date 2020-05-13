@@ -165,11 +165,11 @@ public class GameManager : MonoBehaviour {
         int index = Math.Abs(HermesSpawn % positions.Length);
         var rand1 = new System.Random();
         int randomIndex1 = rand1.Next(positions.Length);
-        int randomIndex11 = rand1.Next(positions.Length);
+        //int randomIndex11 = rand1.Next(positions.Length);
 
-        if (HermesBuffer > 2)
+        if (HermesBuffer > 600)
         {
-            Debug.Log(index);
+            Debug.Log(HermesBuffer);
             GameObject c = (GameObject)Resources.Load("Prefabs/Traps/Hermes_Trap");
             Instantiate(c, positions[index], Quaternion.identity);
             HermesBuffer = 0;
@@ -180,10 +180,10 @@ public class GameManager : MonoBehaviour {
                 randomIndex1 = rand1.Next(positions.Length);
             }
 
-            if (randomIndex11 == index)
+            /*if (randomIndex11 == index)
             {
                 randomIndex11 = rand1.Next(positions.Length);
-            }
+            }*/
         }
         //HermesBuffer++;
 
@@ -198,12 +198,12 @@ public class GameManager : MonoBehaviour {
 
         var rand2 = new System.Random();
         int randomIndex2 = rand2.Next(traps.Length);
-        int randomIndex22 = rand2.Next(traps.Length);
+       // int randomIndex22 = rand2.Next(traps.Length);
 
         GameObject a = traps[randomIndex2];
-        GameObject b = traps[randomIndex22];
+       // GameObject b = traps[randomIndex22];
         Instantiate(a, positions[randomIndex1], Quaternion.identity);
-        Instantiate(b, positions[randomIndex11], Quaternion.identity);
+        //Instantiate(b, positions[randomIndex11], Quaternion.identity);
         //Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
         //Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
     }
