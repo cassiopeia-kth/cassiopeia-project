@@ -16,13 +16,21 @@ public class MovePlayerOnline : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     private bool flyingAllowed = true;
-    
-    
+    public int id;
+
     // Start is called before the first frame update
-    void Start(){	
+    void Start(){
 	FindObjectOfType<GameManager>().Start();
+
 	arrowKeysEnabled = true;
 	pm = FindObjectOfType<PlayerManager>();
+
+  foreach (PlayerManager player in GameManager.instance.getPlayers().Values) {
+      if (player.id == id) {
+          pm = player;
+      }
+  }
+
 //	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
 	movePoint = transform.GetChild(0);
 	movePoint.parent = null;
@@ -34,12 +42,12 @@ public class MovePlayerOnline : MonoBehaviour
 //	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
 	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
-	
+
 		if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		    movePoint.position += position;
 	}
     }
-    
+
     void Update()
     {
 
@@ -49,16 +57,16 @@ public class MovePlayerOnline : MonoBehaviour
 	{
 	    flyingAllowed = false;
 		}
-	
+
 	if (!timerElapsed && !flyingAllowed)
 	{
 	    ani.SetBool("Flying", false);
 	    flying = false; // change animation
 	    flyingAllowed = true;
 	}
-	
 
-	
+
+
 	if(activateSleep)
 	{
 	    timer -= Time.deltaTime;
@@ -102,8 +110,8 @@ public class MovePlayerOnline : MonoBehaviour
 			}
 
 		}
-		
-	
+
+
 	if(Input.GetKeyUp(KeyCode.UpArrow)){
 	    setAllAnimatorZero();
 	}
@@ -118,9 +126,9 @@ public class MovePlayerOnline : MonoBehaviour
 	}
     }
 
-    void OnCollisionEnter2D(Collision2D col){	
+    void OnCollisionEnter2D(Collision2D col){
 	if(col.gameObject.name == "Hole"){
-	}   
+	}
     }
 
     public void ActivateSleep(float forSeconds)
@@ -135,6 +143,7 @@ public class MovePlayerOnline : MonoBehaviour
 			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
 		//pm.isAlive = false;
+        pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(HoleDeath());
 	}
 
@@ -146,22 +155,27 @@ public class MovePlayerOnline : MonoBehaviour
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
+        pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(findPoseidonDirection(TrapScript));
 	    }
 	    else if(name == "HadesTrap"){
 		Debug.Log("Death by Hades!");
+        pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(HadesDeath());
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
+            pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(FireTrap());
 		Debug.Log("Death by Fire!");
 	    }
 	     else if(name == "SpikeTrap"){
+             pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(spikeTrap());
 		Debug.Log("Death by Spike!");
 	    }
 	    else if(name == "ZeusMainTrap"){
+            pm.isDead = true; // ADDED FOR WINNER LOGIC
 		Debug.Log("Death by Zeus!");
 		StartCoroutine(ZeusDeath());
 		//FindObjectOfType<GameManager>().EndGame();
@@ -173,6 +187,7 @@ public class MovePlayerOnline : MonoBehaviour
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
 //	    pm.isAlive = false;
+    pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(ZeusDiagonalDeath());
 		//FindObjectOfType<GameManager>().EndGame();
 	}
@@ -268,6 +283,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(0.5f);
 		ani.SetFloat("HadesTrap", 1f);
 		yield return new WaitForSeconds(1f);
+    FindObjectOfType<GameManager>().checkWinner();//ADDED FOR WINNER LOGIC
 		//FindObjectOfType<GameManager>().EndGame();
 		gameObject.SetActive(false);
 		yield return 0;
@@ -279,6 +295,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("HadesTrap", 1f);
 		yield return new WaitForSeconds(1f);
+    FindObjectOfType<GameManager>().checkWinner();//ADDED FOR WINNER LOGIC
 		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
@@ -293,6 +310,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("ZeusTrap", 1f);
 		yield return new WaitForSeconds(1f);
+    FindObjectOfType<GameManager>().checkWinner();//ADDED FOR WINNER LOGIC
 		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
@@ -307,6 +325,7 @@ public class MovePlayerOnline : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 		ani.SetFloat("ZeusTrap", 1.5f);
 		yield return new WaitForSeconds(1f);
+    FindObjectOfType<GameManager>().checkWinner();//ADDED FOR WINNER LOGIC
 		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
@@ -314,12 +333,13 @@ public class MovePlayerOnline : MonoBehaviour
 		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 		yield return 0;
 	}
-  
+
   IEnumerator spikeTrap() {
 		Vector3 pos = gameObject.transform.position;
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("SpikeTrap", 1f);
 		yield return new WaitForSeconds(1f);
+    FindObjectOfType<GameManager>().checkWinner(); //ADDED FOR WINNER LOGIC
 		//FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
@@ -334,6 +354,7 @@ IEnumerator FireTrap()
 		yield return new WaitForSeconds(3f);
 		ani.SetFloat("FireTrap", 1f);
 		yield return new WaitForSeconds(1f);
+    FindObjectOfType<GameManager>().checkWinner();//ADDED FOR WINNER LOGIC
 	//	FindObjectOfType<GameManager>().EndGame();
 		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);

@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour {
     public bool timerZero;
     public int HermesBuffer = 0;
     private int HermesSpawn = 0;
-    
+    private bool isThereAWinner = false;
+
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -40,6 +41,10 @@ public class GameManager : MonoBehaviour {
     public void waitForInit(int id, Vector3 position){
 	StartCoroutine(waitForGM(id, position));
 
+    }
+
+    public Dictionary<int, PlayerManager> getPlayers() {
+      return players;
     }
 
     public void fillUsername(){
@@ -67,33 +72,34 @@ public class GameManager : MonoBehaviour {
 	    GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().color = new Color32(255,0,0,255);
 	    GameObject.Find("Text_Name_Player_4").GetComponent<TextMeshProUGUI>().text = "Connected";
 	}
-	
+
     }
-    
+
 
     public void SpawnPlayer(int _id, string _username, Vector3 _position, string _charType, bool isReady) {
-        
-        
+
+
         //Debug.Log(_charType);
         GameObject _player;
         if (_id == Client.instance.myId) {
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mp = _player.AddComponent<MovePlayer>();
 	    mp.rb = FindObjectOfType<Rigidbody2D>();
-	    mp.ani = FindObjectOfType<Animator>();	    
+	    mp.ani = FindObjectOfType<Animator>();
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
 	    inventoryCanvas.enabled = false;
-	    
+
         }
         else {
-	    
+
 	    //Debug.Log(_position);
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mpo = _player.AddComponent<MovePlayerOnline>();
 	    mpo.rb = FindObjectOfType<Rigidbody2D>();
-	    mpo.ani = FindObjectOfType<Animator>();	    
+	    mpo.ani = FindObjectOfType<Animator>();
+      mpo.id = _id; //ADDED FOR WINNER LOGIC
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvasOnline = inventoryHUD.transform.GetComponent<Canvas>();
@@ -109,6 +115,7 @@ public class GameManager : MonoBehaviour {
 	}
         _player.GetComponent<PlayerManager>().id = _id;
         _player.GetComponent<PlayerManager>().username = _username;
+
 	_player.GetComponent<PlayerManager>().isReady = isReady;
         players.Add(_id, _player.GetComponent<PlayerManager>());
 	fillUsername();
@@ -137,20 +144,53 @@ public class GameManager : MonoBehaviour {
 	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
 	//        inventoryCanvas.enabled = true;
-        startOfRound = true; 
+        startOfRound = true;
         //        inventoryCanvas.enabled = true;
         //CountdownTimer.instance.StartTimer();
 	GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>().StartTimer();
 
     }
 
+    public bool checkWinner() {
+      /*
+      this block of code is added for win-menu
+      */
+      int countOfDead = 0;
+      if(players.Count > 1) {
+        foreach (PlayerManager player in players.Values) {
+          if(player.isDead) {
+            countOfDead++;
+          }
+        }
+        if(countOfDead == players.Count - 1) {
+          string name = "";
+
+          foreach (PlayerManager playerInner in players.Values) {
+              if(!playerInner.isDead) {
+                name = playerInner.username;
+              }
+            }
+            txtGameOver.text = $"{name} wins";
+            EndGame();
+            isThereAWinner = true;
+            return true;
+        }
+        return false;
+      }
+      return false;
+      /*
+      this block of code is added for win-menu
+      */
+    }
 
     public void EndGame() {
+      if(!isThereAWinner) { //ADDED FOR WINNER LOGIG
         Debug.Log("Game Over!");
         FindObjectOfType<MovePlayer>().enabled = false;
         Invoke("displayGameOverHUD", restartDelay);
         playAgain.onClick.AddListener(spectate);
         mainMenu.onClick.AddListener(displayMainMenu);
+      }
     }
 
     public void AddItemToInventory(Inventory_Item item){
@@ -211,7 +251,7 @@ public class GameManager : MonoBehaviour {
 	FindObjectOfType<MovePlayer>().enabled = false;
     }
 
-    
+
     public static IEnumerator waitForGM(int id, Vector3 position){
 	while(GameManager.players.ContainsKey(id) == false){
 	    yield return null;
@@ -222,9 +262,11 @@ public class GameManager : MonoBehaviour {
 	    GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
     }
     public void FixedUpdate(){
+
+      checkWinner();
         if(startOfRound == true && !timerZero){
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
-            startOfRound = false; 
+            startOfRound = false;
         }
         else if (timerZero)
         {
@@ -249,10 +291,10 @@ public class GameManager : MonoBehaviour {
 		Instantiate(Inventory.instance.fireTrap, pos, new Quaternion(0,0,0,0));
 		break;
 
-		
+
 	}
     }
-    
+
     public void spawnTrap(int id, GameObject trap, Vector3 pos, Quaternion rot, int trapId)
     {
         Debug.Log("Trapdrop Id: " + id);
@@ -261,7 +303,7 @@ public class GameManager : MonoBehaviour {
         {
             StartCoroutine(markTrap(pos, rot));
         }
-       
+
         if(trap.name == "Zeusmain_Trap")
         {
             pos.y = pos.y + 0.5f;

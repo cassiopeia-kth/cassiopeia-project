@@ -1709,9 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charType: bishop
-
-  ip: 83.227.73.57
-  port: 25850
+  ip: 127.0.0.1
   myId: 0
 --- !u!4 &1617048333
 Transform:
