@@ -36,28 +36,9 @@ public class ClientSend : MonoBehaviour {
             _packet.Write(_inputs.Length);
             foreach (bool _input in _inputs) {
                 _packet.Write(_input);
-//		Debug.Log(_input);
             }
 	    _packet.Write(GameManager.players[Client.instance.myId].isAlive);
 	    _packet.Write(GameManager.players[Client.instance.myId].transform.position);
-            SendTCPData(_packet);
-        }
-    }
-
-    public static void PoseidonMovement(bool[] _inputs)
-    {
-        Debug.Log("hello");
-        Debug.Log(GameManager.players[Client.instance.myId].isAlive);
-        using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
-        {
-            _packet.Write(_inputs.Length);
-            foreach (bool _input in _inputs)
-            {
-                _packet.Write(_input);
-                //		Debug.Log(_input);
-            }
-            _packet.Write(true);
-            _packet.Write(GameManager.players[Client.instance.myId].transform.position);
             SendTCPData(_packet);
         }
     }

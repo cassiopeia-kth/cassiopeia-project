@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour {
     private int HermesSpawn = 0;
     public GameObject _player;
     public static Dictionary<int, GameObject> playersNotManager = new Dictionary<int, GameObject>();
+
+    public bool movedThisRound = false;
     
     private void Awake() {
         if (instance == null) {
@@ -227,14 +229,20 @@ public class GameManager : MonoBehaviour {
     
     public void FixedUpdate(){
         if(startOfRound == true && !timerZero){
+            
+            if (movedThisRound)
+            {
+                movedThisRound = false;
+            }
+            
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false;
 
-	    foreach(GameObject go in playersNotManager.Values){
-		if(go.GetComponent<MovePlayer>() != null)
+	        foreach(GameObject go in playersNotManager.Values){
+		    if(go.GetComponent<MovePlayer>() != null)
 		    if(go.GetComponent<MovePlayer>().isOverAHole)
 			go.GetComponent<MovePlayer>().holeDeathStartRound();
-		if(go.GetComponent<MovePlayerOnline>() != null)
+		    if(go.GetComponent<MovePlayerOnline>() != null)
 		    if(go.GetComponent<MovePlayerOnline>().isOverAHole)
 			go.GetComponent<MovePlayerOnline>().holeDeathStartRound();
 	    }
@@ -243,6 +251,11 @@ public class GameManager : MonoBehaviour {
         else if (timerZero)
         {
             startOfRound = true;
+            if (!movedThisRound)
+            {
+                Debug.Log("I did not move! Kill me");
+                movedThisRound = true;
+            }
         }
     }
     public void spawnTrapInvisible(Vector3 pos, int trapId){

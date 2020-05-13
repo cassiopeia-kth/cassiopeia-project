@@ -58,6 +58,10 @@ public class ClientHandle : MonoBehaviour {
 		GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
 	*/
 	GameManager.instance.waitForInit(_id, _position);
+	if (_position != new Vector3(0,0,0))
+		{
+			FindObjectOfType<GameManager>().movedThisRound = true;
+		}
     }
 
 	
