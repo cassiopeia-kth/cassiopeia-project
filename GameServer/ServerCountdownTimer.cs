@@ -32,7 +32,7 @@ namespace GameServer
             if (currentTime <= 0)
             {
                 isZero = true;
-                if(currentTime <= -5)
+                if(currentTime <= -7)
                 {
                     currentTime = 15f;
                     isZero = false;

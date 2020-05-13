@@ -16,6 +16,7 @@ public class MovePlayer : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     private bool flyingAllowed = true;
+    public bool WAVE = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -27,14 +28,15 @@ public class MovePlayer : MonoBehaviour
 	movePoint.parent = null;
 	whatStopsMovement = LayerMask.GetMask("StopMovement");
     }
-    public void movePlayer(Vector3 position){
-//	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+    public void movePlayer(Vector3 position, bool movedPoseidon){
+	if(!WAVE){
 	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		movePoint.position += position;
-		//movePoint.position = Vector3.MoveTowards(movePoint.position, movePoint.position + position, moveSpeed*Time.deltaTime);
 	}
+	}
+
     }
     void Update()
     {
@@ -159,6 +161,7 @@ public class MovePlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole"){
+	    WAVE = true;
 	    isOverAHole = true;
 	    Debug.Log("shortest debug ever");
 	}
@@ -175,26 +178,36 @@ public class MovePlayer : MonoBehaviour
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
+		GameManager.players[Client.instance.myId].poseidonMove = true;
+		arrowKeysEnabled = false;
 		StartCoroutine(findPoseidonDirection(TrapScript));
 	    }
 	    else if(name == "HadesTrap"){
+		WAVE = true;
 		Debug.Log("Death by Hades!");
+		arrowKeysEnabled = false;
 		StartCoroutine(HadesDeath());
 		pm.isAlive = false;
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
+		WAVE = true;
 		StartCoroutine(FireTrap());
+		arrowKeysEnabled = false;
 		pm.isAlive = false;
 		Debug.Log("Death by Fire!");
 	    }
 	    else if(name == "SpikeTrap"){
+		WAVE = true;
+		arrowKeysEnabled = false;
 		pm.isAlive = false;
 		StartCoroutine(spikeTrap());
 		Debug.Log("Death by Spike!");
 	    }
 	    else if(name == "ZeusMainTrap"){
+		WAVE = true;
 		Debug.Log("Death by Zeus!");
+		arrowKeysEnabled = false;
 		pm.isAlive = false;
 		StartCoroutine(ZeusDeath());
 		//FindObjectOfType<GameManager>().EndGame();

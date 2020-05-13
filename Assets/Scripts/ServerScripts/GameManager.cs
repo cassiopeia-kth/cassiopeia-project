@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour {
     }
 
 
-    public void waitForInit(int id, Vector3 position){
-	StartCoroutine(waitForGM(id, position));
+    public void waitForInit(int id, Vector3 position, bool movedPoseidon){
+	StartCoroutine(waitForGM(id, position, movedPoseidon));
 
     }
 
@@ -214,14 +214,15 @@ public class GameManager : MonoBehaviour {
     }
 
     
-    public static IEnumerator waitForGM(int id, Vector3 position){
+    public static IEnumerator waitForGM(int id, Vector3 position, bool movedPoseidon){
 	while(GameManager.players.ContainsKey(id) == false){
 	    yield return null;
 	}
 	if(GameManager.players[id].GetComponent<MovePlayer>() != null)
-	    GameManager.players[id].GetComponent<MovePlayer>().movePlayer(position);
+	    GameManager.players[id].GetComponent<MovePlayer>().movePlayer(position, movedPoseidon);
 	else if(GameManager.players[id].GetComponent<MovePlayerOnline>() != null)
 	    GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
+	
     }
 
     
@@ -229,7 +230,7 @@ public class GameManager : MonoBehaviour {
         if(startOfRound == true && !timerZero){
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false;
-
+	    MovePlayer.arrowKeysEnabled = true;
 	    foreach(GameObject go in playersNotManager.Values){
 		if(go.GetComponent<MovePlayer>() != null)
 		    if(go.GetComponent<MovePlayer>().isOverAHole)
@@ -243,6 +244,7 @@ public class GameManager : MonoBehaviour {
         else if (timerZero)
         {
             startOfRound = true;
+	    MovePlayer.arrowKeysEnabled = false;
         }
     }
     public void spawnTrapInvisible(Vector3 pos, int trapId){

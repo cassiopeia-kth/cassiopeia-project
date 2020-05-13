@@ -72,15 +72,21 @@ namespace GameServer {
 	    using (Packet _packet = new Packet((int)ServerPackets.playerPosition)){
 		_packet.Write(_player.id);
 		_packet.Write(_player.movePosition);
-		if(_player.isAlive)
+		if(_player.poseidonMove == true)
+		    _packet.Write(true);
+		else
+		    _packet.Write(false);
+		Console.Write(_player.poseidonMove);
+		if(_player.isAlive || _player.poseidonMove){
 		    SendTCPDataToAll(_packet);
+		    Console.Write("TRIED TO MOVE");
+		}
 	    }
 	}
 
         public static void PlayerDisconnected(int _playerId) {
             using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected)) {
                 _packet.Write(_playerId);
-
                 SendTCPDataToAll(_packet);
             }
         }
