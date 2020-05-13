@@ -228,12 +228,13 @@ public class GameManager : MonoBehaviour {
 	
     }
 
-    
+
+    public int roundCount = 0;
     public void FixedUpdate(){
         Debug.Log("Have I moved is " + movedThisRound + ", the round is " + firstRound + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true));
         
         if(startOfRound == true && !timerZero){
-            
+            roundCount++;
             if (movedThisRound)
             {
                 movedThisRound = false;
@@ -256,7 +257,7 @@ public class GameManager : MonoBehaviour {
         {
             startOfRound = true;
 
-            if (!movedThisRound && !firstRound && GameManager.players[Client.instance.myId].startPressed == true)
+            if (!movedThisRound && !firstRound && GameManager.players[Client.instance.myId].startPressed == true && roundCount > 1)
             {
                 Debug.Log("I did not move! Kill me");
                 ClientSend.sendTrap(Client.instance.myId, _player.transform.position, 1);
