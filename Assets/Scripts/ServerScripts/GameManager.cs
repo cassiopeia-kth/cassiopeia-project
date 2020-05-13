@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     public static Dictionary<int, GameObject> playersNotManager = new Dictionary<int, GameObject>();
 
     public bool movedThisRound = false;
+    private bool firstRound = true;
     
     private void Awake() {
         if (instance == null) {
@@ -228,6 +229,8 @@ public class GameManager : MonoBehaviour {
 
     
     public void FixedUpdate(){
+        Debug.Log("Have I moved is " + movedThisRound + ", the round is " + firstRound + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true));
+        
         if(startOfRound == true && !timerZero){
             
             if (movedThisRound)
@@ -251,16 +254,22 @@ public class GameManager : MonoBehaviour {
         else if (timerZero)
         {
             startOfRound = true;
-            if (!movedThisRound && players[Client.instance.myId].startPressed == true)
+            if (!movedThisRound && !firstRound && GameManager.players[Client.instance.myId].startPressed == true)
             {
                 Debug.Log("I did not move! Kill me");
                 ClientSend.sendTrap(Client.instance.myId, _player.transform.position, 1);
                 GameObject laid_trap = Instantiate(Inventory.instance.hadesTrap, _player.transform.position, Quaternion.identity);
-                laid_trap.GetComponent<TrapInteraction>().killer = "God";
+                laid_trap.GetComponent<TrapInteraction>().killer = "Not Moving";
                 Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
                 movedThisRound = true;
             }
         }
+
+        if (firstRound && GameManager.players[Client.instance.myId].startPressed == true)
+        {
+            firstRound = false;
+        }
+
     }
     public void spawnTrapInvisible(Vector3 pos, int trapId){
 	switch(trapId){
