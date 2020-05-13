@@ -51,6 +51,10 @@ public class MovePlayer : MonoBehaviour
 		{
 			ani.SetBool("Flying", false);
 			flying = false; // change animation
+			/*
+			FindObjectOfType<BoxCollider2D>().enabled = false;
+			FindObjectOfType<BoxCollider2D>().enabled = true;
+			*/
 			flyingAllowed = true;
 		}
 
@@ -137,21 +141,27 @@ public class MovePlayer : MonoBehaviour
 	activateSleep = true;
     }
 
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-		Debug.Log("Hejejejej");
-		if (collision.gameObject.name == "Hole" && flying == false)
-		{
-			arrowKeysEnabled = false;
-			pm.isAlive = false;
-			StartCoroutine(HoleDeath());
-		}
+    
+    public bool isOverAHole = false;
+
+    private void OnTriggerExit2D(Collider2D other){
+	if(other.gameObject.name == "Hole"){
+	    isOverAHole = false;
+	    Debug.Log("On collision exit is called");
 	}
-
-
-
-	private void OnTriggerEnter2D(Collider2D other)
+    }
+    public void holeDeathStartRound(){
+	    arrowKeysEnabled = false;
+	    pm.isAlive = false;
+	    StartCoroutine(HoleDeath());
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
+	if(other.gameObject.name == "Hole"){
+	    isOverAHole = true;
+	    Debug.Log("shortest debug ever");
+	}
 	if(other.gameObject.name == "Hole" && flying == false){
 	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    arrowKeysEnabled = false;

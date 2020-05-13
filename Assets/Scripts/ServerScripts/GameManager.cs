@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     public bool timerZero;
     public int HermesBuffer = 0;
     private int HermesSpawn = 0;
+    public GameObject _player;
+    public static Dictionary<int, GameObject> playersNotManager = new Dictionary<int, GameObject>();
     
     private void Awake() {
         if (instance == null) {
@@ -75,7 +77,6 @@ public class GameManager : MonoBehaviour {
         
         
         //Debug.Log(_charType);
-        GameObject _player;
         if (_id == Client.instance.myId) {
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mp = _player.AddComponent<MovePlayer>();
@@ -110,6 +111,7 @@ public class GameManager : MonoBehaviour {
         _player.GetComponent<PlayerManager>().id = _id;
         _player.GetComponent<PlayerManager>().username = _username;
 	_player.GetComponent<PlayerManager>().isReady = isReady;
+	playersNotManager.Add(_id, _player);
         players.Add(_id, _player.GetComponent<PlayerManager>());
 	fillUsername();
 	Lobby.instance.displayReadyorNot(_id);
@@ -221,10 +223,22 @@ public class GameManager : MonoBehaviour {
 	else if(GameManager.players[id].GetComponent<MovePlayerOnline>() != null)
 	    GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
     }
+
+    
     public void FixedUpdate(){
         if(startOfRound == true && !timerZero){
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
-            startOfRound = false; 
+            startOfRound = false;
+
+	    foreach(GameObject go in playersNotManager.Values){
+		if(go.GetComponent<MovePlayer>() != null)
+		    if(go.GetComponent<MovePlayer>().isOverAHole)
+			go.GetComponent<MovePlayer>().holeDeathStartRound();
+		if(go.GetComponent<MovePlayerOnline>() != null)
+		    if(go.GetComponent<MovePlayerOnline>().isOverAHole)
+			go.GetComponent<MovePlayerOnline>().holeDeathStartRound();
+	    }
+	    
         }
         else if (timerZero)
         {

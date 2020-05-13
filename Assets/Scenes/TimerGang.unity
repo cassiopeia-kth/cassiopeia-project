@@ -1709,9 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charType: bishop
-
   ip: 83.227.73.57
-  port: 25850
   myId: 0
 --- !u!4 &1617048333
 Transform:
@@ -2002,7 +2000,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781839309}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
