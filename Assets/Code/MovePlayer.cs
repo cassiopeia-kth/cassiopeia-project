@@ -17,7 +17,7 @@ public class MovePlayer : MonoBehaviour
     public LayerMask whatStopsMovement;
     private bool flyingAllowed = true;
     public bool WAVE = false;
-
+    public bool movedThisRound = false;
     // Start is called before the first frame update
     void Start(){
 	FindObjectOfType<GameManager>().Start();
@@ -29,18 +29,29 @@ public class MovePlayer : MonoBehaviour
 	movePoint.parent = null;
 	whatStopsMovement = LayerMask.GetMask("StopMovement");
     }
+    
     public void movePlayer(Vector3 position, bool movedPoseidon){
 	if(!WAVE){
+
 	transform.position = movePoint.position;
+	movedThisRound = true;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
-	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
+	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement)){
 		movePoint.position += position;
+		
+	    }
 	}
 	}
 
     }
     void Update()
     {
+	if(movedThisRound == false && GameManager.players[Client.instance.myId].startPressed == true && GameManager.instance.roundCount > 1){
+	       ClientSend.sendTrap(Client.instance.myId, transform.position, 1);
+                GameObject laid_trap = Instantiate(Inventory.instance.hadesTrap, transform.position, Quaternion.identity);
+                laid_trap.GetComponent<TrapInteraction>().killer = "Not Moving";
+		movedThisRound = true;
+	}
 
 		// For enabling and disabling Hermes animation each round.
 		bool timerElapsed = FindObjectOfType<GameManager>().timerZero;
