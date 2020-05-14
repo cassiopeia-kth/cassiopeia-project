@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour {
     public GameObject _player;
     public static Dictionary<int, GameObject> playersNotManager = new Dictionary<int, GameObject>();
     public bool movedThisRound = false;
-    private bool firstRound = true;
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -303,7 +302,7 @@ public class GameManager : MonoBehaviour {
         {
             startOfRound = true;
 
-            if (!movedThisRound && !firstRound && GameManager.players[Client.instance.myId].startPressed == true && roundCount > 1)
+            if (!movedThisRound && GameManager.players[Client.instance.myId].startPressed == true && roundCount > 1)
             {
                 Debug.Log("I did not move! Kill me");
                 ClientSend.sendTrap(Client.instance.myId, _player.transform.position, 1);
@@ -314,12 +313,6 @@ public class GameManager : MonoBehaviour {
             }
 	    MovePlayer.arrowKeysEnabled = false;
         }
-
-        if (firstRound && GameManager.players[Client.instance.myId].startPressed == true)
-        {
-            firstRound = false;
-        }
-
     }
     public void spawnTrapInvisible(Vector3 pos, int trapId){
 	switch(trapId){

@@ -154,6 +154,7 @@ public class Lobby : MonoBehaviour {
     }
 
     public void displayReadyorNot(int _id){
+	if(GameManager.players[_id] != null)
 	if(GameManager.players[_id].isReady == true){
 	    if(GameObject.Find("Username_Player_1").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
 		GameObject.Find("Text_Ready_Player_1").GetComponent<TextMeshProUGUI>().text = "Ready";
