@@ -59,4 +59,23 @@ public class CollectableItem : MonoBehaviour, Inventory_Item
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Collectable")
+        {
+            if (collision.GetComponent<SpriteRenderer>() != null)
+            {
+                int colOrder = collision.GetComponent<SpriteRenderer>().sortingOrder;
+                int myOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+                Debug.Log("Two collectables on same spot!");
+
+                if (colOrder <= myOrder)
+                {
+                    gameObject.SetActive(false);
+                }
+                
+            }
+        }
+    }
 }
