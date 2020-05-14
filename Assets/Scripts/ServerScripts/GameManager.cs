@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour {
     public void FixedUpdate(){
 
       checkWinner();
-        Debug.Log("Have I moved is " + movedThisRound + ", the round is " + firstRound + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true));
+      //Debug.Log("Have I moved is " + movedThisRound + ", the round is " + firstRound + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true));
         
         if(startOfRound == true && !timerZero){
             roundCount++;

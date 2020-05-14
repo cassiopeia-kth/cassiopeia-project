@@ -51,9 +51,9 @@ namespace GameServer {
 		Server.clients[_fromClient].player.ready = isReady;
 		//Player.startPressed = startPressed;
 		Server.clients[_fromClient].player.startPressed = startPressed;
-				if (startPressed)
-					ServerCountdownTimer.instance.currentTime = 19f;
-				Console.WriteLine($"{ServerCountdownTimer.instance.currentTime}");
+		if(startPressed)
+		    ServerCountdownTimer.instance.currentTime = 19f;
+		Console.WriteLine($"{ServerCountdownTimer.instance.currentTime}");
 			}
 	    catch(Exception e){
 		Console.Write(e);
