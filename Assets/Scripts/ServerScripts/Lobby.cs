@@ -85,6 +85,7 @@ public class Lobby : MonoBehaviour {
 
     public void startGame(){
 	GameManager.players[Client.instance.myId].startPressed = true;
+	GameManager.instance.roundCount = 0;
 	ClientSend.ReadyFlag();
 		//ClientSend.sendStartTimer();
 		//if (CountdownTimer.instance.currentTime > 18)

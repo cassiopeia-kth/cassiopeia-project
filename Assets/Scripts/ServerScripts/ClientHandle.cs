@@ -60,14 +60,15 @@ public class ClientHandle : MonoBehaviour {
 		else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
 		GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
 	*/
-	if (_position != new Vector3(0,0,0))
+	if (_position != new Vector3(0,0,0) && _id == Client.instance.myId)
 	{
-	    FindObjectOfType<GameManager>().movedThisRound = true;
+	      MovePlayer.movedThisRound = true;	
 	}
 	GameManager.instance.waitForInit(_id, _position, movedPoseidon);
     }
 
 
+    public static bool flagStart = true;
 
     //	Vector3 actual_position = GameManager.players[_id].transform.position;
     //	GameManager.players[_id].transform.position = _position;
@@ -88,6 +89,12 @@ public class ClientHandle : MonoBehaviour {
 		Lobby.instance.hideStartButton();
 	    }
 	    if(startPressed == true){
+		if(flagStart){
+		    Debug.Log("DID THIS RESET TO COUNTDOWN");
+		    GameManager.instance.roundCount = 0;
+		    flagStart = false;
+		}
+		MovePlayer.startedGame = true;
 		Lobby.instance.startGame();
 		if(definitelyUseful){
 		    Lobby.instance.theMostUsefulFunction();

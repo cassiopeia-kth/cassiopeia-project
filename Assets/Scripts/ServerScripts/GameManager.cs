@@ -279,9 +279,8 @@ public class GameManager : MonoBehaviour {
 //      Debug.Log("Have I moved is " + movedThisRound  + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true) + ", round number is" + roundCount);
         
         if(startOfRound == true && !timerZero){
-            roundCount++;
-	    movedThisRound = false;
-
+	    MovePlayer.movedThisRound = false;
+	    roundCount++;
             
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false;
@@ -300,7 +299,7 @@ public class GameManager : MonoBehaviour {
         {
             startOfRound = true;
 
-            if (!movedThisRound && GameManager.players[Client.instance.myId].startPressed == true && roundCount > 1)
+	    /*  if (!movedThisRound && GameManager.players[Client.instance.myId].startPressed == true && roundCount > 1)
             {
                 Debug.Log("I did not move! Kill me");
                 ClientSend.sendTrap(Client.instance.myId, _player.transform.position, 1);
@@ -308,7 +307,7 @@ public class GameManager : MonoBehaviour {
                 laid_trap.GetComponent<TrapInteraction>().killer = "Not Moving";
                 Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
                 movedThisRound = true;
-            }
+            }*/
 	    MovePlayer.arrowKeysEnabled = false;
         }
     }
