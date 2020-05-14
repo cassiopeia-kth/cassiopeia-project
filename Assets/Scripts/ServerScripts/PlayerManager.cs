@@ -10,5 +10,6 @@ public class PlayerManager : MonoBehaviour {
     public bool checkChange = false;
     public bool everyoneReady = false;
     public bool startPressed = false;
+    public bool isDead = false; //Added for winner logic
     public bool poseidonMove = false;
 }

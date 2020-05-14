@@ -23,6 +23,7 @@ public class MovePlayer : MonoBehaviour
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
 	pm = FindObjectOfType<PlayerManager>();
+
 	//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
 	movePoint = transform.GetChild(0);
 	movePoint.parent = null;
@@ -40,7 +41,7 @@ public class MovePlayer : MonoBehaviour
     }
     void Update()
     {
-		
+
 		// For enabling and disabling Hermes animation each round.
 		bool timerElapsed = FindObjectOfType<GameManager>().timerZero;
 
@@ -136,7 +137,7 @@ public class MovePlayer : MonoBehaviour
 	}
     }
 
-    
+
     public void ActivateSleep(float forSeconds)
     {
 	timer = forSeconds;
@@ -167,6 +168,7 @@ public class MovePlayer : MonoBehaviour
 	if(other.gameObject.name == "Hole" && flying == false){
 	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    arrowKeysEnabled = false;
+          pm.isDead = true; // ADDED FOR WINNER LOGIC
 	    pm.isAlive = false;
 	    WAVE = true;
 	    StartCoroutine(HoleDeath());
@@ -185,12 +187,16 @@ public class MovePlayer : MonoBehaviour
 	    else if(name == "HadesTrap"){
 		WAVE = true;
 		Debug.Log("Death by Hades!");
+
+      pm.isDead = true; // ADDED FOR WINNER LOGIC
+
 		arrowKeysEnabled = false;
 		StartCoroutine(HadesDeath());
 		pm.isAlive = false;
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
+            pm.isDead = true; // ADDED FOR WINNER LOGIC
 		WAVE = true;
 		StartCoroutine(FireTrap());
 		arrowKeysEnabled = false;
@@ -201,6 +207,7 @@ public class MovePlayer : MonoBehaviour
 		WAVE = true;
 		arrowKeysEnabled = false;
 		pm.isAlive = false;
+        pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(spikeTrap());
 		Debug.Log("Death by Spike!");
 	    }
@@ -209,6 +216,7 @@ public class MovePlayer : MonoBehaviour
 		Debug.Log("Death by Zeus!");
 		arrowKeysEnabled = false;
 		pm.isAlive = false;
+    pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(ZeusDeath());
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
@@ -217,6 +225,7 @@ public class MovePlayer : MonoBehaviour
 	else if (other.GetComponent<ZeusDiagonal>() != null && flying == false)
 	{
 	    Debug.Log("Death by Zeus Diagonal!");
+          pm.isDead = true; // ADDED FOR WINNER LOGIC
 	    pm.isAlive = false;
 	    StartCoroutine(ZeusDiagonalDeath());
 	    FindObjectOfType<GameManager>().EndGame();
@@ -225,11 +234,12 @@ public class MovePlayer : MonoBehaviour
 	else if (other.GetComponent<WildFire>() != null && flying == false)
 		{
 			Debug.Log("Death by WildFire!");
+          pm.isDead = true; // ADDED FOR WINNER LOGIC
 			pm.isAlive = false;
 			StartCoroutine(FireTrap());
 			//FindObjectOfType<GameManager>().EndGame();
 		}
-	
+
 	else if (other.GetComponent<Pickup>() != null)
 	{
 	    other.enabled = false;
@@ -324,60 +334,80 @@ public class MovePlayer : MonoBehaviour
 	yield return new WaitForSeconds(0.5f);
 	ani.SetFloat("HadesTrap", 1f);
 	yield return new WaitForSeconds(1f);
-	FindObjectOfType<GameManager>().EndGame();
+  bool marker = FindObjectOfType<GameManager>().checkWinner(); //ADDED FOR WINNER LOGIC
+  if (!marker) {
+    FindObjectOfType<GameManager>().EndGame();
+  }
 	gameObject.SetActive(false);
 	yield return 0;
     }
+
     IEnumerator HadesDeath()
     {
 	Vector3 pos = gameObject.transform.position;
 	yield return new WaitForSeconds(3f);
 	ani.SetFloat("HadesTrap", 1f);
 	yield return new WaitForSeconds(1f);
-	FindObjectOfType<GameManager>().EndGame();
+  bool marker = FindObjectOfType<GameManager>().checkWinner(); //ADDED FOR WINNER logic
+  if (!marker) {
+    FindObjectOfType<GameManager>().EndGame();
+  }
 	yield return new WaitForSeconds(2f);
 	gameObject.SetActive(false);
 	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
 	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 	yield return 0;
     }
+
     IEnumerator ZeusDeath()
     {
 	Vector3 pos = gameObject.transform.position;
 	yield return new WaitForSeconds(3f);
 	ani.SetFloat("ZeusTrap", 1f);
 	yield return new WaitForSeconds(1f);
-	FindObjectOfType<GameManager>().EndGame();
+  bool marker = FindObjectOfType<GameManager>().checkWinner(); //ADDED FOR WINNER LOGIC
+  if (!marker) {
+    FindObjectOfType<GameManager>().EndGame();
+  }
 	yield return new WaitForSeconds(2f);
 	gameObject.SetActive(false);
 	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
 	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 	yield return 0;
     }
+
     IEnumerator ZeusDiagonalDeath()
     {
 	Vector3 pos = gameObject.transform.position;
 	yield return new WaitForSeconds(1f);
 	ani.SetFloat("ZeusTrap", 1.5f);
 	yield return new WaitForSeconds(1f);
-	FindObjectOfType<GameManager>().EndGame();
+  bool marker = FindObjectOfType<GameManager>().checkWinner(); //ADDED FOR WINNER LOGIC
+  if (!marker) {
+    FindObjectOfType<GameManager>().EndGame();
+  }
 	yield return new WaitForSeconds(2f);
 	gameObject.SetActive(false);
 	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
 	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 	yield return 0;
     }
+
     IEnumerator spikeTrap() {
 	Vector3 pos = gameObject.transform.position;
 	yield return new WaitForSeconds(3f);
 	ani.SetFloat("SpikeTrap", 1f);
 	yield return new WaitForSeconds(1f);
-	FindObjectOfType<GameManager>().EndGame();
+  bool marker = FindObjectOfType<GameManager>().checkWinner(); //ADDED FOR WINNER LOGIC
+  if (!marker) {
+    FindObjectOfType<GameManager>().EndGame();
+  }
 	yield return new WaitForSeconds(2f);
 	gameObject.SetActive(false);
 	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
 	GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 	yield return 0;
+
     }
     IEnumerator FireTrap()
     {
@@ -385,7 +415,10 @@ public class MovePlayer : MonoBehaviour
 	yield return new WaitForSeconds(3f);
 	ani.SetFloat("FireTrap", 1f);
 	yield return new WaitForSeconds(1f);
-	FindObjectOfType<GameManager>().EndGame();
+  bool marker = FindObjectOfType<GameManager>().checkWinner(); //ADDED FOR WINNER LOGIC
+  if (!marker) {
+    FindObjectOfType<GameManager>().EndGame();
+  }
 	yield return new WaitForSeconds(2f);
 	gameObject.SetActive(false);
 	GameObject BishopGrave = (GameObject)Resources.Load("Prefabs/Graves/BishopGrave", typeof(GameObject));
@@ -416,9 +449,9 @@ public class MovePlayer : MonoBehaviour
     public AudioSource placeItemSound;
     public AudioSource itemPickUpSound;
 
-    
+
     // Start is called before the first frame update
-    void Start(){	
+    void Start(){
 	FindObjectOfType<GameManager>().Start();
 	arrowKeysEnabled = true;
 	}
@@ -430,7 +463,7 @@ public class MovePlayer : MonoBehaviour
 			rb.constraints = RigidbodyConstraints2D.FreezeAll;
 			fixedpos = true;
 		}
-		
+
 
 		if (activateSleep)
 		{
@@ -506,9 +539,9 @@ public class MovePlayer : MonoBehaviour
 	    ActivateSleep(0.25f);
 	    inventorySwitchSound.Play();
 	}
-	
-	
-	
+
+
+
 	if(Input.GetKeyUp(KeyCode.UpArrow)){
 	    setAllAnimatorZero();
 	}
@@ -520,12 +553,12 @@ public class MovePlayer : MonoBehaviour
 	}
 	else if(Input.GetKeyUp(KeyCode.LeftArrow)){
 	    setAllAnimatorZero();
-	}	    
+	}
     }
 
-    void OnCollisionEnter2D(Collision2D col){	
+    void OnCollisionEnter2D(Collision2D col){
 	if(col.gameObject.name == "Hole"){
-	}   
+	}
     }
 
     public void ActivateSleep(float forSeconds)
@@ -589,7 +622,7 @@ public class MovePlayer : MonoBehaviour
 	// Deals with pickup interaction. (e.g. the Hermes status effect)
 	else if (other.GetComponent<Pickup>() != null)
 	{
-		
+
 	    Pickup PickupScript = other.GetComponent<Pickup>();
 	    string name = PickupScript.trap.trapName;
 	    if(name == "HermesPickup"){
@@ -741,7 +774,7 @@ public class MovePlayer : MonoBehaviour
 		GameObject actualGrave = Instantiate(BishopGrave, pos, Quaternion.identity);
 		yield return 0;
 	}
-  
+
   IEnumerator spikeTrap() {
 		Vector3 pos = gameObject.transform.position;
 		yield return new WaitForSeconds(3f);

@@ -24,12 +24,12 @@ public class GameManager : MonoBehaviour {
     public bool timerZero;
     public int HermesBuffer = 0;
     private int HermesSpawn = 0;
+
+    private bool isThereAWinner = false;
     public GameObject _player;
     public static Dictionary<int, GameObject> playersNotManager = new Dictionary<int, GameObject>();
-
     public bool movedThisRound = false;
     private bool firstRound = true;
-    
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour {
     public void waitForInit(int id, Vector3 position, bool movedPoseidon){
 	StartCoroutine(waitForGM(id, position, movedPoseidon));
 
+    }
+
+    public Dictionary<int, PlayerManager> getPlayers() {
+      return players;
     }
 
     public void fillUsername(){
@@ -72,32 +76,33 @@ public class GameManager : MonoBehaviour {
 	    GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().color = new Color32(255,0,0,255);
 	    GameObject.Find("Text_Name_Player_4").GetComponent<TextMeshProUGUI>().text = "Connected";
 	}
-	
+
     }
-    
+
 
     public void SpawnPlayer(int _id, string _username, Vector3 _position, string _charType, bool isReady) {
-        
-        
+
+
         //Debug.Log(_charType);
         if (_id == Client.instance.myId) {
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mp = _player.AddComponent<MovePlayer>();
 	    mp.rb = FindObjectOfType<Rigidbody2D>();
-	    mp.ani = FindObjectOfType<Animator>();	    
+	    mp.ani = FindObjectOfType<Animator>();
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mp.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvas = inventoryHUD.transform.GetComponent<Canvas>();
 	    inventoryCanvas.enabled = false;
-	    
+
         }
         else {
-	    
+
 	    //Debug.Log(_position);
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mpo = _player.AddComponent<MovePlayerOnline>();
 	    mpo.rb = FindObjectOfType<Rigidbody2D>();
-	    mpo.ani = FindObjectOfType<Animator>();	    
+	    mpo.ani = FindObjectOfType<Animator>();
+      mpo.id = _id; //ADDED FOR WINNER LOGIC
 	    GameObject inventoryHUD = Instantiate(inventoryPrefab);
 	    mpo.inventory = inventoryHUD.transform.GetChild(0).gameObject.AddComponent<Inventory>();
 	    inventoryCanvasOnline = inventoryHUD.transform.GetComponent<Canvas>();
@@ -113,6 +118,7 @@ public class GameManager : MonoBehaviour {
 	}
         _player.GetComponent<PlayerManager>().id = _id;
         _player.GetComponent<PlayerManager>().username = _username;
+
 	_player.GetComponent<PlayerManager>().isReady = isReady;
 	playersNotManager.Add(_id, _player);
         players.Add(_id, _player.GetComponent<PlayerManager>());
@@ -142,20 +148,57 @@ public class GameManager : MonoBehaviour {
 	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
 	//        inventoryCanvas.enabled = true;
-        startOfRound = true; 
+        startOfRound = true;
         //        inventoryCanvas.enabled = true;
         //CountdownTimer.instance.StartTimer();
 	GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>().StartTimer();
 
     }
 
+    public bool checkWinner() {
+      /*
+      this block of code is added for win-menu
+      */
+      if(!isThereAWinner) {
+        int countOfDead = 0;
+        if(players.Count > 1) {
+          foreach (PlayerManager player in players.Values) {
+            if(player.isDead) {
+              countOfDead++;
+            }
+          }
+          if(countOfDead == players.Count - 1) {
+            string name = "";
+
+            foreach (PlayerManager playerInner in players.Values) {
+                if(!playerInner.isDead) {
+                  name = playerInner.username;
+                }
+              }
+              txtGameOver.text = $"{name} wins";
+              playAgain.gameObject.SetActive(false);
+              EndGame();
+              isThereAWinner = true;
+              return true;
+          }
+          return false;
+        }
+        return false;
+        /*
+        this block of code is added for win-menu
+        */
+      }
+      return false;
+    }
 
     public void EndGame() {
+      if(!isThereAWinner) { //ADDED FOR WINNER LOGIG
         Debug.Log("Game Over!");
         FindObjectOfType<MovePlayer>().enabled = false;
         Invoke("displayGameOverHUD", restartDelay);
         playAgain.onClick.AddListener(spectate);
         mainMenu.onClick.AddListener(displayMainMenu);
+      }
     }
 
     public void AddItemToInventory(Inventory_Item item){
@@ -168,6 +211,7 @@ public class GameManager : MonoBehaviour {
         int index = Math.Abs(HermesSpawn % positions.Length);
         var rand1 = new System.Random();
         int randomIndex1 = rand1.Next(positions.Length);
+
         //int randomIndex11 = rand1.Next(positions.Length);
 
         if (HermesBuffer > 600)
@@ -231,6 +275,8 @@ public class GameManager : MonoBehaviour {
 
     public int roundCount = 0;
     public void FixedUpdate(){
+
+      checkWinner();
         Debug.Log("Have I moved is " + movedThisRound + ", the round is " + firstRound + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true));
         
         if(startOfRound == true && !timerZero){
@@ -293,10 +339,10 @@ public class GameManager : MonoBehaviour {
 		Instantiate(Inventory.instance.fireTrap, pos, new Quaternion(0,0,0,0));
 		break;
 
-		
+
 	}
     }
-    
+
     public void spawnTrap(int id, GameObject trap, Vector3 pos, Quaternion rot, int trapId)
     {
         Debug.Log("Trapdrop Id: " + id);
@@ -305,7 +351,7 @@ public class GameManager : MonoBehaviour {
         {
             StartCoroutine(markTrap(pos, rot));
         }
-       
+
         if(trap.name == "Zeusmain_Trap")
         {
             pos.y = pos.y + 0.5f;
