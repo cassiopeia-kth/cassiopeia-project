@@ -64,8 +64,18 @@ public class CollectableItem : MonoBehaviour, Inventory_Item
     {
         if (collision.gameObject.tag == "Collectable")
         {
-            Debug.Log("Two collectables on same spot. Kill them both!");
-            gameObject.SetActive(false);
+            if (collision.GetComponent<SpriteRenderer>() != null)
+            {
+                int colOrder = collision.GetComponent<SpriteRenderer>().sortingOrder;
+                int myOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+                Debug.Log("Two collectables on same spot!");
+
+                if (colOrder <= myOrder)
+                {
+                    gameObject.SetActive(false);
+                }
+                
+            }
         }
     }
 }
