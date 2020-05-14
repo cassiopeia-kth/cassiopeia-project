@@ -86,21 +86,16 @@ public class Lobby : MonoBehaviour {
     public void startGame(){
 	GameManager.players[Client.instance.myId].startPressed = true;
 	ClientSend.ReadyFlag();
-		//ClientSend.sendStartTimer();
-		//if (CountdownTimer.instance.currentTime > 18)
-		//{
-			GameManager.instance.inventoryCanvas.enabled = true;
-			this.gameStarted = true;
-			foreach (PlayerManager pman in GameManager.players.Values)
-			{
-				pman.isAlive = true;
-			}
-			//GameObject.Find("Lobby").SetActive(false);
-			Canvas a = gameObject.GetComponent<Canvas>();
-			a.enabled = false;
-			GameObject.Find("Lobby").SetActive(false);
-			//CountdownTimer.instance.StartTimer();
-		//}
+	GameManager.instance.inventoryCanvas.enabled = true;
+	this.gameStarted = true;
+	foreach(PlayerManager pman in GameManager.players.Values){
+	    pman.isAlive = true;
+	}
+	//GameObject.Find("Lobby").SetActive(false);
+	Canvas a = gameObject.GetComponent<Canvas>();
+	a.enabled = false;
+	GameObject.Find("Lobby").SetActive(false);
+        //CountdownTimer.instance.StartTimer();
     }
 
     public void startGameTimer()
@@ -154,28 +149,29 @@ public class Lobby : MonoBehaviour {
     }
 
     public void displayReadyorNot(int _id){
-	if(GameManager.players[_id].isReady == true){
-	    if(GameObject.Find("Username_Player_1").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
-		GameObject.Find("Text_Ready_Player_1").GetComponent<TextMeshProUGUI>().text = "Ready";
-		GameObject.Find("Text_Ready_Player_1").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
-		return;
+	if(GameManager.players[_id] != null)
+	    if(GameManager.players[_id].isReady == true){
+		if(GameObject.Find("Username_Player_1").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
+		    GameObject.Find("Text_Ready_Player_1").GetComponent<TextMeshProUGUI>().text = "Ready";
+		    GameObject.Find("Text_Ready_Player_1").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
+		    return;
+		}
+		if(GameObject.Find("Username_Player_2").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
+		    GameObject.Find("Text_Ready_Player_2").GetComponent<TextMeshProUGUI>().text = "Ready";
+		    GameObject.Find("Text_Ready_Player_2").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
+		    return;
+		}
+		if(GameObject.Find("Username_Player_3").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
+		    GameObject.Find("Text_Ready_Player_3").GetComponent<TextMeshProUGUI>().text = "Ready";
+		    GameObject.Find("Text_Ready_Player_3").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
+		    return;
+		}
+		if(GameObject.Find("Username_Player_4").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
+		    GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().text = "Ready";
+		    GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
+		    return;
+		}
 	    }
-	    if(GameObject.Find("Username_Player_2").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
-		GameObject.Find("Text_Ready_Player_2").GetComponent<TextMeshProUGUI>().text = "Ready";
-		GameObject.Find("Text_Ready_Player_2").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
-		return;
-	    }
-	    if(GameObject.Find("Username_Player_3").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
-		GameObject.Find("Text_Ready_Player_3").GetComponent<TextMeshProUGUI>().text = "Ready";
-		GameObject.Find("Text_Ready_Player_3").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
-		return;
-	    }
-	    if(GameObject.Find("Username_Player_4").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){
-		GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().text = "Ready";
-		GameObject.Find("Text_Ready_Player_4").GetComponent<TextMeshProUGUI>().color = new Color32(0,255,0,255);
-		return;
-	    }
-	}
     
 	if(GameManager.players[_id].isReady == false){
 	    if(GameObject.Find("Username_Player_1").GetComponent<TextMeshProUGUI>().text == GameManager.players[_id].username){

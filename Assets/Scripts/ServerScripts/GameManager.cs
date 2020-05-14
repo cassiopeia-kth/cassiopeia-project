@@ -24,8 +24,12 @@ public class GameManager : MonoBehaviour {
     public bool timerZero;
     public int HermesBuffer = 0;
     private int HermesSpawn = 0;
-    private bool isThereAWinner = false;
 
+    private bool isThereAWinner = false;
+    public GameObject _player;
+    public static Dictionary<int, GameObject> playersNotManager = new Dictionary<int, GameObject>();
+    public bool movedThisRound = false;
+    private bool firstRound = true;
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -38,8 +42,8 @@ public class GameManager : MonoBehaviour {
     }
 
 
-    public void waitForInit(int id, Vector3 position){
-	StartCoroutine(waitForGM(id, position));
+    public void waitForInit(int id, Vector3 position, bool movedPoseidon){
+	StartCoroutine(waitForGM(id, position, movedPoseidon));
 
     }
 
@@ -80,7 +84,6 @@ public class GameManager : MonoBehaviour {
 
 
         //Debug.Log(_charType);
-        GameObject _player;
         if (_id == Client.instance.myId) {
 	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
 	    mp = _player.AddComponent<MovePlayer>();
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour {
         _player.GetComponent<PlayerManager>().username = _username;
 
 	_player.GetComponent<PlayerManager>().isReady = isReady;
+	playersNotManager.Add(_id, _player);
         players.Add(_id, _player.GetComponent<PlayerManager>());
 	fillUsername();
 	Lobby.instance.displayReadyorNot(_id);
@@ -207,11 +211,12 @@ public class GameManager : MonoBehaviour {
         int index = Math.Abs(HermesSpawn % positions.Length);
         var rand1 = new System.Random();
         int randomIndex1 = rand1.Next(positions.Length);
-        int randomIndex11 = rand1.Next(positions.Length);
 
-        if (HermesBuffer > 2)
+        //int randomIndex11 = rand1.Next(positions.Length);
+
+        if (HermesBuffer > 600)
         {
-            Debug.Log(index);
+            Debug.Log(HermesBuffer);
             GameObject c = (GameObject)Resources.Load("Prefabs/Traps/Hermes_Trap");
             Instantiate(c, positions[index], Quaternion.identity);
             HermesBuffer = 0;
@@ -222,10 +227,10 @@ public class GameManager : MonoBehaviour {
                 randomIndex1 = rand1.Next(positions.Length);
             }
 
-            if (randomIndex11 == index)
+            /*if (randomIndex11 == index)
             {
                 randomIndex11 = rand1.Next(positions.Length);
-            }
+            }*/
         }
         //HermesBuffer++;
 
@@ -240,12 +245,12 @@ public class GameManager : MonoBehaviour {
 
         var rand2 = new System.Random();
         int randomIndex2 = rand2.Next(traps.Length);
-        int randomIndex22 = rand2.Next(traps.Length);
+       // int randomIndex22 = rand2.Next(traps.Length);
 
         GameObject a = traps[randomIndex2];
-        GameObject b = traps[randomIndex22];
+       // GameObject b = traps[randomIndex22];
         Instantiate(a, positions[randomIndex1], Quaternion.identity);
-        Instantiate(b, positions[randomIndex11], Quaternion.identity);
+        //Instantiate(b, positions[randomIndex11], Quaternion.identity);
         //Debug.Log("collectible trap " + traps[randomIndex2] + " spawned at position " + positions[randomIndex1]);
         //Debug.Log("collectible trap " + traps[randomIndex22] + " spawned at position " + positions[randomIndex11]);
     }
@@ -255,27 +260,66 @@ public class GameManager : MonoBehaviour {
 	FindObjectOfType<MovePlayer>().enabled = false;
     }
 
-
-    public static IEnumerator waitForGM(int id, Vector3 position){
+    
+    public static IEnumerator waitForGM(int id, Vector3 position, bool movedPoseidon){
 	while(GameManager.players.ContainsKey(id) == false){
 	    yield return null;
 	}
 	if(GameManager.players[id].GetComponent<MovePlayer>() != null)
-	    GameManager.players[id].GetComponent<MovePlayer>().movePlayer(position);
+	    GameManager.players[id].GetComponent<MovePlayer>().movePlayer(position, movedPoseidon);
 	else if(GameManager.players[id].GetComponent<MovePlayerOnline>() != null)
 	    GameManager.players[id].GetComponent<MovePlayerOnline>().movePlayer(position);
+	
     }
+
+
+    public int roundCount = 0;
     public void FixedUpdate(){
 
       checkWinner();
+        Debug.Log("Have I moved is " + movedThisRound + ", the round is " + firstRound + ", and the button press " + (GameManager.players[Client.instance.myId].startPressed == true));
+        
         if(startOfRound == true && !timerZero){
+            roundCount++;
+            if (movedThisRound)
+            {
+                movedThisRound = false;
+            }
+            
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false;
+	    MovePlayer.arrowKeysEnabled = true;
+	    foreach(GameObject go in playersNotManager.Values){
+		if(go.GetComponent<MovePlayer>() != null)
+		    if(go.GetComponent<MovePlayer>().isOverAHole)
+			go.GetComponent<MovePlayer>().holeDeathStartRound();
+		    if(go.GetComponent<MovePlayerOnline>() != null)
+		    if(go.GetComponent<MovePlayerOnline>().isOverAHole)
+			go.GetComponent<MovePlayerOnline>().holeDeathStartRound();
+	    }
+	    
         }
         else if (timerZero)
         {
             startOfRound = true;
+
+            if (!movedThisRound && !firstRound && GameManager.players[Client.instance.myId].startPressed == true && roundCount > 1)
+            {
+                Debug.Log("I did not move! Kill me");
+                ClientSend.sendTrap(Client.instance.myId, _player.transform.position, 1);
+                GameObject laid_trap = Instantiate(Inventory.instance.hadesTrap, _player.transform.position, Quaternion.identity);
+                laid_trap.GetComponent<TrapInteraction>().killer = "Not Moving";
+                Debug.Log("Trap laid by player: " + laid_trap.GetComponent<TrapInteraction>().killer);
+                movedThisRound = true;
+            }
+	    MovePlayer.arrowKeysEnabled = false;
         }
+
+        if (firstRound && GameManager.players[Client.instance.myId].startPressed == true)
+        {
+            firstRound = false;
+        }
+
     }
     public void spawnTrapInvisible(Vector3 pos, int trapId){
 	switch(trapId){

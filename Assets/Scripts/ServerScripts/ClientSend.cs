@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+//using System.Diagnostics;
 
 public class ClientSend : MonoBehaviour {
     private static bool activateSleep = false;
@@ -36,10 +37,10 @@ public class ClientSend : MonoBehaviour {
             _packet.Write(_inputs.Length);
             foreach (bool _input in _inputs) {
                 _packet.Write(_input);
-//		Debug.Log(_input);
             }
 	    _packet.Write(GameManager.players[Client.instance.myId].isAlive);
 	    _packet.Write(GameManager.players[Client.instance.myId].transform.position);
+	    _packet.Write(GameManager.players[Client.instance.myId].poseidonMove);
             SendTCPData(_packet);
         }
     }
@@ -50,6 +51,7 @@ public class ClientSend : MonoBehaviour {
 	    _packet.Write(GameManager.players[Client.instance.myId].isReady);
 	    _packet.Write(GameManager.players[Client.instance.myId].startPressed);
 	    //Debug.Log(GameManager.players[Client.instance.myId].startPressed);
+
 	    SendTCPData(_packet);
 	}
 	
@@ -58,6 +60,7 @@ public class ClientSend : MonoBehaviour {
     public static void sendStartTimer(){
 	using (Packet _packet = new Packet((int)ClientPackets.timer)) {
 	    _packet.Write(GameManager.players[Client.instance.myId].startPressed);
+            Debug.Log("sent start PressedXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	SendTCPData(_packet);
 	}
     }

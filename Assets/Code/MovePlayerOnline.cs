@@ -16,8 +16,12 @@ public class MovePlayerOnline : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     private bool flyingAllowed = true;
+
     public int id;
 
+    public bool WAVE = false;
+    
+  
     // Start is called before the first frame update
     void Start(){
 	FindObjectOfType<GameManager>().Start();
@@ -40,11 +44,13 @@ public class MovePlayerOnline : MonoBehaviour
 
     public void movePlayer(Vector3 position){
 //	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+	if(!WAVE){
 	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 
 		if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		    movePoint.position += position;
+	}
 	}
     }
 
@@ -136,8 +142,44 @@ public class MovePlayerOnline : MonoBehaviour
 	timer = forSeconds;
 	activateSleep = true;
     }
+    
+    private void OnTriggerStay2D(Collider2D collision)
+	{
+	    Debug.Log("Hejejejej");
+	    if (collision.gameObject.name == "Hole" && flying == false)
+	    {
+		arrowKeysEnabled = false;
+		pm.isAlive = false;
+		StartCoroutine(HoleDeath());
+	    }
+	}
+
+
+
+  public bool isOverAHole = false;
+
+    private void OnTriggerExit2D(Collider2D other){
+	if(other.gameObject.name == "Hole"){
+	    isOverAHole = false;
+	    Debug.Log("On collision exit is called");
+	}
+    }
+    public void holeDeathStartRound(){
+	    arrowKeysEnabled = false;
+	    pm.isAlive = false;
+	    StartCoroutine(HoleDeath());
+    }
+    
+
+
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
+	if(other.gameObject.name == "Hole"){
+	    WAVE = true;
+	    isOverAHole = true;
+	    Debug.Log("shortest debug ever");
+	}
 
 	if(other.gameObject.name == "Hole" && flying == false){
 			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
@@ -161,21 +203,25 @@ public class MovePlayerOnline : MonoBehaviour
 	    else if(name == "HadesTrap"){
 		Debug.Log("Death by Hades!");
         pm.isDead = true; // ADDED FOR WINNER LOGIC
+		WAVE = true;
 		StartCoroutine(HadesDeath());
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
             pm.isDead = true; // ADDED FOR WINNER LOGIC
+		WAVE = true;
 		StartCoroutine(FireTrap());
 		Debug.Log("Death by Fire!");
 	    }
 	     else if(name == "SpikeTrap"){
-             pm.isDead = true; // ADDED FOR WINNER LOGIC
+    WAVE = true;
+    pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(spikeTrap());
 		Debug.Log("Death by Spike!");
 	    }
 	    else if(name == "ZeusMainTrap"){
             pm.isDead = true; // ADDED FOR WINNER LOGIC
+            WAVE = true;
 		Debug.Log("Death by Zeus!");
 		StartCoroutine(ZeusDeath());
 		//FindObjectOfType<GameManager>().EndGame();

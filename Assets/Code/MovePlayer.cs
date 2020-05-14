@@ -16,6 +16,7 @@ public class MovePlayer : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     private bool flyingAllowed = true;
+    public bool WAVE = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -28,14 +29,15 @@ public class MovePlayer : MonoBehaviour
 	movePoint.parent = null;
 	whatStopsMovement = LayerMask.GetMask("StopMovement");
     }
-    public void movePlayer(Vector3 position){
-//	transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+    public void movePlayer(Vector3 position, bool movedPoseidon){
+	if(!WAVE){
 	transform.position = movePoint.position;
 	if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 	    if(!Physics2D.OverlapCircle(movePoint.position + position, .2f, whatStopsMovement))
 		movePoint.position += position;
-		//movePoint.position = Vector3.MoveTowards(movePoint.position, movePoint.position + position, moveSpeed*Time.deltaTime);
 	}
+	}
+
     }
     void Update()
     {
@@ -52,6 +54,10 @@ public class MovePlayer : MonoBehaviour
 		{
 			ani.SetBool("Flying", false);
 			flying = false; // change animation
+			/*
+			FindObjectOfType<BoxCollider2D>().enabled = false;
+			FindObjectOfType<BoxCollider2D>().enabled = true;
+			*/
 			flyingAllowed = true;
 		}
 
@@ -138,26 +144,33 @@ public class MovePlayer : MonoBehaviour
 	activateSleep = true;
     }
 
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-		Debug.Log("Hejejejej");
-		if (collision.gameObject.name == "Hole" && flying == false)
-		{
-			arrowKeysEnabled = false;
-			pm.isAlive = false;
-			StartCoroutine(HoleDeath());
-		}
+    
+    public bool isOverAHole = false;
+
+    private void OnTriggerExit2D(Collider2D other){
+	if(other.gameObject.name == "Hole"){
+	    isOverAHole = false;
+	    Debug.Log("On collision exit is called");
 	}
-
-
-
-	private void OnTriggerEnter2D(Collider2D other)
+    }
+    public void holeDeathStartRound(){
+	    arrowKeysEnabled = false;
+	    pm.isAlive = false;
+	    StartCoroutine(HoleDeath());
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
+	if(other.gameObject.name == "Hole"){
+	    isOverAHole = true;
+	    Debug.Log("shortest debug ever");
+	}
 	if(other.gameObject.name == "Hole" && flying == false){
 	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    arrowKeysEnabled = false;
           pm.isDead = true; // ADDED FOR WINNER LOGIC
 	    pm.isAlive = false;
+	    WAVE = true;
 	    StartCoroutine(HoleDeath());
 	}
 	// Deals with trap interaction. (e.g. kills character if they stand on a trap)
@@ -167,29 +180,41 @@ public class MovePlayer : MonoBehaviour
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
 	    if(name == "PoseidonTrap"){
+		GameManager.players[Client.instance.myId].poseidonMove = true;
+		arrowKeysEnabled = false;
 		StartCoroutine(findPoseidonDirection(TrapScript));
 	    }
 	    else if(name == "HadesTrap"){
+		WAVE = true;
 		Debug.Log("Death by Hades!");
+
       pm.isDead = true; // ADDED FOR WINNER LOGIC
+
+		arrowKeysEnabled = false;
 		StartCoroutine(HadesDeath());
 		pm.isAlive = false;
 		//FindObjectOfType<GameManager>().EndGame();
 	    }
 	    else if(name == "FireTrap"){
             pm.isDead = true; // ADDED FOR WINNER LOGIC
+		WAVE = true;
 		StartCoroutine(FireTrap());
+		arrowKeysEnabled = false;
 		pm.isAlive = false;
 		Debug.Log("Death by Fire!");
 	    }
 	    else if(name == "SpikeTrap"){
+		WAVE = true;
+		arrowKeysEnabled = false;
 		pm.isAlive = false;
         pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(spikeTrap());
 		Debug.Log("Death by Spike!");
 	    }
 	    else if(name == "ZeusMainTrap"){
+		WAVE = true;
 		Debug.Log("Death by Zeus!");
+		arrowKeysEnabled = false;
 		pm.isAlive = false;
     pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(ZeusDeath());

@@ -39,16 +39,19 @@ public class ClientHandle : MonoBehaviour {
 	//Debug.Log("did try to spawn the player");
 	Lobby.instance.hideStartButton();
     }
-    
+
     public static void PlayerDisconnected(Packet _packet) {
         int _id = _packet.ReadInt();
         Destroy(GameManager.players[_id].gameObject);
+	Lobby.instance.removeFromList(_id);
         GameManager.players.Remove(_id);
     }
 
     public static void PlayerPosition(Packet _packet) {
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
+	bool movedPoseidon = _packet.ReadBool();
+	Debug.Log("Moved Poseidon result: " + movedPoseidon);
 	//	GameManager.players[_id].GetComponent<Rigidbody2D>().MovePosition(_position);
 
 	/*	if(GameManager.players.ContainsKey(_id)){
@@ -57,11 +60,15 @@ public class ClientHandle : MonoBehaviour {
 		else if(GameManager.players[_id].GetComponent<MovePlayerOnline>() != null)
 		GameManager.players[_id].GetComponent<MovePlayerOnline>().movePlayer(_position);
 	*/
-	GameManager.instance.waitForInit(_id, _position);
+	if (_position != new Vector3(0,0,0))
+	{
+	    FindObjectOfType<GameManager>().movedThisRound = true;
+	}
+	GameManager.instance.waitForInit(_id, _position, movedPoseidon);
     }
 
-	
-	
+
+
     //	Vector3 actual_position = GameManager.players[_id].transform.position;
     //	GameManager.players[_id].transform.position = _position;
     private static bool startPressed = false;
@@ -88,7 +95,7 @@ public class ClientHandle : MonoBehaviour {
 
 	    }
 	    Lobby.instance.displayReadyorNot(_id);
-	}	
+	}
     }
 
     public static bool flagSetAlive = true;
@@ -110,6 +117,16 @@ public class ClientHandle : MonoBehaviour {
 	    }
 	    FindObjectOfType<GameManager>().timerZero = true;
 	    GameManager.instance.HermesBuffer++;
+        }
+        else if(currentTime > 15 && currentTime < 19)
+        {
+            foreach (PlayerManager pman in GameManager.players.Values)
+            {
+                pman.isAlive = false;
+            }
+            CountdownTimer.instance.currentTime = currentTime;
+            CountdownTimer.instance.UpdateTimer();
+            FindObjectOfType<GameManager>().timerZero = false;
         }
         else {
 	    flagSetDead = true;
@@ -134,5 +151,5 @@ public class ClientHandle : MonoBehaviour {
 	    GameManager.instance.spawnTrapInvisible(pos, trapId);
 	}
     }
-    
+
 }
