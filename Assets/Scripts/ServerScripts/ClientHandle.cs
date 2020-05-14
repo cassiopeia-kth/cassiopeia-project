@@ -96,13 +96,23 @@ public class ClientHandle : MonoBehaviour {
         bool isZero = _packet.ReadBool();
 	//Debug.Log("got here server timer");
         //Debug.Log($"{currentTime} is the current time");
-        if (isZero)
+        if (isZero /*|| (currentTime > 15 && currentTime < 19)*/)
         {
             foreach (PlayerManager pman in GameManager.players.Values)
             {
                 pman.isAlive = false;
             }
             FindObjectOfType<GameManager>().timerZero = true;
+        }
+        else if(currentTime > 15 && currentTime < 19)
+        {
+            foreach (PlayerManager pman in GameManager.players.Values)
+            {
+                pman.isAlive = false;
+            }
+            CountdownTimer.instance.currentTime = currentTime;
+            CountdownTimer.instance.UpdateTimer();
+            FindObjectOfType<GameManager>().timerZero = false;
         }
         else {
             //Debug.Log(currentTime);
