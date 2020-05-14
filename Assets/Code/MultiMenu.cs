@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MultiMenu : MonoBehaviour
 {
     public void backFromLobby(){
-	SceneManager.LoadScene("Menu");
+	SceneManager.LoadScene("Menu-test");
     }
 
 }
