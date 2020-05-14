@@ -11,8 +11,8 @@ namespace GameServer
     {
         public static ServerCountdownTimer instance;
 
-        public float currentTime = 15f;
-        public float startTime = 15f;
+        public float currentTime = 19f;
+        public float startTime = 19f;
         public bool isZero = false;
 
         public void Awake(){
@@ -34,7 +34,7 @@ namespace GameServer
                 isZero = true;
                 if(currentTime <= -7)
                 {
-                    currentTime = 15f;
+                    currentTime = 19f;
                     isZero = false;
                 }
             }
@@ -62,7 +62,7 @@ namespace GameServer
                         item.player.isAlive = true;
                     }
                 }
-                currentTime = 15f;
+                currentTime = 19f;
             }
         }
         

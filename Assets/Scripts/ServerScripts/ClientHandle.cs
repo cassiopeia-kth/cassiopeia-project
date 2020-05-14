@@ -39,7 +39,7 @@ public class ClientHandle : MonoBehaviour {
 	//Debug.Log("did try to spawn the player");
 	Lobby.instance.hideStartButton();
     }
-    
+
     public static void PlayerDisconnected(Packet _packet) {
         int _id = _packet.ReadInt();
         Destroy(GameManager.players[_id].gameObject);
@@ -67,8 +67,8 @@ public class ClientHandle : MonoBehaviour {
 	GameManager.instance.waitForInit(_id, _position, movedPoseidon);
     }
 
-	
-	
+
+
     //	Vector3 actual_position = GameManager.players[_id].transform.position;
     //	GameManager.players[_id].transform.position = _position;
     private static bool startPressed = false;
@@ -95,7 +95,7 @@ public class ClientHandle : MonoBehaviour {
 
 	    }
 	    Lobby.instance.displayReadyorNot(_id);
-	}	
+	}
     }
 
     public static bool flagSetAlive = true;
@@ -117,6 +117,16 @@ public class ClientHandle : MonoBehaviour {
 	    }
 	    FindObjectOfType<GameManager>().timerZero = true;
 	    GameManager.instance.HermesBuffer++;
+        }
+        else if(currentTime > 15 && currentTime < 19)
+        {
+            foreach (PlayerManager pman in GameManager.players.Values)
+            {
+                pman.isAlive = false;
+            }
+            CountdownTimer.instance.currentTime = currentTime;
+            CountdownTimer.instance.UpdateTimer();
+            FindObjectOfType<GameManager>().timerZero = false;
         }
         else {
 	    flagSetDead = true;
@@ -141,5 +151,5 @@ public class ClientHandle : MonoBehaviour {
 	    GameManager.instance.spawnTrapInvisible(pos, trapId);
 	}
     }
-    
+
 }

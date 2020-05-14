@@ -51,7 +51,10 @@ namespace GameServer {
 		Server.clients[_fromClient].player.ready = isReady;
 		//Player.startPressed = startPressed;
 		Server.clients[_fromClient].player.startPressed = startPressed;
-	    }
+				if (startPressed)
+					ServerCountdownTimer.instance.currentTime = 19f;
+				Console.WriteLine($"{ServerCountdownTimer.instance.currentTime}");
+			}
 	    catch(Exception e){
 		Console.Write(e);
 	    }
@@ -59,6 +62,12 @@ namespace GameServer {
 
 	public static void ReceiveStartTimer(int _fromClient, Packet _packet){
 	    bool startPressed = _packet.ReadBool();
+			Console.WriteLine("Timer Packet Received");
+            if (startPressed)
+            {
+				ServerCountdownTimer.instance.currentTime = 19f;
+				Console.WriteLine("Timer Reset");
+            }
 	}
 	
 	public static void spawnTrap(int _fromClient, Packet _packet){

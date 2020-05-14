@@ -21,9 +21,9 @@ namespace GameServer
         private static void MainThread() {
             Console.WriteLine($"Main thread started. Running at {Constants.TICKS_PER_SEC} ticks per second");
             DateTime _nextLoop = DateTime.Now;
-	    ServerCountdownTimer inst = new ServerCountdownTimer();
-	    inst.Awake();
-	    Console.Write(ServerCountdownTimer.instance.isZero);
+            ServerCountdownTimer inst = new ServerCountdownTimer();
+            inst.Awake();
+            Console.Write($"{inst.currentTime} TimerStart");
             while (isRunning) {
                 while(_nextLoop < DateTime.Now) {
                     GameLogic.Update();

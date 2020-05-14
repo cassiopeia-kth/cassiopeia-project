@@ -12,6 +12,7 @@ namespace GameServer {
             }
 	    ServerCountdownTimer.instance.Update();
             ThreadManager.UpdateMain();
+            Console.WriteLine($"{ServerCountdownTimer.instance.currentTime}");
         }
     }
 }
