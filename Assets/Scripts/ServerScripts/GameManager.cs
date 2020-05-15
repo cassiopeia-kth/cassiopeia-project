@@ -134,6 +134,9 @@ public class GameManager : MonoBehaviour {
     public Button playAgain;
     public Button mainMenu;
 
+    public Canvas SpectateCanvas;
+    public Button returnFromSpectate;
+
 
     public void displayGameOverHUD() {
         gameOverCanvas.enabled = true;
@@ -141,7 +144,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public void displayMainMenu() {
-        SceneManager.LoadScene("Menu");
+        Client.instance.tcp.Disconnect();
+        Client.instance.udp.Disconnect();
+        SceneManager.LoadScene("Menu-test"); // Do I need to disconnect here?
     }
     public void Start() {
 	//	inventoryCanvas = inventoryPrefab.GetComponent<Canvas>();
@@ -151,7 +156,7 @@ public class GameManager : MonoBehaviour {
         //        inventoryCanvas.enabled = true;
         //CountdownTimer.instance.StartTimer();
 	GameObject.Find("CountdownTimer").GetComponent<CountdownTimer>().StartTimer();
-
+        SpectateCanvas.enabled = false;
     }
 
     public bool checkWinner() {
@@ -256,7 +261,9 @@ public class GameManager : MonoBehaviour {
 
     void spectate() {
 	gameOverCanvas.enabled = false;
-	FindObjectOfType<MovePlayer>().enabled = false;
+    SpectateCanvas.enabled = true;
+    //FindObjectOfType<MovePlayer>().enabled = false;
+    returnFromSpectate.onClick.AddListener(displayMainMenu);
     }
 
     
