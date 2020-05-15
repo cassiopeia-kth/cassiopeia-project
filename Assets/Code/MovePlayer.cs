@@ -19,7 +19,7 @@ public class MovePlayer : MonoBehaviour
     public bool WAVE = false;
     public static bool movedThisRound = false;
     public static bool startedGame = false;
-	public GameObject pointer;
+    public GameObject pointer;
 
     
     // Start is called before the first frame update

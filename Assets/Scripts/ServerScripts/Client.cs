@@ -151,7 +151,7 @@ public class Client : MonoBehaviour {
             return false;
         }
 
-        private void Disconnect() {
+        public void Disconnect() {
             
             instance.Disconnect();
 
@@ -211,7 +211,7 @@ public class Client : MonoBehaviour {
             }
         }
 
-        private void Disconnect() {
+        public void Disconnect() {
             instance.Disconnect();
 
             endPoint = null;
