@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 27680918}
   m_Layer: 0
   m_Name: Hermes_Trap
-  m_TagString: Untagged
+  m_TagString: Hermes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -423694017
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -3337038689812066966, guid: 977dd02b9290b2c478526bce5a5f2779,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

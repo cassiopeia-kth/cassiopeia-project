@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour {
 
         //Debug.Log(_charType);
         if (_id == Client.instance.myId) {
-	    _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0,0,0,0));
+            _player = Instantiate((GameObject)Resources.Load($"Prefabs/Player/{_charType}", typeof(GameObject)), _position, new Quaternion(0, 0, 0, 0));
 	    mp = _player.AddComponent<MovePlayer>();
 	    mp.rb = FindObjectOfType<Rigidbody2D>();
 	    mp.ani = FindObjectOfType<Animator>();
