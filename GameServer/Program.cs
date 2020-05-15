@@ -23,7 +23,7 @@ namespace GameServer
             DateTime _nextLoop = DateTime.Now;
             ServerCountdownTimer inst = new ServerCountdownTimer();
             inst.Awake();
-            Console.Write($"{inst.currentTime} TimerStart");
+            //Console.Write($"{inst.currentTime} TimerStart");
             while (isRunning) {
                 while(_nextLoop < DateTime.Now) {
                     GameLogic.Update();

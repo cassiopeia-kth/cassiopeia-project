@@ -12,6 +12,7 @@ public class Lobby : MonoBehaviour {
     public GameObject notReadyButton;
     public GameObject readyButton;
     public GameObject startButton;
+    public GameObject mobileGUI;
     public bool gameStarted = false;
     private void Awake(){
         if (instance == null){
@@ -32,6 +33,8 @@ public class Lobby : MonoBehaviour {
 	GameObject.Find("NotReadyButton").SetActive(false);
 	startButton.SetActive(false);
 	StartCoroutine("connectToServer");
+	mobileGUI = GameObject.Find("MobileGUI");
+	mobileGUI.SetActive(false);
     }
 
     public void Update(){
@@ -86,22 +89,27 @@ public class Lobby : MonoBehaviour {
     public void startGame(){
 	GameManager.players[Client.instance.myId].startPressed = true;
 	GameManager.instance.roundCount = 0;
+	mobileGUI.SetActive(true);
 	ClientSend.ReadyFlag();
 		//ClientSend.sendStartTimer();
 		//if (CountdownTimer.instance.currentTime > 18)
 		//{
-			GameManager.instance.inventoryCanvas.enabled = true;
-			this.gameStarted = true;
-			foreach (PlayerManager pman in GameManager.players.Values)
-			{
-				pman.isAlive = true;
-			}
-			//GameObject.Find("Lobby").SetActive(false);
-			Canvas a = gameObject.GetComponent<Canvas>();
-			a.enabled = false;
-			GameObject.Find("Lobby").SetActive(false);
-			//CountdownTimer.instance.StartTimer();
-		//}
+	GameManager.instance.inventoryCanvas.enabled = true;
+	this.gameStarted = true;
+	foreach (PlayerManager pman in GameManager.players.Values)
+	{
+	    pman.isAlive = true;
+	}
+	//GameObject.Find("Lobby").SetActive(false);
+	Canvas a = gameObject.GetComponent<Canvas>();
+	a.enabled = false;
+	GameObject.Find("Lobby").SetActive(false);
+	//CountdownTimer.instance.StartTimer();
+	//}
+    }
+
+    public void stopGame(){
+	mobileGUI.SetActive(false);
     }
 
     public void startGameTimer()

@@ -76,10 +76,10 @@ namespace GameServer {
 		    _packet.Write(true);
 		else
 		    _packet.Write(false);
-		Console.Write(_player.poseidonMove);
+		//Console.Write(_player.poseidonMove);
 		if(_player.isAlive || _player.poseidonMove){
 		    SendTCPDataToAll(_packet);
-		    Console.Write("TRIED TO MOVE");
+		    //Console.Write("TRIED TO MOVE");
 		}
 	    }
 	}

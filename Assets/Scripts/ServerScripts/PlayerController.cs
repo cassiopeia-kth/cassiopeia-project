@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate(){
 	if(MovePlayer.arrowKeysEnabled)
 	    SendInputToServer();
+
+
+	
 	//TODO stop calling this once in game (might add up)
 	if(GameManager.players[Client.instance.myId].checkChange != GameManager.players[Client.instance.myId].isReady){
 	    SendReadyFlag();
@@ -28,10 +32,10 @@ public class PlayerController : MonoBehaviour
     private void SendInputToServer(){
         StartCoroutine("timerFix");
 	bool[] _inputs = new bool[]{
-	    Input.GetKey(KeyCode.W),
-	    Input.GetKey(KeyCode.S),
-	    Input.GetKey(KeyCode.A),
-	    Input.GetKey(KeyCode.D),
+	    CrossPlatformInputManager.GetButton("MoveUp"),
+	    CrossPlatformInputManager.GetButton("MoveDown"),
+	    CrossPlatformInputManager.GetButton("MoveLeft"),
+	    CrossPlatformInputManager.GetButton("MoveRight"),
 	};
 	ClientSend.PlayerMovement(_inputs);
     }
@@ -46,10 +50,10 @@ public class PlayerController : MonoBehaviour
         }
         bool[] _inputs = new bool[4];
             _inputs = new bool[]{
-                Input.GetKey(KeyCode.W),
-                Input.GetKey(KeyCode.S),
-                Input.GetKey(KeyCode.A),
-                Input.GetKey(KeyCode.D),
+		CrossPlatformInputManager.GetButton("MoveUp"),
+		CrossPlatformInputManager.GetButton("MoveDown"),
+		CrossPlatformInputManager.GetButton("MoveLeft"),
+		CrossPlatformInputManager.GetButton("MoveRight"),
             };
 
             ClientSend.PlayerMovement(_inputs);

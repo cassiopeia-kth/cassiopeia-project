@@ -140,7 +140,7 @@ namespace GameServer {
 		 if(moveSlower >= 5){
 		     //&& _inputDirection != Vector2.Zero){
 		     Move(_inputDirection);
-		     Console.Write(_inputDirection);
+		     //Console.Write(_inputDirection);
 		     moveSlower = 0;
 		 }}
 	     else moveSlower = 5;
