@@ -38,6 +38,8 @@ namespace GameServer
                     isZero = false;
                 }
             }
+	    if(currentTime > 0)
+		isZero = false;
 
 
                 currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
