@@ -198,6 +198,7 @@ public class MovePlayer : MonoBehaviour
 	    arrowKeysEnabled = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
+			GameManager.killer = TrapScript.killer;
 	    if(name == "PoseidonTrap"){
 		GameManager.players[Client.instance.myId].poseidonMove = true;
 		arrowKeysEnabled = false;

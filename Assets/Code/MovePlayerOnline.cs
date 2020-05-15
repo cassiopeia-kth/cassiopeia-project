@@ -196,6 +196,7 @@ public class MovePlayerOnline : MonoBehaviour
 //	    pm.isAlive = false;
 	    TrapInteraction TrapScript = other.GetComponent<TrapInteraction>();
 	    string name = TrapScript.trap.trapName;
+			GameManager.killer = TrapScript.killer;
 	    if(name == "PoseidonTrap"){
         pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(findPoseidonDirection(TrapScript));
