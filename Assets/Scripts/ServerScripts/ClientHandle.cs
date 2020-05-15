@@ -155,7 +155,7 @@ public class ClientHandle : MonoBehaviour {
 	Vector3 pos = _packet.ReadVector3();
 	int trapId = _packet.ReadInt();
 	if(playerId != Client.instance.myId){
-	    GameManager.instance.spawnTrapInvisible(pos, trapId);
+	    GameManager.instance.spawnTrapInvisible(pos, trapId,playerId);
 	}
     }
 

@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     public bool timerZero;
     public int HermesBuffer = 0;
     private int HermesSpawn = 0;
+    public static string killer;
+    public bool winnercheckbeforeEnd = false; 
 
     private bool isThereAWinner = false;
     public GameObject _player;
@@ -176,7 +178,8 @@ public class GameManager : MonoBehaviour {
               }
               txtGameOver.text = $"{name} wins";
               playAgain.gameObject.SetActive(false);
-              EndGame();
+                    winnercheckbeforeEnd = true;
+                    EndGame();
               isThereAWinner = true;
               return true;
           }
@@ -195,7 +198,12 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Game Over!");
         FindObjectOfType<MovePlayer>().enabled = false;
         Invoke("displayGameOverHUD", restartDelay);
-        playAgain.onClick.AddListener(spectate);
+            if (!winnercheckbeforeEnd)
+            {
+                txtGameOver.text = $"Game Over \n {killer} killed you";
+            }
+
+            playAgain.onClick.AddListener(spectate);
         mainMenu.onClick.AddListener(displayMainMenu);
       }
     }
@@ -311,23 +319,32 @@ public class GameManager : MonoBehaviour {
 	    MovePlayer.arrowKeysEnabled = false;
         }
     }
-    public void spawnTrapInvisible(Vector3 pos, int trapId){
-	switch(trapId){
+    public void spawnTrapInvisible(Vector3 pos, int trapId,int playerId){
+        GameObject enemyTrap;
+      switch(trapId){
 	    case 1:
-		Instantiate(Inventory.instance.hadesTrap, pos, new Quaternion(0,0,0,0));
-		break;
+		 enemyTrap = Instantiate(Inventory.instance.hadesTrap, pos, new Quaternion(0,0,0,0));
+                enemyTrap.GetComponent<TrapInteraction>().killer = players[playerId].username;
+
+
+        break;
 	    case 2:
-		Instantiate(Inventory.instance.spikeTrap, pos, new Quaternion(0,0,0,0));
-		break;
+                enemyTrap=  Instantiate(Inventory.instance.spikeTrap, pos, new Quaternion(0,0,0,0));
+                enemyTrap.GetComponent<TrapInteraction>().killer = players[playerId].username;
+                break;
 	    case 3:
-		Instantiate(Inventory.instance.poseidonTrap, pos, new Quaternion(0,0,0,0));
-		break;
+             enemyTrap =  Instantiate(Inventory.instance.poseidonTrap, pos, new Quaternion(0,0,0,0));
+                enemyTrap.GetComponent<TrapInteraction>().killer = players[playerId].username;
+                break;
 	    case 4:
-		Instantiate(Inventory.instance.zeusmainTrap, pos, new Quaternion(0,0,0,0));
-		break;
+              enemyTrap =   Instantiate(Inventory.instance.zeusmainTrap, pos, new Quaternion(0,0,0,0));
+                enemyTrap.GetComponent<TrapInteraction>().killer = players[playerId].username;
+                break;
 	    case 5:
-		Instantiate(Inventory.instance.fireTrap, pos, new Quaternion(0,0,0,0));
-		break;
+              enemyTrap =   Instantiate(Inventory.instance.fireTrap, pos, new Quaternion(0,0,0,0));
+                enemyTrap.GetComponent<TrapInteraction>().killer = players[playerId].username;
+
+                break;
 
 
 	}

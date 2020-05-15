@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - TrapCollision
   - Collectable
+  - music
   - Hermes
   layers:
   - Default
