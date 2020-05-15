@@ -11,8 +11,11 @@ public class ZeusDiagonal : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         // If the lightning collides with a player, then change its sorting layer.
-        Debug.Log("Hit my with your rhythm stick");
-        gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Hit my with your rhythm stick");
+            gameObject.GetComponent<Renderer>().sortingLayerName = "Zeus";
+        }
     }
 
     void Start()

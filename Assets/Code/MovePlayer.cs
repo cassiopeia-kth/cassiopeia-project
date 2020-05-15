@@ -19,6 +19,7 @@ public class MovePlayer : MonoBehaviour
     public bool WAVE = false;
     public static bool movedThisRound = false;
     public static bool startedGame = false;
+	public GameObject pointer;
 
     
     // Start is called before the first frame update
@@ -27,8 +28,11 @@ public class MovePlayer : MonoBehaviour
 	arrowKeysEnabled = true;
 	pm = FindObjectOfType<PlayerManager>();
 
-	//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
-	movePoint = transform.GetChild(0);
+	Vector3 _position = gameObject.transform.position;
+	pointer = Instantiate((GameObject)Resources.Load($"Prefabs/Player/Pointer", typeof(GameObject)), new Vector3(_position.x, _position.y + 0.5f, _position.z), new Quaternion(0, 0, 0, 0));
+		pointer.transform.SetParent(gameObject.transform);
+		//	inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
+		movePoint = transform.GetChild(0);
 	movePoint.parent = null;
 	whatStopsMovement = LayerMask.GetMask("StopMovement");
     }

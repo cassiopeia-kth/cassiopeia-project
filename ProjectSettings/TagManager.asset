@@ -9,6 +9,7 @@ TagManager:
   - TrapCollision
   - Collectable
   - music
+  - Hermes
   layers:
   - Default
   - TransparentFX
