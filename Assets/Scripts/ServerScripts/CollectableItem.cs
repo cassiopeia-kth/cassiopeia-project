@@ -62,7 +62,12 @@ public class CollectableItem : MonoBehaviour, Inventory_Item
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Collectable")
+        if (collision.gameObject.tag == "Hermes")
+        {
+            gameObject.SetActive(false);
+        }
+        
+        else if (collision.gameObject.tag == "Collectable")
         {
             if (collision.GetComponent<SpriteRenderer>() != null)
             {
@@ -70,7 +75,7 @@ public class CollectableItem : MonoBehaviour, Inventory_Item
                 int myOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
                 Debug.Log("Two collectables on same spot!");
 
-                if (colOrder <= myOrder)
+                if (colOrder >= myOrder)
                 {
                     gameObject.SetActive(false);
                 }

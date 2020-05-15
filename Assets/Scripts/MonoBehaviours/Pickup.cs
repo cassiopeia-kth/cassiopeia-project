@@ -17,7 +17,7 @@ public class Pickup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (anim.GetInteger(animationState) < 1)
+        if (anim.GetInteger(animationState) < 1 && collision.gameObject.tag == "Player")
         {
             StartCoroutine(MyCoroutine());
         }

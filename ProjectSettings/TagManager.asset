@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - TrapCollision
   - Collectable
+  - Hermes
   layers:
   - Default
   - TransparentFX
