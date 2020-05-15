@@ -60,8 +60,8 @@ public class ClientSend : MonoBehaviour {
     public static void sendStartTimer(){
 	using (Packet _packet = new Packet((int)ClientPackets.timer)) {
 	    _packet.Write(GameManager.players[Client.instance.myId].startPressed);
-            Debug.Log("sent start PressedXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-	SendTCPData(_packet);
+            //Debug.Log("sent start PressedXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+//	SendTCPData(_packet);
 	}
     }
     

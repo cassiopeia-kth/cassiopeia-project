@@ -142,18 +142,6 @@ public class MovePlayerOnline : MonoBehaviour
 	timer = forSeconds;
 	activateSleep = true;
     }
-    
-    private void OnTriggerStay2D(Collider2D collision)
-	{
-	    Debug.Log("Hejejejej");
-	    if (collision.gameObject.name == "Hole" && flying == false)
-	    {
-		arrowKeysEnabled = false;
-		pm.isAlive = false;
-		StartCoroutine(HoleDeath());
-	    }
-	}
-
 
 
   public bool isOverAHole = false;
@@ -176,16 +164,17 @@ public class MovePlayerOnline : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if(other.gameObject.name == "Hole"){
-	    WAVE = true;
+
 	    isOverAHole = true;
 	    Debug.Log("shortest debug ever");
 	}
 
 	if(other.gameObject.name == "Hole" && flying == false){
+	    	    WAVE = true;
 			//	    Debug.Log("OnCollisionEnter2D TRIGGER");
 		arrowKeysEnabled = false;
 		//pm.isAlive = false;
-        pm.isDead = true; // ADDED FOR WINNER LOGIC
+		pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(HoleDeath());
 	}
 
@@ -198,12 +187,12 @@ public class MovePlayerOnline : MonoBehaviour
 	    string name = TrapScript.trap.trapName;
 			GameManager.killer = TrapScript.killer;
 	    if(name == "PoseidonTrap"){
-        pm.isDead = true; // ADDED FOR WINNER LOGIC
+		//pm.isDead = true; // ADDED FOR WINNER LOGIC
 		StartCoroutine(findPoseidonDirection(TrapScript));
 	    }
 	    else if(name == "HadesTrap"){
 		Debug.Log("Death by Hades!");
-        pm.isDead = true; // ADDED FOR WINNER LOGIC
+		pm.isDead = true; // ADDED FOR WINNER LOGIC
 		WAVE = true;
 		StartCoroutine(HadesDeath());
 		//FindObjectOfType<GameManager>().EndGame();
@@ -287,7 +276,6 @@ public class MovePlayerOnline : MonoBehaviour
 	// If the poseidon direction is up, move the player up.
 	if(direction == 0)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,1));
 	    ani.SetFloat("up", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("up", 0f);
@@ -295,7 +283,6 @@ public class MovePlayerOnline : MonoBehaviour
 	// If the poseidon direction is right, move the player right.
 	else if(direction == 1)
 	{
-	    rb.MovePosition(rb.position + new Vector2(-1,0));
 	    ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
 		yield return new WaitForSeconds(0.1f);
@@ -304,7 +291,6 @@ public class MovePlayerOnline : MonoBehaviour
 	// If the poseidon direction is down, move the player down.
 	else if(direction == 2)
 	{
-	    rb.MovePosition(rb.position + new Vector2(0,-1));
 	    ani.SetFloat("down", 1f);
 	    yield return new WaitForSeconds(0.1f);
 	    ani.SetFloat("down", 0f);
@@ -312,7 +298,6 @@ public class MovePlayerOnline : MonoBehaviour
 	// If the poseidon direction is left, move the player left.
 	else
 	{
-	    rb.MovePosition(rb.position + new Vector2(1,0));
 	    ani.SetFloat("left", 1f);
 	    ani.SetFloat("FacingLeft", 1f);
 	    yield return new WaitForSeconds(0.1f);

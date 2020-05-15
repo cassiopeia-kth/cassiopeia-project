@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
+
 public class MovePlayer : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -16,7 +18,7 @@ public class MovePlayer : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     private bool flyingAllowed = true;
-    public bool WAVE = false;
+    public static bool WAVE = false;
     public static bool movedThisRound = false;
     public static bool startedGame = false;
     public GameObject pointer;
@@ -100,26 +102,26 @@ public class MovePlayer : MonoBehaviour
 	}
 	if (arrowKeysEnabled)
 	{
-	    if (Input.GetKey(KeyCode.W))
+	    if (CrossPlatformInputManager.GetButton("MoveUp"))
 	    {
 		//				rb.MovePosition(rb.position + new Vector2(0, 1));
 		ani.SetFloat("up", 1f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (Input.GetKey(KeyCode.S))
+	    if (CrossPlatformInputManager.GetButton("MoveDown"))
 	    {
 		//				rb.MovePosition(rb.position - new Vector2(0, 1));
 		ani.SetFloat("down", 1f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (Input.GetKey(KeyCode.D))
+	    if (CrossPlatformInputManager.GetButton("MoveRight"))
 	    {
 		//				rb.MovePosition(rb.position + new Vector2(1, 0));
 		ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (Input.GetKey(KeyCode.A))
+	    if (CrossPlatformInputManager.GetButton("MoveLeft"))
 	    {
 		//				rb.MovePosition(rb.position - new Vector2(1, 0));
 		ani.SetFloat("left", 1f);
@@ -127,33 +129,26 @@ public class MovePlayer : MonoBehaviour
 		//				ActivateSleep(0.25f);
 	    }
 	}
-	if(Input.GetKey(KeyCode.Space)){
+	if(CrossPlatformInputManager.GetButton("PlaceTrap")){
 	    for(int i = 0 ; i < 7; i++){
 		Debug.Log(inventory.itemList[i]);
 	    }
 	    inventory.PlaceItem();
 	    ActivateSleep(0.25f);
 	}
-	if(Input.GetKey(KeyCode.L) ){
+	if(CrossPlatformInputManager.GetButton("InvRight")){
 	    inventory.hoverRight();
 	    ActivateSleep(0.25f);
 	}
-	if(Input.GetKey(KeyCode.H)){
+	if(CrossPlatformInputManager.GetButton("InvLeft")){
 	    inventory.hoverLeft();
 	    ActivateSleep(0.25f);
 	}
-	if(Input.GetKeyUp(KeyCode.W)){
+	if(	(CrossPlatformInputManager.GetButton("MoveUp") &&
+		CrossPlatformInputManager.GetButton("MoveDown") &&
+		CrossPlatformInputManager.GetButton("MoveLeft") &&
+		 CrossPlatformInputManager.GetButton("MoveRight")) == false)
 	    setAllAnimatorZero();
-	}
-	else if(Input.GetKeyUp(KeyCode.A)){
-	    setAllAnimatorZero();
-	}
-	else if(Input.GetKeyUp(KeyCode.S)){
-	    setAllAnimatorZero();
-	}
-	else if(Input.GetKeyUp(KeyCode.D)){
-	    setAllAnimatorZero();
-	}
     }
     void OnCollisionEnter2D(Collision2D col){
 	if(col.gameObject.name == "Hole"){
@@ -191,7 +186,7 @@ public class MovePlayer : MonoBehaviour
 	if(other.gameObject.name == "Hole" && flying == false){
 	    //	    Debug.Log("OnCollisionEnter2D TRIGGER");
 	    arrowKeysEnabled = false;
-          pm.isDead = true; // ADDED FOR WINNER LOGIC
+	    pm.isDead = true; // ADDED FOR WINNER LOGIC
 	    pm.isAlive = false;
 	    WAVE = true;
 	    StartCoroutine(HoleDeath());
@@ -212,7 +207,7 @@ public class MovePlayer : MonoBehaviour
 		WAVE = true;
 		Debug.Log("Death by Hades!");
 
-      pm.isDead = true; // ADDED FOR WINNER LOGIC
+		pm.isDead = true; // ADDED FOR WINNER LOGIC
 
 		arrowKeysEnabled = false;
 		StartCoroutine(HadesDeath());

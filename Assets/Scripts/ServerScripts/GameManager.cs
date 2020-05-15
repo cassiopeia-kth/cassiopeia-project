@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour {
 
     public void displayGameOverHUD() {
         gameOverCanvas.enabled = true;
+	Lobby.instance.mobileGUI.SetActive(false);
         inventoryCanvas.enabled = false;
     }
 
@@ -185,8 +186,12 @@ public class GameManager : MonoBehaviour {
               }
               txtGameOver.text = $"{name} wins";
               playAgain.gameObject.SetActive(false);
-                    winnercheckbeforeEnd = true;
-                    EndGame();
+	      winnercheckbeforeEnd = true;
+
+	      Vector2 pos = mainMenu.transform.position;
+              pos.x = Screen.width/2;
+              mainMenu.transform.position = pos;
+              EndGame();
               isThereAWinner = true;
               return true;
           }
@@ -270,10 +275,11 @@ public class GameManager : MonoBehaviour {
     }
 
     void spectate() {
+	SpectateCanvas.enabled = true;
+	returnFromSpectate.onClick.AddListener(displayMainMenu);
+	Lobby.instance.mobileGUI.SetActive(false);
 	gameOverCanvas.enabled = false;
-    SpectateCanvas.enabled = true;
-    //FindObjectOfType<MovePlayer>().enabled = false;
-    returnFromSpectate.onClick.AddListener(displayMainMenu);
+	FindObjectOfType<MovePlayer>().enabled = false;
     }
 
     
