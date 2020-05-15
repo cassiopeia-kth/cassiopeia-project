@@ -111,7 +111,7 @@ public class ClientHandle : MonoBehaviour {
         float currentTime = _packet.ReadFloat();
         bool isZero = _packet.ReadBool();
 	//Debug.Log("got here server timer");
-        //Debug.Log($"{currentTime} is the current time");
+        Debug.Log($"{currentTime} is the current time");
 	if(startPressed)
         if (isZero)
         {

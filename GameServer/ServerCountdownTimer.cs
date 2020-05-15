@@ -38,6 +38,8 @@ namespace GameServer
                     isZero = false;
                 }
             }
+	    if(currentTime > 0)
+		isZero = false;
 
 
                 currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
@@ -55,7 +57,7 @@ namespace GameServer
             }
 
             currentTime -= 1f / (float)Constants.TICKS_PER_SEC; //* Time.deltaTime;
-            if (currentTime <= -5) {
+            if (currentTime <= -7) {
                 
                 foreach (Client item in Server.clients.Values) {
                     if (item.player != null) {

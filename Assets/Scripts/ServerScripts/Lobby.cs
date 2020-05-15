@@ -87,21 +87,21 @@ public class Lobby : MonoBehaviour {
 	GameManager.players[Client.instance.myId].startPressed = true;
 	GameManager.instance.roundCount = 0;
 	ClientSend.ReadyFlag();
-		//ClientSend.sendStartTimer();
-		//if (CountdownTimer.instance.currentTime > 18)
-		//{
-			GameManager.instance.inventoryCanvas.enabled = true;
-			this.gameStarted = true;
-			foreach (PlayerManager pman in GameManager.players.Values)
-			{
-				pman.isAlive = true;
-			}
-			//GameObject.Find("Lobby").SetActive(false);
-			Canvas a = gameObject.GetComponent<Canvas>();
-			a.enabled = false;
-			GameObject.Find("Lobby").SetActive(false);
-			//CountdownTimer.instance.StartTimer();
-		//}
+	//ClientSend.sendStartTimer();
+	//if (CountdownTimer.instance.currentTime > 18)
+	//{
+	GameManager.instance.inventoryCanvas.enabled = true;
+	this.gameStarted = true;
+	foreach (PlayerManager pman in GameManager.players.Values)
+	{
+	    pman.isAlive = true;
+	}
+	//GameObject.Find("Lobby").SetActive(false);
+	Canvas a = gameObject.GetComponent<Canvas>();
+	a.enabled = false;
+	GameObject.Find("Lobby").SetActive(false);
+	//CountdownTimer.instance.StartTimer();
+	//}
     }
 
     public void startGameTimer()

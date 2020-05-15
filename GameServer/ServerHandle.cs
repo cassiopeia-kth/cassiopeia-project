@@ -66,7 +66,7 @@ namespace GameServer {
             if (startPressed)
             {
 		ServerCountdownTimer.instance.currentTime = 19f;
-				Console.WriteLine("Timer Reset");
+		Console.WriteLine("Timer Reset");
             }
 	}
 	
