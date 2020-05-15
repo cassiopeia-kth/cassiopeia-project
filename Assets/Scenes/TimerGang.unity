@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charType: bishop
-  ip: 127.0.0.1
+  ip: 83.227.73.57
   myId: 0
 --- !u!4 &1617048333
 Transform:
