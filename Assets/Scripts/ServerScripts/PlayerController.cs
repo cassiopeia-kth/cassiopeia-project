@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private float timer;
     private bool activateSleep = false;
-
+    public static bool sendReadyOnce = true;
     private void FixedUpdate(){
 	if(MovePlayer.arrowKeysEnabled)
 	    SendInputToServer();
@@ -15,9 +15,11 @@ public class PlayerController : MonoBehaviour
 
 	
 	//TODO stop calling this once in game (might add up)
-	if(GameManager.players[Client.instance.myId].checkChange != GameManager.players[Client.instance.myId].isReady){
-	    SendReadyFlag();
-	    GameManager.players[Client.instance.myId].checkChange = GameManager.players[Client.instance.myId].isReady;
+	if(sendReadyOnce){
+	    if(GameManager.players[Client.instance.myId].checkChange != GameManager.players[Client.instance.myId].isReady){
+		SendReadyFlag();
+		GameManager.players[Client.instance.myId].checkChange = GameManager.players[Client.instance.myId].isReady;
+	    }
 	}
     }
     

@@ -90,6 +90,7 @@ public class ClientHandle : MonoBehaviour {
 	    }
 	    if(startPressed == true){
 		if(flagStart){
+		    PlayerController.sendReadyOnce = false;
 		    Debug.Log("DID THIS RESET TO COUNTDOWN");
 		    GameManager.instance.roundCount = 0;
 		    flagStart = false;
@@ -111,7 +112,7 @@ public class ClientHandle : MonoBehaviour {
         float currentTime = _packet.ReadFloat();
         bool isZero = _packet.ReadBool();
 	//Debug.Log("got here server timer");
-        Debug.Log($"{currentTime} is the current time");
+        //Debug.Log($"{currentTime} is the current time");
 	if(startPressed)
         if (isZero)
         {

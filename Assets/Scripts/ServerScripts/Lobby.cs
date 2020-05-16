@@ -33,7 +33,7 @@ public class Lobby : MonoBehaviour {
 	GameObject.Find("NotReadyButton").SetActive(false);
 	startButton.SetActive(false);
 	StartCoroutine("connectToServer");
-	MobileGUI = GameObject.Find("MobileGUI");
+	mobileGUI = GameObject.Find("MobileGUI");
 	mobileGUI.SetActive(false);
     }
 

@@ -279,7 +279,7 @@ public class GameManager : MonoBehaviour {
 	returnFromSpectate.onClick.AddListener(displayMainMenu);
 	Lobby.instance.mobileGUI.SetActive(false);
 	gameOverCanvas.enabled = false;
-	FindObjectOfType<MovePlayer>().enabled = false;
+	//FindObjectOfType<MovePlayer>().enabled = false;
     }
 
     
@@ -304,7 +304,6 @@ public class GameManager : MonoBehaviour {
         if(startOfRound == true && !timerZero){
 	    MovePlayer.movedThisRound = false;
 	    roundCount++;
-            
             spawnCollectibleTrap(gameObject.GetComponent<Trap_positions>().smallMapCoordinates);
             startOfRound = false;
 	    MovePlayer.arrowKeysEnabled = true;
