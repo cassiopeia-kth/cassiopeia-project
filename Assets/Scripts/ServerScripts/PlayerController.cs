@@ -11,10 +11,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate(){
 	if(MovePlayer.arrowKeysEnabled)
 	    SendInputToServer();
-
-
 	
-	//TODO stop calling this once in game (might add up)
 	if(sendReadyOnce){
 	    if(GameManager.players[Client.instance.myId].checkChange != GameManager.players[Client.instance.myId].isReady){
 		SendReadyFlag();
@@ -33,6 +30,8 @@ public class PlayerController : MonoBehaviour
     
     private void SendInputToServer(){
         StartCoroutine("timerFix");
+
+	/*
 	bool[] _inputs = new bool[]{
 	    CrossPlatformInputManager.GetButton("MoveUp"),
 	    CrossPlatformInputManager.GetButton("MoveDown"),
@@ -40,6 +39,7 @@ public class PlayerController : MonoBehaviour
 	    CrossPlatformInputManager.GetButton("MoveRight"),
 	};
 	ClientSend.PlayerMovement(_inputs);
+	*/
     }
 
     private void SendReadyFlag(){
