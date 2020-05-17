@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5519135712803064097}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player Move Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4359356247435381851}
   - component: {fileID: -2681871825646313677}
   - component: {fileID: 1697019175028718161}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: monster
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -214,3 +214,5 @@ MonoBehaviour:
   checkChange: 0
   everyoneReady: 0
   startPressed: 0
+  isDead: 0
+  poseidonMove: 0

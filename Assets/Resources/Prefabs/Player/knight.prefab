@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6383537081460842409}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player Move Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2905593365569842962}
   - component: {fileID: 1316725051310023962}
   - component: {fileID: -5628074364037599737}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: knight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -202,6 +202,8 @@ MonoBehaviour:
   checkChange: 0
   everyoneReady: 0
   startPressed: 0
+  isDead: 0
+  poseidonMove: 0
 --- !u!114 &-5628074364037599737
 MonoBehaviour:
   m_ObjectHideFlags: 0
