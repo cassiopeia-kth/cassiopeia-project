@@ -102,26 +102,26 @@ public class MovePlayer : MonoBehaviour
 	}
 	if (arrowKeysEnabled)
 	{
-	    if (CrossPlatformInputManager.GetButton("MoveUp"))
+	    if(Input.GetKey(KeyCode.W))
 	    {
 		//				rb.MovePosition(rb.position + new Vector2(0, 1));
 		ani.SetFloat("up", 1f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (CrossPlatformInputManager.GetButton("MoveDown"))
+	    if(Input.GetKey(KeyCode.S))
 	    {
 		//				rb.MovePosition(rb.position - new Vector2(0, 1));
 		ani.SetFloat("down", 1f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (CrossPlatformInputManager.GetButton("MoveRight"))
+	    if(Input.GetKey(KeyCode.D))
 	    {
 		//				rb.MovePosition(rb.position + new Vector2(1, 0));
 		ani.SetFloat("right", 1f);
 		ani.SetFloat("FacingLeft", 0f);
 		//				ActivateSleep(0.25f);
 	    }
-	    if (CrossPlatformInputManager.GetButton("MoveLeft"))
+	    if(Input.GetKey(KeyCode.A))
 	    {
 		//				rb.MovePosition(rb.position - new Vector2(1, 0));
 		ani.SetFloat("left", 1f);
@@ -144,10 +144,10 @@ public class MovePlayer : MonoBehaviour
 	    inventory.hoverLeft();
 	    ActivateSleep(0.25f);
 	}
-	if(	(CrossPlatformInputManager.GetButton("MoveUp") &&
-		 CrossPlatformInputManager.GetButton("MoveDown") &&
-		 CrossPlatformInputManager.GetButton("MoveLeft") &&
-		 CrossPlatformInputManager.GetButton("MoveRight")) == false)
+	if((Input.GetKey(KeyCode.W) &&
+	   Input.GetKey(KeyCode.W) &&
+	   Input.GetKey(KeyCode.W) &&
+	   Input.GetKey(KeyCode.W)) == false)
 	    setAllAnimatorZero();
     }
     void OnCollisionEnter2D(Collision2D col){

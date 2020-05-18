@@ -52,10 +52,10 @@ public class PlayerController : MonoBehaviour
         }
         bool[] _inputs = new bool[4];
             _inputs = new bool[]{
-		CrossPlatformInputManager.GetButton("MoveUp"),
-		CrossPlatformInputManager.GetButton("MoveDown"),
-		CrossPlatformInputManager.GetButton("MoveLeft"),
-		CrossPlatformInputManager.GetButton("MoveRight"),
+		Input.GetKey(KeyCode.W),
+		Input.GetKey(KeyCode.S),
+		Input.GetKey(KeyCode.A),
+		Input.GetKey(KeyCode.D),
             };
 
             ClientSend.PlayerMovement(_inputs);
